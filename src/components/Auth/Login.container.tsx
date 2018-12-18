@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import Login from "./Login.component";
-import { loginUser } from "../../actions/auth";
+import { loginUser } from "./auth.actions";
 
 const mapStateToProps = state => state
 
