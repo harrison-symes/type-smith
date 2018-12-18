@@ -1,8 +1,9 @@
 import * as React from "react";
+import Login from "./Auth/Login.container";
 
 const App : React.SFC<{}> = () => (
     <div>
-        This is the App
+        <Login />
     </div>
 )
 

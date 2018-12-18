@@ -15,7 +15,7 @@ interface AuthUser {
 interface AuthState {
     isFetching: boolean;
     isAuthenticated: boolean;
-    user: AuthUser;
+    user: any;
     errorMessage: string;
 }
 
