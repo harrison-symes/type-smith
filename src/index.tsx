@@ -1,13 +1,12 @@
 import * as React from "react";
 import { render } from "react-dom";
-
-const Test : React.SFC<{}> = () => (
-  <div>
-    Hello
-  </div>
-)
+import store from "./store"
+import { Provider } from "react-redux"
+import App from "/components/App";
 
 render(
-  <Test />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("app")
 )
