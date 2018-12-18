@@ -6,7 +6,7 @@ import { loginUser } from "../../actions/auth";
 
 const mapStateToProps = state => state
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
 	loginUser: (creds => dispatch(loginUser(creds)))
 })
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface LoginProps {
-	loginUser(creds : LoginState) : void;
+	loginUser?(creds : LoginState) : void;
 }
 
 interface LoginState {
