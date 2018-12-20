@@ -1,6 +1,6 @@
 import {postRequest} from "../../utils/request"
 import { loginError, requestLogin, receiveLogin, requestLogout } from "./auth.actions";
-import { removeUser } from "../../utils/auth";
+import { removeUser, saveUserToken } from "../../utils/auth";
 
 export const loginUser = creds => 
 	async dispatch => {
@@ -28,12 +28,18 @@ export const logoutUser = () =>
 		removeUser()
 	}
 
-// export const registerUser = dispatch =>
-// 	(creds) => {
-// 		try {
-
-// 		}
-// 		catch(e) {
-
-// 		}
-// 	}
+export const registerUserRequest = (creds) =>
+	async dispatch => {
+		try {
+			const res = await postRequest(
+				'auth/register',
+				creds 
+				)
+			const userInfo = saveUserToken(res.body.token)
+			dispatch(receiveLogin(userInfo))
+		} catch(e) {
+			console.log(e);
+			
+			dispatch(loginError(e.response.body.message))
+		}
+	}

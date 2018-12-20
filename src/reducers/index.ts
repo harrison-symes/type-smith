@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 
 import socket from "./sockets"
-import auth from "./auth"
+import auth from "../components/Auth/auth.reducer"
 
 const reducer = combineReducers({
     socket,

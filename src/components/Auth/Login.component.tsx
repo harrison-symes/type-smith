@@ -1,13 +1,5 @@
 import * as React from "react";
-
-interface LoginProps {
-	loginUser?(creds : LoginState) : void;
-}
-
-interface LoginState {
-	user_name: string;
-	password: string;
-}
+import { LoginState, LoginProps } from "./auth.interface";
 
 class Login extends React.Component<LoginProps, LoginState> {
 	constructor(props) {

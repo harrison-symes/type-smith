@@ -1,4 +1,5 @@
-import { isAuthenticated, getUserTokenInfo } from '../utils/auth'
+import { isAuthenticated, getUserTokenInfo } from '../../utils/auth'
+import { AuthState, AuthAction } from './auth.interface';
 
 const initialState = {
     isFetching: false,
@@ -7,26 +8,8 @@ const initialState = {
     errorMessage: ''
 } as AuthState
 
-interface AuthUser {
-    id: number;
-    user_name: string;
-}
 
-interface AuthState {
-    isFetching: boolean;
-    isAuthenticated: boolean;
-    user: any;
-    errorMessage: string;
-}
-
-interface Action {
-    type: string;
-    user?: AuthUser;
-    message?: string;
-}
-
-
-export default () => (state: AuthState = initialState, action: Action) : AuthState => {
+export default () => (state: AuthState = initialState, action: AuthAction) : AuthState => {
     switch (action.type) {
         case 'LOGIN_REQUEST':
             return {

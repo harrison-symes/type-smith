@@ -1,13 +1,5 @@
 import { removeUser } from "../../utils/auth";
-
-export enum AUTH_TYPES {
-    LOGIN_ERROR = "LOGIN_ERROR",
-    LOGIN_REQUEST = "LOGIN_REQUEST",
-    LOGIN_SUCCESS = "LOGIN_SUCCESS",
-    LOGIN_FAILURE = "LOGIN_FAILURE",
-    LOUGOUT_REQUEST = "LOGOUT_REQUEST",
-    LOGOUT_SUCCESS = "LOGOUT_SUCCESS",
-}
+import { AUTH_TYPES } from "./auth.interface";
 
 export interface LoginAction {
     type: string;
