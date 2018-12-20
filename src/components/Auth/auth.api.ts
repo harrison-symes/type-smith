@@ -1,6 +1,6 @@
 import {postRequest} from "../../utils/request"
 import { loginError, requestLogin, receiveLogin, requestLogout } from "./auth.actions";
-import { removeUser } from "src/utils/auth";
+import { removeUser } from "../../utils/auth";
 
 export const loginUser = creds => 
 	async dispatch => {
