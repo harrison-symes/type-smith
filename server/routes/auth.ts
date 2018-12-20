@@ -6,6 +6,7 @@ const router = express.Router()
 
 const register = async (req, res, next) => {
     const { user_name, password} = req.body
+    
     const exists = await userExists(user_name)
     if (exists) {
         res.status(400).send("Username already taken")
