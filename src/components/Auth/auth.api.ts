@@ -1,10 +1,10 @@
 import {postRequest} from "../../utils/request"
-import { loginError, requestLogin, receiveLogin } from "./auth.actions";
+import { loginError, requestLogin, receiveLogin, requestLogout } from "./auth.actions";
+import { removeUser } from "src/utils/auth";
 
 export const loginUser = creds => 
 	async dispatch => {
-		// dispatch(requestLogin())
-		console.log({creds});
+		dispatch(requestLogin())
 		
 		try {
 			const res = await postRequest("auth/login", creds)
@@ -19,6 +19,13 @@ export const loginUser = creds =>
 				return dispatch(loginError("Username and password don't match"))
 			}
 		}
+	}
+
+// Logs the user out
+export const logoutUser = () => 
+	dispatch => {
+		dispatch(requestLogout())
+		removeUser()
 	}
 
 // export const registerUser = dispatch =>
