@@ -26,13 +26,15 @@ class Login extends React.Component<LoginProps, LoginState> {
 
 		return (
 			<form className="Login container" onSubmit={this.submit}>
-				<label>Username:
-          <input className="input" type="text" name="user_name" onChange={this.updateUsername} />
-				</label><br />
-				<label>Password:
-          <input className="input" type="password" name="password" onChange={this.updatePassword} />
-				</label><br />
+
+				<label htmlFor="user_name">Username:</label>
+          		<input className="input" type="text" name="user_name" onChange={this.updateUsername} />
+
+				<label htmlFor="password">Password:</label>
+         		<input className="input" type="password" name="password" onChange={this.updatePassword} />
+
 				<input className="button is-success" type="submit" />
+
 			</form>
 		)
 	}

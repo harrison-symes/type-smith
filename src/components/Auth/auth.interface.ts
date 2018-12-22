@@ -1,3 +1,5 @@
+import { TokenInfo } from "src/utils/auth";
+
 // LOGIN
 export interface LoginOwnProps {
 
@@ -48,7 +50,7 @@ export interface AuthUser {
 export interface AuthState {
     isFetching: boolean;
     isAuthenticated: boolean;
-    user: any;
+    user: TokenInfo;
     errorMessage: string;
 }
 

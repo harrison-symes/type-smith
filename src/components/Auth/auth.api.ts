@@ -34,8 +34,10 @@ export const registerUserRequest = (creds) =>
 			const res = await postRequest(
 				'auth/register',
 				creds 
-				)
+			)
+			console.log({res})
 			const userInfo = saveUserToken(res.body.token)
+			console.log({userInfo})
 			dispatch(receiveLogin(userInfo))
 		} catch(e) {
 			console.log(e);

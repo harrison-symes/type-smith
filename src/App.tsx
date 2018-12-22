@@ -13,6 +13,7 @@ interface AppProps {
 const App : React.SFC<AppProps> = (props) => (
     <Router>
         <React.Fragment>
+            {props.auth.user && props.auth.user.user_name}
             {
                 props.auth.isAuthenticated ? 
                 <Route path="/" render={() => <div>Hi</div>} /> :

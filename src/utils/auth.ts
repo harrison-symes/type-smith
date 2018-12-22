@@ -2,8 +2,11 @@ import * as decode from "jwt-decode";
 
 import { get, set } from "./localstorage"
 
-interface TokenInfo {
-    exp: number;
+export interface TokenInfo {
+    exp?: number;
+    iat?: number;
+    id: number
+    user_name: string;
 }
 
 export const removeUser = () : void => {

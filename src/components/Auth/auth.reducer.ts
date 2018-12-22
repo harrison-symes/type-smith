@@ -1,5 +1,5 @@
-import { isAuthenticated, getUserTokenInfo } from '../../utils/auth'
-import { AuthState, AuthAction, AUTH_TYPES } from './auth.interface';
+import { isAuthenticated, getUserTokenInfo, TokenInfo } from '../../utils/auth'
+import { AuthState, AuthAction, AUTH_TYPES, AuthUser } from './auth.interface';
 
 const initialState = {
     isFetching: false,
@@ -9,7 +9,8 @@ const initialState = {
 } as AuthState
 
 
-export default () => (state: AuthState = initialState, action: AuthAction) : AuthState => {
+export default (state: AuthState = initialState, action: AuthAction) : AuthState => {
+    console.log({state, action})
     switch (action.type) {
         case AUTH_TYPES.LOGIN_REQUEST:
             return {
