@@ -1,5 +1,6 @@
 import * as React from "react";
 import { LoginState, LoginProps } from "./auth.interface";
+import { Link } from "react-router-dom";
 
 class Login extends React.Component<LoginProps, LoginState> {
 	constructor(props) {
@@ -25,17 +26,27 @@ class Login extends React.Component<LoginProps, LoginState> {
 	render() {
 
 		return (
-			<form className="Login container" onSubmit={this.submit}>
+			<div className="center w-50">
+				<h2 className="page-title">Login</h2>
+				<form className="form" onSubmit={this.submit}>
 
-				<label htmlFor="user_name">Username:</label>
-          		<input className="input" type="text" name="user_name" onChange={this.updateUsername} />
+					<label htmlFor="user_name">Username:</label>
+					<input type="text" name="user_name" onChange={this.updateUsername} />
 
-				<label htmlFor="password">Password:</label>
-         		<input className="input" type="password" name="password" onChange={this.updatePassword} />
+					<label htmlFor="password">Password:</label>
+					<input type="password" name="password" onChange={this.updatePassword} />
 
-				<input className="button is-success" type="submit" />
+					<input className="btn btn--green" type="submit" />
 
-			</form>
+				</form>
+				<span className="info-text">
+					Already have an account?
+                    {" "}
+					<Link to="/register">
+						Sign in
+                    </Link>
+				</span>
+			</div>
 		)
 	}
 }

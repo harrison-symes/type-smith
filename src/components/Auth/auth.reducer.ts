@@ -10,7 +10,6 @@ const initialState = {
 
 
 export default (state: AuthState = initialState, action: AuthAction) : AuthState => {
-    console.log({state, action})
     switch (action.type) {
         case AUTH_TYPES.LOGIN_REQUEST:
             return {

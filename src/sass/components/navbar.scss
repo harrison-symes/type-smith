@@ -1,0 +1,38 @@
+
+
+.navbar {
+    // overflow: hidden;
+    width: 100%;
+    box-shadow: 0 0.125rem .125rem $purple-bright;
+    // top: 0;
+    // left: 0;
+    // position: fixed;
+    // z-index: 1000; 
+
+    &__container {
+    
+        padding: 0.5rem;
+        max-height: 2rem;
+    
+        display: flex;
+
+        justify-content: space-around;
+        background-color: $blue-dark;
+    
+    }
+
+    &__right {
+        align-self: center;
+        padding: .25rem;
+    }
+    &__title {
+        text-decoration: none;
+        margin: 0;
+        font-size: 2rem;
+        color: $purple-light;
+        font-weight: 700;
+        &:hover {
+            color: $purple-med;
+        }
+    }
+}

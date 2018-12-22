@@ -2,12 +2,12 @@ import * as React from "react";
 import { Link } from "react-router-dom"
 
 const AuthNav : React.SFC<{}> = () => (
-    <div>
+    <div className="flex">
         <Link to="/login">
-            <button>Login</button>
+            <button className="btn btn--purple">Login</button>
         </Link>
         <Link to="/register">
-            <button>Register</button>
+            <button className="btn btn--green">Register</button>
         </Link>
     </div>
 )

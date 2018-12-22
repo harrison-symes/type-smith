@@ -1,0 +1,26 @@
+.form {
+    min-width: 300px;
+
+    input[type="submit"] {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
+
+label {
+    margin-top: 0.5rem;
+    color: $purple-med;
+}
+
+input[type="text"], input[type="password"] {
+    display: block;
+    width: 100%;
+    height: 2rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: .25rem;
+    text-align: center;
+    &:focus {
+        box-shadow: 0 0 0.25rem $purple-med;
+    }
+}

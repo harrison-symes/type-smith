@@ -5,6 +5,7 @@ import { HashRouter as Router, Route } from "react-router-dom"
 import Welcome from "./pages/Welcome"
 import { AuthState } from "components/Auth/auth.interface";
 
+import "./sass/main.scss"
 
 interface AppProps {
     auth: AuthState

@@ -1,5 +1,6 @@
 import* as React from "react"
 import { AuthState, RegisterProps, RegisterState } from "./auth.interface";
+import { Link } from "react-router-dom";
 
 class Register extends React.Component<
     RegisterProps, RegisterState
@@ -30,25 +31,33 @@ class Register extends React.Component<
     render() {
         const { auth } = this.props
         return (
-            <form onSubmit={this.submit}>
-                <h1>Register</h1>
-                <hr />
-                {auth.errorMessage && 
-                    <span>{auth.errorMessage}</span>
-                }
+            <div className="center w-50">
+                <h2 className="page-title">Register</h2>
+                <form onSubmit={this.submit} className="form">
+                    {auth.errorMessage && 
+                        <span>{auth.errorMessage}</span>
+                    }
 
-                <label htmlFor="user_name">Username</label>
-                <input required placeholder="User Name" type="text" name="user_name" onChange={this.updateDetails} />
+                    <label htmlFor="user_name">Username</label>
+                    <input required placeholder="User Name" type="text" name="user_name" onChange={this.updateDetails} />
 
-                <label>Password</label>
-                <input required placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
-                
-                <label>Confirm Password</label>
-                <input required placeholder="Confirm Password" type="password" name="confirm_password" onChange={this.updateDetails} />
+                    <label>Password</label>
+                    <input required placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
+                    
+                    <label>Confirm Password</label>
+                    <input required placeholder="Confirm Password" type="password" name="confirm_password" onChange={this.updateDetails} />
 
-                <input className="button is-success is-large is-fullwidth" value="Register" type="submit" />
+                    <input className="btn btn--green" value="Register" type="submit" />
 
-            </form>
+                </form>
+                <span className="info-text">
+                    New to Type-Smith?
+                    {" "}
+                    <Link to="/login">
+                        Make an account
+                    </Link>
+                </span>
+            </div>
         )
     }
 }
