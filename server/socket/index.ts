@@ -1,13 +1,18 @@
 import * as lobbySocket from "./lobby"
+import * as lobbyDb from "../db/lobby"
 
 export const connection = (io, socket) => {
     console.log("User connected")
     socket.on("disconnect", disconnection)
-    lobbySocket.joinQueue(socket)
+    lobbySocket.joinQueue(socket, io)
+    lobbySocket.leaveQueue(socket, io)
 }
 
-export const disconnection = socket => {
+export const disconnection = async socket => {
     console.log("user disconnected")
+
+    // console.log({leaveRes})
+    // const leaveRes = await lobbyDb.leaveQueue(socket.id, 0)
 }
 
 

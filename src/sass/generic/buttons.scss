@@ -25,4 +25,10 @@
         border-color: $green-light;
         color: $white;
     }
+    &--small {
+        height: 1rem;
+    }
+    &--large {
+        height: 3rem;
+    }
 }
