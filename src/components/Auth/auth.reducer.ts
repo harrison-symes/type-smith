@@ -1,5 +1,5 @@
 import { isAuthenticated, getUserTokenInfo } from '../../utils/auth'
-import { AuthState, AuthAction } from './auth.interface';
+import { AuthState, AuthAction, AUTH_TYPES } from './auth.interface';
 
 const initialState = {
     isFetching: false,
@@ -11,42 +11,42 @@ const initialState = {
 
 export default () => (state: AuthState = initialState, action: AuthAction) : AuthState => {
     switch (action.type) {
-        case 'LOGIN_REQUEST':
+        case AUTH_TYPES.LOGIN_REQUEST:
             return {
                 ...state,
                 isFetching: true,
                 isAuthenticated: false,
                 errorMessage: ''
             }
-        case 'LOGIN_SUCCESS':
+        case AUTH_TYPES.LOGIN_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 isAuthenticated: true,
                 user: action.user
             }
-        case 'LOGIN_FAILURE':
+        case AUTH_TYPES.LOGIN_FAILURE:
             return {
                 ...state,
                 isFetching: false,
                 isAuthenticated: false,
                 errorMessage: action.message
             }
-        case 'LOGOUT_SUCCESS':
+        case AUTH_TYPES.LOGOUT_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 isAuthenticated: false,
                 user: null
             }
-        case 'REGISTER_REQUEST':
+        case AUTH_TYPES.REGISTER_REQUEST:
             return {
                 ...state,
                 isFetching: true,
                 isAuthenticated: false,
                 errorMessage: ''
             }
-        case 'REGISTER_FAILURE':
+        case AUTH_TYPES.REGISTER_FAILURE:
             return {
                 ...state,
                 isFetching: false,

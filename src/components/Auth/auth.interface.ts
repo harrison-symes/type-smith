@@ -1,17 +1,25 @@
-//LOGIN
-export interface LoginProps {
-    loginUser?(creds: LoginState): void;
+// LOGIN
+export interface LoginOwnProps {
+
+}
+export interface LoginProps extends LoginOwnProps {
+    auth: AuthState
+    loginUser(creds): any;
+
 }
 export interface LoginState {
     user_name: string;
     password: string;
 }
 
-//REGISTER
-export interface RegisterProps {
-    loginError?(err: string): void;
-    register?(creds: RegisterState): void;
+// REGISTER
+export interface RegisterOwnProps {
+
+}
+export interface RegisterProps extends RegisterOwnProps {
     auth: AuthState;
+    loginError(err: string): void;
+    register(creds: RegisterState): void;
 }
 export interface RegisterState {
     user_name: string;
@@ -20,7 +28,7 @@ export interface RegisterState {
     confirm_password: string;
 }
 
-//TYPES
+// TYPES
 export enum AUTH_TYPES {
     LOGIN_ERROR = "LOGIN_ERROR",
     LOGIN_REQUEST = "LOGIN_REQUEST",
@@ -28,6 +36,8 @@ export enum AUTH_TYPES {
     LOGIN_FAILURE = "LOGIN_FAILURE",
     LOUGOUT_REQUEST = "LOGOUT_REQUEST",
     LOGOUT_SUCCESS = "LOGOUT_SUCCESS",
+    REGISTER_REQUEST = "REGISTER_REQUEST",
+    REGISTER_FAILURE = "REGISTER_FAILURE"
 }
 
 export interface AuthUser {
