@@ -26,13 +26,10 @@ class List extends React.Component<ListProps> {
 
         
         return (
-            <div>
-                <h2 className="page-title">Looking for a game:</h2>
-                <div className="flex flex-wrap ">
-                    {queue.lookingForGame
-                        .map(entry => <Entry entry={entry} key={entry.id} />)
-                    }
-                </div>
+            <div className="flex flex-wrap ">
+                {queue.lookingForGame
+                    .map(entry => <Entry entry={entry} key={entry.id} />)
+                }
             </div>
         )
     }

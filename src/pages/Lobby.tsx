@@ -19,9 +19,9 @@ class Lobby extends React.Component<LobbyProps> {
                 <NavBar />
                 <div className="center w-75">   
                     <h2 className="page-title">Lobby</h2>
-                    <Join />
                     <List />
                 </div>
+                <Join />
             </React.Fragment>
         )
     }

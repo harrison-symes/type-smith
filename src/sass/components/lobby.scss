@@ -3,3 +3,18 @@
     border-radius: .5rem;
     
 }
+
+$footer-height: 150px;
+
+.join-queue {
+    position: fixed;
+    top: calc(100% - #{ $footer-height });
+    left: 0;
+    background-color: $purple-bright;
+    z-index: 1000;
+    overflow: hidden;
+    
+    width: 100%;
+    height: $footer-height;
+
+}

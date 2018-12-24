@@ -40,21 +40,22 @@ class Join extends React.Component<JoinProps> {
         const {queue} = this.props
 
         return (
-            <div>
+            <div className="join-queue">
                 {
                     queue.isInQueue ? 
-                    <React.Fragment>
-                        <p>You are in the queue</p>
+                    <div className="center">
                         <button 
-                            className="btn btn--purple"
+                            className="btn h-100 w-100 btn--purple"
                             onClick={this.leaveQueue}    
                         >
                             Leave Queue
                         </button>
-                    </React.Fragment> :
-                    <button className="btn btn--green btn--large" onClick={this.joinQueue}>
-                        Join Queue
-                    </button>
+                    </div> :
+                    <div className="center">
+                        <button className="btn h-100 w-100 btn--full btn--green btn--large" onClick={this.joinQueue}>
+                            Join Queue
+                        </button>
+                    </div>
                 }
             </div>
         )
