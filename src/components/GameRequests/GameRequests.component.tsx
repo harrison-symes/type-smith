@@ -40,6 +40,14 @@ class GameRequests extends React.Component<GameRequestsProps> {
             request_id => removeOutgoingGameRequest(request_id)
         )
     }
+    declineRequest = (request) => {
+        const { socket } = this.props
+
+        socket.emit(
+            GAME_REQUEST_SOCKET_CHANNEL.CANCEL_GAME_REQUEST,
+            request
+        )
+    } 
     render() {
         const {gameRequests} = this.props
 
@@ -48,13 +56,13 @@ class GameRequests extends React.Component<GameRequestsProps> {
         return (
             <div>
                 {/* <h2>Game Requests</h2> */}
-                <div className="flex flex-wrap">
+                <div className="flex justify-center flex-wrap">
                     {gameRequests.inbound.map(request => (
                         <div className="wpx-300 lobby-entry">
                             <h3>{request.sender_user_name}</h3>
                             <p>Wants to play</p>
                             <div className="flex">
-                                <button className="btn btn--purple">Decline</button>
+                                <button className="btn btn--purple" onClick={()=>this.declineRequest(request)}>Decline</button>
                                 <button className="btn btn--green">Accept</button>
                             </div>
                         </div>
