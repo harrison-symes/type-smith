@@ -6,8 +6,13 @@ export enum GAME_REQUEST_TYPE {
 }
 
 export interface GameRequest {
-    sender_id: number;
+    id?: number;
     target_id: number;
+    target_socket_id?:string;
+    target_user_name: string;
+    sender_id: number;
+    sender_socket_id?:string;
+    sender_user_name: string;
 }
 
 export type GameRequestsState = {
@@ -18,6 +23,6 @@ export type GameRequestsState = {
 export interface GameRequestAction {
     type: GAME_REQUEST_TYPE,
     request?: GameRequest,
-    user_id?: number;
+    request_id?: number;
 }
 

@@ -6,13 +6,19 @@
 
 $footer-height: 150px;
 
+.lobby-container {
+    margin-bottom: $footer-height;
+    padding-bottom: 2rem;
+}
+
 .join-lobby {
     position: fixed;
     top: calc(100% - #{ $footer-height });
+    bottom: 0;
     left: 0;
     background-color: $purple-bright;
     z-index: 1000;
-    overflow: hidden;
+    // overflow: hidden;
     
     width: 100%;
     height: $footer-height;

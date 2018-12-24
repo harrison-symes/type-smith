@@ -3,10 +3,12 @@ import Entry from "./Entry.component"
 
 const mapStateToProps = ({
     socket,
-    auth
+    auth,
+    gameRequests
 }) => ({
     socket,
-    auth
+    auth,
+    gameRequests
 })
 
 export default connect(mapStateToProps)(Entry)

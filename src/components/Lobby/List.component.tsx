@@ -39,7 +39,7 @@ class List extends React.Component<ListProps> {
         const {lobby, auth} = this.props
         console.log({lobby, auth})
         return (
-            <div className="flex flex-wrap ">
+            <div className="flex flex-wrap justify-center">
                 {lobby.map(entry => (
                     <Entry 
                         key={entry.id} 

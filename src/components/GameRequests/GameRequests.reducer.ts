@@ -19,12 +19,12 @@ export default (state : GameRequestsState = initialState, action:GameRequestActi
             return newState
         case type.REMOVE_INCOMING_GAME_REQUEST:
             newState.inbound = [...newState.inbound].filter(
-                request => request.sender_id == action.user_id 
-            )
+                request => request.id !== action.request_id 
+                )
             return newState
         case type.REMOVE_OUTGOING_GAME_REQUEST:
-            newState.inbound = [...newState.inbound].filter(
-                request => request.sender_id == action.user_id 
+            newState.outbound = [...newState.outbound].filter(
+                request => request.id !== action.request_id 
             )
             return newState
         default:

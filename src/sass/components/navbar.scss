@@ -1,13 +1,11 @@
-
-
 .navbar {
-    // overflow: hidden;
     width: 100%;
     box-shadow: 0 0.125rem .125rem $purple-bright;
-    // top: 0;
-    // left: 0;
-    // position: fixed;
-    // z-index: 1000; 
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1000;
+
     h1, h2, h3, h4, h5, h6, p, a {
         margin-top: auto;
         margin-bottom: auto;
