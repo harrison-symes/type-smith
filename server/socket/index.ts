@@ -4,7 +4,7 @@ import * as lobbyDb from "../db/lobby"
 export const connection = (io, socket) => {
     console.log("User connected")
     socket.on("disconnect", disconnection)
-    lobbySocket.joinQueue(socket, io)
+    lobbySocket.joinLobby(socket, io)
     lobbySocket.leaveQueue(socket, io)
 }
 

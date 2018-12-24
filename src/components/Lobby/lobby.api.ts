@@ -1,12 +1,12 @@
 import { getRequest } from "../../utils/request";
-import { receiveQueue } from "./queue.actions";
+import { receiveLobby } from "./lobby.actions";
 
-export const getQueue = () => 
+export const getLobby = () =>
     async dispatch => {
         try {
             const res = await getRequest("lobby")
-            dispatch(receiveQueue(res.body))
-        } catch(e) {
+            dispatch(receiveLobby(res.body))
+        } catch (e) {
             console.log(e)
         }
     }

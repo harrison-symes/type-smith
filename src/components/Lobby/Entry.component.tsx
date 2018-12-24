@@ -1,7 +1,7 @@
 import * as React from "react";
-import { QueueEntry } from "./queue.reducer";
 import { AuthState } from "../Auth/auth.interface";
 import { Socket } from "socket.io";
+import { QueueEntry } from "./interface";
 
 interface EntryProps {
     entry: QueueEntry;
