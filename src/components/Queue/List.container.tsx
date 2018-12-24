@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import List from "./List.component"
-import { addEntryToQueue } from "./queue.actions";
+import { addEntryToQueue, addPlayerEntryToQueue } from "./queue.actions";
 import { getQueue } from "./queue.api";
 
 const mapStateToProps = ({
@@ -16,7 +16,8 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => ({
     getQueue: () => dispatch(getQueue()),
-    playerJoinedQueue: entry => dispatch(addEntryToQueue(entry))
+    playerJoinedQueue: entry => dispatch(addPlayerEntryToQueue(entry)),
+    addEntryToQueue: entry => dispatch(addEntryToQueue(entry))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)

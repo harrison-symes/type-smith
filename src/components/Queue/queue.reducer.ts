@@ -41,10 +41,21 @@ const queueReducer = (state: QueueState = initialState, action:QueueAction) : Qu
             newState.lookingForGame = [...action.lookingForGame]
             return newState
         case QUEUE_TYPES.PLAYER_JOINED_QUEUE:
+            newState.isInQueue = true;
+            newState.lookingForGame = [...newState.lookingForGame, action.entry]
+            return newState
+        case QUEUE_TYPES.ADD_ENTRY_TO_QUEUE:
+            newState.lookingForGame = [...newState.lookingForGame, action.entry]
+            return newState
+        case QUEUE_TYPES.PLAYER_JOINED_QUEUE:
             newState.lookingForGame = [...newState.lookingForGame, action.entry]
             return newState
         case QUEUE_TYPES.REMOVE_ENTRY_FROM_QUEUE:
-            newState.lookingForGame = [...newState.lookingForGame].filter(entry => entry.id !== action.id)
+            newState.lookingForGame = [...newState.lookingForGame].filter(entry => entry.user_id !== action.id)
+            return newState
+        case QUEUE_TYPES.PLAYER_LEFT_QUEUE:
+            newState.isInQueue = false
+            return newState
         default: 
             return state
     }

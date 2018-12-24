@@ -1,4 +1,4 @@
-import { isAuthenticated, getUserTokenInfo, TokenInfo } from '../../utils/auth'
+import { isAuthenticated, getUserTokenInfo, TokenInfo, clearUserToken } from '../../utils/auth'
 import { AuthState, AuthAction, AUTH_TYPES, AuthUser } from './auth.interface';
 
 const initialState = {
@@ -33,6 +33,7 @@ export default (state: AuthState = initialState, action: AuthAction) : AuthState
                 errorMessage: action.message
             }
         case AUTH_TYPES.LOGOUT_SUCCESS:
+            clearUserToken()
             return {
                 ...state,
                 isFetching: false,

@@ -8,6 +8,7 @@ export const loginUser = creds =>
 		
 		try {
 			const res = await postRequest("auth/login", creds)
+			const userInfo = saveUserToken(res.body.token)
 			dispatch(receiveLogin(res.body))
 		} 
 		catch (e) {

@@ -34,7 +34,7 @@ export const requestLogout = () => ({
     isAuthenticated: true
 })
 
-export const receiveLogout = () => ({
+export const logout = () => ({
     type: AUTH_TYPES.LOGOUT_SUCCESS,
     isFetching: false,
     isAuthenticated: false

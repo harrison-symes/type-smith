@@ -9,14 +9,16 @@ interface ListProps {
     auth: AuthState;
     queue: QueueState;
     getQueue(): void;
+    addEntryToQueue(entry : QueueEntry) : void;
     playerJoinedQueue(entry: QueueEntry): void;
 }
 
 class List extends React.Component<ListProps> {
     componentDidMount() {
-        const {socket, queue, getQueue, playerJoinedQueue} = this.props
+        const {socket, queue, getQueue, playerJoinedQueue, addEntryToQueue} = this.props
         
         getQueue()
+        socket.on("queueJoined", entry => addEntryToQueue(entry))
         socket.on("playerJoinedQueue", (entry) => playerJoinedQueue(entry))
     }
     render() {
@@ -26,10 +28,11 @@ class List extends React.Component<ListProps> {
         return (
             <div>
                 <h2 className="page-title">Looking for a game:</h2>
-                {queue.lookingForGame
-                    .filter(entry => entry.user_id !== auth.user.id)
-                    .map(entry => <Entry entry={entry} key={entry.id} />)
-                }
+                <div className="flex flex-wrap ">
+                    {queue.lookingForGame
+                        .map(entry => <Entry entry={entry} key={entry.id} />)
+                    }
+                </div>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import * as decode from "jwt-decode";
 
-import { get, set } from "./localstorage"
+import { get, set, remove } from "./localstorage"
 
 export interface TokenInfo {
     exp?: number;
@@ -16,6 +16,10 @@ export const removeUser = () : void => {
 export const saveUserToken = token => {
     set('token', token)
     return decode(token)
+}
+
+export const clearUserToken = () => {
+    remove("token")
 }
 
 export const getUserTokenInfo = () : TokenInfo | null => {

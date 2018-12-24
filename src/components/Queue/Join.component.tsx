@@ -9,20 +9,22 @@ interface JoinProps {
     queue: QueueState;
     userJoinedQueue(): void;
     userLeftQueue(id:number): void;
+    ownUserLeftQueue() : void;
 }
 
 class Join extends React.Component<JoinProps> {
     componentDidMount() {
-        const {socket, userJoinedQueue, userLeftQueue} = this.props
+        const {socket, userJoinedQueue, userLeftQueue, ownUserLeftQueue} = this.props
         console.log("listening");
         
         socket.on("queueJoinedUser", () => {
             console.log("you joined the queue")
             userJoinedQueue()
         })
-        socket.on("ownUserLeaveQueue", (id) => {
+        socket.on("leaveQueue", (id) => {
             userLeftQueue(id)
         })
+        socket.on("youLeftQueue", () => ownUserLeftQueue())
     }
     joinQueue  = () => {
         const {socket, auth} = this.props
@@ -31,7 +33,7 @@ class Join extends React.Component<JoinProps> {
     }
     leaveQueue = () => {
         const {socket, auth} = this.props
-    
+        console.log("leaving queue")
         socket.emit("leaveQueue", auth.user.id)
     }
     render() {
@@ -43,7 +45,12 @@ class Join extends React.Component<JoinProps> {
                     queue.isInQueue ? 
                     <React.Fragment>
                         <p>You are in the queue</p>
-                        <button className="btn btn--purple">Leave Queue</button>
+                        <button 
+                            className="btn btn--purple"
+                            onClick={this.leaveQueue}    
+                        >
+                            Leave Queue
+                        </button>
                     </React.Fragment> :
                     <button className="btn btn--green btn--large" onClick={this.joinQueue}>
                         Join Queue

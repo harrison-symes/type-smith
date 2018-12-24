@@ -19,8 +19,27 @@
     width: 50%;
 }
 
+.wpx-100 {
+    width: 100px;
+}
+.wpx-200 {
+    width: 200px;
+}
+.wpx-300 {
+    width: 300px;
+}
+.wpx-400 {
+    width: 400px;
+}
+.wpx-500 {
+    width: 500px;
+}
 
 //flex 
 .flex {
     display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
 }

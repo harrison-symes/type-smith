@@ -3,7 +3,9 @@ export enum QUEUE_TYPES {
     JOINED_QUEUE = "JOINED_QUEUE",
     RECEIVE_QUEUE = "RECEIVE_QUEUE",
     PLAYER_JOINED_QUEUE = "PLAYER_JOINED_QUEUE",
-    REMOVE_ENTRY_FROM_QUEUE = "REMOVE_ENTRY_FROM_QUEUE"
+    ADD_ENTRY_TO_QUEUE = "ADD_ENTRY_TO_QUEUE",
+    REMOVE_ENTRY_FROM_QUEUE = "REMOVE_ENTRY_FROM_QUEUE",
+    PLAYER_LEFT_QUEUE = "PLAYER_LEFT_QUEUE"
 }
 
 export const joinQueue = () => ({
@@ -19,12 +21,20 @@ export const receiveQueue = (lookingForGame) => ({
     lookingForGame
 })
 
-export const addEntryToQueue = entry => ({
+export const addPlayerEntryToQueue = entry => ({
     type: QUEUE_TYPES.PLAYER_JOINED_QUEUE,
+    entry
+})
+export const addEntryToQueue = entry => ({
+    type: QUEUE_TYPES.ADD_ENTRY_TO_QUEUE,
     entry
 })
 
 export const userLeftQueue = id => ({
-    tye: QUEUE_TYPES.REMOVE_ENTRY_FROM_QUEUE,
+    type: QUEUE_TYPES.REMOVE_ENTRY_FROM_QUEUE,
     id
+})
+
+export const ownUserLeftQueue = () => ({
+    type: QUEUE_TYPES.PLAYER_LEFT_QUEUE
 })
