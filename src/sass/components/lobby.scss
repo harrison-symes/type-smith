@@ -1,4 +1,4 @@
-.queue-entry {
+.lobby-entry {
     border: 1px solid $purple-light;
     border-radius: .5rem;
     
@@ -6,7 +6,7 @@
 
 $footer-height: 150px;
 
-.join-queue {
+.join-lobby {
     position: fixed;
     top: calc(100% - #{ $footer-height });
     left: 0;

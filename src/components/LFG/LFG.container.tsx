@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import Join from "./LFG.component";
+import LFG from "./LFG.component";
 import { ownPlayerJoinedLobby, ownPlayerLeftLobby } from "./LFG.actions";
 
 const mapStateToProps = ({
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
     ownPlayerLeftLobby: (user_id:number) => dispatch(ownPlayerLeftLobby(user_id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Join)
+export default connect(mapStateToProps, mapDispatchToProps)(LFG)

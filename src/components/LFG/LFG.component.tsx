@@ -44,7 +44,7 @@ class LFG extends React.Component<LFGProps> {
         const {isLFG} = this.props
 
         return (
-            <div className="join-queue">
+            <div className="join-lobby">
                 {
                     isLFG ? 
                     <div className="center">
@@ -52,12 +52,12 @@ class LFG extends React.Component<LFGProps> {
                             className="btn h-100 w-100 btn--purple"
                             onClick={this.leaveLobby}    
                         >
-                            Leave Queue
+                            Leave Lobby
                         </button>
                     </div> :
                     <div className="center">
                         <button className="btn h-100 w-100 btn--full btn--green btn--large" onClick={this.joinLobby}>
-                            Join Queue
+                            Join Lobby
                         </button>
                     </div>
                 }

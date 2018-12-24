@@ -4,8 +4,8 @@ const router = express.Router()
 
 router.get("/", async (req, res) => {
     try {
-        const queue = await lobbyDb.getQueueList()
-        res.json(queue)
+        const Lobby = await lobbyDb.getLobbyList()
+        res.json(Lobby)
 
     } catch (e) {
         console.log(e)

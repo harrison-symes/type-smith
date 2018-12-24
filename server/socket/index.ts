@@ -5,14 +5,14 @@ export const connection = (io, socket) => {
     console.log("User connected")
     socket.on("disconnect", disconnection)
     lobbySocket.joinLobby(socket, io)
-    lobbySocket.leaveQueue(socket, io)
+    lobbySocket.leaveLobby(socket, io)
 }
 
 export const disconnection = async socket => {
     console.log("user disconnected")
 
     // console.log({leaveRes})
-    // const leaveRes = await lobbyDb.leaveQueue(socket.id, 0)
+    // const leaveRes = await lobbyDb.leaveLobby(socket.id, 0)
 }
 
 

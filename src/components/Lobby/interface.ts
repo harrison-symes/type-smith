@@ -4,18 +4,18 @@ export enum LOBBY_TYPES {
     REMOVE_ENTRY_FROM_LOBBY = "REMOVE_ENTRY_FROM_LOBBY"
 } 
 
-export interface QueueEntry {
+export interface LobbyEntry {
     id: number;
     user_id: number;
     socket_id: string;
     user_name: string;
 }
 
-export interface QueueAction {
+export interface LobbyAction {
     type: LOBBY_TYPES;
-    entry?: QueueEntry;
-    lobby?: QueueEntry[];
+    entry?: LobbyEntry;
+    lobby?: LobbyEntry[];
     user_id?: number;
 }
 
-export type LobbyState = QueueEntry[]
+export type LobbyState = LobbyEntry[]
