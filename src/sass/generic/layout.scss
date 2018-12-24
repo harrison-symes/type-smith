@@ -31,18 +31,11 @@
 .hpx-500 {height: 500px;}
 
 //flex 
-.flex {
-    display: flex;
-}
+.flex {display: flex;}
+.flex-wrap {flex-wrap: wrap;}
+.justify-center {justify-content: center;}
 
-.flex-wrap {
-    flex-wrap: wrap;
-}
-
-.justify-center {
-    justify-content: center;
-}
-
-.nav-handler {
+//helpers
+.nav-helper {
     margin-top: 4rem;
 }

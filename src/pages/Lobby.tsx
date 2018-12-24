@@ -17,7 +17,7 @@ class Lobby extends React.Component<LobbyProps> {
         return (
             <React.Fragment>
                 <NavBar />
-                <div className="nav-handler w-100 lobby-container center">
+                <div className="nav-helper w-100 lobby-container center">
                     <h2 className="page-title">Lobby</h2>
                     <div className="center w-75">   
                         <GameRequests />

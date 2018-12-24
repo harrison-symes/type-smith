@@ -4,7 +4,7 @@ import * as gameRequestsSocket from "./gameRequest"
 
 export const connection = (io, socket) => {
     console.log("User connected")
-    socket.on("disconnect", disconnection)
+    socket.on("disconnect", () => disconnection(socket))
     lobbySocket.joinLobby(socket, io)
     lobbySocket.leaveLobby(socket, io)
     gameRequestsSocket.gameRequests(socket, io)
@@ -14,7 +14,7 @@ export const disconnection = async socket => {
     console.log("user disconnected")
 
     // console.log({leaveRes})
-    // const leaveRes = await lobbyDb.leaveLobby(socket.id, 0)
+    const leaveRes = await lobbyDb.leaveLobby(socket.id, 0)
 }
 
 
