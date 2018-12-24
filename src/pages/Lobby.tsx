@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import LFG from "../components/LFG/LFG.container"
 import List from "../components/Lobby/List.container";
 import NavBar from "../components/NavBar/NavBar.component";
-import GameRequests from "components/GameRequests/GameRequests.container";
+import GameRequests from "../components/GameRequests/GameRequests.container";
 
 interface LobbyProps {
     socket: SocketIOClientStatic;

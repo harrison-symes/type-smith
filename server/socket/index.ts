@@ -1,11 +1,13 @@
 import * as lobbySocket from "./lobby"
 import * as lobbyDb from "../db/lobby"
+import * as gameRequestsSocket from "./gameRequest"
 
 export const connection = (io, socket) => {
     console.log("User connected")
     socket.on("disconnect", disconnection)
     lobbySocket.joinLobby(socket, io)
     lobbySocket.leaveLobby(socket, io)
+    gameRequestsSocket.gameRequests(socket, io)
 }
 
 export const disconnection = async socket => {
