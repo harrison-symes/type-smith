@@ -16,12 +16,17 @@ class Login extends React.Component<LoginProps, LoginState> {
 	updatePassword = (e : React.ChangeEvent<HTMLInputElement>) => this.setState({
 		password: e.target.value
 	})
-	submit = (e : React.FormEvent) => {
+	submit = async (e : React.FormEvent) => {
 		e.preventDefault();
 
 		const {user_name, password} = this.state
 
-		this.props.loginUser({user_name, password})
+		try {
+			await this.props.loginUser({user_name, password})
+			this.props.history.push("/")
+		} catch(e) {
+			console.log(e)
+		}
 	}
 	render() {
 

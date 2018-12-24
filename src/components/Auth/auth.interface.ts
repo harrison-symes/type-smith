@@ -1,5 +1,5 @@
 import { TokenInfo } from "src/utils/auth";
-
+import { History } from "history";
 // LOGIN
 export interface LoginOwnProps {
 
@@ -7,7 +7,7 @@ export interface LoginOwnProps {
 export interface LoginProps extends LoginOwnProps {
     auth: AuthState
     loginUser(creds): any;
-
+    history: History;
 }
 export interface LoginState {
     user_name: string;
@@ -22,6 +22,7 @@ export interface RegisterProps extends RegisterOwnProps {
     auth: AuthState;
     loginError(err: string): void;
     register(creds: RegisterState): void;
+    history: History;
 }
 export interface RegisterState {
     user_name: string;

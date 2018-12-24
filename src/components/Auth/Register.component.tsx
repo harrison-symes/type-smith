@@ -20,13 +20,14 @@ class Register extends React.Component<
     updateDetails = (e : React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ [e.target.name]: e.target.value } as any)
     }
-    submit = (e) => {
+    submit = async (e) => {
         e.preventDefault()
         let { password, confirm_password } = this.state
 
         if (confirm_password != password) return this.props.loginError("Passwords don't match")
 
-        this.props.register(this.state)
+        await this.props.register(this.state)
+        this.props.history.push("/")
     }
     render() {
         const { auth } = this.props

@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch : Dispatch<any>) => ({
-	loginUser: (creds) => dispatch(loginUser(creds))
+	loginUser: async (creds) => await dispatch(loginUser(creds))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
