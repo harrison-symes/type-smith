@@ -1,3 +1,5 @@
+import { AUTH_TYPES } from "components/Auth/auth.interface";
+
 export enum LOBBY_TYPES {
     RECEIVE_LOBBY = "RECEIVE_LOBBY",
     ADD_ENTRY_TO_LOBBY = "ADD_ENTRY_TO_LOBBY",
@@ -12,7 +14,7 @@ export interface LobbyEntry {
 }
 
 export interface LobbyAction {
-    type: LOBBY_TYPES;
+    type: LOBBY_TYPES | AUTH_TYPES;
     entry?: LobbyEntry;
     lobby?: LobbyEntry[];
     user_id?: number;

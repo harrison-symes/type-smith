@@ -3,7 +3,7 @@ import { Socket } from "socket.io";
 import Entry from "./Entry.container";
 
 import { LOBBY_SOCKET_CHANNEL } from "./lobby.socket";
-import { LobbyState, QueueEntry } from "./interface";
+import { LobbyState, LobbyEntry } from "./interface";
 import { AuthState } from "../Auth/auth.interface";
 
 interface ListProps {
@@ -11,7 +11,7 @@ interface ListProps {
     auth: AuthState;
     lobby: LobbyState;
     getLobby(): void;
-    addEntryToLobby(entry : QueueEntry) : void;
+    addEntryToLobby(entry : LobbyEntry) : void;
     removeEntryFromLobby(user_id: number) : void;
 }
 
@@ -37,7 +37,7 @@ class List extends React.Component<ListProps> {
     }
     render = () => {
         const {lobby, auth} = this.props
-        
+        console.log({lobby, auth})
         return (
             <div className="flex flex-wrap ">
                 {lobby.map(entry => (

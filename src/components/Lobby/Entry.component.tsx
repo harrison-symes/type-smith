@@ -1,10 +1,10 @@
 import * as React from "react";
 import { AuthState } from "../Auth/auth.interface";
 import { Socket } from "socket.io";
-import { QueueEntry } from "./interface";
+import { LobbyEntry } from "./interface";
 
 interface EntryProps {
-    entry: QueueEntry;
+    entry: LobbyEntry;
     auth: AuthState,
     socket: Socket;
 }

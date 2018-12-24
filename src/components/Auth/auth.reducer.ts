@@ -38,7 +38,8 @@ export default (state: AuthState = initialState, action: AuthAction) : AuthState
                 ...state,
                 isFetching: false,
                 isAuthenticated: false,
-                user: null
+                user: null,
+                errorMessage: ""
             }
         case AUTH_TYPES.REGISTER_REQUEST:
             return {

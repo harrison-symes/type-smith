@@ -1,11 +1,11 @@
-import { QueueEntry, LOBBY_TYPES } from "./interface";
+import { LobbyEntry, LOBBY_TYPES } from "./interface";
 
-export const receiveLobby = (lobby: QueueEntry[]) => ({
+export const receiveLobby = (lobby: LobbyEntry[]) => ({
     type: LOBBY_TYPES.RECEIVE_LOBBY,
     lobby
 })
 
-export const addEntryToLobby = (entry: QueueEntry) => ({
+export const addEntryToLobby = (entry: LobbyEntry) => ({
     type: LOBBY_TYPES.ADD_ENTRY_TO_LOBBY,
     entry
 })

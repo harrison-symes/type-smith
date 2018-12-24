@@ -8,9 +8,10 @@ export const joinGame = (socket, room) => {
 }
 
 export const joinLobby = (socket : Socket, io) => {
-    socket.on(LFG_SOCKET_CHANNEL.USER_JOIN_LOBBY, async (user_id) => {
+    socket.on(
+        LFG_SOCKET_CHANNEL.USER_JOIN_LOBBY, 
+        async (user_id) => {
 
-        try {
             const entry = await lobbyDb.joinLobby(socket.id, user_id)
             
             io.emit(LOBBY_SOCKET_CHANNEL.ENTRY_ADDED, entry)
@@ -18,14 +19,11 @@ export const joinLobby = (socket : Socket, io) => {
             
             socket.addListener("disconnect", async () => {
                 const leaveRes = await lobbyDb.leaveLobby(socket.id, user_id)
-                console.log("Lobby left", leaveRes)
+                io.emit(LFG_SOCKET_CHANNEL.USER_LEFT_LOBBY, user_id)
             })
 
         }
-        catch (e) {
-            throw e
-        }
-    })
+    )
 }
 
 export const leaveLobby = (socket : Socket, io) => {

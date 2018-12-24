@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import List from "./List.component"
 import { getLobby } from "./lobby.api";
 import { addEntryToLobby, removeEntryFromLobby } from "./lobby.actions";
-import { QueueEntry } from "./interface";
+import { LobbyEntry } from "./interface";
 
 const mapStateToProps = ({
     socket,
@@ -17,7 +17,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch) => ({
     getLobby: () => dispatch(getLobby()),
-    addEntryToLobby: (entry:QueueEntry) => dispatch(addEntryToLobby(entry)),
+    addEntryToLobby: (entry:LobbyEntry) => dispatch(addEntryToLobby(entry)),
     removeEntryFromLobby: (user_id: number) => dispatch(removeEntryFromLobby(user_id))
 })
 

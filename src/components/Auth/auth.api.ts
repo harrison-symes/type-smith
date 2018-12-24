@@ -9,7 +9,7 @@ export const loginUser = creds =>
 		try {
 			const res = await postRequest("auth/login", creds)
 			const userInfo = saveUserToken(res.body.token)
-			dispatch(receiveLogin(res.body))
+			dispatch(receiveLogin(userInfo))
 		} 
 		catch (e) {
 			console.log({e})
@@ -36,9 +36,7 @@ export const registerUserRequest = (creds) =>
 				'auth/register',
 				creds 
 			)
-			console.log({res})
 			const userInfo = saveUserToken(res.body.token)
-			console.log({userInfo})
 			dispatch(receiveLogin(userInfo))
 		} catch(e) {
 			console.log(e);
