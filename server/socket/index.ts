@@ -1,6 +1,7 @@
 import * as lobbySocket from "./lobby"
 import * as lobbyDb from "../db/lobby"
 import * as gameRequestsSocket from "./gameRequest"
+import * as game from "./game"
 
 export const connection = (io, socket) => {
     console.log("User connected")
@@ -8,6 +9,7 @@ export const connection = (io, socket) => {
     lobbySocket.joinLobby(socket, io)
     lobbySocket.leaveLobby(socket, io)
     gameRequestsSocket.gameRequests(socket, io)
+    game.game(socket, io)
 }
 
 export const disconnection = async socket => {

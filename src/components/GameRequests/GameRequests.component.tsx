@@ -48,6 +48,14 @@ class GameRequests extends React.Component<GameRequestsProps> {
             request
         )
     } 
+    acceptRequest = (request) => {
+        const {socket} = this.props
+
+        socket.emit(
+            GAME_REQUEST_SOCKET_CHANNEL.ACCEPT_GAME_REQUEST,
+            request
+        )
+    }
     render() {
         const {gameRequests} = this.props
 
@@ -63,7 +71,7 @@ class GameRequests extends React.Component<GameRequestsProps> {
                             <p>Wants to play</p>
                             <div className="flex">
                                 <button className="btn btn--purple" onClick={()=>this.declineRequest(request)}>Decline</button>
-                                <button className="btn btn--green">Accept</button>
+                                <button className="btn btn--green" onClick={()=>this.acceptRequest(request)}>Accept</button>
                             </div>
                         </div>
                     ))}

@@ -6,7 +6,6 @@ import NavBar from "../components/NavBar/NavBar.component";
 import GameRequests from "../components/GameRequests/GameRequests.container";
 
 interface LobbyProps {
-    socket: SocketIOClientStatic;
 }
 
 class Lobby extends React.Component<LobbyProps> {
