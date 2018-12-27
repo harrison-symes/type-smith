@@ -19,11 +19,14 @@ interface ListProps {
 }
 
 class List extends React.Component<ListProps> {
+    constructor(props) {
+        super(props)
+        this.socketsListen()
+    }
     componentDidMount = () => {
         const {getLobby} = this.props
         
         getLobby()
-        this.socketsListen()
     }
     socketsListen = () => {
         const {socket, addEntryToLobby, removeEntryFromLobby, receiveGameInfo} = this.props

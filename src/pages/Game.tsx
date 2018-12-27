@@ -10,7 +10,7 @@ interface GameProps {
 
 class Game extends React.Component<GameProps> {
     render() {
-
+        console.log(this.props)
         return (
             <div>
                 <CharacterBar />
@@ -22,4 +22,4 @@ class Game extends React.Component<GameProps> {
     }
 }
 
-export default connect()(Game)
+export default connect(state => state)(Game)

@@ -8,7 +8,6 @@ router.get("/", async (req, res) => {
         res.json(Lobby)
 
     } catch (e) {
-        console.log(e)
         res.sendStatus(500)
     }
 })

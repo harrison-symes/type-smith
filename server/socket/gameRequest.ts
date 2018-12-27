@@ -39,7 +39,6 @@ export const gameRequests = (socket, io) => {
             )
         }
     )
-
     socket.on(
         GAME_REQUEST_SOCKET_CHANNEL.ACCEPT_GAME_REQUEST,
         (request: GameRequest) => {

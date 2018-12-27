@@ -9,8 +9,9 @@ import Lobby from "./pages/Lobby"
 
 
 import "./sass/main.scss"
-import { GameState } from "./components/GameScreen/game.interface";
+import { GameState, GameStage } from "./components/GameScreen/game.interface";
 import Game from "./pages/Game";
+import PreGame from "./pages/PreGame";
 
 interface AppProps {
     auth: AuthState,
@@ -24,13 +25,12 @@ const App : React.SFC<AppProps> = (props) => (
                 !props.auth.isAuthenticated ? 
                 <Route path="/" component={Welcome} /> :
                 <Route path="/" render={routeProps => {
-                    console.log(props.gameInfo)
-                    if (props.gameInfo.gameReady || props.gameInfo.gameStarted) {
-                        return <Game />
+                    console.log("info", props.gameInfo)
+                    switch(props.gameInfo.gameStage) {
+                        case GameStage.GAME_STARTED: return <Game />
+                        case GameStage.PRE_GAME: return <PreGame />
+                        default: return <Lobby />
                     }
-
-                    return <Lobby />
-                    
                 }} />
             }
         </React.Fragment>

@@ -13,7 +13,8 @@ interface LFGProps {
 }
 
 class LFG extends React.Component<LFGProps> {
-    componentDidMount() {
+    constructor(props) {
+        super(props)
         this.socketsListen()
     }
     socketsListen = () => {

@@ -13,7 +13,9 @@ export interface GameRequestsProps {
 }
 
 class GameRequests extends React.Component<GameRequestsProps> {
-    componentDidMount () {
+    constructor(props) {
+        super(props)
+
         this.socketsListen()
     }
     socketsListen = () => {

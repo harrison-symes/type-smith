@@ -1,6 +1,7 @@
 export enum GAME_TYPES {
     READY_GAME = "READY_GAME",
-    START_GAME = "START_GAME"
+    START_GAME = "START_GAME",
+    RECEIVE_TEAM_INFO = "TEAM_INFO"
 }
 
 export interface GameAction {
@@ -8,11 +9,17 @@ export interface GameAction {
     gameInfo?: Partial<GameState>
 }
 
+export enum GameStage {
+    PENDING = "PENDING",
+    PRE_GAME = "PRE_GAME",
+    GAME_STARTED = "GAME_STARTED"
+}
+
 export interface GameState {
+    roomId?: any;
     user_id: number;
     user_socket_id?: string;
     opponent_id: number;
     opponent_socket_id?: string;
-    gameReady: boolean;
-    gameStarted: boolean;
+    gameStage?: GameStage;
 }
