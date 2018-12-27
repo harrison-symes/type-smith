@@ -1,0 +1,12 @@
+.character-bar {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    border: 0.25rem $purple-med;
+    
+    .btn {
+        min-width: 200px;
+        height: 100%;
+        
+    }
+}

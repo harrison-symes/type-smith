@@ -1,0 +1,33 @@
+.game-character {
+    &--container {
+        min-height: 300px;
+        width: 100%;
+        max-height: 400px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    &--portrait-container {
+        width: 50%;
+    }
+    &--portrait {
+        width: 100%;
+        min-width: 100px;
+        min-height: 100px;
+        max-height: 300px;
+    }
+    &--stats {
+        width: 50%;
+        border: 0.25rem $blue-dark;
+        border-radius: 0.5rem;
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+    }
+
+
+}

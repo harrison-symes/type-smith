@@ -1,7 +1,13 @@
 import { GAME_TYPES } from "./game.interface";
 
 export interface Character {
-
+    heroClass: string;
+    healthMax:number;
+    health:number;
+    power:number;
+    defense:number;
+    energy:number;
+    speed:number;
 }
 
 export interface TeamAction {

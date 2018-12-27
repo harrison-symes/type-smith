@@ -1,0 +1,13 @@
+.team-bar {
+    display: flex;
+    justify-content: space-around;
+    border: 0.25rem $green-med;
+    border-radius: 0.5rem;
+
+
+    .team-member {
+        min-width: 100px;
+        height: 100px;
+        font-size: 2rem;
+    }
+}
