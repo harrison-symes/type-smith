@@ -1,6 +1,11 @@
 import {connect} from "react-redux"
-import GameCharacter from "./GameCharacter.component"
+import GameCharacter, { GameCharacterProps } from "./GameCharacter.component"
+
+const mapStateToProps = (state, ownProps: Partial<GameCharacterProps>) => ({
+    character: state[
+        ownProps.isPlayerSide ? "userTeam" : "opponentTeam"
+    ].find(character => character.isActive)
+})
 
 
-
-export default connect()(GameCharacter)
+export default connect(mapStateToProps)(GameCharacter)

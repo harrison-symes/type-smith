@@ -4,10 +4,12 @@ import { Socket } from "socket.io";
 import { GameState } from "../../src/components/GameScreen/game.interface";
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import { TEAM_PREVIEW_SOCKET_CHANNEL } from "../../src/components/TeamPreview/teamPreview.socket";
+import createCharacter from "../gameUtils.ts/createCharacter";
 
 const games = {
 
 }
+//leave this here :)
 
 export const game = (socket, io) => {
     joinRoom(socket, io)
@@ -30,7 +32,6 @@ const organiseGameInfo = (socket_id, roomId, request:GameRequest) => {
         roomId
         
     }
-
 
     return newInfo
 }
@@ -56,8 +57,6 @@ const joinRoom = (socket:Socket, io) => {
         games[roomId].player_socket_ids.push(socket.id)
         games[roomId][gameInfo.user_id] = obj
         
-        console.log(games)
-
         io.to(socket.id).emit(
             GAME_SOCKET_CHANNEL.READY_GAME,
             gameInfo
@@ -70,8 +69,8 @@ const joinRoom = (socket:Socket, io) => {
 
 const mapTeamToGameObjects = team => {
     return team.map(character => {
-        character.hpStat = 3
-        return character
+        const mapped = createCharacter(character)
+        return mapped
     })
 }
 
@@ -87,7 +86,8 @@ const roomListeners = (socket, io) => {
             const opponent_id = getOpponentId(user_id, game)
             game[user_id].team = mapTeamToGameObjects(team)
             game.readyPlayers++
-            console.log({game})
+            console.log(game[user_id.team])
+            console.log(game[opponent_id.team])
 
             if (game.readyPlayers == 2) {
                 io.to(roomId).emit(

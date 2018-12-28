@@ -1,7 +1,8 @@
 import * as React from "react"
 import { Socket } from "socket.io";
 import { TEAM_PREVIEW_SOCKET_CHANNEL } from "./teamPreview.socket";
-import { GameState } from "components/GameScreen/game.interface";
+import { GameState } from "../GameScreen/game.interface";
+import { CharacterClassList, Character } from "../../interfacing/characters";
 
 export interface TeamPreviewProps {
     socket: Socket,
@@ -10,9 +11,22 @@ export interface TeamPreviewProps {
 
 const defaultTeam = [
     {
-        heroClass: "Warrior",
-    }
-]
+        characterClass: CharacterClassList.WARRIOR,
+        isActive: true
+    },
+    {
+        characterClass: CharacterClassList.MAGE,
+    },
+    {
+        characterClass: CharacterClassList.ASSASSIN,
+    },
+    {
+        characterClass: CharacterClassList.PALADIN,
+    },
+    {
+        characterClass: CharacterClassList.WITCH,
+    },
+] as Partial<Character>[]
 
 class TeamPreview extends React.Component<TeamPreviewProps> {
     submitTeam = () => {

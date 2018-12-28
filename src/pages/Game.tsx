@@ -4,7 +4,7 @@ import CharacterBar from "../components/CharacterBar/CharacterBar.container";
 import GameLog from "../components/GameLog/GameLog.container";
 import GameScreen from "../components/GameScreen/GameScreen.container";
 import TeamBar from "../components/TeamBar/TeamBar.component";
-import { Character } from "../components/GameScreen/opponentTeam.reducer";
+import { Character } from "../interfacing/characters";
 
 interface GameProps {
     userTeam: Character[];

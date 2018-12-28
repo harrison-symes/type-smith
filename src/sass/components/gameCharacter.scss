@@ -2,7 +2,6 @@ $maxHeight: 200px;
 
 .game-character {
     &--container {
-        min-height: 300px;
         width: 100%;
         max-height: $maxHeight;
         display: flex;

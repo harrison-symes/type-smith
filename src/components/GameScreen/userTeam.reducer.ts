@@ -1,8 +1,5 @@
 import { GAME_TYPES } from "./game.interface";
-
-export interface Character {
-
-}
+import { Character } from "../../interfacing/characters";
 
 export interface TeamAction {
     type: GAME_TYPES;
