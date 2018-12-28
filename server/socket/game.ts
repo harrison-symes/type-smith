@@ -67,9 +67,9 @@ const joinRoom = (socket:Socket, io) => {
    
 }
 
-const mapTeamToGameObjects = team => {
+const mapTeamToGameObjects = (owner_id, team) => {
     return team.map(character => {
-        const mapped = createCharacter(character)
+        const mapped = createCharacter(owner_id, character)
         return mapped
     })
 }
@@ -84,7 +84,7 @@ const roomListeners = (socket, io) => {
         (roomId, user_id, team) => {
             const game = games[roomId]
             const opponent_id = getOpponentId(user_id, game)
-            game[user_id].team = mapTeamToGameObjects(team)
+            game[user_id].team = mapTeamToGameObjects(user_id, team)
             game.readyPlayers++
             console.log(game[user_id.team])
             console.log(game[opponent_id.team])

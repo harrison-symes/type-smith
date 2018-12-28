@@ -7,9 +7,13 @@ export const calcDefense = (defenseStat : number) => 2 + defenseStat
 export const calcPower = (powerStat : number) => 10 + powerStat
 export const calcSpeed = (speedStat : number) => speedStat
 
-export const createClassFromStatSheet = (characterClass : CharacterClassList, isActive: boolean, statSheet : StatSheet) : Character => ({
+let id = 1
+
+export const createClassFromStatSheet = (owner_id, characterClass : CharacterClassList, isActive: boolean, statSheet : StatSheet) : Character => ({
     characterClass,
     isActive,
+    id: ++id,
+    owner_id,
     health: calcHealth(statSheet.healthStat),
     healthMax: calcHealth(statSheet.healthStat),
     energy: calcEnergy(statSheet.energyStat),
@@ -19,6 +23,6 @@ export const createClassFromStatSheet = (characterClass : CharacterClassList, is
     speed: calcSpeed(statSheet.speedStat)
 })
 
-export default ({characterClass, isActive}: Partial<Character>) : Character => {
-    return createClassFromStatSheet(characterClass, isActive, statSheets[characterClass])
+export default (owner_id, {characterClass, isActive}: Partial<Character>) : Character => {
+    return createClassFromStatSheet(owner_id, characterClass, isActive, statSheets[characterClass])
 } 
