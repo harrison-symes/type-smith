@@ -1,8 +1,6 @@
-import { GAME_REQUEST_SOCKET_CHANNEL } from "../../src/components/GameRequests/GameRequests.socket";
 import { GameRequest } from "../../src/components/GameRequests/interface";
-import { LOBBY_SOCKET_CHANNEL } from "../../src/components/Lobby/lobby.socket";
 import { leaveLobby } from "../db/lobby";
-import { LFG_SOCKET_CHANNEL } from "../../src/components/LFG/LFG.socket";
+import { GAME_REQUEST_SOCKET_CHANNEL, LOBBY_SOCKET_CHANNEL, LFG_SOCKET_CHANNEL } from "../../shared/socketChannels";
 
 let idCounter = 1;
 

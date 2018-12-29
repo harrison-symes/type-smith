@@ -1,12 +1,9 @@
 import * as React from "react"
 import { Socket } from "socket.io";
 import { GameRequest } from "./components/GameRequests/interface";
-import { GAME_REQUEST_SOCKET_CHANNEL } from "./components/GameRequests/GameRequests.socket";
-import { LFG_SOCKET_CHANNEL } from "./components/LFG/LFG.socket";
 import { LobbyEntry } from "./components/Lobby/interface";
 import { GameState } from "./components/GameScreen/game.interface";
-import { GAME_SOCKET_CHANNEL } from "./components/GameScreen/game.socket";
-import { LOBBY_SOCKET_CHANNEL } from "./components/Lobby/lobby.socket";
+import { GAME_REQUEST_SOCKET_CHANNEL, LFG_SOCKET_CHANNEL, LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL } from "../shared/socketChannels";
 
 export interface SocketListenerProps 
 extends 
@@ -49,6 +46,7 @@ class SocketListener extends React.Component<SocketListenerProps> {
         this.gameRequests(socket)
         this.LFG(socket)
         this.list(socket)
+        this.preGame(socket)
     }
     gameRequests = (socket) => {
         const {

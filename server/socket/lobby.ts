@@ -1,7 +1,6 @@
 import * as lobbyDb from "../db/lobby"
 import { Socket } from "socket.io";
-import { LOBBY_SOCKET_CHANNEL } from "../../src/components/Lobby/lobby.socket";
-import { LFG_SOCKET_CHANNEL } from "../../src/components/LFG/LFG.socket";
+import { LFG_SOCKET_CHANNEL, LOBBY_SOCKET_CHANNEL } from "../../shared/socketChannels";
 
 export const joinGame = (socket, room) => {
     socket.join(room)

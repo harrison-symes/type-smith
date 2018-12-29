@@ -1,10 +1,8 @@
-import { GAME_SOCKET_CHANNEL } from "../../src/components/GameScreen/game.socket";
-import { LOBBY_SOCKET_CHANNEL } from "../../src/components/Lobby/lobby.socket";
 import { Socket } from "socket.io";
 import { GameState } from "../../src/components/GameScreen/game.interface";
 import { GameRequest } from "../../src/components/GameRequests/interface";
-import { TEAM_PREVIEW_SOCKET_CHANNEL } from "../../src/components/TeamPreview/teamPreview.socket";
 import createCharacter from "../gameUtils.ts/createCharacter";
+import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL } from "../../shared/socketChannels";
 
 const games = {
 
@@ -36,7 +34,6 @@ const organiseGameInfo = (socket_id, roomId, request:GameRequest) => {
     return newInfo
 }
 
-console.log(Object.keys(games))
 const joinRoom = (socket:Socket, io) => {
     socket.on(LOBBY_SOCKET_CHANNEL.JOIN_ROOM, (roomId, request) => {
         socket.join(roomId)
@@ -86,8 +83,6 @@ const roomListeners = (socket, io) => {
             const opponent_id = getOpponentId(user_id, game)
             game[user_id].team = mapTeamToGameObjects(user_id, team)
             game.readyPlayers++
-            console.log(game[user_id.team])
-            console.log(game[opponent_id.team])
 
             if (game.readyPlayers == 2) {
                 io.to(roomId).emit(

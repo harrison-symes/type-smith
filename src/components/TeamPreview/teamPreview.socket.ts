@@ -1,3 +1,0 @@
-export enum TEAM_PREVIEW_SOCKET_CHANNEL {
-    SUBMIT_TEAM = "SUBMIT_TEAM",
-}
