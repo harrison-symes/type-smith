@@ -1,4 +1,4 @@
-import { GAME_ATTACKS, ATTACK_STACK_TYPES, damageTargetAction } from "./attacks";
+import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "./attacks";
 import * as React from "react"
 import { ATTACK_TYPES } from "./types";
 import { Character } from "../src/interfacing/characters";

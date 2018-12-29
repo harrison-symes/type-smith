@@ -28,11 +28,19 @@ class Login extends React.Component<LoginProps, LoginState> {
 			console.log(e)
 		}
 	}
+	test = async (user_name) => {
+		await this.props.loginUser({ user_name, password: "test" })
+		this.props.history.push("/")
+	}
 	render() {
 
 		return (
 			<div className="center w-50">
 				<h2 className="page-title">Login</h2>
+				<div className="flex justify-center">
+					<button className="btn btn--green" onClick={()=>this.test("test")}>Test</button>
+					<button className="btn btn--purple" onClick={()=>this.test("test2")}>Test2</button>
+				</div>
 				<form className="form" onSubmit={this.submit}>
 
 					<label htmlFor="user_name">Username:</label>

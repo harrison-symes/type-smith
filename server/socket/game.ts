@@ -2,7 +2,8 @@ import { Socket } from "socket.io";
 import { GameState } from "../../src/components/GameScreen/game.interface";
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils.ts/createCharacter";
-import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL } from "../../shared/socketChannels";
+import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
+import { GameTurnAction, attackActionMapper } from "../../shared/attacks";
 
 const games = {
 
@@ -12,6 +13,14 @@ const games = {
 export const game = (socket, io) => {
     joinRoom(socket, io)
 }
+
+const initTurn = (turnNumber, player_ids) => ({
+    [player_ids[0]]: [],
+    [player_ids[1]]: [],
+    player_ids,
+    playersSubmitted: 0,
+    isComplete: false
+})
 
 const organiseGameInfo = (socket_id, roomId, request:GameRequest) => {
     const isSender = request.sender_socket_id == socket_id
@@ -44,6 +53,7 @@ const joinRoom = (socket:Socket, io) => {
             readyPlayers: 0,
             player_ids: [],
             player_socket_ids: [],
+            turns: []
         } 
         const obj = games[roomId][socket.id] = {
             user_id: gameInfo.user_id,
@@ -92,7 +102,46 @@ const roomListeners = (socket, io) => {
                         opponent_team: game[opponent_id].team
                     }
                 )
+                game.turns.push(initTurn(1, game.player_ids))
             }
+        }
+    )
+
+    socket.on(
+        GAME_ACTION_SOCKET_CHANNEL.SUBMIT_TURN_ACTION,
+        (roomId, user_id, action:GameTurnAction) => {
+            const game = games[roomId]
+            const turn = game.turns[game.turns.length -1]
+
+            const {character, opponent, ability} = action
+
+            const actionStack = ability.stack.map(action_type => {
+                return attackActionMapper[action_type](character, opponent, ability)
+            })
+
+            turn[!turn.action_one ? "action_one" : "action_two"] = {
+                actionStack,
+                character
+            }
+            turn.playersSubmitted++
+            
+            if (turn.playersSubmitted == 2) {
+                console.log("both players submitted")
+            } else {
+                console.log("waiting for player 2")
+                return
+            }
+            
+            const finalStack = [
+                [...turn.action_one.actionStack],
+                [...turn.action_two.actionStack]
+            ]
+
+            console.log(finalStack)
+            //end turn
+            //submit stack to client side
+            //create next turn
+
         }
     )
 }

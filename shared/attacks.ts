@@ -1,4 +1,5 @@
 import { calcDamage } from "./damageCalc";
+import { Character, CharacterAbility } from "src/interfacing/characters";
 
 export enum GAME_ATTACKS {
     SLASH = "Slash",
@@ -21,11 +22,20 @@ export enum ATTACK_STACK_TYPES {
     INCREASE_MAX_ENERGY = "INCREASE_MAX_ENERGY",
 }
 
-const damageOpponentAction = (character, opponent, ability) => {
+export interface GameTurnAction {
+    character: Character,
+    opponent: Character,
+    ability: CharacterAbility
+}
+
+
+export const damageOpponentAction = (character, opponent, ability) => {
     const { power, isResist, isStrong } = calcDamage(character, opponent, ability)
 
     return {
-        type: ATTACK_STACK_TYPES,
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        attacker: character.name,
+        target: opponent,
         power,
         isResist,
         isStrong
@@ -33,9 +43,9 @@ const damageOpponentAction = (character, opponent, ability) => {
 }
 
 
-export const healSelfAction = (target_id, power) => ({
+export const healSelfAction = (target, power) => ({
     type: ATTACK_STACK_TYPES.HEAL_SELF,
-    target_id,
+    target,
     power
 })
 

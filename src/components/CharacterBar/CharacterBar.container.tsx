@@ -2,9 +2,15 @@ import {connect} from "react-redux"
 import CharacterBar from "./CharacterBar.component"
 
 const mapStateToProps = ({
-    userTeam
+    userTeam,
+    gameInfo,
+    socket,
+    opponentTeam
 }) => ({
-    character: userTeam.find(character => character.isActive)
+    gameInfo,
+    socket,
+    character: userTeam.find(character => character.isActive),
+    opponent: opponentTeam.find(character => character.isActive)
 })
 
 export default connect(mapStateToProps)(CharacterBar)
