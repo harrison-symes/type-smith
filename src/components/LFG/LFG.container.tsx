@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
 import LFG from "./LFG.component";
-import { ownPlayerJoinedLobby, ownPlayerLeftLobby } from "./LFG.actions";
 
 const mapStateToProps = ({
     socket,
@@ -12,9 +11,4 @@ const mapStateToProps = ({
     auth
 })
 
-const mapDispatchToProps = dispatch => ({
-    ownPlayerJoinedLobby: () => dispatch(ownPlayerJoinedLobby()),
-    ownPlayerLeftLobby: (user_id:number) => dispatch(ownPlayerLeftLobby(user_id))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LFG)
+export default connect(mapStateToProps)(LFG)

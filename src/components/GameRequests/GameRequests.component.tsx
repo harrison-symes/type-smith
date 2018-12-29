@@ -6,41 +6,13 @@ import { GAME_REQUEST_SOCKET_CHANNEL } from "./GameRequests.socket";
 export interface GameRequestsProps {
     socket: Socket;
     gameRequests: GameRequestsState;
-    receiveIncomingGameRequest(request:GameRequest) : void;
-    receiveOutgoingGameRequest(request:GameRequest) : void;
-    removeIncomingGameRequest(request_id: number) : void;
-    removeOutgoingGameRequest(request_id: number) : void;
 }
 
 class GameRequests extends React.Component<GameRequestsProps> {
     constructor(props) {
         super(props)
 
-        this.socketsListen()
-    }
-    socketsListen = () => {
-        const {
-            socket, 
-            receiveIncomingGameRequest, receiveOutgoingGameRequest,
-            removeIncomingGameRequest, removeOutgoingGameRequest
-        } = this.props
-        
-        socket.on(
-            GAME_REQUEST_SOCKET_CHANNEL.RECEIVE_GAME_REQUEST_IN,
-            request => receiveIncomingGameRequest(request)
-        )
-        socket.on(
-            GAME_REQUEST_SOCKET_CHANNEL.RECEIVE_GAME_REQUEST_OUT,
-            request => receiveOutgoingGameRequest(request)
-        )
-        socket.on(
-            GAME_REQUEST_SOCKET_CHANNEL.REMOVE_GAME_REQUEST_IN,
-            request_id => removeIncomingGameRequest(request_id)
-        )
-        socket.on(
-            GAME_REQUEST_SOCKET_CHANNEL.REMOVE_GAME_REQUEST_OUT,
-            request_id => removeOutgoingGameRequest(request_id)
-        )
+        console.log("construct game requests");
     }
     declineRequest = (request) => {
         const { socket } = this.props

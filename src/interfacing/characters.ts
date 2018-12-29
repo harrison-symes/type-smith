@@ -8,6 +8,7 @@ export enum CharacterClassList {
 
 export interface Character {
     id: number;
+    owner_id: number;
     characterClass: CharacterClassList;
     isActive?: boolean;
     healthMax: number;

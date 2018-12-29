@@ -36,11 +36,11 @@ const organiseGameInfo = (socket_id, roomId, request:GameRequest) => {
     return newInfo
 }
 
+console.log(Object.keys(games))
 const joinRoom = (socket:Socket, io) => {
     socket.on(LOBBY_SOCKET_CHANNEL.JOIN_ROOM, (roomId, request) => {
-    
         socket.join(roomId)
-        
+        socket.on("disconnect", () => delete games[roomId])
         const gameInfo = organiseGameInfo(socket.id, roomId, request)
         
         if (!games[roomId]) games[roomId] = {

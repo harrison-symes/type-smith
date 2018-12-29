@@ -8,24 +8,9 @@ interface LFGProps {
     socket: Socket;
     auth: AuthState;
     isLFG: LFGState;
-    ownPlayerJoinedLobby():void;
-    ownPlayerLeftLobby(user_id: number):void;
 }
 
 class LFG extends React.Component<LFGProps> {
-    constructor(props) {
-        super(props)
-        this.socketsListen()
-    }
-    socketsListen = () => {
-        const {socket, ownPlayerJoinedLobby, ownPlayerLeftLobby} = this.props
-        socket.on(LFG_SOCKET_CHANNEL.USER_JOINED_LOBBY, () => {
-            ownPlayerJoinedLobby()
-        })
-        socket.on(LFG_SOCKET_CHANNEL.USER_LEFT_LOBBY, (user_id) => {
-            ownPlayerLeftLobby(user_id)
-        })
-    }
     joinLobby  = () => {
         const {socket, auth} = this.props
 

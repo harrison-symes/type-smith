@@ -12,6 +12,7 @@ import "./sass/main.scss"
 import { GameState, GameStage } from "./components/GameScreen/game.interface";
 import Game from "./pages/Game";
 import PreGame from "./pages/PreGame";
+import SocketListener from "./SocketListener.container";
 
 interface AppProps {
     auth: AuthState,
@@ -21,6 +22,7 @@ interface AppProps {
 const App : React.SFC<AppProps> = (props) => (
     <Router>
         <React.Fragment>
+            <SocketListener />
             {
                 !props.auth.isAuthenticated ? 
                 <Route path="/" component={Welcome} /> :

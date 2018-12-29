@@ -11,25 +11,9 @@ interface PreGameProps {
     socket: Socket,
     gameInfo: GameState;
     auth: AuthState
-    receiveTeamInfo(teamInfo : any[]) : void;
 }
 
 class PreGame extends React.Component<PreGameProps> {
-    constructor(props) {
-        super(props)
-        this.socketsListen()
-    }
-    socketsListen() {
-        const {socket, receiveTeamInfo, auth} = this.props
-
-        socket.on(
-            GAME_SOCKET_CHANNEL.RECEIVE_TEAM_INFO,
-            teamInfo => {
-                console.log({teamInfo})
-                receiveTeamInfo(teamInfo)
-            }
-        )
-    }
     render() {
         return (
             <div>
@@ -50,8 +34,4 @@ const mapStateToProps = ({
     auth
 })
 
-const mapDispatchToProps = dispatch => ({
-    receiveTeamInfo: teamInfo => dispatch(receiveTeamInfo(teamInfo))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(PreGame)
+export default connect(mapStateToProps)(PreGame)

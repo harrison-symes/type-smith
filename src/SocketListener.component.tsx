@@ -1,0 +1,132 @@
+import * as React from "react"
+import { Socket } from "socket.io";
+import { GameRequest } from "./components/GameRequests/interface";
+import { GAME_REQUEST_SOCKET_CHANNEL } from "./components/GameRequests/GameRequests.socket";
+import { LFG_SOCKET_CHANNEL } from "./components/LFG/LFG.socket";
+import { LobbyEntry } from "./components/Lobby/interface";
+import { GameState } from "./components/GameScreen/game.interface";
+import { GAME_SOCKET_CHANNEL } from "./components/GameScreen/game.socket";
+import { LOBBY_SOCKET_CHANNEL } from "./components/Lobby/lobby.socket";
+
+export interface SocketListenerProps 
+extends 
+GameRequestSocketCommands, 
+LFGSocketCommands,
+ListSocketCommands,
+PreGameSocketCommands
+{
+    socket: Socket;
+}
+
+interface GameRequestSocketCommands {
+    receiveIncomingGameRequest(request: GameRequest): void;
+    receiveOutgoingGameRequest(request: GameRequest): void;
+    removeIncomingGameRequest(request_id: number): void;
+    removeOutgoingGameRequest(request_id: number): void;
+}
+
+interface LFGSocketCommands {
+    ownPlayerJoinedLobby(): void;
+    ownPlayerLeftLobby(user_id: number): void;
+}
+
+interface ListSocketCommands {
+    addEntryToLobby(entry: LobbyEntry): void;
+    removeEntryFromLobby(user_id: number): void;
+    receiveGameInfo(gameInfo: GameState): void;
+}
+
+interface PreGameSocketCommands {
+    receiveTeamInfo(teamInfo: any[]): void;
+}
+
+class SocketListener extends React.Component<SocketListenerProps> {
+    componentDidMount() {
+        const {
+            socket
+        } = this.props
+        
+        this.gameRequests(socket)
+        this.LFG(socket)
+        this.list(socket)
+    }
+    gameRequests = (socket) => {
+        const {
+            receiveIncomingGameRequest, receiveOutgoingGameRequest,
+            removeIncomingGameRequest, removeOutgoingGameRequest
+        } = this.props
+        
+        socket.on(  
+            GAME_REQUEST_SOCKET_CHANNEL.RECEIVE_GAME_REQUEST_IN,
+            request => receiveIncomingGameRequest(request)
+        )
+        socket.on(
+            GAME_REQUEST_SOCKET_CHANNEL.RECEIVE_GAME_REQUEST_OUT,
+            request => receiveOutgoingGameRequest(request)
+        )
+        socket.on(
+            GAME_REQUEST_SOCKET_CHANNEL.REMOVE_GAME_REQUEST_IN,
+            request_id => removeIncomingGameRequest(request_id)
+        )
+        socket.on(
+            GAME_REQUEST_SOCKET_CHANNEL.REMOVE_GAME_REQUEST_OUT,
+            request_id => removeOutgoingGameRequest(request_id)
+        )
+    } 
+    LFG = socket => {
+        const {ownPlayerJoinedLobby, ownPlayerLeftLobby } = this.props
+
+        socket.on(
+            LFG_SOCKET_CHANNEL.USER_JOINED_LOBBY,
+            () => ownPlayerJoinedLobby()
+        )
+        socket.on(
+            LFG_SOCKET_CHANNEL.USER_LEFT_LOBBY,
+            (user_id) => ownPlayerLeftLobby(user_id)
+        )
+    }
+    list = socket => {
+        const {addEntryToLobby, removeEntryFromLobby, receiveGameInfo } = this.props
+
+        socket.on(
+            LOBBY_SOCKET_CHANNEL.ENTRY_ADDED,
+            entry => addEntryToLobby(entry)
+        )
+        socket.on(
+            LOBBY_SOCKET_CHANNEL.ENTRY_REMOVED,
+            user_id => removeEntryFromLobby(user_id)
+        )
+
+        socket.on(
+            LOBBY_SOCKET_CHANNEL.SIGNAL_JOIN_ROOM,
+            (roomId, request) => {
+                socket.emit(
+                    LOBBY_SOCKET_CHANNEL.JOIN_ROOM,
+                    roomId,
+                    request
+                )
+            }
+        )
+
+        socket.on(
+            GAME_SOCKET_CHANNEL.READY_GAME,
+            gameInfo => receiveGameInfo(gameInfo)
+        )
+    }
+    preGame = (socket) => {
+        const { receiveTeamInfo } = this.props
+
+        socket.on(
+            GAME_SOCKET_CHANNEL.RECEIVE_TEAM_INFO,
+            teamInfo => receiveTeamInfo(teamInfo)
+        )
+    }
+    render() {
+
+        return <React.Fragment>
+
+        </React.Fragment>
+    }
+}
+
+export default SocketListener

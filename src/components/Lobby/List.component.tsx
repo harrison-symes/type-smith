@@ -13,53 +13,11 @@ interface ListProps {
     auth: AuthState;
     lobby: LobbyState;
     getLobby(): void;
-    addEntryToLobby(entry : LobbyEntry) : void;
-    removeEntryFromLobby(user_id: number) : void;
-    receiveGameInfo(gameInfo: GameState) : void;
 }
 
 class List extends React.Component<ListProps> {
-    constructor(props) {
-        super(props)
-        this.socketsListen()
-    }
     componentDidMount = () => {
-        const {getLobby} = this.props
-        
-        getLobby()
-    }
-    socketsListen = () => {
-        const {socket, addEntryToLobby, removeEntryFromLobby, receiveGameInfo} = this.props
-
-        socket.on(
-            LOBBY_SOCKET_CHANNEL.ENTRY_ADDED, 
-            entry => addEntryToLobby(entry)
-        )
-        socket.on(
-            LOBBY_SOCKET_CHANNEL.ENTRY_REMOVED,
-            user_id => removeEntryFromLobby(user_id)
-        )
-
-        socket.on(
-            LOBBY_SOCKET_CHANNEL.SIGNAL_JOIN_ROOM,
-            (roomId, request) => {
-                console.log({roomId})
-                socket.emit(
-                    LOBBY_SOCKET_CHANNEL.JOIN_ROOM,
-                    roomId,
-                    request
-                )
-            }
-        )
-
-        socket.on(
-            GAME_SOCKET_CHANNEL.READY_GAME,
-            gameInfo => {
-                console.log({gameInfo})
-                receiveGameInfo(gameInfo)
-            }
-        )
-
+        this.props.getLobby()
     }
     render = () => {
         const {lobby, auth} = this.props
