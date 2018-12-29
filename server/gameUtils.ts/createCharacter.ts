@@ -14,10 +14,7 @@ export const createClassFromStatSheet = (owner_id, character) : Character => {
     const {characterClass, isActive} = character
     const statSheet = statSheets[characterClass]
     const abilities = character.abilities.map(ability => mapAbilities[ability.name]())
-    console.log({
-        character,
-        abilities
-    })
+    
     return {
         characterClass,
         isActive,

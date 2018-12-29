@@ -13,6 +13,7 @@ export interface CharacterAbility {
     name: string | GAME_ATTACKS;
     description: string;
     cost: number;
+    power: number;
     isUltimate: boolean;
     type: ATTACK_TYPES
 }
