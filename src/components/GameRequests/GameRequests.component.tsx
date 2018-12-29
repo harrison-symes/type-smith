@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Socket } from "socket.io";
 import { GameRequest, GameRequestsState } from "./interface";
-import { GAME_REQUEST_SOCKET_CHANNEL } from "./GameRequests.socket";
+import { GAME_REQUEST_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 
 export interface GameRequestsProps {
     socket: Socket;

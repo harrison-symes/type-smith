@@ -2,11 +2,8 @@ import * as React from "react";
 import { Socket } from "socket.io";
 import Entry from "./Entry.container";
 
-import { LOBBY_SOCKET_CHANNEL } from "./lobby.socket";
 import { LobbyState, LobbyEntry } from "./interface";
 import { AuthState } from "../Auth/auth.interface";
-import { GAME_SOCKET_CHANNEL } from "../GameScreen/game.socket";
-import { GameState } from "../GameScreen/game.interface";
 
 interface ListProps {
     socket: Socket;
@@ -21,7 +18,7 @@ class List extends React.Component<ListProps> {
     }
     render = () => {
         const {lobby, auth} = this.props
-        console.log({lobby, auth})
+            
         return (
             <div className="flex flex-wrap justify-center">
                 {lobby.map(entry => (

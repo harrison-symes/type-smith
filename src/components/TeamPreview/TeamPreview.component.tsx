@@ -1,30 +1,43 @@
 import * as React from "react"
 import { Socket } from "socket.io";
-import { TEAM_PREVIEW_SOCKET_CHANNEL } from "./teamPreview.socket";
 import { GameState } from "../GameScreen/game.interface";
 import { CharacterClassList, Character } from "../../interfacing/characters";
+import { GAME_ATTACKS } from "../../../shared/attacks";
+import { TEAM_PREVIEW_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 
 export interface TeamPreviewProps {
     socket: Socket,
     gameInfo: GameState
 }
 
+const defaultMoves = () => ([
+    {name: GAME_ATTACKS.SLASH },
+    {name: GAME_ATTACKS.ACCELERATE },
+    {name: GAME_ATTACKS.SLASH },
+    {name: GAME_ATTACKS.TANK_UP }
+])
+
 const defaultTeam = [
     {
         characterClass: CharacterClassList.WARRIOR,
-        isActive: true
+        isActive: true,
+        abilities: defaultMoves()
     },
     {
         characterClass: CharacterClassList.MAGE,
+        abilities: defaultMoves()
     },
     {
         characterClass: CharacterClassList.ASSASSIN,
+        abilities: defaultMoves()
     },
     {
         characterClass: CharacterClassList.PALADIN,
+        abilities: defaultMoves()
     },
     {
         characterClass: CharacterClassList.WITCH,
+        abilities: defaultMoves()
     },
 ] as Partial<Character>[]
 

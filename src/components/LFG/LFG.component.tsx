@@ -2,7 +2,7 @@ import * as React from "react";
 import { Socket } from "socket.io";
 import { AuthState } from "../Auth/auth.interface";
 import { LFGState } from "./interface";
-import { LFG_SOCKET_CHANNEL } from "./LFG.socket";
+import { LFG_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 
 interface LFGProps {
     socket: Socket;

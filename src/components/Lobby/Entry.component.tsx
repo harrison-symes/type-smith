@@ -2,7 +2,7 @@ import * as React from "react";
 import { AuthState } from "../Auth/auth.interface";
 import { Socket } from "socket.io";
 import { LobbyEntry } from "./interface";
-import { GAME_REQUEST_SOCKET_CHANNEL } from "../GameRequests/GameRequests.socket";
+import { GAME_REQUEST_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 import { GameRequestsState } from "components/GameRequests/interface";
 
 interface EntryProps {

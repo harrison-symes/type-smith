@@ -1,3 +1,6 @@
+import { GAME_ATTACKS } from "../../shared/attacks";
+import { ATTACK_TYPES } from "../../shared/types";
+
 export enum CharacterClassList {
     WARRIOR = "Warrior",
     MAGE = "Mage",
@@ -5,6 +8,19 @@ export enum CharacterClassList {
     PALADIN = "Paladin",
     WITCH = "Witch"
 }
+
+export interface CharacterAbility {
+    name: string | GAME_ATTACKS;
+    description: string;
+    cost: number;
+    isUltimate: boolean;
+    type: ATTACK_TYPES
+}
+
+// export interface PreGameCharacter {
+//     characterClass: CharacterClassList;
+//     abilities: string[]
+// }
 
 export interface Character {
     id: number;
@@ -18,4 +34,5 @@ export interface Character {
     defense: number;
     power: number;
     speed: number;
+    abilities: CharacterAbility[]
 }

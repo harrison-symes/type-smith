@@ -3,9 +3,7 @@ import {connect} from "react-redux"
 import TeamPreview from "../components/TeamPreview/TeamPreview.container";
 import { Socket } from "socket.io";
 import { GameState } from "../components/GameScreen/game.interface";
-import { GAME_SOCKET_CHANNEL } from "../components/GameScreen/game.socket";
 import { AuthState } from "../components/Auth/auth.interface";
-import { receiveTeamInfo } from "../components/GameScreen/gameScreen.actions";
 
 interface PreGameProps {
     socket: Socket,

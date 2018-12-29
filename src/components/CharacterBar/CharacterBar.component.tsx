@@ -1,33 +1,19 @@
 import * as React from "react"
+import { CharacterAbility, Character } from "../../interfacing/characters";
 
 export interface CharacterBarProps {
-    
+    character: Character
 }
 
-const attacks = [
-    {
-        name: "attack 1"
-    },
-    {
-        name: "attack 2"
-    },
-    {
-        name: "attack 3"
-    },
-    {
-        name: "attack 4"
-    }
-]
-
 class CharacterBar extends React.Component<CharacterBarProps>{
-
     render() {
+        const {character} = this.props
 
         return (
             <div className="character-bar">
-                {attacks.map(attack => (
+                {character.abilities.map((ability) => (
                     <button className="btn w-25">
-                        {attack.name}
+                        {ability.name}
                     </button>
                 ))}
             </div>
