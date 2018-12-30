@@ -20,7 +20,6 @@ const defaultMoves = () => ([
 const defaultTeam = [
     {
         characterClass: CharacterClassList.WARRIOR,
-        isActive: true,
         abilities: defaultMoves()
     },
     {
@@ -40,6 +39,9 @@ const defaultTeam = [
         abilities: defaultMoves()
     },
 ] as Partial<Character>[]
+
+const idx = Math.floor(Math.random() * defaultTeam.length)
+defaultTeam[idx].isActive = true 
 
 class TeamPreview extends React.Component<TeamPreviewProps> {
     submitTeam = () => {

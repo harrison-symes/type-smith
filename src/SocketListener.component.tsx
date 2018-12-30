@@ -3,16 +3,18 @@ import { Socket } from "socket.io";
 import { GameRequest } from "./components/GameRequests/interface";
 import { LobbyEntry } from "./components/Lobby/interface";
 import { GameState } from "./components/GameScreen/game.interface";
-import { GAME_REQUEST_SOCKET_CHANNEL, LFG_SOCKET_CHANNEL, LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL } from "../shared/socketChannels";
+import { GAME_REQUEST_SOCKET_CHANNEL, LFG_SOCKET_CHANNEL, LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../shared/socketChannels";
 
 export interface SocketListenerProps 
 extends 
 GameRequestSocketCommands, 
 LFGSocketCommands,
 ListSocketCommands,
-PreGameSocketCommands
+PreGameSocketCommands,
+InGameSocketCommands
 {
     socket: Socket;
+    despacito(any:any) : void; //desperate burrito
 }
 
 interface GameRequestSocketCommands {
@@ -37,6 +39,10 @@ interface PreGameSocketCommands {
     receiveTeamInfo(teamInfo: any[]): void;
 }
 
+interface InGameSocketCommands {
+    waitForOpponent() : void;
+}
+
 class SocketListener extends React.Component<SocketListenerProps> {
     componentDidMount() {
         const {
@@ -47,6 +53,7 @@ class SocketListener extends React.Component<SocketListenerProps> {
         this.LFG(socket)
         this.list(socket)
         this.preGame(socket)
+        this.inGame(socket)
     }
     gameRequests = (socket) => {
         const {
@@ -117,6 +124,22 @@ class SocketListener extends React.Component<SocketListenerProps> {
         socket.on(
             GAME_SOCKET_CHANNEL.RECEIVE_TEAM_INFO,
             teamInfo => receiveTeamInfo(teamInfo)
+        )
+    }
+    inGame = (socket) => {
+        const {waitForOpponent, despacito} = this.props
+
+        socket.on(
+            GAME_ACTION_SOCKET_CHANNEL.WAIT_FOR_OPPONENT,
+            () => waitForOpponent()
+        )
+
+        socket.on(
+            GAME_ACTION_SOCKET_CHANNEL.RECEIVE_TURN_STACK,
+            stack => {
+                console.log({stack})
+                stack.forEach(action => despacito(action[0]))
+            }
         )
     }
     render() {

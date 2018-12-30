@@ -1,7 +1,7 @@
 import * as React from "react"
 import { CharacterAbility, Character } from "../../interfacing/characters";
 import { Socket } from "socket.io";
-import { GameState } from "../GameScreen/game.interface";
+import { GameState, TurnStage } from "../GameScreen/game.interface";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 
 export interface CharacterBarProps {
@@ -11,7 +11,7 @@ export interface CharacterBarProps {
     opponent: Character;
 }
 
-class CharacterBar extends React.Component<CharacterBarProps>{
+class CharacterBar extends React.Component<CharacterBarProps> {
     submitAction = (ability) => {
         const {gameInfo, socket, character, opponent} = this.props
 
@@ -26,16 +26,21 @@ class CharacterBar extends React.Component<CharacterBarProps>{
             }
         )
     }
+    renderAbility = (ability: CharacterAbility) => (
+        <button 
+            className="btn w-25" 
+            onClick={() => this.submitAction(ability)}
+            disabled={this.props.gameInfo.turnStage != TurnStage.CHOOSING}
+        >
+            {ability.name}
+        </button>
+    )
     render() {
         const {character} = this.props
 
         return (
             <div className="character-bar">
-                {character.abilities.map((ability) => (
-                    <button className="btn w-25" onClick={()=>this.submitAction(ability)}>
-                        {ability.name}
-                    </button>
-                ))}
+                {character.abilities.map(this.renderAbility)}
             </div>
         )
     }

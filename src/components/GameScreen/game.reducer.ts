@@ -1,9 +1,10 @@
-import { GAME_TYPES, GameState, GameAction, GameStage } from "./game.interface";
+import { GAME_TYPES, GameState, GameAction, GameStage, TurnStage } from "./game.interface";
 
 const initialState : GameState = {
     user_id: 0,
     opponent_id: 0,
     gameStage: GameStage.PENDING,
+    turnStage: TurnStage.CHOOSING
 }
 
 const types = GAME_TYPES
@@ -18,6 +19,8 @@ export default (state:GameState = initialState, action:GameAction) : GameState =
         case types.RECEIVE_TEAM_INFO:
             newState.gameStage = GameStage.GAME_STARTED
             return newState
+        case types.WAITING_FOR_OPPONENT:
+            newState.turnStage = TurnStage.WAITING
         default:
             return state
     }

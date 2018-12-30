@@ -21,6 +21,10 @@ class GameCharacter extends React.Component<GameCharacterProps> {
                 <div className="game-character--stats">
                     <table>
                         <tr>
+                            <th>{character.characterClass}</th>
+                            <td>{character.id}</td>
+                        </tr>
+                        <tr>
                             <th>Health</th>
                             <td>{character.health} / {character.healthMax}</td>
                         </tr>

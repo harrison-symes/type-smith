@@ -1,5 +1,6 @@
 import { calcDamage } from "./damageCalc";
 import { Character, CharacterAbility } from "src/interfacing/characters";
+import { GAME_TYPES } from "../src/components/GameScreen/game.interface";
 
 export enum GAME_ATTACKS {
     SLASH = "Slash",
@@ -28,13 +29,21 @@ export interface GameTurnAction {
     ability: CharacterAbility
 }
 
+export interface AttackAction {
+    type: GAME_TYPES | ATTACK_STACK_TYPES;
+    attacker?: Character;
+    target?: Character;
+    power: number;
+    isResist: boolean;
+    isStrong: boolean;
+}
 
 export const damageOpponentAction = (character, opponent, ability) => {
     const { power, isResist, isStrong } = calcDamage(character, opponent, ability)
 
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
-        attacker: character.name,
+        attacker: character,
         target: opponent,
         power,
         isResist,

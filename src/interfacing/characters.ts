@@ -36,5 +36,6 @@ export interface Character {
     defense: number;
     power: number;
     speed: number;
-    abilities: CharacterAbility[]
+    abilities: CharacterAbility[],
+    isAlive: boolean;
 }

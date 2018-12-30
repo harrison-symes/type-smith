@@ -4,7 +4,7 @@ import { receiveGameRequestInbound, receiveGameRequestOutbound, removeGameReques
 import { ownPlayerJoinedLobby, ownPlayerLeftLobby } from "./components/LFG/LFG.actions";
 import { LobbyEntry } from "./components/Lobby/interface";
 import { addEntryToLobby, removeEntryFromLobby } from "./components/Lobby/lobby.actions";
-import { receiveGameInfo, receiveTeamInfo } from "./components/GameScreen/gameScreen.actions";
+import { receiveGameInfo, receiveTeamInfo, waitForOpponent } from "./components/GameScreen/gameScreen.actions";
 
 const mapStateToProps = ({
     socket
@@ -26,7 +26,14 @@ const mapDispatchToProps = dispatch => ({
     removeEntryFromLobby: (user_id: number) => dispatch(removeEntryFromLobby(user_id)),
     receiveGameInfo: gameInfo => dispatch(receiveGameInfo(gameInfo)),
     //pregame
-    receiveTeamInfo: teamInfo => dispatch(receiveTeamInfo(teamInfo))
+    receiveTeamInfo: teamInfo => dispatch(receiveTeamInfo(teamInfo)),
+    //ingame
+        //turns
+        waitForOpponent: () => dispatch(waitForOpponent()),
+        despacito: (action) => {
+            console.log({action})
+            dispatch(action)
+        }      
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SocketListener)

@@ -84,6 +84,9 @@ const mapTeamToGameObjects = (owner_id, team) => {
 const getOpponentId = (user_id, game) => {
     return game.player_ids.find(id => id != user_id)
 }
+const getOpponentSocketId = (socket_id, game) => {
+    return game.player_socket_ids.find(id => id != socket_id)
+}
 
 const roomListeners = (socket, io) => {
     socket.on(
@@ -91,15 +94,23 @@ const roomListeners = (socket, io) => {
         (roomId, user_id, team) => {
             const game = games[roomId]
             const opponent_id = getOpponentId(user_id, game)
+            const opponent_socket_id = getOpponentSocketId(socket.id, game)
             game[user_id].team = mapTeamToGameObjects(user_id, team)
             game.readyPlayers++
 
             if (game.readyPlayers == 2) {
-                io.to(roomId).emit(
+                io.to(socket.id).emit(
                     GAME_SOCKET_CHANNEL.RECEIVE_TEAM_INFO,
                     {
                         user_team: game[user_id].team,
                         opponent_team: game[opponent_id].team
+                    }
+                )
+                io.to(opponent_socket_id).emit(
+                    GAME_SOCKET_CHANNEL.RECEIVE_TEAM_INFO,
+                    {
+                        user_team: game[opponent_id].team,
+                        opponent_team: game[user_id].team
                     }
                 )
                 game.turns.push(initTurn(1, game.player_ids))
@@ -125,10 +136,11 @@ const roomListeners = (socket, io) => {
             }
             turn.playersSubmitted++
             
-            if (turn.playersSubmitted == 2) {
-                console.log("both players submitted")
-            } else {
+            if (turn.playersSubmitted < 2) {
                 console.log("waiting for player 2")
+                io.to(socket.id).emit(
+                    GAME_ACTION_SOCKET_CHANNEL.WAIT_FOR_OPPONENT
+                )
                 return
             }
             
@@ -138,9 +150,18 @@ const roomListeners = (socket, io) => {
             ]
 
             console.log(finalStack)
+            
             //end turn
-            //submit stack to client side
+            turn.isComplete = true;
+            
             //create next turn
+            game.turns.push(initTurn(turn.id + 1, turn.player_ids))
+            
+            //submit stack to client side
+            io.to(roomId).emit(
+                GAME_ACTION_SOCKET_CHANNEL.RECEIVE_TURN_STACK,
+                finalStack
+            )
 
         }
     )
