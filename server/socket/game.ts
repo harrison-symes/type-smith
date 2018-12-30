@@ -1,5 +1,5 @@
 import { Socket } from "socket.io";
-import { GameState } from "../../src/components/GameScreen/game.interface";
+import { GameState, GAME_TYPES } from "../../src/components/GameScreen/game.interface";
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils.ts/createCharacter";
 import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
@@ -19,6 +19,7 @@ const initTurn = (turnNumber, player_ids) => ({
     [player_ids[1]]: [],
     player_ids,
     playersSubmitted: 0,
+    playersValidated: 0,
     isComplete: false
 })
 
@@ -145,24 +146,43 @@ const roomListeners = (socket, io) => {
             }
             
             const finalStack = [
-                [...turn.action_one.actionStack],
-                [...turn.action_two.actionStack]
+                ...turn.action_one.actionStack,
+                ...turn.action_two.actionStack,
+                {
+                    type: GAME_TYPES.START_VALIDATING
+                }
             ]
 
-            console.log(finalStack)
-            
-            //end turn
-            turn.isComplete = true;
-            
-            //create next turn
-            game.turns.push(initTurn(turn.id + 1, turn.player_ids))
-            
             //submit stack to client side
             io.to(roomId).emit(
                 GAME_ACTION_SOCKET_CHANNEL.RECEIVE_TURN_STACK,
                 finalStack
             )
+                
+        }
+    )
+            
+    socket.on(
+        GAME_ACTION_SOCKET_CHANNEL.VALIDATE_TURN,
+        (roomId) => {
+            const game = games[roomId]
+            const turn = game.turns[game.turns.length - 1]   
+            
+            turn.playersValidated++
+            
+            if (turn.playersValidated != 2) {
+                
+                return
+            }
+            turn.isComplete = true
+            game.turns.push(initTurn(turn.id + 1, turn.player_ids))
+            
+            //turn was valid
+            // const opponent_socket_id = getOpponentSocketId(socket.id, game)
 
+            io.to(roomId).emit(
+                GAME_ACTION_SOCKET_CHANNEL.TURN_VALIDATED
+            )
         }
     )
 }

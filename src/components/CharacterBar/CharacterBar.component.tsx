@@ -26,15 +26,21 @@ class CharacterBar extends React.Component<CharacterBarProps> {
             }
         )
     }
-    renderAbility = (ability: CharacterAbility) => (
-        <button 
-            className="btn w-25" 
-            onClick={() => this.submitAction(ability)}
-            disabled={this.props.gameInfo.turnStage != TurnStage.CHOOSING}
-        >
-            {ability.name}
-        </button>
-    )
+    renderAbility = (ability: CharacterAbility) => {
+        const {gameInfo} = this.props
+        const isWaiting = gameInfo.turnStage != TurnStage.CHOOSING
+        
+        return (
+            <button 
+                className="btn w-25" 
+                onClick={() => this.submitAction(ability)}
+                disabled={isWaiting}
+            >
+                {ability.name}
+            </button>
+
+        )
+    }
     render() {
         const {character} = this.props
 

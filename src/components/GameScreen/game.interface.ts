@@ -2,7 +2,9 @@ export enum GAME_TYPES {
     READY_GAME = "READY_GAME",
     START_GAME = "START_GAME",
     RECEIVE_TEAM_INFO = "TEAM_INFO",
-    WAITING_FOR_OPPONENT = "WAITING_FOR_OPPONENT"
+    WAITING_FOR_OPPONENT = "WAITING_FOR_OPPONENT",
+    START_VALIDATING = "START_VALIDATING",
+    TURN_VALIDATED = "TURN_VALIDATED"
 }
 
 export interface GameAction {
@@ -18,7 +20,8 @@ export enum GameStage {
 
 export enum TurnStage {
     CHOOSING = "CHOOSING",
-    WAITING = "WAITING"
+    WAITING = "WAITING",
+    VALIDATING = "VALIDATING",
 }
 
 export interface GameState {

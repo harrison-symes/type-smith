@@ -16,7 +16,6 @@ const initialState = []
 
 export default (state : any[] = initialState, action ):TeamState => {
     const newState = [...state]
-    console.log({action})
     switch (action.type) {
         case GAME_TYPES.RECEIVE_TEAM_INFO:
             return action.teamInfo.user_team

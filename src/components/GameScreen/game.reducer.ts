@@ -21,6 +21,13 @@ export default (state:GameState = initialState, action:GameAction) : GameState =
             return newState
         case types.WAITING_FOR_OPPONENT:
             newState.turnStage = TurnStage.WAITING
+            return newState
+        case types.START_VALIDATING:
+            newState.turnStage = TurnStage.VALIDATING
+            return newState
+        case types.TURN_VALIDATED:
+            newState.turnStage = TurnStage.CHOOSING
+            return newState
         default:
             return state
     }
