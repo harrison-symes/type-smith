@@ -5,16 +5,30 @@ import GameLog from "../components/GameLog/GameLog.container";
 import GameScreen from "../components/GameScreen/GameScreen.container";
 import TeamBar from "../components/TeamBar/TeamBar.component";
 import { Character } from "../interfacing/characters";
+import { GameState, TurnStage } from "../components/GameScreen/game.interface";
+import { Socket } from "socket.io";
+import { GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
 
 interface GameProps {
+    socket: Socket;
     userTeam: Character[];
     opponentTeam: Character[];
+    gameInfo: GameState;
 }
 
 class Game extends React.Component<GameProps> {
+    componentWillReceiveProps (nextProps:GameProps) {
+        const nextStage = nextProps.gameInfo.turnStage
+        const lastStage = this.props.gameInfo.turnStage
+        if (nextStage != lastStage && nextStage == TurnStage.VALIDATING) {
+            this.props.socket.emit(
+                GAME_ACTION_SOCKET_CHANNEL.VALIDATE_TURN,
+                this.props.gameInfo.roomId
+            )
+        }
+    }
     render() {
         const {userTeam, opponentTeam} = this.props
-        console.log(this.props)
         return (
             <div>
                 <TeamBar isPlayerSide={false} team={opponentTeam} />
@@ -28,9 +42,13 @@ class Game extends React.Component<GameProps> {
 }
 
 const mapStateToProps = ({
+    socket,
+    gameInfo,
     userTeam,
     opponentTeam
 }) => ({
+    socket,
+    gameInfo,
     userTeam,
     opponentTeam
 })

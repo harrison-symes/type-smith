@@ -9,11 +9,6 @@ export interface GameRequestsProps {
 }
 
 class GameRequests extends React.Component<GameRequestsProps> {
-    constructor(props) {
-        super(props)
-
-        console.log("construct game requests");
-    }
     declineRequest = (request) => {
         const { socket } = this.props
 

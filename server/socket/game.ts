@@ -1,8 +1,9 @@
 import { Socket } from "socket.io";
-import { GameState } from "../../src/components/GameScreen/game.interface";
+import { GameState, GAME_TYPES } from "../../src/components/GameScreen/game.interface";
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils.ts/createCharacter";
-import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL } from "../../shared/socketChannels";
+import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
+import { GameTurnAction, attackActionMapper } from "../../shared/attacks";
 
 const games = {
 
@@ -12,6 +13,15 @@ const games = {
 export const game = (socket, io) => {
     joinRoom(socket, io)
 }
+
+const initTurn = (turnNumber, player_ids) => ({
+    [player_ids[0]]: [],
+    [player_ids[1]]: [],
+    player_ids,
+    playersSubmitted: 0,
+    playersValidated: 0,
+    isComplete: false
+})
 
 const organiseGameInfo = (socket_id, roomId, request:GameRequest) => {
     const isSender = request.sender_socket_id == socket_id
@@ -44,6 +54,7 @@ const joinRoom = (socket:Socket, io) => {
             readyPlayers: 0,
             player_ids: [],
             player_socket_ids: [],
+            turns: []
         } 
         const obj = games[roomId][socket.id] = {
             user_id: gameInfo.user_id,
@@ -74,6 +85,9 @@ const mapTeamToGameObjects = (owner_id, team) => {
 const getOpponentId = (user_id, game) => {
     return game.player_ids.find(id => id != user_id)
 }
+const getOpponentSocketId = (socket_id, game) => {
+    return game.player_socket_ids.find(id => id != socket_id)
+}
 
 const roomListeners = (socket, io) => {
     socket.on(
@@ -81,18 +95,94 @@ const roomListeners = (socket, io) => {
         (roomId, user_id, team) => {
             const game = games[roomId]
             const opponent_id = getOpponentId(user_id, game)
+            const opponent_socket_id = getOpponentSocketId(socket.id, game)
             game[user_id].team = mapTeamToGameObjects(user_id, team)
             game.readyPlayers++
 
             if (game.readyPlayers == 2) {
-                io.to(roomId).emit(
+                io.to(socket.id).emit(
                     GAME_SOCKET_CHANNEL.RECEIVE_TEAM_INFO,
                     {
                         user_team: game[user_id].team,
                         opponent_team: game[opponent_id].team
                     }
                 )
+                io.to(opponent_socket_id).emit(
+                    GAME_SOCKET_CHANNEL.RECEIVE_TEAM_INFO,
+                    {
+                        user_team: game[opponent_id].team,
+                        opponent_team: game[user_id].team
+                    }
+                )
+                game.turns.push(initTurn(1, game.player_ids))
             }
+        }
+    )
+
+    socket.on(
+        GAME_ACTION_SOCKET_CHANNEL.SUBMIT_TURN_ACTION,
+        (roomId, user_id, action:GameTurnAction) => {
+            const game = games[roomId]
+            const turn = game.turns[game.turns.length -1]
+
+            const {character, opponent, ability} = action
+
+            const actionStack = ability.stack.map(action_type => {
+                return attackActionMapper[action_type](character, opponent, ability)
+            })
+
+            turn[!turn.action_one ? "action_one" : "action_two"] = {
+                actionStack,
+                character
+            }
+            turn.playersSubmitted++
+            
+            if (turn.playersSubmitted < 2) {
+                console.log("waiting for player 2")
+                io.to(socket.id).emit(
+                    GAME_ACTION_SOCKET_CHANNEL.WAIT_FOR_OPPONENT
+                )
+                return
+            }
+            
+            const finalStack = [
+                ...turn.action_one.actionStack,
+                ...turn.action_two.actionStack,
+                {
+                    type: GAME_TYPES.START_VALIDATING
+                }
+            ]
+
+            //submit stack to client side
+            io.to(roomId).emit(
+                GAME_ACTION_SOCKET_CHANNEL.RECEIVE_TURN_STACK,
+                finalStack
+            )
+                
+        }
+    )
+            
+    socket.on(
+        GAME_ACTION_SOCKET_CHANNEL.VALIDATE_TURN,
+        (roomId) => {
+            const game = games[roomId]
+            const turn = game.turns[game.turns.length - 1]   
+            
+            turn.playersValidated++
+            
+            if (turn.playersValidated != 2) {
+                
+                return
+            }
+            turn.isComplete = true
+            game.turns.push(initTurn(turn.id + 1, turn.player_ids))
+            
+            //turn was valid
+            // const opponent_socket_id = getOpponentSocketId(socket.id, game)
+
+            io.to(roomId).emit(
+                GAME_ACTION_SOCKET_CHANNEL.TURN_VALIDATED
+            )
         }
     )
 }

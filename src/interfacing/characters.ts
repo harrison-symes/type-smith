@@ -1,4 +1,4 @@
-import { GAME_ATTACKS } from "../../shared/attacks";
+import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "../../shared/attacks";
 import { ATTACK_TYPES } from "../../shared/types";
 
 export enum CharacterClassList {
@@ -13,8 +13,10 @@ export interface CharacterAbility {
     name: string | GAME_ATTACKS;
     description: string;
     cost: number;
+    power: number;
     isUltimate: boolean;
-    type: ATTACK_TYPES
+    type: ATTACK_TYPES,
+    stack: string[]
 }
 
 // export interface PreGameCharacter {
@@ -34,5 +36,6 @@ export interface Character {
     defense: number;
     power: number;
     speed: number;
-    abilities: CharacterAbility[]
+    abilities: CharacterAbility[],
+    isAlive: boolean;
 }

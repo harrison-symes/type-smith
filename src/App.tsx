@@ -27,7 +27,6 @@ const App : React.SFC<AppProps> = (props) => (
                 !props.auth.isAuthenticated ? 
                 <Route path="/" component={Welcome} /> :
                 <Route path="/" render={routeProps => {
-                    console.log("info", props.gameInfo)
                     switch(props.gameInfo.gameStage) {
                         case GameStage.GAME_STARTED: return <Game />
                         case GameStage.PRE_GAME: return <PreGame />

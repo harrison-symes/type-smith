@@ -4,7 +4,7 @@ import mapAbilities from "../../shared/mapAbilities";
 
 export const calcHealth = (healthStat : number) => 30 + (10 * healthStat)
 export const calcEnergy = (energyStat : number) => 10 + (2*energyStat)
-export const calcDefense = (defenseStat : number) => 2 + defenseStat
+export const calcDefense = (defenseStat : number) => defenseStat
 export const calcPower = (powerStat : number) => 10 + powerStat
 export const calcSpeed = (speedStat : number) => speedStat
 
@@ -14,10 +14,7 @@ export const createClassFromStatSheet = (owner_id, character) : Character => {
     const {characterClass, isActive} = character
     const statSheet = statSheets[characterClass]
     const abilities = character.abilities.map(ability => mapAbilities[ability.name]())
-    console.log({
-        character,
-        abilities
-    })
+    
     return {
         characterClass,
         isActive,
@@ -31,6 +28,7 @@ export const createClassFromStatSheet = (owner_id, character) : Character => {
         power: calcPower(statSheet.powerStat),
         speed: calcSpeed(statSheet.speedStat),
         abilities,
+        isAlive: true,
     }
 }
 
