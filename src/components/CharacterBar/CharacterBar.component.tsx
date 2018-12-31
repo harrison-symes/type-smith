@@ -27,14 +27,17 @@ class CharacterBar extends React.Component<CharacterBarProps> {
         )
     }
     renderAbility = (ability: CharacterAbility) => {
-        const {gameInfo} = this.props
+        const {gameInfo, character} = this.props
         const isWaiting = gameInfo.turnStage != TurnStage.CHOOSING
-        
+        const hasEnergy = character.energy >= ability.cost
+
+        const isDisabled = !hasEnergy || isWaiting 
+
         return (
             <button 
                 className="btn w-25" 
                 onClick={() => this.submitAction(ability)}
-                disabled={isWaiting}
+                disabled={isDisabled}
             >
                 {ability.name}
             </button>

@@ -7,7 +7,7 @@ import isLFG from "../components/LFG/LFG.reducer";
 import gameRequests from "../components/GameRequests/GameRequests.reducer"
 import gameInfo from "../components/GameScreen/game.reducer"
 import userTeam from "../components/GameScreen/userTeam.reducer"
-import opponentTeam from "../components/GameScreen/opponentTeam.reducer"
+// import opponentTeam from "../components/GameScreen/opponentTeam.reducer"
 
 const reducer = combineReducers({
     socket,
@@ -16,8 +16,8 @@ const reducer = combineReducers({
     isLFG,
     gameRequests,
     gameInfo,
-    userTeam,
-    opponentTeam
+    userTeam: userTeam(true),
+    opponentTeam: userTeam(false)
 })
 
 export default reducer

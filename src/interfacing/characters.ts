@@ -16,7 +16,12 @@ export interface CharacterAbility {
     power: number;
     isUltimate: boolean;
     type: ATTACK_TYPES,
-    stack: string[]
+    stack: string[],
+    powerGain?: number;
+    energyGain?: number;
+    defenseGain?: number;
+    healthGain?: number;
+    speedGain?: number;
 }
 
 // export interface PreGameCharacter {
