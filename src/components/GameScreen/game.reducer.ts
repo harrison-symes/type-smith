@@ -22,6 +22,9 @@ export default (state:GameState = initialState, action:GameAction) : GameState =
         case types.WAITING_FOR_OPPONENT:
             newState.turnStage = TurnStage.WAITING
             return newState
+        case types.START_SECOND_STACK:
+            newState.turnStage = TurnStage.WAITING_SECOND
+            return newState
         case types.START_VALIDATING:
             newState.turnStage = TurnStage.VALIDATING
             return newState

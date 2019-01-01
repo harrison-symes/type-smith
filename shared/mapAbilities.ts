@@ -50,8 +50,10 @@ export default {
         name: [GAME_ATTACKS.TANK_UP],
         cost: 1,
         power: 0,
-        descriptiom: "Gain X Defense and X Max Health",
+        descriptiom: "Gain 1 Defense and 5 Max Health",
         isUltimate: false,
+        healthGain: 5,
+        defenseGain: 1,
         type: ATTACK_TYPES.STATUS,
         stack: [
             ATTACK_STACK_TYPES.GAIN_DEFENSE,

@@ -5,6 +5,7 @@ import { ownPlayerJoinedLobby, ownPlayerLeftLobby } from "./components/LFG/LFG.a
 import { LobbyEntry } from "./components/Lobby/interface";
 import { addEntryToLobby, removeEntryFromLobby } from "./components/Lobby/lobby.actions";
 import { receiveGameInfo, receiveTeamInfo, waitForOpponent, turnValidated } from "./components/GameScreen/gameScreen.actions";
+import { promises } from "fs";
 
 const mapStateToProps = ({
     socket
@@ -31,9 +32,7 @@ const mapDispatchToProps = dispatch => ({
         //turns
         waitForOpponent: () => dispatch(waitForOpponent()),
         turnValidated: () => dispatch(turnValidated()),
-        despacito: (action) => {
-            dispatch(action)
-        }      
+        despacito: (action) => Promise.resolve().then(() => dispatch(action))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SocketListener)

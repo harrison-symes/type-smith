@@ -2,7 +2,7 @@ import * as React from "react"
 import { Socket } from "socket.io";
 import { GameRequest } from "./components/GameRequests/interface";
 import { LobbyEntry } from "./components/Lobby/interface";
-import { GameState } from "./components/GameScreen/game.interface";
+import { GameState, GAME_TYPES } from "./components/GameScreen/game.interface";
 import { GAME_REQUEST_SOCKET_CHANNEL, LFG_SOCKET_CHANNEL, LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../shared/socketChannels";
 
 export interface SocketListenerProps 
@@ -136,9 +136,30 @@ class SocketListener extends React.Component<SocketListenerProps> {
         )
 
         socket.on(
-            GAME_ACTION_SOCKET_CHANNEL.RECEIVE_TURN_STACK,
+            GAME_ACTION_SOCKET_CHANNEL.RECEIVE_FIRST_TURN_STACK,
             stack => {
-                stack.forEach(action => despacito(action))
+                Promise.all(
+                    stack.map(action => despacito(action))
+                )
+                .then(() => {
+                    despacito({
+                        type: GAME_TYPES.START_SECOND_STACK
+                    })       
+                })
+            }
+        )
+        socket.on(
+            GAME_ACTION_SOCKET_CHANNEL.RECEIVE_SECOND_TURN_STACK,
+            stack => {
+                Promise.all(
+                    stack.map(action => despacito(action))
+
+                )
+                .then(() => {
+                    despacito({
+                        type: GAME_TYPES.START_VALIDATING
+                    })
+                })
             }
         )
 

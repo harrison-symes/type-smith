@@ -116,11 +116,19 @@ export const gainSpeedAction = (character, opponent, ability) => {
 }
 // INCREASE_MAX_HEALTH = "INCREASE_MAX_HEALTH",
 export const increaseMaxHealth = (character, opponent, ability) => {
-
+    return {
+        type: ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH,
+        target: character,
+        healthGain: ability.healthGain
+    }
 }
 // INCREASE_MAX_ENERGY = "INCREASE_MAX_ENERGY",
 export const increaseMaxEnergy = (character, opponent, ability) => {
-
+    return {
+        type: ATTACK_STACK_TYPES.INCREASE_MAX_ENERGY,
+        target: character,
+        ability
+    }
 }
 
 export const attackActionMapper = {
@@ -133,6 +141,6 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.GAIN_POWER]: gainPowerAction,
     [ATTACK_STACK_TYPES.GAIN_SPEED]: gainSpeedAction,
     [ATTACK_STACK_TYPES.GAIN_ENERGY]: gainEnergyAction,
-    [ATTACK_STACK_TYPES.INCREASE_MAX_ENERGY]: increaseMaxHealth,
+    [ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH]: increaseMaxHealth,
     [ATTACK_STACK_TYPES.INCREASE_MAX_ENERGY]: increaseMaxEnergy,
 }

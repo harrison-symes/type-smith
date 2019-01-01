@@ -13,7 +13,7 @@ export interface TeamPreviewProps {
 const defaultMoves = () => ([
     {name: GAME_ATTACKS.SLASH },
     {name: GAME_ATTACKS.ACCELERATE },
-    {name: GAME_ATTACKS.SLASH },
+    {name: GAME_ATTACKS.RECUPERATE },
     {name: GAME_ATTACKS.TANK_UP }
 ])
 

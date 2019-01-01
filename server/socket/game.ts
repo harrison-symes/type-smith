@@ -1,5 +1,5 @@
 import { Socket } from "socket.io";
-import { GameState, GAME_TYPES } from "../../src/components/GameScreen/game.interface";
+import { GameState, GAME_TYPES, TurnStage } from "../../src/components/GameScreen/game.interface";
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils.ts/createCharacter";
 import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
@@ -19,8 +19,10 @@ const initTurn = (turnNumber, player_ids) => ({
     [player_ids[1]]: [],
     player_ids,
     playersSubmitted: 0,
+    playersSubmittedSecond: 0,
     playersValidated: 0,
-    isComplete: false
+    isComplete: false,
+    turnActions: []
 })
 
 const organiseGameInfo = (socket_id, roomId, request:GameRequest) => {
@@ -127,38 +129,79 @@ const roomListeners = (socket, io) => {
 
             const {character, opponent, ability} = action
 
-            const actionStack = ability.stack.map(action_type => {
-                return attackActionMapper[action_type](character, opponent, ability)
-            })
-
-            turn[!turn.action_one ? "action_one" : "action_two"] = {
-                actionStack,
-                character
+            const actionObj = {
+                character,
+                opponent,
+                ability
             }
+
+            turn.turnActions.push(actionObj)
+
             turn.playersSubmitted++
             
+            io.to(socket.id).emit(
+                GAME_ACTION_SOCKET_CHANNEL.WAIT_FOR_OPPONENT
+            )
             if (turn.playersSubmitted < 2) {
                 console.log("waiting for player 2")
-                io.to(socket.id).emit(
-                    GAME_ACTION_SOCKET_CHANNEL.WAIT_FOR_OPPONENT
-                )
                 return
             }
+                
+            //execute first stack
+            const firstStack = turn.turnActions.pop()
             
+            const actionStack = firstStack.ability.stack.map(action_type => {
+                return attackActionMapper[action_type](firstStack.character, firstStack.opponent, firstStack.ability)
+            })
+
             const finalStack = [
-                ...turn.action_one.actionStack,
-                ...turn.action_two.actionStack,
-                {
-                    type: GAME_TYPES.START_VALIDATING
-                }
+                ...actionStack
             ]
 
             //submit stack to client side
             io.to(roomId).emit(
-                GAME_ACTION_SOCKET_CHANNEL.RECEIVE_TURN_STACK,
+                GAME_ACTION_SOCKET_CHANNEL.RECEIVE_FIRST_TURN_STACK,
                 finalStack
-            )
+            )   
                 
+        }
+    )
+
+    socket.on(
+        GAME_ACTION_SOCKET_CHANNEL.REQUEST_SECOND_STACK,
+        (roomId, user_id, character) => {
+            const game = games[roomId]
+            const turn = game.turns[game.turns.length - 1]
+            console.log("second stack")
+            
+            const secondStack = turn.turnActions[0]
+
+            if (secondStack.character.id == character.id) {
+                secondStack.character = character
+            } else {
+                secondStack.opponent = character
+            }
+
+            turn.playersSubmittedSecond++
+            if (turn.playersSubmittedSecond < 2) {
+                console.log("waiting for player 2")
+                return
+            }
+
+            turn.turnActions.pop()
+
+            const actionStack = secondStack.ability.stack.map(action_type => {
+                return attackActionMapper[action_type](secondStack.character, secondStack.opponent, secondStack.ability)
+            })
+
+            const finalStack = [
+                ...actionStack
+            ]
+
+            io.to(roomId).emit(
+                GAME_ACTION_SOCKET_CHANNEL.RECEIVE_SECOND_TURN_STACK,
+                finalStack
+            )  
         }
     )
             
