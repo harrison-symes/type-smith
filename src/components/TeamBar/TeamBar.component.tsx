@@ -1,7 +1,7 @@
 import * as React from "react"
-import { Character } from "../../interfacing/characters";
+import { Character, CharacterClassList } from "../../interfacing/characters";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../../shared/socketChannels";
-import { GameState } from "../GameScreen/game.interface";
+import { GameState, TurnStage } from "../GameScreen/game.interface";
 import { Socket } from "socket.io";
 import { ATTACK_TYPES } from "../../../shared/types";
 import { ATTACK_STACK_TYPES, GAME_ATTACKS } from "../../../shared/attacks";
@@ -12,6 +12,14 @@ interface TeamBarProps {
     userTeam: Character[];
     opponentTeam: Character[];
     socket: Socket;
+}
+
+const images = {
+    [CharacterClassList.WARRIOR]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSrnnC3vvN68thWmPatN6YJotE84yitAhCgoGMvIDBcxjaU-yJ",
+    [CharacterClassList.MAGE]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9jdkxWaz9A9qKZuUx9B30n9Av63UfCnWQW8QAUtJvBdFoH3DVVQ",
+    [CharacterClassList.ASSASSIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2ZPdgsilSlMot1Ra_J1wW6k5qExY0CrJAn9YTrUXKGUFjpsJ",
+    [CharacterClassList.PALADIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO1QoI5qjFzrmcmcZ7E1ZzIzNsyDWoZlk6uOVPETzGyigXTvdR3g",
+    [CharacterClassList.WITCH]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGR81UKtXdiUnJFdpO0T4aQ7DkitpeLvu9qCFmTgajafFTKt4",
 }
 
 class TeamBar extends React.Component<TeamBarProps> {
@@ -46,6 +54,29 @@ class TeamBar extends React.Component<TeamBarProps> {
             }
         )
     }
+    renderCharacter = (character:Character) => {
+        const {gameInfo, isPlayerSide} = this.props
+        const isWaiting = gameInfo.turnStage != TurnStage.CHOOSING
+
+        const isDisabled = isWaiting 
+
+        return (
+            <div className="team-member">
+                <p className="team-member--name">
+                    {character.characterClass}
+                </p>
+                <img className="team-member--image" src={images[character.characterClass]} />
+                {isPlayerSide &&
+                    <button 
+                        className="btn" 
+                        disabled={isDisabled}
+                        onClick={() => this.switchCharacter(character)}>
+                        Switch
+                    </button>
+                }
+            </div>
+        )
+    }
     render() {
         const {userTeam, opponentTeam, isPlayerSide} = this.props
         const team = isPlayerSide ? userTeam : opponentTeam
@@ -53,16 +84,7 @@ class TeamBar extends React.Component<TeamBarProps> {
             <div className="team-bar width-100">
                 {team
                     .filter(({isActive}) => !isActive)
-                    .map(character => (
-                        <div className="team-member">
-                            {character.characterClass}
-                            {isPlayerSide && 
-                                <button className="btn" onClick={() => this.switchCharacter(character)}>
-                                    Switch
-                                </button>
-                            }
-                        </div>
-                    ))
+                    .map(character => this.renderCharacter(character))
                 }
             </div>
         )
