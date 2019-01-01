@@ -2,4 +2,16 @@ import {connect} from "react-redux"
 import TeamBar from "./TeamBar.component"
 
 
-export default connect()(TeamBar)
+const mapStateToProps = ({
+    gameInfo,
+    userTeam,
+    opponentTeam,
+    socket
+}, {isPlayerSide}) => ({
+    gameInfo,
+    userTeam,
+    opponentTeam,
+    socket
+})
+
+export default connect(mapStateToProps)(TeamBar)

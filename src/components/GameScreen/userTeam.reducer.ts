@@ -56,6 +56,17 @@ export default (isUserTeam:boolean) =>
         case "GET_OPPONENT_ACTIVE":
             if (!isUserTeam) action.getCharacter(state.find(character => character.isActive))
             return state
+
+        case ATTACK_STACK_TYPES.SWITCH:
+            let newActive = newState.find(character => character.id == action.targetCharacter.id)
+            if (!newActive) return state
+
+            newState.forEach(character => character.isActive = false)
+            idx = newState.indexOf(newActive)
+            newActive.isActive = true
+            newState[idx] = {...newActive}
+
+            return newState.map(character => ({...character}))
         case ATTACK_STACK_TYPES.DAMAGE_OPPONENT:
             return modifyStat(newState, "health", false, action.power, action.target)
 

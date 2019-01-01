@@ -1,6 +1,7 @@
 
 
 export enum ATTACK_TYPES {
+    SWITCH = "Switch",
     STATUS = "Status",
     SWORDS = "Swords",
     FIRE = "Fire",

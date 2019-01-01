@@ -3,13 +3,15 @@ import { Character, CharacterAbility } from "src/interfacing/characters";
 import { GAME_TYPES } from "../src/components/GameScreen/game.interface";
 
 export enum GAME_ATTACKS {
+    SWITCH = "Switch",
     SLASH = "Slash",
+    TANK_UP = "Tank Up!",
     RECUPERATE = "Recuperate",
     ACCELERATE = "Accelerate",
-    TANK_UP = "Tank Up!"
 }
 
 export enum ATTACK_STACK_TYPES {
+    SWITCH = "SWITCH",
     SPEND_ENERGY = "SPEND_ENERGY",
     DAMAGE_OPPONENT = "DAMAGE_OPPONENT",
     DAMAGE_SELF = "DAMAGE_SELF",
@@ -131,7 +133,16 @@ export const increaseMaxEnergy = (character, opponent, ability) => {
     }
 }
 
+export const switchCharacterAction = (character, opponent, ability) => {
+    return {
+        type: ATTACK_STACK_TYPES.SWITCH,
+        character,
+        targetCharacter: ability.targetCharacter
+    }
+}
+
 export const attackActionMapper = {
+    [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
     [ATTACK_STACK_TYPES.SPEND_ENERGY]: spendEnergyAction,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT]: damageOpponentAction,
     [ATTACK_STACK_TYPES.DAMAGE_SELF]: damageSelfAction,

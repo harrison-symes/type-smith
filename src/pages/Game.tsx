@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import CharacterBar from "../components/CharacterBar/CharacterBar.container";
 import GameLog from "../components/GameLog/GameLog.container";
 import GameScreen from "../components/GameScreen/GameScreen.container";
-import TeamBar from "../components/TeamBar/TeamBar.component";
+import TeamBar from "../components/TeamBar/TeamBar.container";
 import { Character } from "../interfacing/characters";
 import { GameState, TurnStage } from "../components/GameScreen/game.interface";
 import { Socket } from "socket.io";
@@ -57,10 +57,10 @@ class Game extends React.Component<GameProps> {
         const {userTeam, opponentTeam} = this.props
         return (
             <div>
-                <TeamBar isPlayerSide={false} team={opponentTeam} />
+                <TeamBar isPlayerSide={false} />
                 <GameScreen />
                 <CharacterBar />
-                <TeamBar isPlayerSide={true} team={userTeam} />
+                <TeamBar isPlayerSide={true} />
                 <GameLog />
             </div>
         )

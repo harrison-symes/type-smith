@@ -11,6 +11,7 @@ export default {
         descriptiom: "Attack the opponent for 100% of Character Power",
         isUltimate: false,
         type: ATTACK_TYPES.SWORDS,
+        priority: 0,
         stack: [
             ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
             ATTACK_STACK_TYPES.SPEND_ENERGY
@@ -25,6 +26,7 @@ export default {
         speedGain: 1,
         powerGain: 1,
         type: ATTACK_TYPES.STATUS,
+        priority: 0,
         stack: [
             ATTACK_STACK_TYPES.GAIN_SPEED,
             ATTACK_STACK_TYPES.GAIN_POWER,
@@ -41,6 +43,7 @@ export default {
         healAmount: 5,
         energyGain: 2,
         type: ATTACK_TYPES.STATUS,
+        priority: 0,
         stack: [
             ATTACK_STACK_TYPES.HEAL_SELF,
             ATTACK_STACK_TYPES.GAIN_ENERGY
@@ -54,6 +57,7 @@ export default {
         isUltimate: false,
         healthGain: 5,
         defenseGain: 1,
+        priority: 0,
         type: ATTACK_TYPES.STATUS,
         stack: [
             ATTACK_STACK_TYPES.GAIN_DEFENSE,

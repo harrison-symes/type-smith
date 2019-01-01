@@ -22,6 +22,7 @@ export interface CharacterAbility {
     defenseGain?: number;
     healthGain?: number;
     speedGain?: number;
+    priority: number
 }
 
 // export interface PreGameCharacter {

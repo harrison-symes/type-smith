@@ -92,36 +92,56 @@ const getOpponentSocketId = (socket_id, game) => {
 }
 
 const orderTurnActions = ([actionOne, actionTwo]) => {
-    const speedOne = actionOne.character.speed
-    const speedTwo = actionTwo.character.speed
-    if (speedOne > speedTwo) {
-        console.log(actionOne.character.characterClass, "first")
-        return [
-            actionOne,
-            actionTwo
-        ]
-    } 
-    else if (speedTwo > speedOne) {
-        console.log(actionTwo.character.characterClass, "first")
-        return [
-            actionTwo,
-            actionOne
-        ] 
+    let first;
+    let second;
+    
+    const priorityOne = actionOne.priority
+    const priorityTwo = actionTwo.priority
+    if (priorityOne == priorityTwo) {
+        //no priority, speed check
+
+        const speedOne = actionOne.character.speed
+        const speedTwo = actionTwo.character.speed
+        if (speedOne > speedTwo) {
+            console.log(actionOne.character.characterClass, "first")
+            first = actionOne
+            second = actionTwo
+        }
+        else if (speedTwo > speedOne) {
+            console.log(actionTwo.character.characterClass, "first")
+            first = actionTwo
+            second = actionOne
+        }
+        else {
+            const speedTie = Math.random() > 0.5
+            const winner = speedTie ? actionOne : actionTwo
+            const loser = speedTie ? actionTwo : actionOne
+            //speed tie action added
+            // winner.ability.stack.push({
+
+            // }) 
+            console.log(winner.character.characterClass, "won speed tie")
+            first = winner
+            second = loser
+        }
+    } else {
+        //a move has higher / lower priority
+        if (priorityOne > priorityTwo) {
+            first = actionOne
+            second = actionTwo
+        } else if (priorityTwo > priorityOne) {
+            first = actionTwo
+            second = actionOne
+        }
     }
-    else {
-        const speedTie = Math.random() > 0.5
-        const winner = speedTie ? actionOne : actionTwo
-        const loser = speedTie ? actionTwo : actionOne
-        //speed tie action added
-        // winner.ability.stack.push({
-        
-        // }) 
-        console.log(winner.character.characterClass, "won speed tie")
-        return [
-            winner,
-            loser
-        ]
-    }
+    
+    console.log("first:", first.ability.name)
+    console.log("second:", second.ability.name)
+    
+    return [
+        first,
+        second
+    ]
 }
 
 const roomListeners = (socket, io) => {
@@ -209,7 +229,7 @@ const roomListeners = (socket, io) => {
             
             const secondStack = turn.turnActions[0]
 
-            if (secondStack.character.id == character.id) {
+            if (secondStack.character.owner_id == user_id) {
                 secondStack.character = character
             } else {
                 secondStack.opponent = character
