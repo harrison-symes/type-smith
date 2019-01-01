@@ -217,8 +217,8 @@ export default {
         ]
     }),
 
-    [GAME_ATTACKS.HOLY_RADIANCE]: () => ({
-        name: [GAME_ATTACKS.HOLY_RADIANCE],
+    [GAME_ATTACKS.BLESSED_HAMMER]: () => ({
+        name: [GAME_ATTACKS.BLESSED_HAMMER],
         cost: 1,
         power: 0.5,
         descriptiom: "Damage opponent for 50% of Power, then heal yourself for 5",
@@ -245,8 +245,8 @@ export default {
         priority: 0,
         type: ATTACK_TYPES.STATUS,
         stack: [
-            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
-            ATTACK_STACK_TYPES.HEAL_SELF,
+            ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_DEFENSE,
+            ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_POWER,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
     }),
