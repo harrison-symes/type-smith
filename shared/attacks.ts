@@ -23,8 +23,8 @@ export enum GAME_ATTACKS {
     BLOOD_MOON = "Blood Moon",
 
     HOLY_RADIANCE = "Holy Radiance",
-    BLESSED_HAMMER = "BLESSED_HAMMER",
-    INSPIRE = "INSPIRE",
+    BLESSED_HAMMER = "Blessed Hammer",
+    INSPIRE = "Inspire",
 }
 
 export enum REDUCER_ATTACK_TYPES {
@@ -49,16 +49,20 @@ export enum REDUCER_ATTACK_TYPES {
 
 export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_BLOOD_MOON = "DAMAGE_OPPONENT_BLOOD_MOON",
+
     TRAP_OPPONENT = "TRAP_OPPONENT",
     TRAP_SELF = "TRAP_SELF",
+
     CHANGE_ALL_STATS_SELF = "CHANGE_ALL_STATS_SELF",
     CHANGE_ALL_STATS_OPPONENT = "CHANGE_ALL_STATS_OPPONENT",
+
     LOWER_OPPONENT_MAX_HEALTH = "LOWER_OPPONENT_MAX_HEALTH",
     LOWER_OPPONENT_POWER = "LOWER_OPPONENT_POWER",
     LOWER_OPPONENT_DEFENSE = "LOWER_OPPONENT_DEFENSE",
     LOWER_OPPONENT_ENERGY = "LOWER_OPPONENT_ENERGY",
     LOWER_OPPONENT_MAX_ENERGY = "LOWER_OPPONENT_MAX_ENERGY",
     LOWER_OPPONENT_SPEED = "LOWER_OPPONENT_SPEED",
+
     HEAL_TEAM_SELF = "HEAL_TEAM_SELF",
     HEAL_TEAM_OPPONENT = "HEAL_TEAM_OPPONENT",
 
@@ -122,7 +126,7 @@ export const healSelfAction = (character, opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.HEAL_SELF,
         power: ability.isStatic
-            ? ability.healthAmount
+            ? ability.healAmount
             : ability.power * character.power,
         target: character
     }
