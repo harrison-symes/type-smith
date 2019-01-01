@@ -47,7 +47,12 @@ const defaultTeam = [
     },
     {
         characterClass: CharacterClassList.PALADIN,
-        abilities: defaultMoves()
+        abilities: [
+            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.BLESSED_HAMMER },
+            { name: GAME_ATTACKS.HOLY_RADIANCE },
+            { name: GAME_ATTACKS.INSPIRE },
+        ]
     },
     {
         characterClass: CharacterClassList.WITCH,

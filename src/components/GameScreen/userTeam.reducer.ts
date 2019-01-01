@@ -116,6 +116,23 @@ export default (isUserTeam:boolean) =>
             newState[idx] = { ...target }
             return newState
 
+        case ATTACK_STACK_TYPES.HEAL_TEAM:
+            return newState.map(character => {
+                if (character.owner_id == action.owner_id) {
+                    character.health += action.power
+                    if (character.health > character.maxHealth) character.health = character.maxHealth
+                }
+                return {...character}
+            })
+        
+        case ATTACK_STACK_TYPES.CHANGE_TEAM_STATS:
+            return newState.map(character => {
+                if (character.owner_id == action.owner_id) {
+                    character[action.stat] += action.statChange
+                }
+                return { ...character }
+            })
+            
         default:
             return state
     }
