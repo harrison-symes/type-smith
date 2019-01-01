@@ -142,9 +142,12 @@ class SocketListener extends React.Component<SocketListenerProps> {
                     stack.map(action => despacito(action))
                 )
                 .then(() => {
-                    despacito({
-                        type: GAME_TYPES.START_SECOND_STACK
-                    })       
+                    setTimeout(() => {
+                        despacito({
+                            type: GAME_TYPES.START_SECOND_STACK
+                        })       
+                    
+                    }, 3000)
                 })
             }
         )
