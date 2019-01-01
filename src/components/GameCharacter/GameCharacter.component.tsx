@@ -1,9 +1,17 @@
 import * as React from "react"
-import { Character } from "src/interfacing/characters";
+import { Character, CharacterClassList } from "../../../src/interfacing/characters";
 
 export interface GameCharacterProps {
     character: Character;
     isPlayerSide: boolean;
+}
+
+const images = {
+    [CharacterClassList.WARRIOR]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSrnnC3vvN68thWmPatN6YJotE84yitAhCgoGMvIDBcxjaU-yJ",
+    [CharacterClassList.MAGE]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9jdkxWaz9A9qKZuUx9B30n9Av63UfCnWQW8QAUtJvBdFoH3DVVQ",
+    [CharacterClassList.ASSASSIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2ZPdgsilSlMot1Ra_J1wW6k5qExY0CrJAn9YTrUXKGUFjpsJ",
+    [CharacterClassList.PALADIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO1QoI5qjFzrmcmcZ7E1ZzIzNsyDWoZlk6uOVPETzGyigXTvdR3g",
+    [CharacterClassList.WITCH]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGR81UKtXdiUnJFdpO0T4aQ7DkitpeLvu9qCFmTgajafFTKt4",
 }
 
 class GameCharacter extends React.Component<GameCharacterProps> {
@@ -16,7 +24,7 @@ class GameCharacter extends React.Component<GameCharacterProps> {
                     !isPlayerSide && "flex-reverse"
                 }`}>
                 <div className="game-character--portrait-container">
-                    <img className="game-character--portrait" src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1eT_cT2zIf1_X1jh8dUbm-QSoWq8VJP37MtKqq0rhv_iWFwcc"} />
+                    <img className="game-character--portrait" src={images[character.characterClass]} />
                 </div>
                 <div className="game-character--stats">
                     <table>
