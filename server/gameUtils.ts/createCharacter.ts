@@ -13,7 +13,10 @@ let id = 1
 export const createClassFromStatSheet = (owner_id, character) : Character => {
     const {characterClass, isActive} = character
     const statSheet = statSheets[characterClass]
-    const abilities = character.abilities.map(ability => mapAbilities[ability.name]())
+    const abilities = character.abilities.map(ability => {
+        console.log(ability.name)
+        return mapAbilities[ability.name]()
+    })
     
     return {
         characterClass,

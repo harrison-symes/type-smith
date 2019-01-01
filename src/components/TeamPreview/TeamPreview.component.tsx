@@ -20,15 +20,30 @@ const defaultMoves = () => ([
 const defaultTeam = [
     {
         characterClass: CharacterClassList.WARRIOR,
-        abilities: defaultMoves()
+        abilities: [
+            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.SLASH },
+            { name: GAME_ATTACKS.RECKLESS_SLAM },
+            { name: GAME_ATTACKS.TANK_UP }
+        ]
     },
     {
         characterClass: CharacterClassList.MAGE,
-        abilities: defaultMoves()
+        abilities: [
+            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.FIREBALL },
+            { name: GAME_ATTACKS.MOLTEN_CORE },
+            { name: GAME_ATTACKS.FROST_ARMOUR },
+        ]
     },
     {
         characterClass: CharacterClassList.ASSASSIN,
-        abilities: defaultMoves()
+        abilities: [
+            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.BACKSTAB },
+            { name: GAME_ATTACKS.RECUPERATE },
+            { name: GAME_ATTACKS.ACCELERATE }
+        ]
     },
     {
         characterClass: CharacterClassList.PALADIN,

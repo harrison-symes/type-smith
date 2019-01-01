@@ -4,6 +4,19 @@ import { ATTACK_TYPES } from "./types";
 import { Character } from "../src/interfacing/characters";
 
 export default {
+    [GAME_ATTACKS.ULTIMATE]: () => ({
+        name: [GAME_ATTACKS.ULTIMATE],
+        cost: 100,
+        power: 1,
+        descriptiom: "Attack the opponent for 100% of Character Power",
+        isUltimate: false,
+        type: ATTACK_TYPES.SWORDS,
+        priority: 0,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
     [GAME_ATTACKS.SLASH]: () => ({
         name: [GAME_ATTACKS.SLASH],
         cost: 1,
@@ -14,6 +27,37 @@ export default {
         priority: 0,
         stack: [
             ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+    [GAME_ATTACKS.RECKLESS_SLAM]: () => ({
+        name: [GAME_ATTACKS.RECKLESS_SLAM],
+        cost: 2,
+        power: 2,
+        selfDamage: 0.5,
+        descriptiom: "Attack the opponent for 200% of Power. Damage yourself for 50% of Power",
+        isUltimate: false,
+        type: ATTACK_TYPES.SWORDS,
+        priority: 0,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.DAMAGE_SELF,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+    [GAME_ATTACKS.TANK_UP]: () => ({
+        name: [GAME_ATTACKS.TANK_UP],
+        cost: 1,
+        power: 0,
+        descriptiom: "Gain 1 Defense and 5 Max Health",
+        isUltimate: false,
+        healthGain: 5,
+        defenseGain: 1,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.GAIN_DEFENSE,
+            ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
     }),
@@ -49,20 +93,68 @@ export default {
             ATTACK_STACK_TYPES.GAIN_ENERGY
         ]
     }),
-    [GAME_ATTACKS.TANK_UP]: () => ({
-        name: [GAME_ATTACKS.TANK_UP],
-        cost: 1,
-        power: 0,
-        descriptiom: "Gain 1 Defense and 5 Max Health",
+    
+    [GAME_ATTACKS.BACKSTAB]: () => ({
+        name: [GAME_ATTACKS.BACKSTAB],
+        cost: 3,
+        power: 1,
+        descriptiom: "Damage the opponent for 100% Power. +2 Priority",
         isUltimate: false,
-        healthGain: 5,
-        defenseGain: 1,
-        priority: 0,
-        type: ATTACK_TYPES.STATUS,
+        priority: 2,
+        type: ATTACK_TYPES.DAGGERS,
         stack: [
-            ATTACK_STACK_TYPES.GAIN_DEFENSE,
-            ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH,
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
     }),
+
+    [GAME_ATTACKS.FIREBALL]: () => ({
+        name: [GAME_ATTACKS.FIREBALL],
+        cost: 2,
+        power: 1,
+        descriptiom: "Damage the opponent for 100% Power. -2 Priority",
+        isUltimate: false,
+        priority: -2,
+        type: ATTACK_TYPES.FIRE,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
+    [GAME_ATTACKS.MOLTEN_CORE]: () => ({
+        name: [GAME_ATTACKS.MOLTEN_CORE],
+        cost: 2,
+        power: 1,
+        descriptiom: "Gain 5 Power and 1 Speed",
+        isUltimate: false,
+        priority: 0,
+        powerGain: 5,
+        speedGain: 1,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.GAIN_POWER,
+            ATTACK_STACK_TYPES.GAIN_SPEED,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
+    [GAME_ATTACKS.FROST_ARMOUR]: () => ({
+        name: [GAME_ATTACKS.FROST_ARMOUR],
+        cost: 2,
+        power: 0,
+        descriptiom: "Gain 10 Defense, but lose 1 Speed",
+        isUltimate: false,
+        priority: 0,
+        defenseGain: 10,
+        speedGain: -1,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.GAIN_DEFENSE,
+            ATTACK_STACK_TYPES.GAIN_SPEED,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
+
 }

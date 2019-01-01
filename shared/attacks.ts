@@ -4,10 +4,19 @@ import { GAME_TYPES } from "../src/components/GameScreen/game.interface";
 
 export enum GAME_ATTACKS {
     SWITCH = "Switch",
+    ULTIMATE = "ULTIMATE",
+
     SLASH = "Slash",
+    RECKLESS_SLAM = "Reckless Slam",
     TANK_UP = "Tank Up!",
+
+    BACKSTAB = "Backstab",
     RECUPERATE = "Recuperate",
     ACCELERATE = "Accelerate",
+
+    FIREBALL = "Fireball",
+    MOLTEN_CORE = "Molten Core",
+    FROST_ARMOUR = "Frost Armour",
 }
 
 export enum ATTACK_STACK_TYPES {
@@ -62,7 +71,13 @@ export const damageOpponentAction = (character, opponent, ability) => {
 
 // DAMAGE_SELF = "DAMAGE_SELF",
 export const damageSelfAction = (character, opponent, ability) => {
-
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_SELF,
+        power: ability.isStatic
+            ? ability.damageAmount
+            : ability.selfDamage * character.power,
+        target: character
+    }
 }
 // HEAL_SELF = "HEAL_SELF",
 export const healSelfAction = (character, opponent, ability) => {
