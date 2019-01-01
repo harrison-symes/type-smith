@@ -51,7 +51,12 @@ const defaultTeam = [
     },
     {
         characterClass: CharacterClassList.WITCH,
-        abilities: defaultMoves()
+        abilities: [
+            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.BLOOD_MOON },
+            { name: GAME_ATTACKS.CURSE },
+            { name: GAME_ATTACKS.ENTRAP },
+        ]
     },
 ] as Partial<Character>[]
 

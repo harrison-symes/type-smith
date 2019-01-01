@@ -55,10 +55,13 @@ class TeamBar extends React.Component<TeamBarProps> {
         )
     }
     renderCharacter = (character:Character) => {
-        const {gameInfo, isPlayerSide} = this.props
+        const {gameInfo, isPlayerSide, userTeam, opponentTeam} = this.props
+        const team = isPlayerSide ? userTeam : opponentTeam
+        const active = team.find(character => character.isActive)
+
         const isWaiting = gameInfo.turnStage != TurnStage.CHOOSING
 
-        const isDisabled = isWaiting 
+        const isDisabled = isWaiting || active.isTrapped
 
         return (
             <div className="team-member">

@@ -95,6 +95,27 @@ export default (isUserTeam:boolean) =>
         case ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH:
             const firstState = modifyStat(newState, "healthMax", true, action.healthGain, action.target)
             return modifyStat(firstState, "health", true, action.healthGain, action.target)
+
+        case ATTACK_STACK_TYPES.CHANGE_ALL_STATS:
+            let stateHolder = modifyStat(newState, "healthMax", true, action.statChange, action.target)
+            stateHolder = modifyStat(newState, "health", true, action.statChange, action.target)
+            stateHolder = modifyStat(newState, "energy", true, action.statChange, action.target)
+            stateHolder = modifyStat(newState, "energyMax", true, action.statChange, action.target)
+            stateHolder = modifyStat(newState, "power", true, action.statChange, action.target)
+            stateHolder = modifyStat(newState, "defense", true, action.statChange, action.target)
+            stateHolder = modifyStat(newState, "speed", true, action.statChange, action.target)
+            return stateHolder
+
+        case ATTACK_STACK_TYPES.TRAP_TARGET:
+            target = newState.find(character => character.id == action.target.id)
+            if (!target) return state
+            idx = newState.indexOf(target)
+
+            target.isTrapped = true
+
+            newState[idx] = { ...target }
+            return newState
+
         default:
             return state
     }

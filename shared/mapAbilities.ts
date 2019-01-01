@@ -156,5 +156,50 @@ export default {
         ]
     }),
 
+    [GAME_ATTACKS.CURSE]: () => ({
+        name: [GAME_ATTACKS.CURSE],
+        cost: 1,
+        power: 0,
+        descriptiom: "Lower all stats of you and your opponent by 1",
+        isUltimate: false,
+        priority: 0,
+        statChange: -1,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.CHANGE_ALL_STATS_SELF,
+            ATTACK_STACK_TYPES.CHANGE_ALL_STATS_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
+    [GAME_ATTACKS.ENTRAP]: () => ({
+        name: [GAME_ATTACKS.ENTRAP],
+        cost: 3,
+        power: 0,
+        descriptiom: "Trap your opponent, preventing them from switching",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.TRAP_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
+    [GAME_ATTACKS.BLOOD_MOON]: () => ({
+        name: [GAME_ATTACKS.BLOOD_MOON],
+        cost: 2,
+        power: 0,
+        descriptiom: "Damage your opponent for 100% of OPPONENT's Power, ignoring defense",
+        isStatic: true,
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BLOOD_MOON,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
 
 }

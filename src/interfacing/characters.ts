@@ -44,4 +44,5 @@ export interface Character {
     speed: number;
     abilities: CharacterAbility[],
     isAlive: boolean;
+    isTrapped?: boolean;
 }

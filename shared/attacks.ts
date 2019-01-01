@@ -17,6 +17,10 @@ export enum GAME_ATTACKS {
     FIREBALL = "Fireball",
     MOLTEN_CORE = "Molten Core",
     FROST_ARMOUR = "Frost Armour",
+
+    CURSE = "Curse",
+    ENTRAP = "Entrap",
+    BLOOD_MOON = "Blood Moon",
 }
 
 export enum ATTACK_STACK_TYPES {
@@ -33,6 +37,20 @@ export enum ATTACK_STACK_TYPES {
     GAIN_SPEED = "GAIN_SPEED",
     INCREASE_MAX_HEALTH = "INCREASE_MAX_HEALTH",
     INCREASE_MAX_ENERGY = "INCREASE_MAX_ENERGY",
+    CHANGE_ALL_STATS = "CHANGE_ALL_STATS",
+    TRAP_TARGET = "TRAP_TARGET",
+    
+    DAMAGE_OPPONENT_BLOOD_MOON = "DAMAGE_OPPONENT_BLOOD_MOON",
+    TRAP_OPPONENT = "TRAP_OPPONENT",
+    TRAP_SELF = "TRAP_SELF",
+    CHANGE_ALL_STATS_SELF = "CHANGE_ALL_STATS_SELF",
+    CHANGE_ALL_STATS_OPPONENT = "CHANGE_ALL_STATS_OPPONENT",
+    LOWER_OPPONENT_MAX_HEALTH = "LOWER_OPPONENT_MAX_HEALTH",
+    LOWER_OPPONENT_POWER = "LOWER_OPPONENT_POWER",
+    LOWER_OPPONENT_DEFENSE = "LOWER_OPPONENT_DEFENSE",
+    LOWER_OPPONENT_ENERGY = "LOWER_OPPONENT_ENERGY",
+    LOWER_OPPONENT_MAX_ENERGY = "LOWER_OPPONENT_MAX_ENERGY",
+    LOWER_OPPONENT_SPEED = "LOWER_OPPONENT_SPEED",
 }
 
 export interface GameTurnAction {
@@ -156,6 +174,29 @@ export const switchCharacterAction = (character, opponent, ability) => {
     }
 }
 
+export const changeStatsOpponent = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.CHANGE_ALL_STATS,
+    target: opponent,
+    statChange: ability.statChange
+})
+
+export const changeStatsSelf = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.CHANGE_ALL_STATS,
+    target: character,
+    statChange: ability.statChange
+})
+
+export const trapOpponent = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.TRAP_TARGET,
+    target: opponent
+})
+
+export const damageOpponentBloodMoon = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+    target: opponent,
+    power: opponent.power
+})
+
 export const attackActionMapper = {
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
     [ATTACK_STACK_TYPES.SPEND_ENERGY]: spendEnergyAction,
@@ -169,4 +210,9 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.GAIN_ENERGY]: gainEnergyAction,
     [ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH]: increaseMaxHealth,
     [ATTACK_STACK_TYPES.INCREASE_MAX_ENERGY]: increaseMaxEnergy,
+    [ATTACK_STACK_TYPES.CHANGE_ALL_STATS_OPPONENT]: changeStatsOpponent,
+    [ATTACK_STACK_TYPES.CHANGE_ALL_STATS_SELF]: changeStatsSelf,
+    [ATTACK_STACK_TYPES.TRAP_OPPONENT]: trapOpponent,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BLOOD_MOON]: damageOpponentBloodMoon
+
 }
