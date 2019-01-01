@@ -3,7 +3,7 @@ import { GameState, GAME_TYPES, TurnStage } from "../../src/components/GameScree
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils.ts/createCharacter";
 import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
-import { GameTurnAction, attackActionMapper } from "../../shared/attacks";
+import { GameTurnAction, attackActionMapper, ATTACK_STACK_TYPES } from "../../shared/attacks";
 
 const games = {
 
@@ -91,6 +91,39 @@ const getOpponentSocketId = (socket_id, game) => {
     return game.player_socket_ids.find(id => id != socket_id)
 }
 
+const orderTurnActions = ([actionOne, actionTwo]) => {
+    const speedOne = actionOne.character.speed
+    const speedTwo = actionTwo.character.speed
+    if (speedOne > speedTwo) {
+        console.log(actionOne.character.characterClass, "first")
+        return [
+            actionOne,
+            actionTwo
+        ]
+    } 
+    else if (speedTwo > speedOne) {
+        console.log(actionTwo.character.characterClass, "first")
+        return [
+            actionTwo,
+            actionOne
+        ] 
+    }
+    else {
+        const speedTie = Math.random() > 0.5
+        const winner = speedTie ? actionOne : actionTwo
+        const loser = speedTie ? actionTwo : actionOne
+        //speed tie action added
+        // winner.ability.stack.push({
+        
+        // }) 
+        console.log(winner.character.characterClass, "won speed tie")
+        return [
+            winner,
+            loser
+        ]
+    }
+}
+
 const roomListeners = (socket, io) => {
     socket.on(
         TEAM_PREVIEW_SOCKET_CHANNEL.SUBMIT_TEAM,
@@ -136,7 +169,6 @@ const roomListeners = (socket, io) => {
             }
 
             turn.turnActions.push(actionObj)
-
             turn.playersSubmitted++
             
             io.to(socket.id).emit(
@@ -146,7 +178,8 @@ const roomListeners = (socket, io) => {
                 console.log("waiting for player 2")
                 return
             }
-                
+            
+            turn.turnActions = orderTurnActions(turn.turnActions)
             //execute first stack
             const firstStack = turn.turnActions.pop()
             

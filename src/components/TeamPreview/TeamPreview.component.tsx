@@ -40,13 +40,14 @@ const defaultTeam = [
     },
 ] as Partial<Character>[]
 
-const idx = Math.floor(Math.random() * defaultTeam.length)
-defaultTeam[idx].isActive = true 
 
 class TeamPreview extends React.Component<TeamPreviewProps> {
     submitTeam = () => {
         const {socket, gameInfo} = this.props
-
+        
+        const idx = Math.floor(Math.random() * defaultTeam.length)
+        defaultTeam[idx].isActive = true 
+        
         socket.emit(
             TEAM_PREVIEW_SOCKET_CHANNEL.SUBMIT_TEAM,
             gameInfo.roomId,
