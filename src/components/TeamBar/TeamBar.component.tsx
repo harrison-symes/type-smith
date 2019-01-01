@@ -68,7 +68,7 @@ class TeamBar extends React.Component<TeamBarProps> {
                 <img className="team-member--image" src={images[character.characterClass]} />
                 {isPlayerSide &&
                     <button 
-                        className="btn" 
+                        className="team-member--btn btn" 
                         disabled={isDisabled}
                         onClick={() => this.switchCharacter(character)}>
                         Switch
