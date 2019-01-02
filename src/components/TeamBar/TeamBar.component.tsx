@@ -90,7 +90,7 @@ class TeamBar extends React.Component<TeamBarProps> {
         const isWaiting = !(gameInfo.turnStage == TurnStage.CHOOSING 
             || gameInfo.turnStage == TurnStage.NEED_TO_SWITCH)
 
-        const isDisabled = isWaiting || active.isTrapped
+        const isDisabled = isWaiting || (active.isTrapped && gameInfo.turnStage != TurnStage.NEED_TO_SWITCH)
 
         return (
             <div 

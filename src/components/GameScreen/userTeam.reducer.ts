@@ -118,7 +118,7 @@ export default (isUserTeam:boolean) =>
 
         case ATTACK_STACK_TYPES.HEAL_TEAM:
             return newState.map(character => {
-                if (character.owner_id == action.owner_id) {
+                if (character.owner_id == action.owner_id && character.isAlive) {
                     character.health += action.power
                     if (character.health > character.maxHealth) character.health = character.maxHealth
                 }
