@@ -42,6 +42,7 @@ interface PreGameSocketCommands {
 interface InGameSocketCommands {
     waitForOpponent() : void;
     turnValidated() : void;
+    switchCharacterRequest() : void;
 }
 
 class SocketListener extends React.Component<SocketListenerProps> {
@@ -128,7 +129,7 @@ class SocketListener extends React.Component<SocketListenerProps> {
         )
     }
     inGame = (socket) => {
-        const {waitForOpponent, turnValidated, despacito} = this.props
+        const {waitForOpponent, turnValidated, despacito, switchCharacterRequest} = this.props
 
         socket.on(
             GAME_ACTION_SOCKET_CHANNEL.WAIT_FOR_OPPONENT,
@@ -168,6 +169,10 @@ class SocketListener extends React.Component<SocketListenerProps> {
             }
         )
 
+        socket.on(
+            GAME_ACTION_SOCKET_CHANNEL.SWITCH_CHARACTER_REQUEST,
+            () => switchCharacterRequest()
+        )
         socket.on(
             GAME_ACTION_SOCKET_CHANNEL.TURN_VALIDATED,
             () => turnValidated()

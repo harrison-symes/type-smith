@@ -18,3 +18,7 @@ export const waitForOpponent = () => ({
 export const turnValidated = () => ({
     type: GAME_TYPES.TURN_VALIDATED
 })
+
+export const switchCharacterRequest = () => ({
+    type: GAME_TYPES.SWITCH_CHARACTER_REQUEST
+})

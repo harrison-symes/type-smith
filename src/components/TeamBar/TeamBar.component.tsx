@@ -10,6 +10,7 @@ import { Transition, TransitionGroup } from "react-transition-group";
 
 import posed from "react-pose"
 import { tween, spring } from "popmotion";
+import EnergyBar from "../statComponents/EnergyBar";
 
 interface TeamBarProps {
     isPlayerSide: boolean;
@@ -56,23 +57,38 @@ class TeamBar extends React.Component<TeamBarProps> {
             ]
         }
 
-        socket.emit(
-            GAME_ACTION_SOCKET_CHANNEL.SUBMIT_TURN_ACTION,
-            gameInfo.roomId,
-            gameInfo.user_id,
-            {
-                character: userTeam.find(character => character.isActive),
-                opponent: opponentTeam.find(character => character.isActive),
-                ability
-            }
-        )
+        if (gameInfo.turnStage == TurnStage.NEED_TO_SWITCH) {
+            socket.emit(
+                GAME_ACTION_SOCKET_CHANNEL.SUBMIT_REQUIRED_SWITCH,
+                gameInfo.roomId,
+                gameInfo.user_id,
+                {
+                    character: userTeam.find(character => character.isActive),
+                    opponent: opponentTeam.find(character => character.isActive),
+                    ability
+                }
+            )
+        } else {
+            socket.emit(
+                GAME_ACTION_SOCKET_CHANNEL.SUBMIT_TURN_ACTION,
+                gameInfo.roomId,
+                gameInfo.user_id,
+                {
+                    character: userTeam.find(character => character.isActive),
+                    opponent: opponentTeam.find(character => character.isActive),
+                    ability
+                }
+            )
+        }
+
     }
     renderCharacter = (character:Character) => {
         const {gameInfo, isPlayerSide, userTeam, opponentTeam} = this.props
         const team = isPlayerSide ? userTeam : opponentTeam
         const active = team.find(character => character.isActive)
 
-        const isWaiting = gameInfo.turnStage != TurnStage.CHOOSING
+        const isWaiting = !(gameInfo.turnStage == TurnStage.CHOOSING 
+            || gameInfo.turnStage == TurnStage.NEED_TO_SWITCH)
 
         const isDisabled = isWaiting || active.isTrapped
 
@@ -86,8 +102,9 @@ class TeamBar extends React.Component<TeamBarProps> {
                 <div>
                     <span className={`team-member--image ra ra-lg ${icons[character.characterClass]}`} />
                     <HealthBar character={character} />
+                    <EnergyBar character={character} />
                 </div>
-                {(isPlayerSide && !character.isActive) &&
+                {(isPlayerSide && !character.isActive && character.isAlive) &&
                     <button 
                         className="team-member--btn btn" 
                         disabled={isDisabled}

@@ -4,7 +4,7 @@ import { receiveGameRequestInbound, receiveGameRequestOutbound, removeGameReques
 import { ownPlayerJoinedLobby, ownPlayerLeftLobby } from "./components/LFG/LFG.actions";
 import { LobbyEntry } from "./components/Lobby/interface";
 import { addEntryToLobby, removeEntryFromLobby } from "./components/Lobby/lobby.actions";
-import { receiveGameInfo, receiveTeamInfo, waitForOpponent, turnValidated } from "./components/GameScreen/gameScreen.actions";
+import { receiveGameInfo, receiveTeamInfo, waitForOpponent, turnValidated, switchCharacterRequest } from "./components/GameScreen/gameScreen.actions";
 import { promises } from "fs";
 
 const mapStateToProps = ({
@@ -32,6 +32,7 @@ const mapDispatchToProps = dispatch => ({
         //turns
         waitForOpponent: () => dispatch(waitForOpponent()),
         turnValidated: () => dispatch(turnValidated()),
+        switchCharacterRequest: () => dispatch(switchCharacterRequest()),
         despacito: (action) => Promise.resolve().then(() => dispatch(action))
 })
 

@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Character, CharacterClassList } from "../../../src/interfacing/characters";
 import HealthBar from "../statComponents/HealthBar";
+import EnergyBar from "../statComponents/EnergyBar";
 
 export interface GameCharacterProps {
     character: Character;
@@ -21,22 +22,19 @@ class GameCharacter extends React.Component<GameCharacterProps> {
         const {isPlayerSide, character} = this.props
 
         return (
-            <div className={`game-character--container ${
+            <div className={`mt2 mb2 game-character--container ${
                     !isPlayerSide && "flex-reverse"
                 }`}>
                 <div className="game-character--portrait-container">
                     <img className="game-character--portrait" src={images[character.characterClass]} />
                 </div>
-                <div className="game-character--stats">
+                <div className="game-character--stats pt3">
+                    
                     <HealthBar character={character} />
+                    <EnergyBar character={character} />
                     <table>
                         <tr>
                             <th>{character.characterClass}</th>
-                            <td>{character.id}</td>
-                        </tr>
-                        <tr>
-                            <th>Energy</th>
-                            <td>{character.energy} / {character.energyMax}</td>
                         </tr>
                         <tr>
                             <th>Power</th>

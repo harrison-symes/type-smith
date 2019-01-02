@@ -22,7 +22,10 @@ const initTurn = (turnNumber, player_ids) => ({
     playersSubmittedSecond: 0,
     playersValidated: 0,
     isComplete: false,
-    turnActions: []
+    turnActions: [],
+    deathSwitchesNeeded: 0,
+    deathSwitchesValidated: 0,
+    deathSwitchActions: []
 })
 
 const organiseGameInfo = (socket_id, roomId, request:GameRequest) => {
@@ -95,8 +98,9 @@ const orderTurnActions = ([actionOne, actionTwo]) => {
     let first;
     let second;
     
-    const priorityOne = actionOne.priority
-    const priorityTwo = actionTwo.priority
+    const priorityOne = actionOne.ability.priority || 0
+    const priorityTwo = actionTwo.ability.priority || 0
+    console.log({priorityOne, priorityTwo})
     if (priorityOne == priorityTwo) {
         //no priority, speed check
 
@@ -126,6 +130,7 @@ const orderTurnActions = ([actionOne, actionTwo]) => {
         }
     } else {
         //a move has higher / lower priority
+        console.log("priority off")
         if (priorityOne > priorityTwo) {
             first = actionOne
             second = actionTwo
@@ -139,9 +144,9 @@ const orderTurnActions = ([actionOne, actionTwo]) => {
     console.log("second:", second.ability.name)
     
     return [
+        second,
         first,
-        second
-    ]
+    ] //second is first for pop()
 }
 
 const roomListeners = (socket, io) => {
@@ -221,6 +226,60 @@ const roomListeners = (socket, io) => {
     )
 
     socket.on(
+        GAME_ACTION_SOCKET_CHANNEL.CHARACTER_DIED,
+        (roomId) => {
+            const game = games[roomId]
+            const turn = game.turns[game.turns.length - 1]
+            
+            turn.deathSwitchesNeeded++
+            io.to(socket.id).emit(
+                GAME_ACTION_SOCKET_CHANNEL.SWITCH_CHARACTER_REQUEST
+            )
+        }
+    )
+            
+    socket.on(
+        GAME_ACTION_SOCKET_CHANNEL.SUBMIT_REQUIRED_SWITCH,
+        (roomId, user_id, action:GameTurnAction) => {
+            const game = games[roomId]
+            const turn = game.turns[game.turns.length - 1]
+
+            turn.deathSwitchActions.push(action)
+            turn.deathSwitchesValidated++
+
+            io.to(socket.id).emit(
+                GAME_ACTION_SOCKET_CHANNEL.WAIT_FOR_OPPONENT
+            )
+
+            if (turn.deathSwitchesValidated == turn.deathSwitchesNeeded) {
+                const [actionOne, actionTwo] = turn.deathSwitchActions
+
+                const actionStack = actionOne.ability.stack.map(action_type => {
+                    return attackActionMapper[action_type](actionOne.character, actionOne.opponent, actionOne.ability)
+                })
+
+                let secondStack = []
+                if (turn.deathSwitchesNeeded == 2) {
+                    secondStack = actionTwo.ability.stack.map(action_type => {
+                        return attackActionMapper[action_type](actionTwo.character, actionTwo.opponent, actionTwo.ability)
+                    })
+                }
+
+                const finalStack = [
+                    ...actionStack,
+                    ...secondStack
+                ]
+
+                io.to(roomId).emit(
+                    GAME_ACTION_SOCKET_CHANNEL.RECEIVE_SECOND_TURN_STACK,
+                    finalStack
+                )  
+            }
+
+        }
+    )
+
+    socket.on(
         GAME_ACTION_SOCKET_CHANNEL.REQUEST_SECOND_STACK,
         (roomId, user_id, character) => {
             const game = games[roomId]
@@ -242,10 +301,13 @@ const roomListeners = (socket, io) => {
             }
 
             turn.turnActions.pop()
+            let actionStack = []
 
-            const actionStack = secondStack.ability.stack.map(action_type => {
-                return attackActionMapper[action_type](secondStack.character, secondStack.opponent, secondStack.ability)
-            })
+            if (secondStack.character.isAlive) {
+                actionStack = secondStack.ability.stack.map(action_type => {
+                    return attackActionMapper[action_type](secondStack.character, secondStack.opponent, secondStack.ability)
+                })
+            }
 
             const finalStack = [
                 ...actionStack

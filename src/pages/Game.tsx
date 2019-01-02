@@ -47,10 +47,23 @@ class Game extends React.Component<GameProps> {
         const nextStage = nextProps.gameInfo.turnStage
         const lastStage = this.props.gameInfo.turnStage
         if (nextStage != lastStage && nextStage == TurnStage.VALIDATING) {
-            this.props.socket.emit(
-                GAME_ACTION_SOCKET_CHANNEL.VALIDATE_TURN,
-                this.props.gameInfo.roomId
-            )
+            nextProps.dispatch({
+                type: "GET_USER_ACTIVE",
+                getCharacter: (character) => {
+                    if (character.isAlive) {
+                        this.props.socket.emit(
+                            GAME_ACTION_SOCKET_CHANNEL.VALIDATE_TURN,
+                            this.props.gameInfo.roomId
+                        )
+                    } else {
+                        this.props.socket.emit(
+                            GAME_ACTION_SOCKET_CHANNEL.CHARACTER_DIED,
+                            this.props.gameInfo.roomId
+                        )
+                    }
+
+                }
+            })
         }
     }
     render() {

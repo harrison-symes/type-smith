@@ -7,18 +7,13 @@ export interface HealthBarProps {
 }
 
 export default (props : HealthBarProps)=> {
-    const perc = props.character.health / props.character.healthMax * 100
-    const label = `${props.character.health} / ${props.character.healthMax}`
+    const perc = props.character.energy / props.character.energyMax * 100
+    const label = `${props.character.energy} / ${props.character.energyMax}`
     
-    const bsStyle = perc > 50
-        ? "success"
-        : perc > 25
-            ? "warning"
-            : "danger"
-
     return (
         <ProgressBar 
-            bsStyle={bsStyle}
+            striped
+            bsStyle="info"
             now={perc}
             label={label}
         />

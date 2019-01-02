@@ -31,6 +31,9 @@ export default (state:GameState = initialState, action:GameAction) : GameState =
         case types.TURN_VALIDATED:
             newState.turnStage = TurnStage.CHOOSING
             return newState
+        case types.SWITCH_CHARACTER_REQUEST:
+            newState.turnStage = TurnStage.NEED_TO_SWITCH
+            return newState
         default:
             return state
     }
