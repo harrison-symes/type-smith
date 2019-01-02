@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Character, CharacterClassList } from "../../../src/interfacing/characters";
+import HealthBar from "../statComponents/HealthBar";
 
 export interface GameCharacterProps {
     character: Character;
@@ -27,14 +28,11 @@ class GameCharacter extends React.Component<GameCharacterProps> {
                     <img className="game-character--portrait" src={images[character.characterClass]} />
                 </div>
                 <div className="game-character--stats">
+                    <HealthBar character={character} />
                     <table>
                         <tr>
                             <th>{character.characterClass}</th>
                             <td>{character.id}</td>
-                        </tr>
-                        <tr>
-                            <th>Health</th>
-                            <td>{character.health} / {character.healthMax}</td>
                         </tr>
                         <tr>
                             <th>Energy</th>

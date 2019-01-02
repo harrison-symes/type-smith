@@ -5,6 +5,11 @@ import { GameState, TurnStage } from "../GameScreen/game.interface";
 import { Socket } from "socket.io";
 import { ATTACK_TYPES } from "../../../shared/types";
 import { ATTACK_STACK_TYPES, GAME_ATTACKS } from "../../../shared/attacks";
+import HealthBar from "../statComponents/HealthBar";
+import { Transition, TransitionGroup } from "react-transition-group";
+
+import posed from "react-pose"
+import { tween, spring } from "popmotion";
 
 interface TeamBarProps {
     isPlayerSide: boolean;
@@ -12,6 +17,14 @@ interface TeamBarProps {
     userTeam: Character[];
     opponentTeam: Character[];
     socket: Socket;
+}
+
+const icons = {
+    [CharacterClassList.WARRIOR]: "ra-crossed-swords",
+    [CharacterClassList.MAGE]: "ra-wizard-face",
+    [CharacterClassList.ASSASSIN]: "ra-cowled",
+    [CharacterClassList.PALADIN]: "ra-elf-helmet",
+    [CharacterClassList.WITCH]: "ra-witch-face",
 }
 
 const images = {
@@ -64,12 +77,17 @@ class TeamBar extends React.Component<TeamBarProps> {
         const isDisabled = isWaiting || active.isTrapped
 
         return (
-            <div className="team-member">
+            <div 
+                className="team-member"
+            >
                 <p className="team-member--name">
                     {character.characterClass}
                 </p>
-                <img className="team-member--image" src={images[character.characterClass]} />
-                {isPlayerSide &&
+                <div>
+                    <span className={`team-member--image ra ra-lg ${icons[character.characterClass]}`} />
+                    <HealthBar character={character} />
+                </div>
+                {(isPlayerSide && !character.isActive) &&
                     <button 
                         className="team-member--btn btn" 
                         disabled={isDisabled}
@@ -83,10 +101,10 @@ class TeamBar extends React.Component<TeamBarProps> {
     render() {
         const {userTeam, opponentTeam, isPlayerSide} = this.props
         const team = isPlayerSide ? userTeam : opponentTeam
+
         return (
             <div className="team-bar width-100">
                 {team
-                    .filter(({isActive}) => !isActive)
                     .map(character => this.renderCharacter(character))
                 }
             </div>

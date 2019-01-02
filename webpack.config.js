@@ -18,6 +18,10 @@ module.exports = {
                 loader: 'awesome-typescript-loader'
             },
             {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
+            },
+            {
                 test: /\.scss$/,
                 use: [{
                     loader: "style-loader" // creates style nodes from JS strings

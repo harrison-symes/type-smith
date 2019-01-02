@@ -2,6 +2,10 @@
 @import "./components/main.scss";
 @import "./generic/main.scss";
 
+@import './rpg-awesome/scss/_variables.scss';
+$ra-font-path: './rpg-awesome/fonts/';
+@import './rpg-awesome/scss/rpg-awesome.scss';
+
 body {
     background-color: $blue-bright;
     margin: 0;

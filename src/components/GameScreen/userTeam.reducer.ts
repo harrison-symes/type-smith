@@ -98,12 +98,12 @@ export default (isUserTeam:boolean) =>
 
         case ATTACK_STACK_TYPES.CHANGE_ALL_STATS:
             let stateHolder = modifyStat(newState, "healthMax", true, action.statChange, action.target)
-            stateHolder = modifyStat(newState, "health", true, action.statChange, action.target)
-            stateHolder = modifyStat(newState, "energy", true, action.statChange, action.target)
-            stateHolder = modifyStat(newState, "energyMax", true, action.statChange, action.target)
-            stateHolder = modifyStat(newState, "power", true, action.statChange, action.target)
-            stateHolder = modifyStat(newState, "defense", true, action.statChange, action.target)
-            stateHolder = modifyStat(newState, "speed", true, action.statChange, action.target)
+            stateHolder = modifyStat(stateHolder, "health", true, action.statChange, action.target)
+            stateHolder = modifyStat(stateHolder, "energy", true, action.statChange, action.target)
+            stateHolder = modifyStat(stateHolder, "energyMax", true, action.statChange, action.target)
+            stateHolder = modifyStat(stateHolder, "power", true, action.statChange, action.target)
+            stateHolder = modifyStat(stateHolder, "defense", true, action.statChange, action.target)
+            stateHolder = modifyStat(stateHolder, "speed", true, action.statChange, action.target)
             return stateHolder
 
         case ATTACK_STACK_TYPES.TRAP_TARGET:
