@@ -31,6 +31,8 @@ export const createClassFromStatSheet = (owner_id, character) : Character => {
         speed: calcSpeed(statSheet.speedStat),
         abilities,
         isAlive: true,
+        ultimateCharge: 0,
+        ultimateChargeMax: 5
     }
 }
 

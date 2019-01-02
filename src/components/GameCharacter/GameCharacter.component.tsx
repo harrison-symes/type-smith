@@ -2,6 +2,7 @@ import * as React from "react"
 import { Character, CharacterClassList } from "../../../src/interfacing/characters";
 import HealthBar from "../statComponents/HealthBar";
 import EnergyBar from "../statComponents/EnergyBar";
+import UltimateBar from "../statComponents/UltimateBar";
 
 export interface GameCharacterProps {
     character: Character;
@@ -32,6 +33,7 @@ class GameCharacter extends React.Component<GameCharacterProps> {
                     
                     <HealthBar character={character} />
                     <EnergyBar character={character} />
+                    <UltimateBar character={character} />
                     <table>
                         <tr>
                             <th>{character.characterClass}</th>

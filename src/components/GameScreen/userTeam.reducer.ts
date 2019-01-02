@@ -133,6 +133,18 @@ export default (isUserTeam:boolean) =>
                 return { ...character }
             })
             
+        case GAME_TYPES.TURN_VALIDATED:
+            return newState.map(character => {
+                if (character.isAlive && !character.isActive) {
+                    character.energy += 1
+                    if (character.energy > character.energyMax) character.energy = character.energyMax
+                }
+                if (character.isAlive && character.isActive) {
+                    character.ultimateCharge+=1
+                    if (character.ultimateCharge >= character.ultimateChargeMax) character.ultimateCharge = character.ultimateChargeMax
+                }
+                return character
+            })
         default:
             return state
     }

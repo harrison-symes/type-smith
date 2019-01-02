@@ -11,6 +11,7 @@ import { Transition, TransitionGroup } from "react-transition-group";
 import posed from "react-pose"
 import { tween, spring } from "popmotion";
 import EnergyBar from "../statComponents/EnergyBar";
+import UltimateBar from "../statComponents/UltimateBar";
 
 interface TeamBarProps {
     isPlayerSide: boolean;
@@ -103,6 +104,7 @@ class TeamBar extends React.Component<TeamBarProps> {
                     <span className={`team-member--image ra ra-lg ${icons[character.characterClass]}`} />
                     <HealthBar character={character} />
                     <EnergyBar character={character} />
+                    <UltimateBar character={character} />
                 </div>
                 {(isPlayerSide && !character.isActive && character.isAlive) &&
                     <button 

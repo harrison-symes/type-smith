@@ -45,4 +45,6 @@ export interface Character {
     abilities: CharacterAbility[],
     isAlive: boolean;
     isTrapped?: boolean;
+    ultimateCharge: number;
+    ultimateChargeMax: number;
 }
