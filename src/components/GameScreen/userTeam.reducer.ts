@@ -125,6 +125,7 @@ export default (isUserTeam:boolean) =>
             })
         
         case ATTACK_STACK_TYPES.DAMAGE_TEAM:
+            console.log({action})
             return newState.map(character => {
                 if (character.owner_id == action.owner_id && character.isAlive) {
                     character.health -= action.power

@@ -251,10 +251,12 @@ export const healTeamSelf = (character, opponent, ability) => ({
 
 export const damageTeamOpponent = (character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.DAMAGE_TEAM,
-    owner_id: character.opponent_id,
+    owner_id: opponent.owner_id,
     power: ability.isStatic 
         ? ability.damageAmount 
-        : (ability.teamPower || ability.power) * character.power
+        : ability.teamPower 
+            ? ability.teamPower * character.power
+            : ability.power * character.power
 })
 
 export const changeTeamStatsPower = (character, opponent, ability) => ({

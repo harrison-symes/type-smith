@@ -3,8 +3,11 @@ import thunkMiddleware from "redux-thunk"
 
 import reducers from "./reducers"
 
+
+
 const store = createStore(reducers, compose(
-    applyMiddleware(thunkMiddleware)
+    applyMiddleware(thunkMiddleware),
+    window["devToolsExtension"] ? window["devToolsExtension"]() : f => f
 ))
 
 export default store

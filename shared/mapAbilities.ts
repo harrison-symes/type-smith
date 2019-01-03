@@ -139,7 +139,7 @@ export default {
     [GAME_ATTACKS.METEOR]: () => ({
         name: [GAME_ATTACKS.METEOR],
         cost: 5,
-        power: 2,
+        power: 1.5,
         teamPower: 0.5,
         descriptiom: "Damage the opponent for 200% Power, and all other enemy team members for 50% Player Power",
         isUltimate: true,
