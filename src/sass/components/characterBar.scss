@@ -4,8 +4,11 @@
     border-radius: 0.5rem;
     border: 0.25rem $purple-med;
     
-    .btn {
+    .btn--container, .btn {
         min-width: 200px;
         max-height: 100px;
+    }
+    .btn {
+        width: 100%;
     }
 }

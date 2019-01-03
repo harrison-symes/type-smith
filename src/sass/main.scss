@@ -6,6 +6,8 @@
 $ra-font-path: './rpg-awesome/fonts/';
 @import './rpg-awesome/scss/rpg-awesome.scss';
 
+@import "./tippy.css";
+
 body {
     background-color: $blue-bright;
     margin: 0;

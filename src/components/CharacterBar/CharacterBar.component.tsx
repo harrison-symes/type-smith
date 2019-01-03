@@ -4,6 +4,8 @@ import { Socket } from "socket.io";
 import { GameState, TurnStage } from "../GameScreen/game.interface";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 
+import {Tooltip} from "react-tippy"
+
 export interface CharacterBarProps {
     socket: Socket;
     gameInfo: GameState;
@@ -34,17 +36,34 @@ class CharacterBar extends React.Component<CharacterBarProps> {
             : character.energy >= ability.cost
 
         const isDisabled = !hasEnergy || isWaiting 
-
         return (
-            <button 
-                className="btn w-25" 
-                onClick={() => this.submitAction(ability)}
-                disabled={isDisabled}
+            <Tooltip
+                className="btn--container w-25"
+                position="top"
+                trigger="mouseenter"
+                animation="perspective"
+                // followCursor
+                inertia
+                arrow="true"
+                html={<span>
+                    <text>Cost: {ability.cost} {ability.isUltimate ? "Charges" : "Energy"}</text>
+                    <br />
+                    <text>Type: {ability.type}</text>
+                    <br />
+                    <text>{ability.description}</text>
+                </span>}
+                style={{ cursor: 'context-menu'}}
             >
-                <span className={`ra ra-lg ${ability.icon}`} />
-                {" "}
-                {ability.name}
-            </button>
+                <button 
+                    className="btn" 
+                    onClick={() => this.submitAction(ability)}
+                    disabled={isDisabled}
+                >
+                    <span className={`ra ra-lg ${ability.icon}`} />
+                    {" "}
+                    {ability.name}
+                </button>
+            </Tooltip>
 
         )
     }

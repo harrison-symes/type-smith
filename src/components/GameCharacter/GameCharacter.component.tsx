@@ -29,29 +29,31 @@ class GameCharacter extends React.Component<GameCharacterProps> {
                 <div className="game-character--portrait-container">
                     <img className="game-character--portrait" src={images[character.characterClass]} />
                 </div>
-                <div className="game-character--stats pt3">
+                <div className="game-character--stats">
+                    <text className="page-title center">{character.characterClass}</text>
                     
                     <HealthBar character={character} />
                     <EnergyBar character={character} />
                     <UltimateBar character={character} />
-                    <table>
-                        <tr>
-                            <th>{character.characterClass}</th>
-                        </tr>
-                        <tr>
-                            <th>Power</th>
-                            <td>{character.power}</td>
-                        </tr>
-                        <tr>
-                            <th>Defense</th>
-                            <td>{character.defense}</td>
-                        </tr>
-                        <tr>
-                            <th>Speed</th>
-                            <td>{character.speed}</td>
-                        </tr>
 
-                    </table>
+                    <div className="flex character-stats" >
+                        <div className="page-title">
+                            <span className="ra ra-lg ra-strong" />
+                            {" "}
+                            {character.power}
+                        </div>
+                        <div className="page-title">
+                            <span className="ra ra-lg ra-vibrating-shield" />
+                            {" "}
+                            {character.defense}
+                        </div>
+                        <div className="page-title">
+                            <span className="ra ra-lg ra-electric" />
+                            {" "}
+                            {character.speed}
+                        </div>
+                    
+                    </div>
                 </div>
             </div>
         )

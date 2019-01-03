@@ -1,5 +1,5 @@
 Arguments: 
-  /home/symeshjb/.nvm/versions/node/v10.14.2/bin/node /home/symeshjb/.nvm/versions/node/v10.14.2/bin/yarn add react-pose @types/react-pose
+  /home/symeshjb/.nvm/versions/node/v10.14.2/bin/node /home/symeshjb/.nvm/versions/node/v10.14.2/bin/yarn add @types/react-tippy
 
 PATH: 
   /home/symeshjb/.nvm/versions/node/v10.14.2/bin:/home/symeshjb/bin:/home/symeshjb/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2freact-pose: Not found
+  Error: https://registry.yarnpkg.com/@types%2freact-tippy: Not found
       at Request.params.callback [as _callback] (/home/symeshjb/.nvm/versions/node/v10.14.2/lib/node_modules/yarn/lib/cli.js:65894:18)
       at Request.self.callback (/home/symeshjb/.nvm/versions/node/v10.14.2/lib/node_modules/yarn/lib/cli.js:129018:22)
       at Request.emit (events.js:182:13)
@@ -75,9 +75,11 @@ npm manifest:
       "react": "^16.6.3",
       "react-bootstrap": "^0.32.4",
       "react-dom": "^16.6.3",
+      "react-pose": "^4.0.4",
       "react-progressbar.js": "^0.2.0",
       "react-redux": "^6.0.0",
       "react-router-dom": "^4.3.1",
+      "react-tippy": "^1.2.3",
       "react-transition-group": "^2.5.2",
       "redux": "^4.0.1",
       "redux-thunk": "^2.3.0",
@@ -129,6 +131,33 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
     dependencies:
       regenerator-runtime "^0.12.0"
+  
+  "@emotion/is-prop-valid@^0.7.3":
+    version "0.7.3"
+    resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.7.3.tgz#a6bf4fa5387cbba59d44e698a4680f481a8da6cc"
+    integrity sha512-uxJqm/sqwXw3YPA5GXX365OBcJGFtxUVkB6WyezqFHlNe9jqUWH5ur2O2M8dGBz61kn1g3ZBlzUunFQXQIClhA==
+    dependencies:
+      "@emotion/memoize" "0.7.1"
+  
+  "@emotion/memoize@0.7.1":
+    version "0.7.1"
+    resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.1.tgz#e93c13942592cf5ef01aa8297444dc192beee52f"
+    integrity sha512-Qv4LTqO11jepd5Qmlp3M1YEjBumoTHcHFdgPTQ+sFlIL5myi/7xu/POwP7IRu6odBdmLXdtIs1D6TuW6kbwbbg==
+  
+  "@popmotion/easing@^1.0.1":
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/@popmotion/easing/-/easing-1.0.1.tgz#48336aea29542113df10aeb81b4fd10f0b95f937"
+    integrity sha512-NbIEz9mZAem0F0sjg2v57LbU9Y2Xc50QEX434jYrwEQzXJuJipyUV48Qz4hjHqbB/8xiUj0JMQfRvP8K9nUbxg==
+  
+  "@popmotion/popcorn@^0.3.0":
+    version "0.3.1"
+    resolved "https://registry.yarnpkg.com/@popmotion/popcorn/-/popcorn-0.3.1.tgz#f0f33fbf7ff66f2cd0bf28be24bee0b1d46b65e8"
+    integrity sha512-TRhDPxfzM4CrUff2ELyzDj6xSEp5fcmbnrTO0VkmrN/TxJrAzP2H/VfIDRQQy82Yn65Vwn1ohrIi8eZLqzrCMA==
+    dependencies:
+      "@popmotion/easing" "^1.0.1"
+      framesync "^4.0.1"
+      hey-listen "^1.0.5"
+      style-value-types "^3.0.7"
   
   "@types/bcrypt@^3.0.0":
     version "3.0.0"
@@ -205,6 +234,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
     integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
   
+  "@types/invariant@^2.2.29":
+    version "2.2.29"
+    resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.29.tgz#aa845204cd0a289f65d47e0de63a6a815e30cc66"
+    integrity sha512-lRVw09gOvgviOfeUrKc/pmTiRZ7g7oDOU6OAutyuSHpm1/o2RaBQvRhgK8QEdu+FFuw/wnWb29A/iuxv9i8OpQ==
+  
   "@types/jsonwebtoken@^8.3.0":
     version "8.3.0"
     resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.3.0.tgz#1fe79489df97b49273401ac3c8019cbf1dae4578"
@@ -232,6 +266,11 @@ Lockfile:
   "@types/node@*":
     version "10.12.15"
     resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.15.tgz#20e85651b62fd86656e57c9c9bc771ab1570bc59"
+  
+  "@types/node@^10.0.5":
+    version "10.12.18"
+    resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
+    integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
   
   "@types/prop-types@*":
     version "15.5.8"
@@ -2037,6 +2076,13 @@ Lockfile:
     dependencies:
       map-cache "^0.2.2"
   
+  framesync@^4.0.0, framesync@^4.0.1:
+    version "4.0.1"
+    resolved "https://registry.yarnpkg.com/framesync/-/framesync-4.0.1.tgz#ed7791baf0d266f58ab02000456f82cb384815bf"
+    integrity sha512-7dF3SXz/xMdwSHFHgj8PV2dAUCFclXWhasAb06rFvAM2pX24m9eDs6X+ikK0kx92w/uIljUi0sBINwcbl0rT2Q==
+    dependencies:
+      hey-listen "^1.0.5"
+  
   fresh@0.5.2:
     version "0.5.2"
     resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -2281,6 +2327,11 @@ Lockfile:
   he@1.2.x:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
+  
+  hey-listen@^1.0.4, hey-listen@^1.0.5:
+    version "1.0.5"
+    resolved "https://registry.yarnpkg.com/hey-listen/-/hey-listen-1.0.5.tgz#6d0a3a2f60177f65bc4404d571a00025bf5dc20e"
+    integrity sha512-O2iCNxBBGb4hOxL9tUdnoPwDYmZhQ29t5xKV74BVZNdvwCDXCpVYTJ4yoaibc1V0I8Yw3K3nwmvDpoyjnCqUaw==
   
   history@^4.7.2:
     version "4.7.2"
@@ -3825,6 +3876,46 @@ Lockfile:
     dependencies:
       find-up "^3.0.0"
   
+  popmotion-pose@^3.4.0:
+    version "3.4.1"
+    resolved "https://registry.yarnpkg.com/popmotion-pose/-/popmotion-pose-3.4.1.tgz#e13e52ba9fe02051926ca6313a7615876f459990"
+    integrity sha512-DSQaLu/d0duGQYcOFGT4PaZVwQKvP8eG1Pc9UhlSiUiFFY22mjIRGZFIIIEg2tv37it5MoBjv8jcFMRJ0TBQTA==
+    dependencies:
+      "@popmotion/easing" "^1.0.1"
+      hey-listen "^1.0.5"
+      popmotion "^8.5.0"
+      pose-core "^2.0.0"
+      style-value-types "^3.0.6"
+      tslib "^1.9.1"
+  
+  popmotion@^8.5.0:
+    version "8.5.5"
+    resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-8.5.5.tgz#0b6bfa6c82d457e4cccd2375923539b6d975b9e8"
+    integrity sha512-YiCinpxop8dkXQJEaCvckY6ac1DeVz/MyQkL+FGV9TYJz4J04dzXE1lnFv6gZ2t2Xl2JCkOFa9vZQ9t8krWqXQ==
+    dependencies:
+      "@popmotion/easing" "^1.0.1"
+      "@popmotion/popcorn" "^0.3.0"
+      framesync "^4.0.0"
+      hey-listen "^1.0.5"
+      style-value-types "^3.0.6"
+      stylefire "^2.3.4"
+      tslib "^1.9.1"
+  
+  popper.js@^1.11.1:
+    version "1.14.6"
+    resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.6.tgz#ab20dd4edf9288b8b3b6531c47c361107b60b4b0"
+    integrity sha512-AGwHGQBKumlk/MDfrSOf0JHhJCImdDMcGNoqKmKkU+68GFazv3CQ6q9r7Ja1sKDZmYWTckY/uLyEznheTDycnA==
+  
+  pose-core@^2.0.0:
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/pose-core/-/pose-core-2.0.2.tgz#6a0bd1e7218e4bf30be9c26a30be8eeb5b8695df"
+    integrity sha512-NWR8SELdQ+zhG+xD6nHDCdX/tu3fKAFUQ61hJdBic/7WSy/ABYfqpdQIsepBxPWQhHc8WLgPhRal831K/cWrwA==
+    dependencies:
+      "@types/invariant" "^2.2.29"
+      "@types/node" "^10.0.5"
+      hey-listen "^1.0.5"
+      tslib "^1.9.1"
+  
   posix-character-classes@^0.1.0:
     version "0.1.1"
     resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -4098,6 +4189,16 @@ Lockfile:
       react-transition-group "^2.2.0"
       warning "^3.0.0"
   
+  react-pose@^4.0.4:
+    version "4.0.4"
+    resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.4.tgz#c9072560d1d93d1baa0b75ff1e578e4a9cdeb13e"
+    integrity sha512-X52N/sJ9MUSDKzzWyENa3S6WQI3zBwWEYQxiXiD+n4T8dwoWoA+J3nHhe8D0zgMjVt3BofTHXtW1YQSNBWW27Q==
+    dependencies:
+      "@emotion/is-prop-valid" "^0.7.3"
+      hey-listen "^1.0.5"
+      popmotion-pose "^3.4.0"
+      tslib "^1.9.1"
+  
   react-progressbar.js@^0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/react-progressbar.js/-/react-progressbar.js-0.2.0.tgz#ff96f0fabd8f0f7d4411b3630b1d2016c38df625"
@@ -4150,6 +4251,13 @@ Lockfile:
       path-to-regexp "^1.7.0"
       prop-types "^15.6.1"
       warning "^4.0.1"
+  
+  react-tippy@^1.2.3:
+    version "1.2.3"
+    resolved "https://registry.yarnpkg.com/react-tippy/-/react-tippy-1.2.3.tgz#8aef183ec4986ca7c5c556465013d95196fecfd8"
+    integrity sha512-cEmhw29DbVP33n9ayo0nLzibuSz6o0A77cZtzno7zGsfOH8tUEGai/8a7TXRIKHPYDooW8iJkJBIPDnxmEu00g==
+    dependencies:
+      popper.js "^1.11.1"
   
   react-transition-group@^2.0.0, react-transition-group@^2.2.0, react-transition-group@^2.5.2:
     version "2.5.2"
@@ -4914,6 +5022,20 @@ Lockfile:
       loader-utils "^1.1.0"
       schema-utils "^1.0.0"
   
+  style-value-types@^3.0.6, style-value-types@^3.0.7:
+    version "3.0.7"
+    resolved "https://registry.yarnpkg.com/style-value-types/-/style-value-types-3.0.7.tgz#6e7a22cc8b1a4465193268ed66ad5f2a82579054"
+    integrity sha512-7vzeicDiPNnJjvTYfJbQhZ7P3OCkXfvkJOJQ+ifFnXNTA/7KBxMZacHLvlRjM5/TtXbVdrZE6u+2nzSUSPrbSQ==
+  
+  stylefire@^2.3.4:
+    version "2.3.4"
+    resolved "https://registry.yarnpkg.com/stylefire/-/stylefire-2.3.4.tgz#261957f18683d8e44c89310ff902bec08a83d26a"
+    integrity sha512-mQFSzQTmB2CeYiBDAK8e9AzBLdpuZQGy/W7Oso5BC921+8IM53r+ZFLP2cBOeXCEd6WB3diz7mDxGU5cQh8SbQ==
+    dependencies:
+      framesync "^4.0.0"
+      hey-listen "^1.0.4"
+      style-value-types "^3.0.6"
+  
   superagent@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/superagent/-/superagent-4.0.0.tgz#b9de499c0363acb53879cc42bd14ec26751050bb"
@@ -5083,7 +5205,7 @@ Lockfile:
       source-map-support "^0.5.6"
       yn "^2.0.0"
   
-  tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+  tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.1:
     version "1.9.3"
     resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   
