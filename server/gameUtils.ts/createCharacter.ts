@@ -2,7 +2,7 @@ import { StatSheet, statSheets } from "./statSheets";
 import { CharacterClassList, Character } from "../../src/interfacing/characters";
 import mapAbilities from "../../shared/mapAbilities";
 
-export const calcHealth = (healthStat : number) => 30 + (10 * healthStat)
+export const calcHealth = (healthStat : number) => 40 + (12 * healthStat)
 export const calcEnergy = (energyStat : number) => 10 + (2*energyStat)
 export const calcDefense = (defenseStat : number) => defenseStat
 export const calcPower = (powerStat : number) => 10 + powerStat

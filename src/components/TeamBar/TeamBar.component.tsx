@@ -95,13 +95,14 @@ class TeamBar extends React.Component<TeamBarProps> {
 
         return (
             <div 
-                className="team-member"
+                className={`team-member ${character.isActive && "team-member--active"}`}
             >
                 <p className="team-member--name">
                     {character.characterClass}
+                    {" "}
+                    <span className={`team-member--image ra ${icons[character.characterClass]}`} />
                 </p>
                 <div>
-                    <span className={`team-member--image ra ra-lg ${icons[character.characterClass]}`} />
                     <HealthBar character={character} />
                     <EnergyBar character={character} />
                     <UltimateBar character={character} />

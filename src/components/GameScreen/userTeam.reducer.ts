@@ -81,6 +81,8 @@ export default (isUserTeam:boolean) =>
 
         case ATTACK_STACK_TYPES.SPEND_ENERGY:
             return modifyStat(newState, "energy", false, action.energyLoss, action.target)
+        case ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE:
+            return modifyStat(newState, "ultimateCharge", false, action.ultimateChargeLoss, action.target)
         
         // stat gains
         case ATTACK_STACK_TYPES.GAIN_POWER:
@@ -97,10 +99,7 @@ export default (isUserTeam:boolean) =>
             return modifyStat(firstState, "health", true, action.healthGain, action.target)
 
         case ATTACK_STACK_TYPES.CHANGE_ALL_STATS:
-            let stateHolder = modifyStat(newState, "healthMax", true, action.statChange, action.target)
-            stateHolder = modifyStat(stateHolder, "health", true, action.statChange, action.target)
-            stateHolder = modifyStat(stateHolder, "energy", true, action.statChange, action.target)
-            stateHolder = modifyStat(stateHolder, "energyMax", true, action.statChange, action.target)
+            let stateHolder = modifyStat(newState, "energy", true, action.statChange, action.target)
             stateHolder = modifyStat(stateHolder, "power", true, action.statChange, action.target)
             stateHolder = modifyStat(stateHolder, "defense", true, action.statChange, action.target)
             stateHolder = modifyStat(stateHolder, "speed", true, action.statChange, action.target)
@@ -125,7 +124,27 @@ export default (isUserTeam:boolean) =>
                 return {...character}
             })
         
-        case ATTACK_STACK_TYPES.CHANGE_TEAM_STATS:
+        case ATTACK_STACK_TYPES.DAMAGE_TEAM:
+            return newState.map(character => {
+                if (character.owner_id == action.owner_id && character.isAlive) {
+                    character.health -= action.power
+                    if (character.health <= 0) {
+                        character.isAlive = false
+                        character.health = 0
+                    }
+                }
+                return {...character}
+            })
+        
+        case ATTACK_STACK_TYPES.CHANGE_TEAM_STAT:
+            return newState.map(character => {
+                if (character.owner_id == action.owner_id) {
+                    character[action.stat] += action.statChange
+                }
+                return { ...character }
+            })
+            
+        case ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL:
             return newState.map(character => {
                 if (character.owner_id == action.owner_id) {
                     character[action.stat] += action.statChange

@@ -6,22 +6,27 @@ export enum GAME_ATTACKS {
     SWITCH = "Switch",
     ULTIMATE = "ULTIMATE",
 
+    DEMOLISH = "Demolish",
     SLASH = "Slash",
     RECKLESS_SLAM = "Reckless Slam",
     TANK_UP = "Tank Up!",
 
+    ASSASSINATE = "Assassinate",
     BACKSTAB = "Backstab",
     RECUPERATE = "Recuperate",
     ACCELERATE = "Accelerate",
 
+    METEOR = "Meteor!",
     FIREBALL = "Fireball",
     MOLTEN_CORE = "Molten Core",
     FROST_ARMOUR = "Frost Armour",
 
+    WITCHING_HOUR = "Witching Hour",
     CURSE = "Curse",
     ENTRAP = "Entrap",
     BLOOD_MOON = "Blood Moon",
 
+    SANCTUARY = "Sanctuary",
     HOLY_RADIANCE = "Holy Radiance",
     BLESSED_HAMMER = "Blessed Hammer",
     INSPIRE = "Inspire",
@@ -30,6 +35,7 @@ export enum GAME_ATTACKS {
 export enum REDUCER_ATTACK_TYPES {
     SWITCH = "SWITCH",
     SPEND_ENERGY = "SPEND_ENERGY",
+    SPEND_ULTIMATE_CHARGE = "SPEND_ULTIMATE_CHARGE",
     DAMAGE_OPPONENT = "DAMAGE_OPPONENT",
     DAMAGE_SELF = "DAMAGE_SELF",
     HEAL_SELF = "HEAL_SELF",
@@ -44,7 +50,9 @@ export enum REDUCER_ATTACK_TYPES {
     CHANGE_ALL_STATS = "CHANGE_ALL_STATS",
     TRAP_TARGET = "TRAP_TARGET",
     HEAL_TEAM = "HEAL_TEAM",
-    CHANGE_TEAM_STATS = "CHANGE_TEAM_STATS",
+    DAMAGE_TEAM = "DAMAGE_TEAM",
+    CHANGE_TEAM_STAT = "CHANGE_TEAM_STAT",
+    CHANGE_TEAM_STATS_ALL = "CHANGE_TEAM_STATS_ALL",
 }
 
 export enum ABILITY_ATTACK_STACK_TYPES {
@@ -66,8 +74,12 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     HEAL_TEAM_SELF = "HEAL_TEAM_SELF",
     HEAL_TEAM_OPPONENT = "HEAL_TEAM_OPPONENT",
 
+    DAMAGE_TEAM_SELF = "DAMAGE_TEAM_SELF",
+    DAMAGE_TEAM_OPPONENT = "DAMAGE_TEAM_OPPONENT",
+
     CHANGE_TEAM_STATS_POWER = "CHANGE_TEAM_STATS_POWER",
     CHANGE_TEAM_STATS_DEFENSE = "CHANGE_TEAM_STATS_DEFENSE",
+    CHANGE_TEAM_STATS_ALL_OPPONENT = "CHANGE_TEAM_STATS_ALL_OPPONENT",
 }
 
 export type ATTACK_STACK_TYPES_TYPE = REDUCER_ATTACK_TYPES | ABILITY_ATTACK_STACK_TYPES
@@ -97,6 +109,11 @@ export const spendEnergyAction = (character, opponent, ability) => ({
     energyLoss: ability.cost,
     target: character
 })
+export const spendUltimateCharge = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
+    ultimateChargeLoss: ability.cost,
+    target: character
+})
 
 export const damageOpponentAction = (character, opponent, ability) => {
     const { power, isResist, isStrong } = calcDamage(character, opponent, ability)
@@ -105,7 +122,10 @@ export const damageOpponentAction = (character, opponent, ability) => {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
         attacker: character,
         target: opponent,
-        power,
+        power: ability.isStatic
+            ? ability.power
+            : power
+        ,
         isResist,
         isStrong
     }
@@ -229,23 +249,38 @@ export const healTeamSelf = (character, opponent, ability) => ({
         : ability.power * character.power
 })
 
+export const damageTeamOpponent = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.DAMAGE_TEAM,
+    owner_id: character.opponent_id,
+    power: ability.isStatic 
+        ? ability.damageAmount 
+        : (ability.teamPower || ability.power) * character.power
+})
+
 export const changeTeamStatsPower = (character, opponent, ability) => ({
-    type: ATTACK_STACK_TYPES.CHANGE_TEAM_STATS,
+    type: ATTACK_STACK_TYPES.CHANGE_TEAM_STAT,
     stat: "power",
     statChange: ability.powerGain,
     owner_id: character.owner_id
 })
 
 export const changeTeamStatsDefense = (character, opponent, ability) => ({
-    type: ATTACK_STACK_TYPES.CHANGE_TEAM_STATS,
+    type: ATTACK_STACK_TYPES.CHANGE_TEAM_STAT,
     stat: "defense",
     statChange: ability.defenseGain,
     owner_id: character.owner_id
 })
 
+export const changeTeamStatsAllOpponent = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL,
+    statChange: ability.statChange,
+    owner_id: opponent.owner_id
+})
+
 export const attackActionMapper = {
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
     [ATTACK_STACK_TYPES.SPEND_ENERGY]: spendEnergyAction,
+    [ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE]: spendUltimateCharge,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT]: damageOpponentAction,
     [ATTACK_STACK_TYPES.DAMAGE_SELF]: damageSelfAction,
     [ATTACK_STACK_TYPES.HEAL_SELF]: healSelfAction,
@@ -261,7 +296,9 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.TRAP_OPPONENT]: trapOpponent,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BLOOD_MOON]: damageOpponentBloodMoon,
     [ATTACK_STACK_TYPES.HEAL_TEAM_SELF]: healTeamSelf,
+    [ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT]: damageTeamOpponent,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_POWER]: changeTeamStatsPower,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_DEFENSE]: changeTeamStatsDefense,
+    [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL_OPPONENT]: changeTeamStatsAllOpponent,
 
 }

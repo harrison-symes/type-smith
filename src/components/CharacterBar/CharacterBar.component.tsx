@@ -29,7 +29,9 @@ class CharacterBar extends React.Component<CharacterBarProps> {
     renderAbility = (ability: CharacterAbility) => {
         const {gameInfo, character} = this.props
         const isWaiting = gameInfo.turnStage != TurnStage.CHOOSING
-        const hasEnergy = character.energy >= ability.cost
+        const hasEnergy = ability.isUltimate
+            ? character.ultimateCharge >= ability.cost
+            : character.energy >= ability.cost
 
         const isDisabled = !hasEnergy || isWaiting 
 

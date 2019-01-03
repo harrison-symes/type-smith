@@ -10,9 +10,11 @@
 
         min-width: 100px;
         width: 100%;
-        height: 100px;
+        height: 150px;
         font-size: 2rem;
-
+        &--active {
+            background-color: $purple-light;
+        }
         &--image {
             margin-left: auto;
             margin-right: auto;

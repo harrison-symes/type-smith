@@ -17,6 +17,19 @@ export default {
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
     }),
+    [GAME_ATTACKS.DEMOLISH]: () => ({
+        name: [GAME_ATTACKS.DEMOLISH],
+        cost: 5,
+        power: 1,
+        descriptiom: "Damage each enemy team member for 100% of Character Power",
+        isUltimate: true,
+        type: ATTACK_TYPES.SWORDS,
+        priority: 0,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
+        ]
+    }),
     [GAME_ATTACKS.SLASH]: () => ({
         name: [GAME_ATTACKS.SLASH],
         cost: 1,
@@ -59,6 +72,21 @@ export default {
             ATTACK_STACK_TYPES.GAIN_DEFENSE,
             ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH,
             ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
+    //assassin
+    [GAME_ATTACKS.ASSASSINATE]: () => ({
+        name: [GAME_ATTACKS.ASSASSINATE],
+        cost: 5,
+        power: 4,
+        descriptiom: "Damage the opponent for 400% Character Power, +2 Priority.",
+        isUltimate: true,
+        type: ATTACK_TYPES.DAGGERS,
+        priority: 2,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
         ]
     }),
     [GAME_ATTACKS.ACCELERATE]: () => ({
@@ -108,6 +136,22 @@ export default {
         ]
     }),
 
+    [GAME_ATTACKS.METEOR]: () => ({
+        name: [GAME_ATTACKS.METEOR],
+        cost: 5,
+        power: 2,
+        teamPower: 0.5,
+        descriptiom: "Damage the opponent for 200% Power, and all other enemy team members for 50% Player Power",
+        isUltimate: true,
+        priority: 0,
+        type: ATTACK_TYPES.FIRE,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
+        ]
+    }),
+
     [GAME_ATTACKS.FIREBALL]: () => ({
         name: [GAME_ATTACKS.FIREBALL],
         cost: 2,
@@ -125,13 +169,15 @@ export default {
     [GAME_ATTACKS.MOLTEN_CORE]: () => ({
         name: [GAME_ATTACKS.MOLTEN_CORE],
         cost: 2,
-        power: 1,
-        descriptiom: "Gain 5 Power",
+        power: 5,
+        descriptiom: "Damage opponent for 5, Gain 3 Power",
         isUltimate: false,
         priority: 0,
-        powerGain: 5,
-        type: ATTACK_TYPES.STATUS,
+        powerGain: 3,
+        isStatic: true,
+        type: ATTACK_TYPES.FIRE,
         stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
             ATTACK_STACK_TYPES.GAIN_POWER,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
@@ -141,10 +187,10 @@ export default {
         name: [GAME_ATTACKS.FROST_ARMOUR],
         cost: 2,
         power: 0,
-        descriptiom: "Gain 10 Defense, but lose 2 Speed",
+        descriptiom: "Gain 4 Defense, but lose 2 Speed",
         isUltimate: false,
         priority: 0,
-        defenseGain: 10,
+        defenseGain: 4,
         speedGain: -2,
         type: ATTACK_TYPES.STATUS,
         stack: [
@@ -154,17 +200,33 @@ export default {
         ]
     }),
 
+    [GAME_ATTACKS.WITCHING_HOUR]: () => ({
+        name: [GAME_ATTACKS.WITCHING_HOUR],
+        cost: 5,
+        power: 0,
+        descriptiom: "Lower the Power, Energy, Defense and Speed of each member of your opponent's team by 1. Heal yourself to full",
+        isUltimate: true,
+        priority: 0,
+        statChange: -1,
+        isStatic: true,
+        healAmount: 1000,
+        type: ATTACK_TYPES.DEATH,
+        stack: [
+            ATTACK_STACK_TYPES.HEAL_SELF,
+            ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
+        ]
+    }),
     [GAME_ATTACKS.CURSE]: () => ({
         name: [GAME_ATTACKS.CURSE],
         cost: 1,
         power: 0,
-        descriptiom: "Lower all stats of you and your opponent by 1",
+        descriptiom: "Lower your opponent's Power, Energy, Defense and Speed by 1",
         isUltimate: false,
         priority: 0,
         statChange: -1,
         type: ATTACK_TYPES.STATUS,
         stack: [
-            ATTACK_STACK_TYPES.CHANGE_ALL_STATS_SELF,
             ATTACK_STACK_TYPES.CHANGE_ALL_STATS_OPPONENT,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
@@ -199,6 +261,22 @@ export default {
         ]
     }),
 
+    [GAME_ATTACKS.SANCTUARY]: () => ({
+        name: [GAME_ATTACKS.SANCTUARY],
+        cost: 5,
+        power: 0,
+        descriptiom: "Heal your team for 100% of Power, gain 10 Defense. +6 Priority",
+        isUltimate: true,
+        priority: 6,
+        defenseGain: 10,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.HEAL_TEAM_SELF,
+            ATTACK_STACK_TYPES.GAIN_DEFENSE,
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
+        ]
+    }),
+
     [GAME_ATTACKS.HOLY_RADIANCE]: () => ({
         name: [GAME_ATTACKS.HOLY_RADIANCE],
         cost: 2,
@@ -218,9 +296,8 @@ export default {
     [GAME_ATTACKS.BLESSED_HAMMER]: () => ({
         name: [GAME_ATTACKS.BLESSED_HAMMER],
         cost: 1,
-        power: 0.5,
-        descriptiom: "Damage opponent for 50% of Power, then heal yourself for 5",
-        isStatic: true,
+        power: 1,
+        descriptiom: "Damage opponent for 100% of Power, then heal yourself for 5",
         healAmount: 5,
         isUltimate: false,
         priority: 0,

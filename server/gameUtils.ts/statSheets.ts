@@ -38,9 +38,9 @@ export const paladinStatSheet: StatSheet = {
 }
 export const witchStatSheet: StatSheet = {
     healthStat: 5,
-    energyStat: 2,
-    defenseStat: 1,
-    powerStat: 3,
+    energyStat: 1,
+    defenseStat: 5,
+    powerStat: 0,
     speedStat: 4
 }
 

@@ -21,7 +21,7 @@ const defaultTeam = [
     {
         characterClass: CharacterClassList.WARRIOR,
         abilities: [
-            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.DEMOLISH },
             { name: GAME_ATTACKS.SLASH },
             { name: GAME_ATTACKS.RECKLESS_SLAM },
             { name: GAME_ATTACKS.TANK_UP }
@@ -30,7 +30,7 @@ const defaultTeam = [
     {
         characterClass: CharacterClassList.MAGE,
         abilities: [
-            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.METEOR },
             { name: GAME_ATTACKS.FIREBALL },
             { name: GAME_ATTACKS.MOLTEN_CORE },
             { name: GAME_ATTACKS.FROST_ARMOUR },
@@ -39,7 +39,7 @@ const defaultTeam = [
     {
         characterClass: CharacterClassList.ASSASSIN,
         abilities: [
-            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.ASSASSINATE },
             { name: GAME_ATTACKS.BACKSTAB },
             { name: GAME_ATTACKS.RECUPERATE },
             { name: GAME_ATTACKS.ACCELERATE }
@@ -48,7 +48,7 @@ const defaultTeam = [
     {
         characterClass: CharacterClassList.PALADIN,
         abilities: [
-            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.SANCTUARY },
             { name: GAME_ATTACKS.BLESSED_HAMMER },
             { name: GAME_ATTACKS.HOLY_RADIANCE },
             { name: GAME_ATTACKS.INSPIRE },
@@ -57,7 +57,7 @@ const defaultTeam = [
     {
         characterClass: CharacterClassList.WITCH,
         abilities: [
-            { name: GAME_ATTACKS.ULTIMATE },
+            { name: GAME_ATTACKS.WITCHING_HOUR },
             { name: GAME_ATTACKS.BLOOD_MOON },
             { name: GAME_ATTACKS.CURSE },
             { name: GAME_ATTACKS.ENTRAP },
