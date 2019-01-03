@@ -41,6 +41,8 @@ class CharacterBar extends React.Component<CharacterBarProps> {
                 onClick={() => this.submitAction(ability)}
                 disabled={isDisabled}
             >
+                <span className={`ra ra-lg ${ability.icon}`} />
+                {" "}
                 {ability.name}
             </button>
 

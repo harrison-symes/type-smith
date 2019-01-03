@@ -19,6 +19,7 @@ export default {
     }),
     [GAME_ATTACKS.DEMOLISH]: () => ({
         name: [GAME_ATTACKS.DEMOLISH],
+        icon: "ra-swords-power",
         cost: 5,
         power: 1,
         descriptiom: "Damage each enemy team member for 100% of Character Power",
@@ -32,6 +33,7 @@ export default {
     }),
     [GAME_ATTACKS.SLASH]: () => ({
         name: [GAME_ATTACKS.SLASH],
+        icon: "ra-sword-brandish",
         cost: 1,
         power: 1,
         descriptiom: "Attack the opponent for 100% of Character Power",
@@ -45,6 +47,7 @@ export default {
     }),
     [GAME_ATTACKS.RECKLESS_SLAM]: () => ({
         name: [GAME_ATTACKS.RECKLESS_SLAM],
+        icon: "ra-earth-crack",
         cost: 2,
         power: 1.5,
         selfDamage: 0.5,
@@ -60,6 +63,7 @@ export default {
     }),
     [GAME_ATTACKS.TANK_UP]: () => ({
         name: [GAME_ATTACKS.TANK_UP],
+        icon: "ra-armor-upgrade",
         cost: 1,
         power: 0,
         descriptiom: "Gain 1 Defense and 5 Max Health",
@@ -78,6 +82,7 @@ export default {
     //assassin
     [GAME_ATTACKS.ASSASSINATE]: () => ({
         name: [GAME_ATTACKS.ASSASSINATE],
+        icon: "ra-split-body",
         cost: 5,
         power: 4,
         descriptiom: "Damage the opponent for 400% Character Power, +2 Priority.",
@@ -91,6 +96,7 @@ export default {
     }),
     [GAME_ATTACKS.ACCELERATE]: () => ({
         name: [GAME_ATTACKS.ACCELERATE],
+        icon: "ra-running-ninja",
         cost: 1,
         power: 0,
         descriptiom: "Gain 1 Speed and 3 Power",
@@ -107,6 +113,7 @@ export default {
     }),
     [GAME_ATTACKS.RECUPERATE]: () => ({
         name: [GAME_ATTACKS.RECUPERATE],
+        icon: "ra-bottled-bolt",
         cost: 0,
         power: 0,
         descriptiom: "Heal for 10 and gain 2 Energy",
@@ -124,6 +131,7 @@ export default {
     
     [GAME_ATTACKS.BACKSTAB]: () => ({
         name: [GAME_ATTACKS.BACKSTAB],
+        icon: "ra-bouncing-sword",
         cost: 3,
         power: 1,
         descriptiom: "Damage the opponent for 100% Power. +2 Priority",
@@ -138,6 +146,7 @@ export default {
 
     [GAME_ATTACKS.METEOR]: () => ({
         name: [GAME_ATTACKS.METEOR],
+        icon: "ra-burning-meteor",
         cost: 5,
         power: 1.5,
         teamPower: 0.5,
@@ -154,6 +163,7 @@ export default {
 
     [GAME_ATTACKS.FIREBALL]: () => ({
         name: [GAME_ATTACKS.FIREBALL],
+        icon: "ra-fire-tail",
         cost: 2,
         power: 1.2,
         descriptiom: "Damage the opponent for 120% Power. -2 Priority",
@@ -168,6 +178,7 @@ export default {
 
     [GAME_ATTACKS.MOLTEN_CORE]: () => ({
         name: [GAME_ATTACKS.MOLTEN_CORE],
+        icon: "ra-burning-passion",
         cost: 2,
         power: 5,
         descriptiom: "Damage opponent for 5, Gain 3 Power",
@@ -185,6 +196,7 @@ export default {
 
     [GAME_ATTACKS.FROST_ARMOUR]: () => ({
         name: [GAME_ATTACKS.FROST_ARMOUR],
+        icon: "ra-scale-mail",
         cost: 2,
         power: 0,
         descriptiom: "Gain 4 Defense, but lose 2 Speed",
@@ -202,6 +214,7 @@ export default {
 
     [GAME_ATTACKS.WITCHING_HOUR]: () => ({
         name: [GAME_ATTACKS.WITCHING_HOUR],
+        icon: "ra-witch-flight",
         cost: 5,
         power: 0,
         descriptiom: "Lower the Power, Energy, Defense and Speed of each member of your opponent's team by 1. Heal yourself to full",
@@ -219,6 +232,7 @@ export default {
     }),
     [GAME_ATTACKS.CURSE]: () => ({
         name: [GAME_ATTACKS.CURSE],
+        icon: "ra-cursed-star",
         cost: 1,
         power: 0,
         descriptiom: "Lower your opponent's Power, Energy, Defense and Speed by 1",
@@ -234,6 +248,7 @@ export default {
 
     [GAME_ATTACKS.ENTRAP]: () => ({
         name: [GAME_ATTACKS.ENTRAP],
+        icon: "ra-quicksand",
         cost: 3,
         power: 0,
         descriptiom: "Trap your opponent, preventing them from switching",
@@ -248,6 +263,7 @@ export default {
 
     [GAME_ATTACKS.BLOOD_MOON]: () => ({
         name: [GAME_ATTACKS.BLOOD_MOON],
+        icon: "ra-evil-moon",
         cost: 2,
         power: 0,
         descriptiom: "Damage your opponent for 100% of OPPONENT's Power, ignoring defense",
@@ -263,6 +279,7 @@ export default {
 
     [GAME_ATTACKS.SANCTUARY]: () => ({
         name: [GAME_ATTACKS.SANCTUARY],
+        icon: "ra-guarded-tower",
         cost: 5,
         power: 0,
         descriptiom: "Heal your team for 100% of Power, gain 10 Defense. +6 Priority",
@@ -279,6 +296,7 @@ export default {
 
     [GAME_ATTACKS.HOLY_RADIANCE]: () => ({
         name: [GAME_ATTACKS.HOLY_RADIANCE],
+        icon: "ra-icarus",
         cost: 2,
         power: 0,
         healAmount: 5,
@@ -295,6 +313,7 @@ export default {
 
     [GAME_ATTACKS.BLESSED_HAMMER]: () => ({
         name: [GAME_ATTACKS.BLESSED_HAMMER],
+        icon: "ra-thor-hammer",
         cost: 1,
         power: 1,
         descriptiom: "Damage opponent for 100% of Power, then heal yourself for 5",
@@ -311,6 +330,7 @@ export default {
 
     [GAME_ATTACKS.INSPIRE]: () => ({
         name: [GAME_ATTACKS.INSPIRE],
+        icon: "ra-rally-the-troops",
         cost: 2,
         power: 0.5,
         defenseGain: 1,

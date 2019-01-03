@@ -11,6 +11,7 @@ export enum CharacterClassList {
 
 export interface CharacterAbility {
     name: string | GAME_ATTACKS;
+    icon: string;
     description: string;
     cost: number;
     power: number;
