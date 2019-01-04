@@ -92,6 +92,8 @@ const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:numb
             return modifyStat(newState, "ultimateCharge", true, action.ultimateGain, action.target)
         case ATTACK_STACK_TYPES.GAIN_DEFENSE:
             return modifyStat(newState, "defense", true, action.defenseGain, action.target)
+        case ATTACK_STACK_TYPES.WITCH_PASSIVE:
+            return modifyStat(newState, "defense", true, action.defenseGain, action.target)
         case ATTACK_STACK_TYPES.GAIN_ENERGY:
             return modifyStat(newState, "energy", true, action.energyGain, action.target)
         case ATTACK_STACK_TYPES.GAIN_SPEED:
