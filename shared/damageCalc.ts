@@ -10,9 +10,5 @@ export const calcDamage = (character: Character, opponent: Character, ability: C
         )
     )
 
-    return {
-        power,
-        isResist: false,
-        isStrong: false
-    }
+    return power
 }

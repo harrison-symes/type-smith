@@ -67,6 +67,7 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_BLOOD_MOON = "DAMAGE_OPPONENT_BLOOD_MOON",
     DAMAGE_OPPONENT_RAPID_FIRE = "DAMAGE_OPPONENT_RAPID_FIRE",
     DAMAGE_OPPONENT_IGNORE_ARMOUR = "DAMAGE_OPPONENT_IGNORE_ARMOUR",
+    DAMAGE_OPPONENT_BACKSTAB = "DAMAGE_OPPONENT_BACKSTAB",
 
     TRAP_OPPONENT = "TRAP_OPPONENT",
     TRAP_SELF = "TRAP_SELF",
@@ -128,7 +129,7 @@ export const spendUltimateCharge = (character, opponent, ability) => ({
 })
 
 export const damageOpponentAction = (character, opponent, ability) => {
-    const { power, isResist, isStrong } = calcDamage(character, opponent, ability)
+    const power = calcDamage(character, opponent, ability)
 
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
@@ -138,8 +139,6 @@ export const damageOpponentAction = (character, opponent, ability) => {
             ? ability.power
             : power
         ,
-        isResist,
-        isStrong
     }
 }
 
@@ -257,11 +256,23 @@ export const trapOpponent = (character, opponent, ability) => ({
 export const damageOpponentBloodMoon = (character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
     target: opponent,
-    power: calcDamage(opponent, opponent, ability).power
+    power: calcDamage(opponent, opponent, ability)
 })
 
 export const damageOpponentRapidFire = (character, opponent, ability) => {
     const power = (ability.power + (ability.altPower * character.energy)) * character.power
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power
+    }
+}
+
+export const damageOpponentBackstab = (character, opponent, ability) => {
+    const subCharacter = {...character}
+    if (opponent.health / opponent.maxHealth < 0.5) subCharacter.power *= 2
+
+    const power = calcDamage(subCharacter, opponent, ability)
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
         target: opponent,
@@ -278,7 +289,7 @@ export const damageOpponentIgnoreArmour = (character, opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
         target: opponent,
-        power: calcDamage(character, subOpponent, ability).power
+        power: calcDamage(character, subOpponent, ability)
 
     }
 }
@@ -374,6 +385,7 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BLOOD_MOON]: damageOpponentBloodMoon,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_IGNORE_ARMOUR]: damageOpponentIgnoreArmour,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_RAPID_FIRE]: damageOpponentRapidFire,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BACKSTAB]: damageOpponentBackstab,
     [ATTACK_STACK_TYPES.HEAL_TEAM_SELF]: healTeamSelf,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT]: damageTeamOpponent,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_POWER]: changeTeamStatsPower,

@@ -136,12 +136,12 @@ export default {
         icon: "ra-bouncing-sword",
         cost: 3,
         power: 1,
-        description: "Damage the opponent for 100% Power. +2 Priority",
+        description: "Attack the opponent for 100% Power. Power is doubled for targets below 50% health. +2 Priority",
         isUltimate: false,
         priority: 2,
         type: ATTACK_TYPES.DAGGERS,
         stack: [
-            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BACKSTAB,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
     }),
