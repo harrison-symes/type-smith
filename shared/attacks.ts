@@ -272,9 +272,11 @@ export const damageOpponentRapidFire = (character, opponent, ability) => {
 
 export const damageOpponentBackstab = (character, opponent, ability) => {
     const subCharacter = {...character}
-    if (opponent.health / opponent.maxHealth < 0.5) subCharacter.power *= 2
-
+    if (opponent.health / opponent.healthMax <= 0.5) {
+        subCharacter.power = subCharacter.power * 2
+    }
     const power = calcDamage(subCharacter, opponent, ability)
+    
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
         target: opponent,
