@@ -13,6 +13,8 @@ import { tween, spring } from "popmotion";
 import EnergyBar from "../statComponents/EnergyBar";
 import UltimateBar from "../statComponents/UltimateBar";
 
+import {Tooltip} from "react-tippy"
+
 interface TeamBarProps {
     isPlayerSide: boolean;
     gameInfo: GameState;
@@ -42,6 +44,9 @@ class TeamBar extends React.Component<TeamBarProps> {
     switchCharacter = (character) => {
         const {socket, gameInfo, userTeam, opponentTeam} = this.props
 
+        const spikeTrap = []
+        if (character.isSpiked) spikeTrap.push(ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP)
+
         const ability = {
             name: [GAME_ATTACKS.SWITCH],
             cost: 0,
@@ -50,13 +55,16 @@ class TeamBar extends React.Component<TeamBarProps> {
             isUltimate: false,
             type: ATTACK_TYPES.STATUS,
             targetCharacter: character,
-            priority: 0,
+            priority: -1,
             stack: [
                 //switch out
+                ...spikeTrap,
                 ATTACK_STACK_TYPES.SWITCH,
                 //opponent Switch Catch
             ]
         }
+
+
 
         if (gameInfo.turnStage == TurnStage.NEED_TO_SWITCH) {
             socket.emit(
@@ -91,31 +99,69 @@ class TeamBar extends React.Component<TeamBarProps> {
         const isWaiting = !(gameInfo.turnStage == TurnStage.CHOOSING 
             || gameInfo.turnStage == TurnStage.NEED_TO_SWITCH)
 
-        const isDisabled = isWaiting || (active.isTrapped && gameInfo.turnStage != TurnStage.NEED_TO_SWITCH)
+        const canAttack = !!character.abilities.find(ability => 
+            character[
+                ability.isUltimate ? "ultimateCharge" : "energy"
+            ] >= ability.cost
+        )
+
+        const isDisabled = isWaiting 
+        || (active.isTrapped && (
+            canAttack
+        )) 
+        || (active.isTrapped && gameInfo.turnStage != TurnStage.NEED_TO_SWITCH)
 
         return (
-            <div 
-                className={`team-member ${character.isActive && "team-member--active"}`}
+            <Tooltip
+                className="btn--container w-25"
+                position="top"
+                trigger="mouseenter"
+                animation="perspective"
+                // followCursor
+                inertia
+                arrow="true"
+                html={<span>
+                    <div className="subtitle">
+                        <span className="ra ra-lg ra-strong" />
+                        {" "}
+                        {character.power}
+                    </div>
+                    <div className="subtitle">
+                        <span className="ra ra-lg ra-vibrating-shield" />
+                        {" "}
+                        {character.defense}
+                    </div>
+                    <div className="subtitle">
+                        <span className="ra ra-lg ra-electric" />
+                        {" "}
+                        {character.speed}
+                    </div>
+                </span>}
+                style={{ cursor: 'context-menu' }}
             >
-                <p className="team-member--name">
-                    {character.characterClass}
-                    {" "}
-                    <span className={`team-member--image ra ${icons[character.characterClass]}`} />
-                </p>
-                <div>
-                    <HealthBar character={character} />
-                    <EnergyBar character={character} />
-                    <UltimateBar character={character} />
+                <div 
+                    className={`team-member ${character.isActive && "team-member--active"}`}
+                >
+                    <p className="team-member--name">
+                        {character.characterClass}
+                        {" "}
+                        <span className={`team-member--image ra ${icons[character.characterClass]}`} />
+                    </p>
+                    <div>
+                        <HealthBar character={character} />
+                        <EnergyBar character={character} />
+                        <UltimateBar character={character} />
+                    </div>
+                    {(isPlayerSide && !character.isActive && character.isAlive) &&
+                        <button 
+                            className="team-member--btn btn" 
+                            disabled={isDisabled}
+                            onClick={() => this.switchCharacter(character)}>
+                            Switch
+                        </button>
+                    }
                 </div>
-                {(isPlayerSide && !character.isActive && character.isAlive) &&
-                    <button 
-                        className="team-member--btn btn" 
-                        disabled={isDisabled}
-                        onClick={() => this.switchCharacter(character)}>
-                        Switch
-                    </button>
-                }
-            </div>
+            </Tooltip>
         )
     }
     render() {

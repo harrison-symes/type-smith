@@ -8,4 +8,4 @@ const http = server.listen(3000, () => console.log("hello, I am listening"))
 
 const socket = createSocket(http)
 server.set("socket", socket)
-socket.listen(8000)
+socket.listen(http)

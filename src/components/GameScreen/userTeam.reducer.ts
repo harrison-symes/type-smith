@@ -21,7 +21,7 @@ export default (isUserTeam:boolean) =>
     let target;
     let idx;
 
-    const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:number, actionTarget:Character) => {
+const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:number, actionTarget:Character) => {
         target = newState.find(character => character.id == actionTarget.id)
         if (!target) return state
         idx = newState.indexOf(target)
@@ -31,11 +31,12 @@ export default (isUserTeam:boolean) =>
             : target[stat] -= value
 
         if (target[stat] <= 0) target[stat] = 0
+        
         if (target.health <= 0) target.isAlive = false
+        if (target.health >= target.healthMax) target.health = target.healthMax
+        if (target.ultimateCharge >= target.ultimateChargeMax) target.ultimateCharge = target.ultimateChargeMax
 
-        if (target.health >= target.maxHealth) target.health = target.maxHealth
-        if (target.energy >= target.mamaxEnergyxHealth) target.energy = target.maxEnergy
-
+        if (target.energy >= target.energyMax) target.energy = target.energyMax
 
         newState[idx] = { ...target }
         return newState
@@ -87,6 +88,8 @@ export default (isUserTeam:boolean) =>
         // stat gains
         case ATTACK_STACK_TYPES.GAIN_POWER:
             return modifyStat(newState, "power", true, action.powerGain, action.target)
+        case ATTACK_STACK_TYPES.GAIN_ULTIMATE_CHARGE:
+            return modifyStat(newState, "ultimateCharge", true, action.ultimateGain, action.target)
         case ATTACK_STACK_TYPES.GAIN_DEFENSE:
             return modifyStat(newState, "defense", true, action.defenseGain, action.target)
         case ATTACK_STACK_TYPES.GAIN_ENERGY:
@@ -163,8 +166,32 @@ export default (isUserTeam:boolean) =>
                     character.ultimateCharge+=1
                     if (character.ultimateCharge >= character.ultimateChargeMax) character.ultimateCharge = character.ultimateChargeMax
                 }
-                return character
+                return {...character}
             })
+        case ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP:
+            target = newState.find(character => character.id == action.target.id)
+            if (!target) return state
+            idx = newState.indexOf(target)
+
+            target.isSpiked = true
+
+            newState[idx] = { ...target }
+            return newState
+        case ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP:
+            target = newState.find(character => character.id == action.target.id)
+            if (!target) return state
+            idx = newState.indexOf(target)
+
+            target.isSpiked = false
+            target.health -= 15
+            if (target.health <= 0) {
+                target.health = 0
+                target.isAlive = false
+            }
+
+            newState[idx] = { ...target }
+            return newState
+            
         default:
             return state
     }

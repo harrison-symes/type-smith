@@ -30,6 +30,11 @@ export enum GAME_ATTACKS {
     HOLY_RADIANCE = "Holy Radiance",
     BLESSED_HAMMER = "Blessed Hammer",
     INSPIRE = "Inspire",
+
+    RAPID_FIRE = "Rapid Fire",
+    PIERCING_SHOT = "Peircing Shot",
+    RELOAD = "Reload",
+    SPIKE_TRAP = "Spike Trap"
 }
 
 export enum REDUCER_ATTACK_TYPES {
@@ -53,10 +58,15 @@ export enum REDUCER_ATTACK_TYPES {
     DAMAGE_TEAM = "DAMAGE_TEAM",
     CHANGE_TEAM_STAT = "CHANGE_TEAM_STAT",
     CHANGE_TEAM_STATS_ALL = "CHANGE_TEAM_STATS_ALL",
+    GAIN_ULTIMATE_CHARGE = "GAIN_ULTIMATE_CHARGE",
+    APPLY_SPIKE_TRAP = "APPLY_SPIKE_TRAP",
+    ACTIVATE_SPIKE_TRAP = "ACTIVATE_SPIKE_TRAP",
 }
 
 export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_BLOOD_MOON = "DAMAGE_OPPONENT_BLOOD_MOON",
+    DAMAGE_OPPONENT_RAPID_FIRE = "DAMAGE_OPPONENT_RAPID_FIRE",
+    DAMAGE_OPPONENT_IGNORE_ARMOUR = "DAMAGE_OPPONENT_IGNORE_ARMOUR",
 
     TRAP_OPPONENT = "TRAP_OPPONENT",
     TRAP_SELF = "TRAP_SELF",
@@ -80,6 +90,8 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     CHANGE_TEAM_STATS_POWER = "CHANGE_TEAM_STATS_POWER",
     CHANGE_TEAM_STATS_DEFENSE = "CHANGE_TEAM_STATS_DEFENSE",
     CHANGE_TEAM_STATS_ALL_OPPONENT = "CHANGE_TEAM_STATS_ALL_OPPONENT",
+
+    APPLY_SPIKE_TRAP_OPPONENT = "APPLY_SPIKE_TRAP_OPPONENT",
 }
 
 export type ATTACK_STACK_TYPES_TYPE = REDUCER_ATTACK_TYPES | ABILITY_ATTACK_STACK_TYPES
@@ -185,6 +197,13 @@ export const gainEnergyAction = (character, opponent, ability) => {
         target: character
     }
 }
+export const gainUltimateCharge = (character, opponent, ability) => {
+    return {
+        type: ATTACK_STACK_TYPES.GAIN_ULTIMATE_CHARGE,
+        ultimateGain: ability.ultimateGain,
+        target: character
+    }
+}
 // GAIN_SPEED = "GAIN_SPEED",
 export const gainSpeedAction = (character, opponent, ability) => {
     return {
@@ -238,8 +257,31 @@ export const trapOpponent = (character, opponent, ability) => ({
 export const damageOpponentBloodMoon = (character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
     target: opponent,
-    power: opponent.power
+    power: calcDamage(opponent, opponent, ability).power
 })
+
+export const damageOpponentRapidFire = (character, opponent, ability) => {
+    const power = (ability.power + (ability.altPower * character.energy)) * character.power
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power
+    }
+}
+
+export const damageOpponentIgnoreArmour = (character, opponent, ability) => {
+    const subOpponent = {
+        ...opponent,
+        defense: 0
+    }
+    
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power: calcDamage(character, subOpponent, ability).power
+
+    }
+}
 
 export const healTeamSelf = (character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.HEAL_TEAM,
@@ -279,6 +321,38 @@ export const changeTeamStatsAllOpponent = (character, opponent, ability) => ({
     owner_id: opponent.owner_id
 })
 
+export const lowerOpponentPower = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.GAIN_POWER,
+    target: opponent,
+    powerGain: ability.powerGain
+
+})
+export const lowerOpponentDefense = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.GAIN_DEFENSE,
+    target: opponent,
+    defenseGain: ability.defenseGain
+})
+
+export const lowerOpponentEnergy = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.GAIN_ENERGY,
+    target: opponent,
+    energyGain: ability.energyGain
+})
+
+export const lowerOpponentSpeed = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.GAIN_SPEED,
+    target: opponent,
+    speedGain: ability.speedGain
+})
+export const applySpikeTrapOpponent = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP,
+    target: opponent
+})
+export const activateSpikeTrap = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP,
+    target: opponent
+})
+
 export const attackActionMapper = {
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
     [ATTACK_STACK_TYPES.SPEND_ENERGY]: spendEnergyAction,
@@ -291,16 +365,24 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.GAIN_POWER]: gainPowerAction,
     [ATTACK_STACK_TYPES.GAIN_SPEED]: gainSpeedAction,
     [ATTACK_STACK_TYPES.GAIN_ENERGY]: gainEnergyAction,
+    [ATTACK_STACK_TYPES.GAIN_ULTIMATE_CHARGE]: gainUltimateCharge,
     [ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH]: increaseMaxHealth,
     [ATTACK_STACK_TYPES.INCREASE_MAX_ENERGY]: increaseMaxEnergy,
     [ATTACK_STACK_TYPES.CHANGE_ALL_STATS_OPPONENT]: changeStatsOpponent,
     [ATTACK_STACK_TYPES.CHANGE_ALL_STATS_SELF]: changeStatsSelf,
     [ATTACK_STACK_TYPES.TRAP_OPPONENT]: trapOpponent,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BLOOD_MOON]: damageOpponentBloodMoon,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_IGNORE_ARMOUR]: damageOpponentIgnoreArmour,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_RAPID_FIRE]: damageOpponentRapidFire,
     [ATTACK_STACK_TYPES.HEAL_TEAM_SELF]: healTeamSelf,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT]: damageTeamOpponent,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_POWER]: changeTeamStatsPower,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_DEFENSE]: changeTeamStatsDefense,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL_OPPONENT]: changeTeamStatsAllOpponent,
-
+    [ATTACK_STACK_TYPES.LOWER_OPPONENT_POWER]: lowerOpponentPower,
+    [ATTACK_STACK_TYPES.LOWER_OPPONENT_DEFENSE]: lowerOpponentDefense,
+    [ATTACK_STACK_TYPES.LOWER_OPPONENT_ENERGY]: lowerOpponentEnergy,
+    [ATTACK_STACK_TYPES.LOWER_OPPONENT_SPEED]: lowerOpponentSpeed,
+    [ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP_OPPONENT]: applySpikeTrapOpponent,
+    [ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP]: activateSpikeTrap,
 }

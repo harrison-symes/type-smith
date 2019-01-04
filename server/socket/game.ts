@@ -3,7 +3,7 @@ import { GameState, GAME_TYPES, TurnStage } from "../../src/components/GameScree
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils.ts/createCharacter";
 import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
-import { GameTurnAction, attackActionMapper, ATTACK_STACK_TYPES } from "../../shared/attacks";
+import { GameTurnAction, attackActionMapper, ATTACK_STACK_TYPES, GAME_ATTACKS } from "../../shared/attacks";
 
 const games = {
 
@@ -303,7 +303,10 @@ const roomListeners = (socket, io) => {
             turn.turnActions.pop()
             let actionStack = []
 
-            if (secondStack.character.isAlive) {
+            if (secondStack.character.isTrapped && secondStack.ability.name == GAME_ATTACKS.SWITCH) {
+                //nothing happens, switch fails
+            }
+            else if (secondStack.character.isAlive) {
                 actionStack = secondStack.ability.stack.map(action_type => {
                     return attackActionMapper[action_type](secondStack.character, secondStack.opponent, secondStack.ability)
                 })

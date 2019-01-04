@@ -1,12 +1,14 @@
 import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "../../shared/attacks";
 import { ATTACK_TYPES } from "../../shared/types";
+import { HelpBlock } from "react-bootstrap";
 
 export enum CharacterClassList {
     WARRIOR = "Warrior",
     MAGE = "Mage",
     ASSASSIN = "Assassin",
     PALADIN = "Paladin",
-    WITCH = "Witch"
+    WITCH = "Witch",
+    SNIPER = "Sniper",
 }
 
 export interface CharacterAbility {
@@ -48,4 +50,5 @@ export interface Character {
     isTrapped?: boolean;
     ultimateCharge: number;
     ultimateChargeMax: number;
+    isSpiked?: boolean;
 }

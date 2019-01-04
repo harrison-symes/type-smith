@@ -1,5 +1,6 @@
 import * as io from "socket.io-client"
-const socket = io('http://localhost:8000')
+console.log(window.location)
+const socket = io()
 
 const socketReducer = (state = socket, action) => {
     return state
