@@ -3,6 +3,7 @@ import { Character, CharacterClassList } from "../../../src/interfacing/characte
 import HealthBar from "../statComponents/HealthBar";
 import EnergyBar from "../statComponents/EnergyBar";
 import UltimateBar from "../statComponents/UltimateBar";
+import { Tooltip } from "react-tippy";
 
 export interface GameCharacterProps {
     character: Character;
@@ -18,8 +19,47 @@ const images = {
     [CharacterClassList.SNIPER]: "https://i.pinimg.com/originals/9a/da/65/9ada651d81dc593df9790bee4bab4433.jpg"
 }
 
-class GameCharacter extends React.Component<GameCharacterProps> {
+const passives = {
+    [CharacterClassList.WARRIOR]: "The Warriors attacks have their power increased by 1% for each point of health the Warrior is missing",
+    [CharacterClassList.MAGE]: "The Mage gains +1 Power at the end of each turn while Active.",
+    [CharacterClassList.ASSASSIN]: "The Assassin has +6 Priority when switching",
+    [CharacterClassList.PALADIN]: "The Paladin restores 3 Health to itself at the end of each turn while Active.",
+    [CharacterClassList.WITCH]: "All of the Witch's attacks also lower the opponent's Defense by 1",
+    [CharacterClassList.SNIPER]: "The Sniper gains +1 bonus Energy at the end of each turn, no matter where they are."
+}
 
+
+const icons = {
+    [CharacterClassList.WARRIOR]: "ra-crossed-swords",
+    [CharacterClassList.MAGE]: "ra-wizard-face",
+    [CharacterClassList.ASSASSIN]: "ra-cowled",
+    [CharacterClassList.PALADIN]: "ra-elf-helmet",
+    [CharacterClassList.WITCH]: "ra-witch-face",
+    [CharacterClassList.SNIPER]: "ra-eye-target",
+}
+
+class GameCharacter extends React.Component<GameCharacterProps> {
+    renderPassiveIcon (character) {
+        console.log(passives, character.characterClass)
+        return (
+            <Tooltip
+                position="top"
+                trigger="mouseenter"
+                animation="perspective"
+                // followCursor
+                inertia
+                arrow="true"
+                html={<span>
+                    {passives[character.characterClass]}
+                </span>}
+                style={{ cursor: 'context-menu' }}
+            >
+                <span className={`ra ra-lg ${
+                    icons[character.characterClass]
+                }`} />
+            </Tooltip>
+        )
+    }
     render() {
         const {isPlayerSide, character} = this.props
 
@@ -31,7 +71,11 @@ class GameCharacter extends React.Component<GameCharacterProps> {
                     <img className="game-character--portrait" src={images[character.characterClass]} />
                 </div>
                 <div className="game-character--stats">
-                    <text className="page-title center">{character.characterClass}</text>
+                    <text className="page-title center">
+                        {character.characterClass}
+                        {" "}
+                        {this.renderPassiveIcon(character)}
+                    </text>
                     
                     <HealthBar character={character} />
                     <EnergyBar character={character} />

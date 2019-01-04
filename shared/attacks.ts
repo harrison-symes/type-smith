@@ -61,6 +61,7 @@ export enum REDUCER_ATTACK_TYPES {
     GAIN_ULTIMATE_CHARGE = "GAIN_ULTIMATE_CHARGE",
     APPLY_SPIKE_TRAP = "APPLY_SPIKE_TRAP",
     ACTIVATE_SPIKE_TRAP = "ACTIVATE_SPIKE_TRAP",
+    WITCH_PASSIVE = "WITCH_PASSIVE",
 }
 
 export enum ABILITY_ATTACK_STACK_TYPES {
@@ -68,6 +69,7 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_RAPID_FIRE = "DAMAGE_OPPONENT_RAPID_FIRE",
     DAMAGE_OPPONENT_IGNORE_ARMOUR = "DAMAGE_OPPONENT_IGNORE_ARMOUR",
     DAMAGE_OPPONENT_BACKSTAB = "DAMAGE_OPPONENT_BACKSTAB",
+    DAMAGE_OPPONENT_WARRIOR = "DAMAGE_OPPONENT_WARRIOR",
 
     TRAP_OPPONENT = "TRAP_OPPONENT",
     TRAP_SELF = "TRAP_SELF",
@@ -279,6 +281,19 @@ export const damageOpponentBackstab = (character, opponent, ability) => {
         power
     }
 }
+export const damageOpponentWarrior = (character, opponent, ability) => {
+    const missingHealth = character.healthMax - character.health
+    const subAbility = {...ability}
+
+    subAbility.power *= (1 + (missingHealth / 100))
+    console.log(subAbility.power, ability.power)
+    const power = calcDamage(character, opponent, subAbility)
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power
+    }
+}
 
 export const damageOpponentIgnoreArmour = (character, opponent, ability) => {
     const subOpponent = {
@@ -363,6 +378,11 @@ export const activateSpikeTrap = (character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP,
     target: character
 })
+export const witchPassive = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.GAIN_DEFENSE,
+    target: opponent,
+    defenseGain: -1,
+})
 
 export const attackActionMapper = {
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
@@ -386,6 +406,7 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_IGNORE_ARMOUR]: damageOpponentIgnoreArmour,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_RAPID_FIRE]: damageOpponentRapidFire,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BACKSTAB]: damageOpponentBackstab,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_WARRIOR]: damageOpponentWarrior,
     [ATTACK_STACK_TYPES.HEAL_TEAM_SELF]: healTeamSelf,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT]: damageTeamOpponent,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_POWER]: changeTeamStatsPower,
@@ -397,4 +418,5 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.LOWER_OPPONENT_SPEED]: lowerOpponentSpeed,
     [ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP_OPPONENT]: applySpikeTrapOpponent,
     [ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP]: activateSpikeTrap,
+    [ATTACK_STACK_TYPES.WITCH_PASSIVE]: witchPassive,
 }

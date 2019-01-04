@@ -59,7 +59,8 @@ class TeamBar extends React.Component<TeamBarProps> {
             ]
         }
 
-
+        //rogue passive
+        if (userTeam.find(c => c.isActive).characterClass == CharacterClassList.ASSASSIN) ability.priority = 6
 
         if (gameInfo.turnStage == TurnStage.NEED_TO_SWITCH) {
             socket.emit(
@@ -108,7 +109,7 @@ class TeamBar extends React.Component<TeamBarProps> {
 
         return (
             <Tooltip
-                className="btn--container w-25"
+                className={`team-member ${character.isActive && "team-member--active"}`}
                 position="top"
                 trigger="mouseenter"
                 animation="perspective"
@@ -134,9 +135,8 @@ class TeamBar extends React.Component<TeamBarProps> {
                 </span>}
                 style={{ cursor: 'context-menu' }}
             >
-                <div 
-                    className={`team-member ${character.isActive && "team-member--active"}`}
-                >
+                <React.Fragment>
+
                     <p className="team-member--name">
                         {character.characterClass}
                         {" "}
@@ -149,13 +149,13 @@ class TeamBar extends React.Component<TeamBarProps> {
                     </div>
                     {(isPlayerSide && !character.isActive && character.isAlive) &&
                         <button 
-                            className="team-member--btn btn" 
-                            disabled={isDisabled}
-                            onClick={() => this.switchCharacter(character)}>
+                        className="team-member--btn btn" 
+                        disabled={isDisabled}
+                        onClick={() => this.switchCharacter(character)}>
                             Switch
                         </button>
                     }
-                </div>
+                </React.Fragment>
             </Tooltip>
         )
     }

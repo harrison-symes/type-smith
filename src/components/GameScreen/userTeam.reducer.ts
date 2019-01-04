@@ -1,5 +1,5 @@
 import { GAME_TYPES } from "./game.interface";
-import { Character } from "../../interfacing/characters";
+import { Character, CharacterClassList } from "../../interfacing/characters";
 import { ATTACK_STACK_TYPES, AttackAction } from "../../../shared/attacks";
 
 export interface TeamAction {
@@ -158,13 +158,21 @@ const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:numb
             
         case GAME_TYPES.TURN_VALIDATED:
             return newState.map(character => {
+                if (character.characterClass == CharacterClassList.SNIPER) character.energy += 1
                 if (character.isAlive && !character.isActive) {
                     character.energy += 1
-                    if (character.energy > character.energyMax) character.energy = character.energyMax
                 }
+                if (character.energy > character.energyMax) character.energy = character.energyMax
                 if (character.isAlive && character.isActive) {
                     character.ultimateCharge+=1
                     if (character.ultimateCharge >= character.ultimateChargeMax) character.ultimateCharge = character.ultimateChargeMax
+
+                    //mage passive
+                    if (character.characterClass == CharacterClassList.MAGE) character.power++
+                    else if (character.characterClass == CharacterClassList.PALADIN) {
+                        character.health += 3
+                        if (character.health > character.healthMax) character.health = character.healthMax
+                    }
                 }
                 return {...character}
             })

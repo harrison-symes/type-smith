@@ -42,7 +42,7 @@ export default {
         priority: 0,
         defenseGain: -1,
         stack: [
-            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_WARRIOR,
             ATTACK_STACK_TYPES.LOWER_OPPONENT_DEFENSE,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
@@ -58,7 +58,7 @@ export default {
         type: ATTACK_TYPES.SWORDS,
         priority: 0,
         stack: [
-            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_WARRIOR,
             ATTACK_STACK_TYPES.DAMAGE_SELF,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
@@ -66,11 +66,11 @@ export default {
     [GAME_ATTACKS.TANK_UP]: () => ({
         name: [GAME_ATTACKS.TANK_UP],
         icon: "ra-armor-upgrade",
-        cost: 2,
+        cost: 3,
         power: 0,
-        description: "Gain 2 Defense and 5 Max Health",
+        description: "Gain 2 Defense and 10 Max Health",
         isUltimate: false,
-        healthGain: 5,
+        healthGain: 10,
         defenseGain: 2,
         priority: 0,
         type: ATTACK_TYPES.STATUS,
@@ -229,7 +229,8 @@ export default {
         stack: [
             ATTACK_STACK_TYPES.HEAL_SELF,
             ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL_OPPONENT,
-            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
+            ATTACK_STACK_TYPES.WITCH_PASSIVE
         ]
     }),
     [GAME_ATTACKS.CURSE]: () => ({
@@ -253,7 +254,8 @@ export default {
             ATTACK_STACK_TYPES.LOWER_OPPONENT_POWER,
             ATTACK_STACK_TYPES.LOWER_OPPONENT_ENERGY,
             ATTACK_STACK_TYPES.LOWER_OPPONENT_SPEED,
-            ATTACK_STACK_TYPES.SPEND_ENERGY
+            ATTACK_STACK_TYPES.SPEND_ENERGY,
+            ATTACK_STACK_TYPES.WITCH_PASSIVE
         ]
     }),
 
@@ -269,7 +271,8 @@ export default {
         type: ATTACK_TYPES.STATUS,
         stack: [
             ATTACK_STACK_TYPES.TRAP_OPPONENT,
-            ATTACK_STACK_TYPES.SPEND_ENERGY
+            ATTACK_STACK_TYPES.SPEND_ENERGY,
+            ATTACK_STACK_TYPES.WITCH_PASSIVE
         ]
     }),
 
