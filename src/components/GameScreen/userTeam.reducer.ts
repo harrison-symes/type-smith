@@ -182,8 +182,7 @@ const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:numb
             if (!target) return state
             idx = newState.indexOf(target)
 
-            target.isSpiked = false
-            target.health -= 15
+            target.health -= 10
             if (target.health <= 0) {
                 target.health = 0
                 target.isAlive = false

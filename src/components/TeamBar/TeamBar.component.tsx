@@ -29,6 +29,7 @@ const icons = {
     [CharacterClassList.ASSASSIN]: "ra-cowled",
     [CharacterClassList.PALADIN]: "ra-elf-helmet",
     [CharacterClassList.WITCH]: "ra-witch-face",
+    [CharacterClassList.SNIPER]: "ra-eye-target",
 }
 
 const images = {
@@ -44,9 +45,6 @@ class TeamBar extends React.Component<TeamBarProps> {
     switchCharacter = (character) => {
         const {socket, gameInfo, userTeam, opponentTeam} = this.props
 
-        const spikeTrap = []
-        if (character.isSpiked) spikeTrap.push(ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP)
-
         const ability = {
             name: [GAME_ATTACKS.SWITCH],
             cost: 0,
@@ -57,10 +55,7 @@ class TeamBar extends React.Component<TeamBarProps> {
             targetCharacter: character,
             priority: -1,
             stack: [
-                //switch out
-                ...spikeTrap,
                 ATTACK_STACK_TYPES.SWITCH,
-                //opponent Switch Catch
             ]
         }
 

@@ -15,6 +15,7 @@ const images = {
     [CharacterClassList.ASSASSIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2ZPdgsilSlMot1Ra_J1wW6k5qExY0CrJAn9YTrUXKGUFjpsJ",
     [CharacterClassList.PALADIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO1QoI5qjFzrmcmcZ7E1ZzIzNsyDWoZlk6uOVPETzGyigXTvdR3g",
     [CharacterClassList.WITCH]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGR81UKtXdiUnJFdpO0T4aQ7DkitpeLvu9qCFmTgajafFTKt4",
+    [CharacterClassList.SNIPER]: "https://i.pinimg.com/originals/9a/da/65/9ada651d81dc593df9790bee4bab4433.jpg"
 }
 
 class GameCharacter extends React.Component<GameCharacterProps> {
@@ -52,7 +53,12 @@ class GameCharacter extends React.Component<GameCharacterProps> {
                             {" "}
                             {character.speed}
                         </div>
-                    
+                        {character.isSpiked && <div className="page-title">
+                            <span className="ra ra-lg ra-caltrops" />
+                            {" "}
+                            Spiked
+                        </div>}
+
                     </div>
                 </div>
             </div>

@@ -350,7 +350,7 @@ export const applySpikeTrapOpponent = (character, opponent, ability) => ({
 })
 export const activateSpikeTrap = (character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP,
-    target: opponent
+    target: character
 })
 
 export const attackActionMapper = {

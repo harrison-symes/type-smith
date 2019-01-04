@@ -360,7 +360,7 @@ export default {
 
     [GAME_ATTACKS.RAPID_FIRE]: () => ({
         name: [GAME_ATTACKS.RAPID_FIRE],
-        icon: "ra-rally-the-troops",
+        icon: "ra-reticule",
         cost: 5,
         power: 1,
         altPower: 0.3,
@@ -379,7 +379,7 @@ export default {
     }),
     [GAME_ATTACKS.PIERCING_SHOT]: () => ({
         name: [GAME_ATTACKS.PIERCING_SHOT],
-        icon: "ra-rally-the-troops",
+        icon: "ra-supersonic-bullet",
         cost: 2,
         power: 1,
         description: "Attack for 100% of power, ignoring armour",
@@ -393,7 +393,7 @@ export default {
     }),
     [GAME_ATTACKS.RELOAD]: () => ({
         name: [GAME_ATTACKS.RELOAD],
-        icon: "ra-rally-the-troops",
+        icon: "ra-ammo-box",
         cost: 0,
         power: 0,
         energyGain: 3,
@@ -409,10 +409,10 @@ export default {
     }),
     [GAME_ATTACKS.SPIKE_TRAP]: () => ({
         name: [GAME_ATTACKS.SPIKE_TRAP],
-        icon: "ra-rally-the-troops",
+        icon: "ra-caltrops",
         cost: 1,
         power: 0,
-        description: "Spike trap the opponent, causing them to take 15 damage upon switching out.",
+        description: "Spike trap the opponent, causing them to take 10 damage upon switching out.",
         isUltimate: false,
         priority: 0,
         type: ATTACK_TYPES.STATUS,

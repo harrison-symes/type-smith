@@ -207,7 +207,11 @@ const roomListeners = (socket, io) => {
             turn.turnActions = orderTurnActions(turn.turnActions)
             //execute first stack
             const firstStack = turn.turnActions.pop()
-            
+            if (firstStack.character.isSpiked && firstStack.ability.name == GAME_ATTACKS.SWITCH) {
+                firstStack.ability.stack.push(
+                    ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
+                )
+            }
             const actionStack = firstStack.ability.stack.map(action_type => {
                 return attackActionMapper[action_type](firstStack.character, firstStack.opponent, firstStack.ability)
             })
@@ -307,6 +311,11 @@ const roomListeners = (socket, io) => {
                 //nothing happens, switch fails
             }
             else if (secondStack.character.isAlive) {
+                if (secondStack.character.isSpiked && secondStack.ability.name == GAME_ATTACKS.SWITCH) {
+                    secondStack.ability.stack.push(
+                        ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
+                    )
+                }
                 actionStack = secondStack.ability.stack.map(action_type => {
                     return attackActionMapper[action_type](secondStack.character, secondStack.opponent, secondStack.ability)
                 })
