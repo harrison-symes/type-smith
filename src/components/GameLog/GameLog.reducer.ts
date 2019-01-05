@@ -37,6 +37,14 @@ const initialState : TurnState[] = [
     initTurn(1)
 ]
 
+const addMessage = (state: TurnState[], message: LogMessage) => {
+    const currentTurn = getCurrentTurn(state)
+
+    currentTurn.turnLog.push(message)
+
+    return state.map(t => ({ ...t }))
+}
+
 export default (state:TurnState[] = initialState, action) => {
     const newState = [...state]
     let newTurn;
@@ -52,29 +60,61 @@ export default (state:TurnState[] = initialState, action) => {
 
             return newState
         case ATTACK_STACK_TYPES.USE_ATTACK:
-            currentTurn = getCurrentTurn(newState)
-
-
             message = {
                 type: MESSAGE_TYPES.BOLD,
                 message: action.abilityName == "Switch" 
                     ? `${action.characterName} is Switched out`
                     : `${action.characterName} uses ${action.abilityName}`
             }
-            currentTurn.turnLog.push(message)
-            
-            return newState.map(t => ({...t}))
-            
+            return addMessage(newState, message)
         case ATTACK_STACK_TYPES.DAMAGE_OPPONENT:
-            currentTurn = getCurrentTurn(newState)
-
             message = {
                 type: MESSAGE_TYPES.NORMAL,
                 message: `${action.target.characterClass} takes ${action.power} damage`
             }
-            
-            currentTurn.turnLog.push(message)
-            return newState.map(t => ({...t}))
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.GAIN_DEFENSE:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} ${action.defenseGain > 0 ? "gains" : "loses"} ${Math.abs(action.defenseGain)} Defense`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.GAIN_POWER:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} ${action.powerGain > 0 ? "gains" : "loses"} ${Math.abs(action.powerGain)} Power`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.GAIN_SPEED:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} ${action.speedGain > 0 ? "gains" : "loses"} ${Math.abs(action.speedGain)} Speed`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.GAIN_ULTIMATE_CHARGE:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} ${action.ultimateGain > 0 ? "gains" : "loses"} ${Math.abs(action.ultimateGain)} Ultimate Charge`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.GAIN_ENERGY:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} ${action.energyGain > 0 ? "gains" : "loses"} ${Math.abs(action.energyGain)} Energy`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} ${action.healthGain > 0 ? "gains" : "loses"} ${Math.abs(action.healthGain)} Max Health`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.HEAL_SELF:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} heals themselves for ${action.healthGain || action.healAmount || action.power} Health`
+            }
+            return addMessage(newState, message)
         default: return state
     }
 }
