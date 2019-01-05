@@ -59,12 +59,24 @@ export default (state:TurnState[] = initialState, action) => {
             newState.push(initTurn(currentTurn.turn + 1))
 
             return newState
+        case ATTACK_STACK_TYPES.SWITCH:
+            message = {
+                type: MESSAGE_TYPES.BOLD,
+                message: `${action.targetCharacter.characterClass} switches in.`
+            }
+            return addMessage(newState, message)
         case ATTACK_STACK_TYPES.USE_ATTACK:
             message = {
                 type: MESSAGE_TYPES.BOLD,
                 message: action.abilityName == "Switch" 
                     ? `${action.characterName} is Switched out`
                     : `${action.characterName} uses ${action.abilityName}`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.DAMAGE_SELF:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} deals ${action.power} damage to themself`
             }
             return addMessage(newState, message)
         case ATTACK_STACK_TYPES.DAMAGE_OPPONENT:
@@ -115,6 +127,51 @@ export default (state:TurnState[] = initialState, action) => {
                 message: `${action.target.characterClass} heals themselves for ${action.healthGain || action.healAmount || action.power} Health`
             }
             return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} is spiked`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} takes 15 damage from spike trap`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.TRAP_TARGET:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.characterClass} is trapped`
+            }
+            return addMessage(newState, message)
+        
+        case ATTACK_STACK_TYPES.HEAL_TEAM:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `TEMP: ${action.owner_id}'s team is healed for ${Math.abs(action.power)} Health`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.DAMAGE_TEAM:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `TEMP: ${action.owner_id}'s team takes ${Math.abs(action.power)} Damage`
+            }
+            return addMessage(newState, message)
+        case ATTACK_STACK_TYPES.CHANGE_TEAM_STAT:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `Caster's team ${action.statChange >= 0 ? "gains" : "loses"} ${Math.abs(action.statChange)} ${action.stat}`
+            }
+            return addMessage(newState, message)
+        
+        case ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `Caster's team ${action.statChange >= 0 ? "gains" : "loses"} ${Math.abs(action.statChange)} Power, Defense, Energy and Speed`
+            }
+            return addMessage(newState, message)
+        
         default: return state
     }
 }
