@@ -212,7 +212,10 @@ const roomListeners = (socket, io) => {
                     ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
                 )
             }
-            const actionStack = firstStack.ability.stack.map(action_type => {
+            const actionStack = [
+                ATTACK_STACK_TYPES.USE_ATTACK,
+                ...firstStack.ability.stack
+            ].map(action_type => {
                 return attackActionMapper[action_type](firstStack.character, firstStack.opponent, firstStack.ability)
             })
 
@@ -258,7 +261,10 @@ const roomListeners = (socket, io) => {
             if (turn.deathSwitchesValidated == turn.deathSwitchesNeeded) {
                 const [actionOne, actionTwo] = turn.deathSwitchActions
 
-                const actionStack = actionOne.ability.stack.map(action_type => {
+                const actionStack = [
+                    ATTACK_STACK_TYPES.USE_ATTACK,
+                    ...actionOne.ability.stack
+                ].map(action_type => {
                     return attackActionMapper[action_type](actionOne.character, actionOne.opponent, actionOne.ability)
                 })
 
@@ -316,7 +322,10 @@ const roomListeners = (socket, io) => {
                         ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
                     )
                 }
-                actionStack = secondStack.ability.stack.map(action_type => {
+                actionStack = [
+                    ATTACK_STACK_TYPES.USE_ATTACK,
+                    ...secondStack.ability.stack
+                ].map(action_type => {
                     return attackActionMapper[action_type](secondStack.character, secondStack.opponent, secondStack.ability)
                 })
             }

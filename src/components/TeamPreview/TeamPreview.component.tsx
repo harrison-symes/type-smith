@@ -63,15 +63,15 @@ const defaultTeam = [
             { name: GAME_ATTACKS.ENTRAP },
         ]
     },
-    {
-        characterClass: CharacterClassList.SNIPER,
-        abilities: [
-            { name: GAME_ATTACKS.RAPID_FIRE },
-            { name: GAME_ATTACKS.PIERCING_SHOT },
-            { name: GAME_ATTACKS.RELOAD },
-            { name: GAME_ATTACKS.SPIKE_TRAP },
-        ]
-    },
+    // {
+    //     characterClass: CharacterClassList.SNIPER,
+    //     abilities: [
+    //         { name: GAME_ATTACKS.RAPID_FIRE },
+    //         { name: GAME_ATTACKS.PIERCING_SHOT },
+    //         { name: GAME_ATTACKS.RELOAD },
+    //         { name: GAME_ATTACKS.SPIKE_TRAP },
+    //     ]
+    // },
 ] as Partial<Character>[]
 
 

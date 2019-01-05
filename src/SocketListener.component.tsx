@@ -139,19 +139,17 @@ class SocketListener extends React.Component<SocketListenerProps> {
         socket.on(
             GAME_ACTION_SOCKET_CHANNEL.RECEIVE_FIRST_TURN_STACK,
             stack => {
-                setTimeout(() => {
-                    Promise.all(
-                        stack.map(action => despacito(action))
-                    )
-                    .then(() => {
-                        setTimeout(() => {
-                            despacito({
-                                type: GAME_TYPES.START_SECOND_STACK
-                            })       
-                        
-                        }, 1500)
-                    })
-                }, 1500)
+                Promise.all(
+                    stack.map(action => despacito(action))
+                )
+                .then(() => {
+                    setTimeout(() => {
+                        despacito({
+                            type: GAME_TYPES.START_SECOND_STACK
+                        })       
+                    
+                    }, 500)
+                })
             }
         )
         socket.on(

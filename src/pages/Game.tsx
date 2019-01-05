@@ -69,11 +69,13 @@ class Game extends React.Component<GameProps> {
     render() {
         const {userTeam, opponentTeam} = this.props
         return (
-            <div>
-                <TeamBar isPlayerSide={false} />
-                <GameScreen />
-                <CharacterBar />
-                <TeamBar isPlayerSide={true} />
+            <div className="game--container">
+                <div className="game-screen--container">
+                    <TeamBar isPlayerSide={false} />
+                    <GameScreen />
+                    <CharacterBar />
+                    <TeamBar isPlayerSide={true} />
+                </div>
                 <GameLog />
             </div>
         )

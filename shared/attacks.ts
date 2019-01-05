@@ -38,6 +38,7 @@ export enum GAME_ATTACKS {
 }
 
 export enum REDUCER_ATTACK_TYPES {
+    USE_ATTACK = "USE_ATTACK",
     SWITCH = "SWITCH",
     SPEND_ENERGY = "SPEND_ENERGY",
     SPEND_ULTIMATE_CHARGE = "SPEND_ULTIMATE_CHARGE",
@@ -401,7 +402,15 @@ export const witchPassive = (character, opponent, ability) => ({
     defenseGain: -1,
 })
 
+export const useAttack = (character, opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.USE_ATTACK,
+    abilityName: ability.name,
+    characterName: character.characterClass,
+    ability
+})
+
 export const attackActionMapper = {
+    [ATTACK_STACK_TYPES.USE_ATTACK]: useAttack,
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
     [ATTACK_STACK_TYPES.SPEND_ENERGY]: spendEnergyAction,
     [ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE]: spendUltimateCharge,
