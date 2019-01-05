@@ -70,6 +70,7 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_IGNORE_ARMOUR = "DAMAGE_OPPONENT_IGNORE_ARMOUR",
     DAMAGE_OPPONENT_BACKSTAB = "DAMAGE_OPPONENT_BACKSTAB",
     DAMAGE_OPPONENT_WARRIOR = "DAMAGE_OPPONENT_WARRIOR",
+    DAMAGE_TEAM_DEMOLISH = "DAMAGE_TEAM_DEMOLISH",
 
     TRAP_OPPONENT = "TRAP_OPPONENT",
     TRAP_SELF = "TRAP_SELF",
@@ -276,7 +277,7 @@ export const damageOpponentBackstab = (character, opponent, ability) => {
         subCharacter.power = subCharacter.power * 2
     }
     const power = calcDamage(subCharacter, opponent, ability)
-    
+
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
         target: opponent,
@@ -328,6 +329,20 @@ export const damageTeamOpponent = (character, opponent, ability) => ({
             ? ability.teamPower * character.power
             : ability.power * character.power
 })
+
+export const damageTeamDemolish = (character, opponent, ability) => {
+    const missingHealth = character.healthMax - character.health
+    const subAbility = { ...ability }
+
+    subAbility.power *= (1 + (missingHealth / 100))
+    console.log(subAbility.power, ability.power)
+    const power = subAbility.power
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_TEAM,
+        owner_id: opponent.owner_id,
+        power
+    }
+}
 
 export const changeTeamStatsPower = (character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.CHANGE_TEAM_STAT,
@@ -409,6 +424,7 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_RAPID_FIRE]: damageOpponentRapidFire,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BACKSTAB]: damageOpponentBackstab,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_WARRIOR]: damageOpponentWarrior,
+    [ATTACK_STACK_TYPES.DAMAGE_TEAM_DEMOLISH]: damageTeamDemolish,
     [ATTACK_STACK_TYPES.HEAL_TEAM_SELF]: healTeamSelf,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT]: damageTeamOpponent,
     [ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_POWER]: changeTeamStatsPower,

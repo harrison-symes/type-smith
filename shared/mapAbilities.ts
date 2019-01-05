@@ -27,7 +27,7 @@ export default {
         type: ATTACK_TYPES.SWORDS,
         priority: 0,
         stack: [
-            ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT,
+            ATTACK_STACK_TYPES.DAMAGE_TEAM_DEMOLISH,
             ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
         ]
     }),
@@ -150,9 +150,9 @@ export default {
         name: [GAME_ATTACKS.METEOR],
         icon: "ra-burning-meteor",
         cost: 5,
-        power: 2,
+        power: 2.5,
         teamPower: 0.5,
-        description: "Damage the opponent for 250% Power, and all other enemy team members for 50% Player Power",
+        description: "Damage the opponent for 300% Power, and all other enemy team members for 50% Player Power",
         isUltimate: true,
         priority: 0,
         type: ATTACK_TYPES.FIRE,
@@ -201,10 +201,10 @@ export default {
         icon: "ra-scale-mail",
         cost: 2,
         power: 0,
-        description: "Gain 2 Defense, but lose 1 Speed",
+        description: "Gain 3 Defense, but lose 1 Speed",
         isUltimate: false,
         priority: 0,
-        defenseGain: 2,
+        defenseGain: 3,
         speedGain: -1,
         type: ATTACK_TYPES.STATUS,
         stack: [
