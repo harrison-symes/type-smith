@@ -265,7 +265,7 @@ export default {
         icon: "ra-quicksand",
         cost: 4,
         power: 0,
-        description: "Trap your opponent, preventing them from switching",
+        description: "Trap your opponent, preventing them from switching until they have no other choice",
         isUltimate: false,
         priority: 0,
         type: ATTACK_TYPES.STATUS,
