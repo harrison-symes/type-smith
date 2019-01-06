@@ -31,10 +31,10 @@ export const assassinStatSheet: StatSheet = {
 }
 export const paladinStatSheet: StatSheet = {
     healthStat: 5,
-    energyStat: 2,
-    defenseStat: 4,
-    powerStat: 2,
-    speedStat: 2
+    energyStat: 3,
+    defenseStat: 5,
+    powerStat: 1,
+    speedStat: 1
 }
 export const witchStatSheet: StatSheet = {
     healthStat: 4,

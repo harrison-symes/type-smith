@@ -81,6 +81,7 @@ const joinRoom = (socket:Socket, io) => {
 }
 
 const mapTeamToGameObjects = (owner_id, team) => {
+    console.log(team)
     return team.map(character => {
         const mapped = createCharacter(owner_id, character)
         return mapped

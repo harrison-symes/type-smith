@@ -172,7 +172,7 @@ const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:numb
                     //mage passive
                     if (character.characterClass == CharacterClassList.MAGE) character.power++
                     else if (character.characterClass == CharacterClassList.PALADIN) {
-                        character.health += 3
+                        character.health += 1
                         if (character.health > character.healthMax) character.health = character.healthMax
                     }
                 }

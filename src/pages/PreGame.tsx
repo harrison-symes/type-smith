@@ -15,7 +15,6 @@ class PreGame extends React.Component<PreGameProps> {
     render() {
         return (
             <div>
-                <h1>Pre Game</h1>
                 <TeamPreview />
             </div>
         )

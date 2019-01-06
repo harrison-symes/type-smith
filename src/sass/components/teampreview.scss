@@ -1,0 +1,30 @@
+.team-preview {
+    &--container {
+        flex-wrap: wrap;
+    }
+
+    &--character {
+        min-width: 140px;
+        max-width: 400px;
+        width: 100%;
+        border-radius: 0.25rem;
+        background-color: $blue-med;
+        cursor: pointer;
+        margin: 0.5rem;
+        
+        &--selected {
+            border: 0.5rem $green-light;
+            background-color: $purple-light;
+        }
+    }
+    &--stats {
+        background-color: $blue-bright;
+        padding: 0.5rem;
+        font-weight: 700;
+        .stat-name {
+            width: 50%;
+            text-align: right;
+        }
+    }
+    
+}

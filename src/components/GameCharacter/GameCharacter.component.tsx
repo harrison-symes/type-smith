@@ -23,7 +23,7 @@ const passives = {
     [CharacterClassList.WARRIOR]: "The Warriors attacks have their power increased by 1% for each point of health the Warrior is missing",
     [CharacterClassList.MAGE]: "The Mage gains +1 Power at the end of each turn while Active.",
     [CharacterClassList.ASSASSIN]: "The Assassin has +6 Priority when switching",
-    [CharacterClassList.PALADIN]: "The Paladin restores 3 Health to itself at the end of each turn while Active.",
+    [CharacterClassList.PALADIN]: "The Paladin restores 1 Health to itself at the end of each turn while Active.",
     [CharacterClassList.WITCH]: "All of the Witch's attacks also lower the opponent's Defense by 1",
     [CharacterClassList.SNIPER]: "The Sniper gains +1 bonus Energy at the end of each turn, no matter where they are."
 }
@@ -62,7 +62,7 @@ class GameCharacter extends React.Component<GameCharacterProps> {
     }
     render() {
         const {isPlayerSide, character} = this.props
-
+        if (!character) return <div className="mt2 mb2 game-character--container"></div>
         return (
             <div className={`mt2 mb2 game-character--container ${
                     !isPlayerSide && "flex-reverse"
