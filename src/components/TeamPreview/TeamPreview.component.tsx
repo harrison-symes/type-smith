@@ -103,6 +103,8 @@ interface TeamPreviewState {
     activeCharacter: Partial<Character>,
 }
 
+const teamSize = 4 || 5
+
 class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
     constructor(props) {
         super(props)
@@ -120,7 +122,7 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
             if (activeCharacter.characterClass == character.characterClass) return
 
             selectedTeam = selectedTeam.filter(selected => selected.characterClass != character.characterClass)
-        } else if (selectedTeam.length < 5) {
+        } else if (selectedTeam.length < teamSize) {
             selectedTeam.push(character)
         }
         this.setState({selectedTeam})
@@ -226,14 +228,14 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                         </div>
                     ))}
                 </div>
-                {selectedTeam.length == 5 ?
+                {selectedTeam.length == teamSize ?
                     activeCharacter ?
                         <button onClick={this.submitTeam} className="btn btn--green w-50 hpx-100">
                             SUBMIT TEAM
                         </button> : 
                     <h1 className="page-title">Pick your Lead Character</h1>
                     :
-                    <h1 className="page-title">Select your team members ({selectedTeam.length} / 5)</h1>
+                    <h1 className="page-title">Select your team members ({selectedTeam.length} / teamSize)</h1>
                 }
             </div>
         )
