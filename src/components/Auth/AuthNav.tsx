@@ -22,11 +22,8 @@ const AuthNav : React.SFC<AuthNavProps> = (props) => (
                 <p className="page-title text-white">&nbsp;{"- "}{props.auth.user.user_name}</p >
             </div> : 
             <React.Fragment>
-                <Link to="/login">
-                    <button className="btn btn--purple">Login</button>
-                </Link>
-                <Link to="/register">
-                    <button className="btn btn--green">Register</button>
+                <Link to="/">
+                    <button className="btn btn--purple">Sign In</button>
                 </Link>
             </React.Fragment>
         }

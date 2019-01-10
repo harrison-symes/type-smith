@@ -10,8 +10,8 @@ const Welcome : React.SFC<{}> = () => (
         <React.Fragment>
             <NavBar />
             <div className="nav-helper">
-                <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/" component={Login} />
             </div>
         </React.Fragment>
     </Router>
