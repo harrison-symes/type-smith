@@ -36,33 +36,42 @@ class Login extends React.Component<LoginProps, LoginState> {
 
 		return (
 			<div className="center">
-				<div className="flex justify-center">
-					<button className="btn btn--green" onClick={()=>this.test("test")}>Test</button>
-					<h2 className="page-title">Login</h2>
-					<button className="btn btn--purple" onClick={()=>this.test("test2")}>Test2</button>
-				</div>
 				<form className="form" onSubmit={this.submit}>
 
-					<label className="mt3" htmlFor="user_name">Username:</label>
-					<input className="mt2" type="text" name="user_name" onChange={this.updateUsername} />
+					<label className="mt3" htmlFor="user_name">Username</label>
+					<input 
+						className="mt2" 
+						type="text" 
+						name="user_name" 
+						onChange={this.updateUsername} 
+						placeholder="Krang"
+					/>
 
-					<label className="mt3" htmlFor="password">Password:</label>
-					<input className="mt2" type="password" name="password" onChange={this.updatePassword} />
+					<label className="mt3" htmlFor="password">Password</label>
+					<input 
+						className="mt2" 
+						type="password" 
+						name="password" 
+						onChange={this.updatePassword} 
+						placeholder="password" 
+					/>
 					
-					<div className="content-bottom">
-						<input className="btn" type="submit" />
+					<input className="btn" type="submit" value="Login" /> 
 					
-						<span className="info-text">
-							New to Type Smith?
-							{" "}
-							<Link to="/register">
-								Register
-							</Link>
-						</span>
-
-					</div>
+					<span className="info-text">
+						New to Type Smith?
+						{" "}
+						<Link to="/register">
+							Register
+						</Link>
+					</span>
 
 				</form>
+				<div className="flex justify-center">
+					<button className="btn btn--green" onClick={()=>this.test("test")}>Test</button>
+					{/* <h2 className="page-title">Login</h2> */}
+					<button className="btn btn--purple" onClick={()=>this.test("test2")}>Test2</button>
+				</div>
 			</div>
 		)
 	}

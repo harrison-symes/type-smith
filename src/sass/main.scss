@@ -12,12 +12,16 @@ $ra-font-path: './rpg-awesome/fonts/';
 @import "./sweet-progress.css";
 
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 16px;
 }
 
 body {
-    background: linear-gradient(210deg, $blue-dark, $fade-blue-med);
+    background: linear-gradient(210deg, $blue-dark, $blue-light);
     background-size: 400% 400%;
 
     -webkit-animation: AnimationName 5s ease infinite;

@@ -10,6 +10,7 @@
 
     display: flex;
     flex-direction: column;
+    margin-top: 3rem;
 
     label {
         font-size: 1rem;
@@ -19,52 +20,66 @@
     input[type="text"], input[type="password"] {
         height: 3rem;
         width: 100%;
+        max-width: 600px;
         border-radius: 1rem;
+        font-size: 1.5rem;
+        color: $white;
+
+        margin-left: auto;
+        margin-right: auto;
 
         text-align: center;
 
         padding: 0.5rem 1rem;
         background: none;
-        border: 0.25rem solid $white;
+        border: 0.125rem solid $white;
 
     }
 
-    .content-bottom {
-        position: fixed;
-        $spacing-bottom: 5rem;
-        bottom: $spacing-bottom;
+
+    input[type="submit"] {
+        $input-height: 3.5rem;
+
+        width: 100%;
+        max-width: 600px;
+        margin-top: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1rem;
+
+        font-size: 1.5rem;
         text-align: center;
+        height: $input-height;
 
-        width: calc(100% - 2rem);
-        // display: flex;
-        // justify-content: space-around;
-        // align-items: center;
+        background-color: $orange-light;
+        color: $white;
 
-        input[type="submit"] {
-            position: relative;
-            $input-height: 3.5rem;
-    
-            display: block;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1rem;
-    
-            font-size: 1rem;
-            text-align: center;
-            height: $input-height;
+        border-radius: 1rem;
+        border: none;
+        font-weight: 700;
+
+        box-shadow: inset 0 0 0.5rem $orange-med;
+        transition: opacity 0.2s ease-in-out;
+        
+        &:hover {
+            opacity: 0.8;
         }
-
-        .info-text {
-            position: relative;
-            margin-top: 4rem;
-            color: $white;
-            a {
-                clear: left;
-                color: white;
-                font-weight: 600;
-            }
+        &:active {
+            opacity: 1;
+            box-shadow: inset 0 0 1rem $orange-dark;
 
         }
     }
+
+    .info-text {
+        margin-top: 1rem;
+        color: $white;
+        a {
+            clear: left;
+            color: white;
+            font-weight: 600;
+        }
+
+    }
+
 }
