@@ -45,6 +45,7 @@ class Login extends React.Component<LoginProps, LoginState> {
 						name="user_name" 
 						onChange={this.updateUsername} 
 						placeholder="Krang"
+						autoComplete="off"
 					/>
 
 					<label className="mt3" htmlFor="password">Password</label>
@@ -54,6 +55,7 @@ class Login extends React.Component<LoginProps, LoginState> {
 						name="password" 
 						onChange={this.updatePassword} 
 						placeholder="Password" 
+						autoComplete={"off"}
 					/>
 					
 					<input className="btn" type="submit" value="Login" /> 

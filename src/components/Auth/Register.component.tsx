@@ -39,13 +39,34 @@ class Register extends React.Component<
                     }
 
                     <label className="mt3" htmlFor="user_name">Username</label>
-                    <input className="mt2" required placeholder="User Name" type="text" name="user_name" onChange={this.updateDetails} />
+                    <input
+                        className="mt2"
+                        required
+                        placeholder="User Name" 
+                        type="text" 
+                        name="user_name" 
+                        onChange={this.updateDetails} 
+                    />
 
                     <label className="mt3">Password</label>
-                    <input className="mt2" required placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
+                    <input
+                        className="mt2"
+                        required
+                        placeholder="Password"
+                        type="password"
+                        name="password"
+                        onChange={this.updateDetails} 
+                    />
                     
                     <label className="mt3">Confirm Password</label>
-                    <input className="mt2" required placeholder="Confirm Password" type="password" name="confirm_password" onChange={this.updateDetails} />
+                    <input
+                        className="mt2"
+                        required 
+                        placeholder="Confirm Password" 
+                        type="password" 
+                        name="confirm_password" 
+                        onChange={this.updateDetails} 
+                    />
 
                     <input className="btn" value="Register" type="submit" />
 
