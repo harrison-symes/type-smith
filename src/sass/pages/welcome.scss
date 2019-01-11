@@ -34,6 +34,11 @@
         background: none;
         border: 0.125rem solid $white;
 
+         &::placeholder {
+            color: $white;
+            opacity: 0.8;
+            font-weight: 400;
+        }
     }
 
 
@@ -60,7 +65,10 @@
 
         box-shadow: inset 0 0 0.5rem $orange-med;
         transition: opacity 0.2s ease-in-out;
-        
+
+        font-family: 'Slackey', cursive;
+        letter-spacing: 0.1rem;
+
         &:hover {
             opacity: 0.8;
         }
@@ -78,6 +86,10 @@
             clear: left;
             color: white;
             font-weight: 600;
+            cursor: pointer;
+            font-family: 'Slackey', cursive;
+            letter-spacing: 0.05rem;
+
         }
 
     }
