@@ -62,7 +62,7 @@ class Login extends React.Component<LoginProps, LoginState> {
 					
 					<span className="info-text">
 						New to Type Smith?
-						{" "}
+						{"  "}
 						<Link to="/register">
 							Register
 						</Link>

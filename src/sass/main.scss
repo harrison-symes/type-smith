@@ -18,9 +18,19 @@ $ra-font-path: './rpg-awesome/fonts/';
 
 html {
     font-size: 16px;
+    font-family: 'PT Sans Caption', sans-serif;
+    font-weight: 400;
+    @media only screen and (min-width: 768px) {
+        font-size: 20px;
+    }
 }
 
 body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
     background: linear-gradient(210deg, $blue-dark, $blue-light);
     background-size: 400% 400%;
 
@@ -43,16 +53,8 @@ body {
         50%{background-position:100% 86%}
         100%{background-position:0% 15%}
     }
-    margin: 0;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
 }
 
 a {
     text-decoration: none;
-    color: $purple-med;
-    &:visited {
-        color: $purple-med;
-    }
 }

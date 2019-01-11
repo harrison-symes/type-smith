@@ -72,7 +72,7 @@ class Register extends React.Component<
 
                     <span className="info-text">
                         Already have an account?
-                        {" "}
+                        {"  "}
                         <Link to="/">
                             Sign in
                         </Link>
