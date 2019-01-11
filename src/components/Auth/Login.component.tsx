@@ -68,9 +68,9 @@ class Login extends React.Component<LoginProps, LoginState> {
 
 				</form>
 				<div className="flex justify-center">
-					<button className="btn btn--green" onClick={()=>this.test("test")}>Test</button>
+					<button className="btn" onClick={()=>this.test("test")}>Test</button>
 					{/* <h2 className="page-title">Login</h2> */}
-					<button className="btn btn--purple" onClick={()=>this.test("test2")}>Test2</button>
+					<button className="btn" onClick={()=>this.test("test2")}>Test2</button>
 				</div>
 			</div>
 		)
