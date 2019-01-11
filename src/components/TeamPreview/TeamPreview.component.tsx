@@ -8,6 +8,9 @@ import { ProgressBar } from "react-bootstrap";
 import { statSheets } from "../../../server/gameUtils.ts/statSheets";
 import { Tooltip } from "react-tippy"
 
+import CircularProgressbar from 'react-circular-progressbar';
+import { Progress } from 'react-sweet-progress';
+
 
 export interface TeamPreviewProps {
     socket: Socket,
@@ -117,7 +120,6 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
     selectCharacter = (character) => {
         let {selectedTeam, activeCharacter} = this.state
 
-
         if (selectedTeam.find(selected => selected.characterClass == character.characterClass)) {
             if (activeCharacter.characterClass == character.characterClass) return
 
@@ -143,26 +145,16 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
         )
     }
     renderStatBars = characterClass => {
-        const progress = (val) => <ProgressBar
-            className="w-100"
-            bsStyle={val > 3
-                ? "success"
-                : val < 3
-                    ? val == 2
-                        ? "warning"
-                        : "danger"
-                    : "info"
-            }
-            now={val / 5 * 100}
-        />
-
-        const stat = (label, stat) => <div className="flex">
-            <span className="stat-name">
-                {label}:
-            </span>
-            {progress(stat)}
-        </div>
-
+        const stat = (label, stat) => (
+            <Progress
+                type="circle"
+                symbolClassName="ra ra-crossed-swords"
+                symbol={`${stat}`}
+                width={80}
+                percent={stat / 5 * 100}
+            />
+        )
+        
         return (
             <div className="team-preview--stats">
                 {stat("Health", statSheets[characterClass].healthStat)}
@@ -235,7 +227,7 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                         </button> : 
                     <h1 className="page-title">Pick your Lead Character</h1>
                     :
-                    <h1 className="page-title">Select your team members ({selectedTeam.length} / teamSize)</h1>
+                    <h1 className="page-title">Select your team members ({selectedTeam.length} / {teamSize})</h1>
                 }
             </div>
         )

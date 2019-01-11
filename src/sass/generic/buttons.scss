@@ -25,6 +25,11 @@
         border-color: $green-light;
         color: $white;
     }
+    &--orange {
+        background-color: $orange-light;
+        border-color: $orange-bright;
+        color: $black;
+    }
     &--small {
         height: 1rem;
     }

@@ -1,5 +1,5 @@
 Arguments: 
-  /home/symeshjb/.nvm/versions/node/v10.14.2/bin/node /home/symeshjb/.nvm/versions/node/v10.14.2/bin/yarn add @types/react-tippy
+  /home/symeshjb/.nvm/versions/node/v10.14.2/bin/node /home/symeshjb/.nvm/versions/node/v10.14.2/bin/yarn add react-circular-progress-bar
 
 PATH: 
   /home/symeshjb/.nvm/versions/node/v10.14.2/bin:/home/symeshjb/bin:/home/symeshjb/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2freact-tippy: Not found
+  Error: https://registry.yarnpkg.com/react-circular-progress-bar: Not found
       at Request.params.callback [as _callback] (/home/symeshjb/.nvm/versions/node/v10.14.2/lib/node_modules/yarn/lib/cli.js:65894:18)
       at Request.self.callback (/home/symeshjb/.nvm/versions/node/v10.14.2/lib/node_modules/yarn/lib/cli.js:129018:22)
       at Request.emit (events.js:182:13)
@@ -33,7 +33,8 @@ npm manifest:
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "start": "npm run dev:server & npm run dev:client",
+      "postinstall": "webpack",
+      "start": "ts-node ./server/index",
       "dev": "nodemon --exec ts-node ./server/index.ts & webpack --watch",
       "build": "tsc",
       "dev:server": "ts-node ./server/index.ts",
@@ -42,6 +43,7 @@ npm manifest:
     },
     "dependencies": {
       "@types/bcrypt": "^3.0.0",
+      "@types/cors": "^2.8.4",
       "@types/dotenv": "^6.1.0",
       "@types/express": "^4.16.0",
       "@types/express-jwt": "^0.0.40",
@@ -63,6 +65,7 @@ npm manifest:
       "bcrypt": "^3.0.2",
       "bootstrap": "3",
       "bootstrap-sass": "^3.4.0",
+      "cors": "^2.8.5",
       "css-loader": "^2.0.2",
       "dotenv": "^6.2.0",
       "express": "^4.16.4",
@@ -72,6 +75,7 @@ npm manifest:
       "jwt-decode": "^2.2.0",
       "knex": "^0.16.2",
       "node-sass": "^4.11.0",
+      "pg": "^7.7.1",
       "react": "^16.6.3",
       "react-bootstrap": "^0.32.4",
       "react-dom": "^16.6.3",
@@ -79,6 +83,7 @@ npm manifest:
       "react-progressbar.js": "^0.2.0",
       "react-redux": "^6.0.0",
       "react-router-dom": "^4.3.1",
+      "react-sweet-progress": "^1.1.2",
       "react-tippy": "^1.2.3",
       "react-transition-group": "^2.5.2",
       "redux": "^4.0.1",
@@ -186,6 +191,13 @@ Lockfile:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/@types/cookiejar/-/cookiejar-2.1.0.tgz#4b7daf2c51696cfc70b942c11690528229d1a1ce"
     integrity sha512-EIjmpvnHj+T4nMcKwHwxZKUfDmphIKJc2qnEMhSoOvr1lYEQpuRKRz8orWr//krYIIArS/KGGLfL2YGVUYXmIA==
+  
+  "@types/cors@^2.8.4":
+    version "2.8.4"
+    resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.4.tgz#50991a759a29c0b89492751008c6af7a7c8267b0"
+    integrity sha512-ipZjBVsm2tF/n8qFGOuGBkUij9X9ZswVi9G3bx/6dz7POpVa6gVHcj1wsX/LVEn9MMF41fxK/PnZPPoTD1UFPw==
+    dependencies:
+      "@types/express" "*"
   
   "@types/dotenv@^6.1.0":
     version "6.1.0"
@@ -943,6 +955,11 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   
+  buffer-writer@2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/buffer-writer/-/buffer-writer-2.0.0.tgz#ce7eb81a38f7829db09c873f2fbb792c0c98ec04"
+    integrity sha512-a7ZpuTZU1TRtnwyCNW3I5dc0wWNC3VR9S++Ewyk2HHZdrO3CQJqSpd+95Us590V6AL7JqUAH2IwZ/398PmNFgw==
+  
   buffer-xor@^1.0.3:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/buffer-xor/-/buffer-xor-1.0.3.tgz#26e61ed1422fb70dd42e6e36729ed51d855fe8d9"
@@ -1273,6 +1290,14 @@ Lockfile:
   core-util-is@1.0.2, core-util-is@~1.0.0:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+  
+  cors@^2.8.5:
+    version "2.8.5"
+    resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
+    integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+    dependencies:
+      object-assign "^4"
+      vary "^1"
   
   create-ecdh@^4.0.0:
     version "4.0.3"
@@ -3553,7 +3578,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
     integrity sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
   
-  object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+  object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   
@@ -3693,6 +3718,11 @@ Lockfile:
   p-try@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.0.0.tgz#85080bb87c64688fa47996fe8f7dfbe8211760b1"
+  
+  packet-reader@0.3.1:
+    version "0.3.1"
+    resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-0.3.1.tgz#cd62e60af8d7fea8a705ec4ff990871c46871f27"
+    integrity sha1-zWLmCvjX/qinBexP+ZCHHEaHHyc=
   
   pako@~1.0.5:
     version "1.0.7"
@@ -3844,10 +3874,50 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
     integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
   
+  pg-connection-string@0.1.3:
+    version "0.1.3"
+    resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-0.1.3.tgz#da1847b20940e42ee1492beaf65d49d91b245df7"
+    integrity sha1-2hhHsglA5C7hSSvq9l1J2RskXfc=
+  
   pg-connection-string@2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-2.0.0.tgz#3eefe5997e06d94821e4d502e42b6a1c73f8df82"
     integrity sha1-Pu/lmX4G2Ugh5NUC5CtqHHP434I=
+  
+  pg-pool@^2.0.4:
+    version "2.0.6"
+    resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.6.tgz#7b561a482feb0a0e599b58b5137fd2db3ad8111c"
+    integrity sha512-hod2zYQxM8Gt482q+qONGTYcg/qVcV32VHVPtktbBJs0us3Dj7xibISw0BAAXVMCzt8A/jhfJvpZaxUlqtqs0g==
+  
+  pg-types@~1.12.1:
+    version "1.12.1"
+    resolved "https://registry.yarnpkg.com/pg-types/-/pg-types-1.12.1.tgz#d64087e3903b58ffaad279e7595c52208a14c3d2"
+    integrity sha1-1kCH45A7WP+q0nnnWVxSIIoUw9I=
+    dependencies:
+      postgres-array "~1.0.0"
+      postgres-bytea "~1.0.0"
+      postgres-date "~1.0.0"
+      postgres-interval "^1.1.0"
+  
+  pg@^7.7.1:
+    version "7.7.1"
+    resolved "https://registry.yarnpkg.com/pg/-/pg-7.7.1.tgz#546b192ff484322b69689391f885de3ba91a30d4"
+    integrity sha512-p3I0mXOmUvCoVlCMFW6iYSrnguPol6q8He15NGgSIdM3sPGjFc+8JGCeKclw8ZR4ETd+Jxy2KNiaPUcocHZeMw==
+    dependencies:
+      buffer-writer "2.0.0"
+      packet-reader "0.3.1"
+      pg-connection-string "0.1.3"
+      pg-pool "^2.0.4"
+      pg-types "~1.12.1"
+      pgpass "1.x"
+      semver "4.3.2"
+  
+  pgpass@1.x:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/pgpass/-/pgpass-1.0.2.tgz#2a7bb41b6065b67907e91da1b07c1847c877b306"
+    integrity sha1-Knu0G2BltnkH6R2hsHwYR8h3swY=
+    dependencies:
+      split "^1.0.0"
   
   pify@^2.0.0:
     version "2.3.0"
@@ -3965,6 +4035,28 @@ Lockfile:
       chalk "^2.4.1"
       source-map "^0.6.1"
       supports-color "^5.5.0"
+  
+  postgres-array@~1.0.0:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/postgres-array/-/postgres-array-1.0.3.tgz#c561fc3b266b21451fc6555384f4986d78ec80f5"
+    integrity sha512-5wClXrAP0+78mcsNX3/ithQ5exKvCyK5lr5NEEEeGwwM6NJdQgzIJBVxLvRW+huFpX92F2QnZ5CcokH0VhK2qQ==
+  
+  postgres-bytea@~1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/postgres-bytea/-/postgres-bytea-1.0.0.tgz#027b533c0aa890e26d172d47cf9ccecc521acd35"
+    integrity sha1-AntTPAqokOJtFy1Hz5zOzFIazTU=
+  
+  postgres-date@~1.0.0:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/postgres-date/-/postgres-date-1.0.3.tgz#e2d89702efdb258ff9d9cee0fe91bd06975257a8"
+    integrity sha1-4tiXAu/bJY/52c7g/pG9BpdSV6g=
+  
+  postgres-interval@^1.1.0:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/postgres-interval/-/postgres-interval-1.1.2.tgz#bf71ff902635f21cb241a013fc421d81d1db15a9"
+    integrity sha512-fC3xNHeTskCxL1dC8KOtxXt7YeFmlbTYtn7ul8MkVERuTmf7pI4DrkAxcw3kh1fQ9uz4wQmd03a1mRiXUZChfQ==
+    dependencies:
+      xtend "^4.0.0"
   
   pretty-error@^2.0.2:
     version "2.1.1"
@@ -4251,6 +4343,13 @@ Lockfile:
       path-to-regexp "^1.7.0"
       prop-types "^15.6.1"
       warning "^4.0.1"
+  
+  react-sweet-progress@^1.1.2:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/react-sweet-progress/-/react-sweet-progress-1.1.2.tgz#b27c6baa7c08a12cf0896565431ba477af249892"
+    integrity sha512-FUfiKpox5LJ9YTeK/HsaLp/oOsuxWBJQir6oAYKLY5nsa2pb04PtxzddSy6Y1fn8osaILpXIcItJRQYnHp42CA==
+    dependencies:
+      classnames "^2.2.5"
   
   react-tippy@^1.2.3:
     version "1.2.3"
@@ -4611,6 +4710,11 @@ Lockfile:
     version "5.6.0"
     resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   
+  semver@4.3.2:
+    version "4.3.2"
+    resolved "https://registry.yarnpkg.com/semver/-/semver-4.3.2.tgz#c7a07158a80bedd052355b770d82d6640f803be7"
+    integrity sha1-x6BxWKgL7dBSNVt3DYLWZA+AO+c=
+  
   semver@~5.3.0:
     version "5.3.0"
     resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
@@ -4863,6 +4967,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
     dependencies:
       extend-shallow "^3.0.0"
+  
+  split@^1.0.0:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/split/-/split-1.0.1.tgz#605bd9be303aa59fb35f9229fbea0ddec9ea07d9"
+    integrity sha512-mTyOoPbrivtXnwnIxZRFYRrPNtEFKlpB2fvjSnCQUiAA6qAZzqwna5envK4uk6OIeP17CsdF3rSBGYVBsU0Tkg==
+    dependencies:
+      through "2"
   
   sprintf-js@~1.0.2:
     version "1.0.3"
@@ -5123,6 +5234,11 @@ Lockfile:
     dependencies:
       readable-stream "~2.3.6"
       xtend "~4.0.1"
+  
+  through@2:
+    version "2.3.8"
+    resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
+    integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
   
   tildify@1.2.0:
     version "1.2.0"
@@ -5418,7 +5534,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.4.0.tgz#c5bdd2f54ee093c04839d71ce2e4758a6890abc7"
     integrity sha512-x+cYdNnaA3CxvMaTX0INdTCN8m8aF2uY9BvEqmxuYp8bL09cs/kWVQPVGcA35fMktdOsP69IgU7wFj/61dJHEw==
   
-  vary@~1.1.2:
+  vary@^1, vary@~1.1.2:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   

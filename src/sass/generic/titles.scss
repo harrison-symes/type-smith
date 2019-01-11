@@ -1,6 +1,19 @@
+.game-title {
+    font-family: 'Slackey', cursive;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: $orange-light;
+    opacity: 0.9;
+}
+
 .page-title {
-    font-size: 1.5rem;
-    color: $purple-med;
+    font-size: 2rem;
+    color: $white;
+    font-weight: 400;
+    // padding-bottom: 0.5rem;
+    // border-bottom: 0.25rem solid $purple-med;
 }
 
 .subtitle {

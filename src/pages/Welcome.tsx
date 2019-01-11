@@ -7,13 +7,13 @@ import NavBar from "../components/NavBar/NavBar.component";
 
 const Welcome : React.SFC<{}> = () => (
     <Router>
-        <React.Fragment>
-            <NavBar />
-            <div className="nav-helper">
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/" component={Login} />
-            </div>
-        </React.Fragment>
+        <div className="welcome-page">
+            <span className="mb4 center">
+                <h1 className="game-title">Type Smith</h1>
+            </span>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/" component={Login} />
+        </div>
     </Router>
 )
 

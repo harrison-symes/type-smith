@@ -1,0 +1,70 @@
+
+
+.welcome-page {
+    padding: 2rem 1rem;
+}
+
+.form {
+    height: auto;
+    width: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 1rem;
+        color: $white;
+    }
+
+    input[type="text"], input[type="password"] {
+        height: 3rem;
+        width: 100%;
+        border-radius: 1rem;
+
+        text-align: center;
+
+        padding: 0.5rem 1rem;
+        background: none;
+        border: 0.25rem solid $white;
+
+    }
+
+    .content-bottom {
+        position: fixed;
+        $spacing-bottom: 5rem;
+        bottom: $spacing-bottom;
+        text-align: center;
+
+        width: calc(100% - 2rem);
+        // display: flex;
+        // justify-content: space-around;
+        // align-items: center;
+
+        input[type="submit"] {
+            position: relative;
+            $input-height: 3.5rem;
+    
+            display: block;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem;
+    
+            font-size: 1rem;
+            text-align: center;
+            height: $input-height;
+        }
+
+        .info-text {
+            position: relative;
+            margin-top: 4rem;
+            color: $white;
+            a {
+                clear: left;
+                color: white;
+                font-weight: 600;
+            }
+
+        }
+    }
+}

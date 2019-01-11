@@ -32,7 +32,7 @@ class Register extends React.Component<
     render() {
         const { auth } = this.props
         return (
-            <div className="center w-50">
+            <div className="center">
                 <h2 className="page-title">Register</h2>
                 <form onSubmit={this.submit} className="form">
                     {auth.errorMessage && 
@@ -52,10 +52,10 @@ class Register extends React.Component<
 
                 </form>
                 <span className="info-text">
-                    New to Type-Smith?
+                    Already have an account?
                     {" "}
-                    <Link to="/login">
-                        Make an account
+                    <Link to="/">
+                        Sign in
                     </Link>
                 </span>
             </div>

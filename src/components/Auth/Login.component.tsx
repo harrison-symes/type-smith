@@ -35,30 +35,34 @@ class Login extends React.Component<LoginProps, LoginState> {
 	render() {
 
 		return (
-			<div className="center w-50">
-				<h2 className="page-title">Login</h2>
+			<div className="center">
 				<div className="flex justify-center">
 					<button className="btn btn--green" onClick={()=>this.test("test")}>Test</button>
+					<h2 className="page-title">Login</h2>
 					<button className="btn btn--purple" onClick={()=>this.test("test2")}>Test2</button>
 				</div>
 				<form className="form" onSubmit={this.submit}>
 
-					<label htmlFor="user_name">Username:</label>
-					<input type="text" name="user_name" onChange={this.updateUsername} />
+					<label className="mt3" htmlFor="user_name">Username:</label>
+					<input className="mt2" type="text" name="user_name" onChange={this.updateUsername} />
 
-					<label htmlFor="password">Password:</label>
-					<input type="password" name="password" onChange={this.updatePassword} />
+					<label className="mt3" htmlFor="password">Password:</label>
+					<input className="mt2" type="password" name="password" onChange={this.updatePassword} />
+					
+					<div className="content-bottom">
+						<input className="btn" type="submit" />
+					
+						<span className="info-text">
+							New to Type Smith?
+							{" "}
+							<Link to="/register">
+								Register
+							</Link>
+						</span>
 
-					<input className="btn btn--green" type="submit" />
+					</div>
 
 				</form>
-				<span className="info-text">
-					Already have an account?
-                    {" "}
-					<Link to="/register">
-						Sign in
-                    </Link>
-				</span>
 			</div>
 		)
 	}

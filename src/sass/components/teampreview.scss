@@ -25,6 +25,15 @@
             width: 50%;
             text-align: right;
         }
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-end;
+    }
+    &--stat-progress {
+        width: 60px;
+        height: 60px;
+        flex-grow: 1;
     }
     
 }
