@@ -46,16 +46,18 @@
     transition: top 0.3s ease-in-out;
 
     .lfg-arrow {
-        border-top: 0.25rem solid $white;
-
+        
         margin-bottom: 0.25rem;
         background-color: fade-out($white, 0.8);
         height: 2.5rem;
-
+        
         width: 100%;
         cursor: pointer;
     }
     .lfg-content {
+        border-top: 0.125rem solid $white;
+        padding-top: 0.125rem;
+
         position: relative;
         width: 100%;
         height: 100%;
