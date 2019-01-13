@@ -51,15 +51,17 @@ class LFG extends React.Component<LFGProps, LFGState> {
                         isLFG ? 
                         <div className="center">
                             <button 
-                                className="btn lfg-btn"
+                                className="btn lfg-cancel"
                                 onClick={this.leaveLobby}    
                             >
                                 Cancel
                             </button>
                         </div> :
-                        <button className="btn lfg-btn" onClick={this.joinLobby}>
-                            Look for Game
-                        </button>
+                        <div className="center">
+                            <button className="btn lfg-btn" onClick={this.joinLobby}>
+                                Look for Game
+                            </button>
+                        </div>
                     }
                 </div>
             </div>
