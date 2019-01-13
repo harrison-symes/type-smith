@@ -16,7 +16,6 @@ class Lobby extends React.Component<LobbyProps> {
     render() {
         return (
             <React.Fragment>
-                {/* <NavBar /> */}
                 <div className="w-100 lobby center">
                     <h2 className="page-title">Lobby</h2>
                     <div className="center w-75">   
@@ -24,6 +23,7 @@ class Lobby extends React.Component<LobbyProps> {
                         <List />
                     </div>
                 </div>
+                <LFG />
             </React.Fragment>
         )
     }
