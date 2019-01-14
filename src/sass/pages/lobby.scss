@@ -112,14 +112,14 @@
             &--container {
                 position: absolute;
                 left: calc(100vw + 2rem);
-                box-shadow: -0.15rem 0.15rem 0.15rem 0.1rem fade-out($grey-dark, 0.5);
-
+                
                 transition: 2s;
                 animation: slide 0.5s forwards;
                 animation-delay: 2s;
                 margin-top: 0.5rem;
-
+                
             }
+            box-shadow: -0.15rem 0.15rem 0.15rem 0.1rem fade-out($grey-dark, 0.5);
             position: relative;
             z-index: 1000;
             width: 100%;
