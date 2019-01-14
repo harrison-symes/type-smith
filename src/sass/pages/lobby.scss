@@ -59,7 +59,7 @@
 
             width: 100%;
 
-            &:active {
+            &:active, &:focus {
                 outline: none;
             }
             &-challenge {
@@ -72,6 +72,95 @@
                 border: none;
                 background: none;
                 color: $grey-dark;
+                border-bottom: 0.125rem solid $blue-dark
+            }
+        }
+    }
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0 }
+}
+
+@keyframes slide {
+    100% { left: 0 }
+}
+
+.game-requests {
+    // z-index: -1;
+    position: fixed;
+    width: 0%;
+    margin-left: 0;
+    padding: {
+        top: 0.5rem;
+        bottom: 0.5rem;
+    }
+    z-index: 0;
+
+    top: calc(0% + 5rem);
+    height: calc(100% - 7rem - 5rem);
+
+    display: flex;
+    flex-flow: column-reverse nowrap;
+
+    .game-request--item--container:nth-child(n) {
+        margin-left: calc((1rem * n) + 1rem);
+    }
+    .game-request {
+    
+        &--item {
+            &--container {
+                position: absolute;
+                left: calc(100vw + 2rem);
+                box-shadow: -0.15rem 0.15rem 0.15rem 0.1rem fade-out($grey-dark, 0.5);
+
+                transition: 2s;
+                animation: slide 0.5s forwards;
+                animation-delay: 2s;
+                margin-top: 0.5rem;
+
+            }
+            position: relative;
+            z-index: 1000;
+            width: 100%;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            background-color: $white;
+
+        }
+        &--text {
+            font-size: 1rem;
+            font-weight: 400;
+            color: $grey-dark;
+            display: inline-block;
+        }
+        &--title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: $blue-dark;
+        }
+        &--btns {
+            display: flex;
+            justify-content: space-around;
+
+            .btn {
+                width: 100%;
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+                font-weight: 600;
+                font-size: 1.2rem;
+                &-decline {
+                    border: none;
+                    background: none;
+                    color: $grey-dark
+                }
+                &-accept {
+                    background-color: $orange-med;
+                    color: $white;
+                    border-radius: 0.25rem;
+                    border: none;
+                }
             }
         }
     }

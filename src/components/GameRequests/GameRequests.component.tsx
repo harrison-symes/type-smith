@@ -28,25 +28,25 @@ class GameRequests extends React.Component<GameRequestsProps> {
     render() {
         const {gameRequests} = this.props
 
-        if (gameRequests.inbound.length == 0) return null
+        // if (gameRequests.inbound.length == 0) return null
 
         return (
-            <div>
-                {/* <h2>Game Requests</h2> */}
-                <div className="flex justify-center flex-wrap">
-                    {gameRequests.inbound.map(request => (
-                        <div className="wpx-300 lobby-entry">
-                            <h3>{request.sender_user_name}</h3>
-                            <p>Wants to play</p>
-                            <div className="flex">
-                                <button className="btn btn--purple" onClick={()=>this.declineRequest(request)}>Decline</button>
-                                <button className="btn btn--green" onClick={()=>this.acceptRequest(request)}>Accept</button>
+            <div className="game-requests">
+                {gameRequests.inbound.map((request, i) => (
+                    <div className="game-request--item--container" style={{marginLeft: `${i + 3}rem`}}>
+                        <div className="game-request--item">
+                            <span className="game-request--text">
+                                <h3 className="game-request--title">{request.sender_user_name}</h3>
+                                <p>Has challenged you</p>
+                            </span>
+                            <div className="game-request--btns">
+                                <button className="btn btn-decline" onClick={()=>this.declineRequest(request)}>Decline</button>
+                                <button className="btn btn-accept" onClick={()=>this.acceptRequest(request)}>Accept</button>
                             </div>
                         </div>
-                    ))}
-                
-                </div>
-                <div className="hpx-100" />
+                    </div>
+                ))}
+            
             </div>
         )
     }
