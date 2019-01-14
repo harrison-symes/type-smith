@@ -41,17 +41,19 @@ class Entry extends React.Component<EntryProps> {
         const {entry, auth, gameRequests} = this.props
 
         const isRequestSent = gameRequests.outbound.find(request => request.target_id == entry.user_id)
+        const isOwnListing = auth.user.id == entry.user_id
 
         return (
             <div className="lobby-entry">
                 <h3 className="lobby-entry--title">
-                    {auth.user.id == entry.user_id ? "You" : entry.user_name}
+                    {entry.user_name}
                 </h3>
                 <span className="lobby-entry--info ra ra-info"></span>
-                {isRequestSent ?
-                    <button onClick={this.cancelRequest} className="btn btn-cancel">Cancel</button> :
-                    <button onClick={this.sendRequest} className="btn btn-challenge">Challenge</button>
-
+                {isOwnListing ?
+                    <button disabled className="btn btn-cancel">Your Listing</button> :
+                    isRequestSent ?
+                        <button onClick={this.cancelRequest} className="btn btn-cancel">Cancel</button> :
+                        <button onClick={this.sendRequest} className="btn btn-challenge">Challenge</button>
                 }
             </div>
         )
