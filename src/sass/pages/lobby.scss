@@ -19,7 +19,7 @@
         width: 100%;
 
         margin-bottom: 0.5rem;
-        padding: 0.25rem 0rem;
+        padding: 0.25rem;
 
         border-radius: 0.25rem;
         border: none;
@@ -28,15 +28,15 @@
         &--title {
             font-weight: 600;
             color: $blue-med;
-            margin-left: 1rem;
         }
         &--info {
             border-radius: 50%;
             color: $white;
-            background-color: $blue-dark;
+            background-color: $grey-dark;
             text-align: center;
             height: 100%;
-            font-size: 1.2rem;
+            width: 1.5rem;
+            font-size: 1.5rem;
         }
 
         .btn {
