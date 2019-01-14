@@ -48,13 +48,17 @@ class Entry extends React.Component<EntryProps> {
                 <h3 className="lobby-entry--title">
                     {entry.user_name}
                 </h3>
-                <span className="lobby-entry--info ra ra-info"></span>
-                {isOwnListing ?
-                    <button disabled className="btn btn-cancel">Your Listing</button> :
-                    isRequestSent ?
-                        <button onClick={this.cancelRequest} className="btn btn-cancel">Cancel</button> :
-                        <button onClick={this.sendRequest} className="btn btn-challenge">Challenge</button>
-                }
+                <span className="lobby-entry--info">
+                    <span className="ra ra-info"></span>
+                </span>
+                <span className="lobby-entry--btn">
+                    {isOwnListing ?
+                        <button disabled className="btn btn-cancel">Your Listing</button> :
+                        isRequestSent ?
+                            <button onClick={this.cancelRequest} className="btn btn-cancel">Cancel</button> :
+                            <button onClick={this.sendRequest} className="btn btn-challenge">Challenge</button>
+                    }
+                </span>
             </div>
         )
     }

@@ -1,25 +1,29 @@
 
 
 .lobby {
-    height: 100%;
+    height: calc(100% - 3rem);
     width: 100%;
     padding: 1rem;
+    // margin-top: 
+    
+    position: fixed;
+    top: 0;
+    bottom: 0;
     
     &__content {
         height: 100%;
         width: 100%;
-        
     }
     &-entry {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
 
         height: 2rem;
         width: 100%;
 
         margin-bottom: 0.5rem;
-        padding: 0.25rem;
+        padding: 0.5rem;
 
         border-radius: 0.25rem;
         border: none;
@@ -28,24 +32,32 @@
         &--title {
             font-weight: 600;
             color: $blue-med;
+            width: 100%;
         }
         &--info {
-            border-radius: 50%;
-            color: $white;
-            background-color: $grey-dark;
+            .ra {
+                border-radius: 50%;
+                color: $white;
+                background-color: $grey-dark;
+                height: 100%;
+                width: 1.5rem;
+                font-size: 1.5rem;
+            }
             text-align: center;
-            height: 100%;
-            width: 1.5rem;
-            font-size: 1.5rem;
+            padding-right: 1rem;
+        }
+        &--btn {
+            width: 100%;
         }
 
         .btn {
             margin: 0;
             font-weight: 600;
             font-size: 1.2rem;
-            margin-top: auto;
-            margin-bottom: auto;
+            margin: auto;
             height: 1.5rem;
+
+            width: 100%;
 
             &:active {
                 outline: none;
