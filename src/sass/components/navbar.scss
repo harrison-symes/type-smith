@@ -15,11 +15,10 @@
     &--container {
         position: relative;
         display: flex;
-        justify-content: space-around;
+        justify-content: center ;
         width: 100%;
         height: 100%;
     }
-
 
     a, p {
         margin-top: auto;
@@ -35,6 +34,13 @@
     }
 }
 
+.nav-helper {
+    margin-top: 3rem;
+    margin-bottom: calc(10rem + 2.5rem);
+    height: calc(100% - 12.5rem - 3rem);
+    width: 100%;
+}
+
 .lfg {
     position: fixed;
     height: 10rem;
@@ -46,7 +52,7 @@
     transition: top 0.3s ease-in-out;
 
     .lfg-arrow {
-        
+        cursor: pointer;
         margin-bottom: 0.25rem;
         background-color: fade-out($white, 0.8);
         height: 2.5rem;

@@ -1,39 +1,39 @@
-.btn {
-    border-radius: 0.25rem;
-    padding: 0.25rem;
-    font-size: 1rem;
-    min-width: 4rem;
-    margin: auto;
-    border: 1px solid $grey-med;
-    cursor: pointer;
+// .btn {
+//     border-radius: 0.25rem;
+//     padding: 0.25rem;
+//     font-size: 1rem;
+//     min-width: 4rem;
+//     margin: auto;
+//     border: 1px solid $grey-med;
+//     cursor: pointer;
     
-    // &:hover {
-    //     border: none;
-    //     box-shadow: 0 0 1px $grey-med;
-    // }
-    &:hover {
-        border-color: $white;
-    }
+//     // &:hover {
+//     //     border: none;
+//     //     box-shadow: 0 0 1px $grey-med;
+//     // }
+//     &:hover {
+//         border-color: $white;
+//     }
 
-    &--purple {
-        background-color: $purple-light;
-        border-color: $purple-light;
-        color: $white;
-    }
-    &--green {
-        background-color: $green-light;
-        border-color: $green-light;
-        color: $white;
-    }
-    &--orange {
-        background-color: $orange-light;
-        border-color: $orange-bright;
-        color: $black;
-    }
-    &--small {
-        height: 1rem;
-    }
-    &--large {
-        height: 3rem;
-    }
-}
+//     &--purple {
+//         background-color: $purple-light;
+//         border-color: $purple-light;
+//         color: $white;
+//     }
+//     &--green {
+//         background-color: $green-light;
+//         border-color: $green-light;
+//         color: $white;
+//     }
+//     &--orange {
+//         background-color: $orange-light;
+//         border-color: $orange-bright;
+//         color: $black;
+//     }
+//     &--small {
+//         height: 1rem;
+//     }
+//     &--large {
+//         height: 3rem;
+//     }
+// }

@@ -31,6 +31,7 @@ class Register extends React.Component<
     }
     render() {
         const { auth } = this.props
+
         return (
             <div className="center">
                 <form onSubmit={this.submit} className="form">
@@ -42,7 +43,6 @@ class Register extends React.Component<
                     <input
                         className="mt2"
                         required
-                        placeholder="User Name" 
                         type="text" 
                         name="user_name" 
                         onChange={this.updateDetails} 
@@ -52,7 +52,6 @@ class Register extends React.Component<
                     <input
                         className="mt2"
                         required
-                        placeholder="Password"
                         type="password"
                         name="password"
                         onChange={this.updateDetails} 
@@ -62,7 +61,6 @@ class Register extends React.Component<
                     <input
                         className="mt2"
                         required 
-                        placeholder="Confirm Password" 
                         type="password" 
                         name="confirm_password" 
                         onChange={this.updateDetails} 

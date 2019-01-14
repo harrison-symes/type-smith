@@ -16,12 +16,10 @@ class Lobby extends React.Component<LobbyProps> {
     render() {
         return (
             <React.Fragment>
-                <div className="w-100 lobby center">
+                <div className="w-100 lobby nav-helper">
                     <h2 className="page-title">Lobby</h2>
-                    <div className="center w-75">   
-                        <GameRequests />
-                        <List />
-                    </div>
+                    <List />
+                    <GameRequests />
                 </div>
                 <LFG />
             </React.Fragment>
