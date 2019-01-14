@@ -33,7 +33,7 @@ class GameRequests extends React.Component<GameRequestsProps> {
         return (
             <div className="game-requests">
                 {gameRequests.inbound.map((request, i) => (
-                    <div className="game-request--item--container" style={{marginLeft: `${i + 3}rem`}}>
+                    <div className="game-request--item--container" style={{marginLeft: `${(i * 1.2) + 1}rem`}}>
                         <div className="game-request--item">
                             <span className="game-request--text">
                                 <h3 className="game-request--title">{request.sender_user_name}</h3>
