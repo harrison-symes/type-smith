@@ -1,9 +1,12 @@
 
 
 .lobby {
-    height: calc(100% - 3rem);
+    // height: calc(100% - 3rem);
     width: 100%;
-    padding: 1rem;
+    padding: {
+        left: 1rem;
+        right: 1rem;
+    }
     // margin-top: 
     
     position: fixed;
@@ -216,5 +219,5 @@
     font-size: 2rem;
     font-weight: 700;
     margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 2rem;
 }
