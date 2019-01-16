@@ -53,7 +53,9 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                 <div className="character-roster">
                     {characters.map(character => (
                         <div className={`character-roster--item ${
-                            !!selectedTeam.find(selected => selected.characterClass == character.characterClass) && "selected"
+                            !!selectedTeam.find(selected => selected.characterClass == character.characterClass) 
+                                ? "selected"
+                                : selectedTeam.length == 4 && "disabled"
                         }`}>
                             <div className="portrait" onClick={() => selectCharacter(character)}>
                                 <div className="portrait--inner">

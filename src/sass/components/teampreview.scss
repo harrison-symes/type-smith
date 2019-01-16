@@ -12,7 +12,11 @@
         margin: 1rem;
         width: $width;
         height: auto;
+        &.disabled {
+            opacity: 0.5;
+        }
         &.selected {
+            opacity: 1;
             .portrait, .name-bar {
                 background-color: $orange-med;
                 .name-bar--text {
