@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Socket } from "socket.io";
 import { AuthState } from "../Auth/auth.interface";
-import { LFGState } from "./interface";
 import { LFG_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 
 interface LFGProps {
@@ -10,7 +9,25 @@ interface LFGProps {
     isLFG: LFGState;
 }
 
-class LFG extends React.Component<LFGProps> {
+interface LFGState {
+    showSection: boolean;
+}
+
+class LFG extends React.Component<LFGProps, LFGState> {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            showSection: false
+        }
+    }
+    componentDidMount = () => {
+        this.joinLobby()
+    }
+    componentWillUnmount = () => {
+        this.leaveLobby()
+    }
+    toggleShow = () => this.setState({showSection: !this.state.showSection})
     joinLobby  = () => {
         const {socket, auth} = this.props
 
@@ -28,25 +45,31 @@ class LFG extends React.Component<LFGProps> {
     }
     render() {
         const {isLFG} = this.props
+        const {showSection} = this.state
 
         return (
-            <div className="join-lobby">
-                {
-                    isLFG ? 
-                    <div className="center">
-                        <button 
-                            className="btn h-100 w-100 btn--purple"
-                            onClick={this.leaveLobby}    
-                        >
-                            Leave Lobby
-                        </button>
-                    </div> :
-                    <div className="center">
-                        <button className="btn h-100 w-100 btn--full btn--green btn--large" onClick={this.joinLobby}>
-                            Join Lobby
-                        </button>
-                    </div>
-                }
+            <div className={`lfg ${showSection && "is-open"}`}>
+                <div className="lfg-content">
+                    <span className={`"lfg-arrow ra ${
+                        showSection ? "ra-save-arrow" : "ra-up-card"}`
+                    } onClick={this.toggleShow} />
+                    {
+                        isLFG ? 
+                        <div className="center">
+                            <button 
+                                className="btn lfg-cancel"
+                                onClick={this.leaveLobby}    
+                            >
+                                Do not disturb
+                            </button>
+                        </div> :
+                        <div className="center">
+                            <button className="btn lfg-btn" onClick={this.joinLobby}>
+                                Ready for a game
+                            </button>
+                        </div>
+                    }
+                </div>
             </div>
         )
     }

@@ -41,25 +41,24 @@ class Entry extends React.Component<EntryProps> {
         const {entry, auth, gameRequests} = this.props
 
         const isRequestSent = gameRequests.outbound.find(request => request.target_id == entry.user_id)
+        const isOwnListing = auth.user.id == entry.user_id
 
         return (
-            <div className="lobby-entry wpx-300">
-                {auth.user.id == entry.user_id ?
-                    <React.Fragment>
-                        <h3 className="lobby-entry__title">YOU</h3>
-                        <p className="lobby-entry__text">are looking for a match</p>
-                    </React.Fragment> :
-                    <React.Fragment>
-                        <h3 className="lobby-entry__title">{entry.user_name}</h3>
-                        <p className="lobby-entry__text">Is looking for a match</p>
-                        {isRequestSent ?
-                            <button onClick={this.cancelRequest} className="btn btn--purple">Cancel Request</button> :
-                            <button onClick={this.sendRequest} className="btn btn--green">Request to Join</button>
-
-                        }
-                    </React.Fragment>
-                
-                }
+            <div className="lobby-entry">
+                <h3 className="lobby-entry--title">
+                    {entry.user_name}
+                </h3>
+                <span className="lobby-entry--info">
+                    <span className="ra ra-info"></span>
+                </span>
+                <span className="lobby-entry--btn">
+                    {isOwnListing ?
+                        <button disabled className="btn btn-cancel">Your Listing</button> :
+                        isRequestSent ?
+                            <button onClick={this.cancelRequest} className="btn btn-cancel">Cancel</button> :
+                            <button onClick={this.sendRequest} className="btn btn-challenge">Challenge</button>
+                    }
+                </span>
             </div>
         )
     }

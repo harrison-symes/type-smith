@@ -12,7 +12,9 @@ import "./sass/main.scss"
 import { GameState, GameStage } from "./components/GameScreen/game.interface";
 import Game from "./pages/Game";
 import PreGame from "./pages/PreGame";
+import Main from "./pages/Main";
 import SocketListener from "./SocketListener.container";
+import MobileNav from "./components/MobileNav/MobileNav.container";
 
 interface AppProps {
     auth: AuthState,
@@ -26,13 +28,15 @@ const App : React.SFC<AppProps> = (props) => (
             {
                 !props.auth.isAuthenticated ? 
                 <Route path="/" component={Welcome} /> :
-                <Route path="/" render={routeProps => {
-                    switch(props.gameInfo.gameStage) {
-                        case GameStage.GAME_STARTED: return <Game />
-                        case GameStage.PRE_GAME: return <PreGame />
-                        default: return <Lobby />
-                    }
-                }} />
+                <React.Fragment>
+                    <Route path="/" render={routeProps => {
+                        switch(props.gameInfo.gameStage) {
+                            case GameStage.GAME_STARTED: return <Game />
+                            case GameStage.PRE_GAME: return <PreGame />
+                            default: return <Main />
+                        }
+                    }} />
+                </React.Fragment>
             }
         </React.Fragment>
     </Router>

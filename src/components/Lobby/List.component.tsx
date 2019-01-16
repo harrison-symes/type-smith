@@ -20,7 +20,7 @@ class List extends React.Component<ListProps> {
         const {lobby, auth} = this.props
             
         return (
-            <div className="flex flex-wrap justify-center">
+            <div className="lobby__content">
                 {lobby.map(entry => (
                     <Entry 
                         key={entry.id} 

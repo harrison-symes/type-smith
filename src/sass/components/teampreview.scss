@@ -1,39 +1,65 @@
-.team-preview {
-    &--container {
-        flex-wrap: wrap;
-    }
+.character-roster {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: space-around;
+    // height: 100%;
 
-    &--character {
-        min-width: 140px;
-        max-width: 400px;
-        width: 100%;
-        border-radius: 0.25rem;
-        background-color: $blue-med;
-        cursor: pointer;
-        margin: 0.5rem;
+    &--item {
+        $width: 80px;
+        margin: 1rem;
+        width: $width;
+        height: auto;
+        transition: opacity 0.2s ease-in-out;
+        &.disabled {
+            opacity: 0.5;
+        }
+        &.selected {
+            opacity: 1;
+            .portrait, .name-bar {
+                background-color: $orange-med;
+                .name-bar--text {
+                    color: $white;
+                }
+            }
+        }
+        .portrait {
+            &:focus {
+                outline: none;
+            }
+            cursor: pointer;
+            height: $width;
+            width: $width;
+            border-radius: 50%;
+            background-color: $grey-bright;
+            padding: 5%;
+            transition: background-color 0.2s ease-in-out;
+            &--inner {
+                width: 90%;
+                height: 90%;
+                margin: 5%;
+                background-color: $white;
+                border-radius: 50%;
+            }
+        }
         
-        &--selected {
-            border: 0.5rem $green-light;
-            background-color: $purple-light;
+        .name-bar {
+            cursor: pointer;
+            width: $width;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            border-radius: 0.5rem;
+            background-color: $white;
+            transition: background-color 0.2s ease-in-out;
+            &--text {
+                font-size: 1rem;
+                font-weight: 600;
+                color: $grey-dark;
+                transition: color 0.2s ease-in-out;
+            }
         }
     }
-    &--stats {
-        background-color: $blue-bright;
-        padding: 0.5rem;
-        font-weight: 700;
-        .stat-name {
-            width: 50%;
-            text-align: right;
-        }
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-content: flex-end;
-    }
-    &--stat-progress {
-        width: 60px;
-        height: 60px;
-        flex-grow: 1;
-    }
-    
 }

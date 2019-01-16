@@ -7,27 +7,16 @@ import {logout} from "./auth.actions"
 
 interface AuthNavProps {
     auth: AuthState;
-    logout() : void;
 }
 
 const AuthNav : React.SFC<AuthNavProps> = (props) => (
-    <div className="flex">
-        {props.auth.isAuthenticated ?
-            <div className="flex">
-                <Link to="/" onClick={props.logout}>
-                    <button className="btn btn--purple">
-                        Logout
-                    </button>
-                </Link>
-                <p className="page-title text-white">&nbsp;{"- "}{props.auth.user.user_name}</p >
-            </div> : 
-            <React.Fragment>
-                <Link to="/">
-                    <button className="btn btn--purple">Sign In</button>
-                </Link>
-            </React.Fragment>
-        }
-    </div>
+    props.auth.isAuthenticated ?
+        <p className="">
+            {props.auth.user.user_name}
+        </p> : 
+        <Link to="/">
+            <button className="btn btn--purple">Sign In</button>
+        </Link>
 )
 
 const mapStateToProps = ({
@@ -36,8 +25,4 @@ const mapStateToProps = ({
     auth
 })
 
-const mapDispatchToProps = dispatch => ({
-    logout: () => dispatch(logout())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthNav)
+export default connect(mapStateToProps)(AuthNav)

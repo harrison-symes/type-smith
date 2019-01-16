@@ -44,7 +44,6 @@ class Login extends React.Component<LoginProps, LoginState> {
 						type="text" 
 						name="user_name" 
 						onChange={this.updateUsername} 
-						placeholder="Krang"
 						autoComplete="off"
 					/>
 
@@ -54,7 +53,6 @@ class Login extends React.Component<LoginProps, LoginState> {
 						type="password" 
 						name="password" 
 						onChange={this.updatePassword} 
-						placeholder="Password" 
 						autoComplete={"off"}
 					/>
 					

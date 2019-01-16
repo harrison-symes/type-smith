@@ -2,7 +2,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 import LFG from "../components/LFG/LFG.container"
 import List from "../components/Lobby/List.container";
-import NavBar from "../components/NavBar/NavBar.component";
 import GameRequests from "../components/GameRequests/GameRequests.container";
 
 interface LobbyProps {
@@ -15,14 +14,11 @@ class Lobby extends React.Component<LobbyProps> {
     render() {
         return (
             <React.Fragment>
-                <NavBar />
-                <div className="nav-helper w-100 lobby-container center">
+                <div className="lobby nav-helper">
                     <h2 className="page-title">Lobby</h2>
-                    <div className="center w-75">   
-                        <GameRequests />
-                        <List />
-                    </div>
+                    <List />
                 </div>
+                <GameRequests />
                 <LFG />
             </React.Fragment>
         )
