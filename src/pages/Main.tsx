@@ -12,7 +12,6 @@ const Main : React.SFC<{}> = (props) => {
                 <NavBar />
                 
                 <Route exact path="/" component={Lobby} />
-
                 <Route path="/" component={MobileNav} />
 
             </React.Fragment>

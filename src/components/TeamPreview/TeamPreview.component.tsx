@@ -2,6 +2,7 @@ import * as React from "react"
 import { Socket } from "socket.io";
 import { GameState } from "../GameScreen/game.interface";
 import { CharacterClassList, Character } from "../../interfacing/characters";
+import { Link } from "react-router-dom";
 
 export interface TeamPreviewProps {
     socket: Socket,
@@ -57,16 +58,26 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                                 ? "selected"
                                 : selectedTeam.length == 4 && "disabled"
                         }`}>
+                            <div className="name-bar" onClick={() => selectCharacter(character)}>
+                                <div className="name-bar--text">
+                                    {character.characterClass}
+                                </div>
+
+                            </div>
                             <div className="portrait" onClick={() => selectCharacter(character)}>
                                 <div className="portrait--inner">
 
                                 </div>
                             </div>
-                            <div className="name-bar" onClick={() => selectCharacter(character)}>
-                                <div className="name-bar--text">
-                                    {character.characterClass}
-                                </div>
-                            </div>
+                            <span className="info-icons">
+                                <span className="info-icon">
+                                    <Link to="/character" className="ra ra-id-card" />
+                                </span>
+                                <span className="info-icon play">
+                                    <span className="ra ra-shaking-hands" />
+                                </span>
+
+                            </span>
                         </div>
                     ))}
                 </div>

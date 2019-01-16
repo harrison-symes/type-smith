@@ -9,6 +9,9 @@ import NavBar from "../components/NavBar/NavBar.component";
 import { Character, CharacterClassList } from "../interfacing/characters";
 import { GAME_ATTACKS } from "../../shared/attacks";
 import { TEAM_PREVIEW_SOCKET_CHANNEL } from "../../shared/socketChannels";
+import PreGameMobileNav from "../components/MobileNav/PreGameMobileNav.component";
+import CharacterPreview from "./CharacterPreview";
+import CharacterPreviewMobileNav from "../components/MobileNav/CharacterPreviewMobileNav.component";
 
 export interface PreGameProps {
     socket: Socket,
@@ -149,20 +152,26 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
             <Router>
                 <React.Fragment>
                     <NavBar />
-                    <React.Fragment>
-                        <div className="lobby nav-helper">
-                            <h2 className="page-title">Choose your team</h2>
-                            <TeamPreview 
-                                characters={characters}
-                                selectCharacter={this.selectCharacter}
-                                selectedTeam={selectedTeam}
-                            />
-                        </div>
-                    </React.Fragment>
-
+                    <Route exact path="/" render={(props) => (
+                        <React.Fragment>
+                            <div className="lobby nav-helper">
+                                <h2 className="page-title">Choose your team</h2>
+                                <TeamPreview 
+                                    characters={characters}
+                                    selectCharacter={this.selectCharacter}
+                                    selectedTeam={selectedTeam}
+                                    {...props}
+                                />
+                            </div>
+                        </React.Fragment>
+                    )} />
+                    <Route path="/character" component={CharacterPreview} />
+                    
                     {/* <Route exact path="/" component={Lobby} />
 
                     <Route path="/" component={MobileNav} /> */}
+                    <Route exact path="/" component={PreGameMobileNav} />
+                    <Route path="/character" component={CharacterPreviewMobileNav} />
 
                 </React.Fragment>
 
