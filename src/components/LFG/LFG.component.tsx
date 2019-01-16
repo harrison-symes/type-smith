@@ -21,6 +21,12 @@ class LFG extends React.Component<LFGProps, LFGState> {
             showSection: false
         }
     }
+    componentDidMount = () => {
+        this.joinLobby()
+    }
+    componentWillUnmount = () => {
+        this.leaveLobby()
+    }
     toggleShow = () => this.setState({showSection: !this.state.showSection})
     joinLobby  = () => {
         const {socket, auth} = this.props
@@ -54,12 +60,12 @@ class LFG extends React.Component<LFGProps, LFGState> {
                                 className="btn lfg-cancel"
                                 onClick={this.leaveLobby}    
                             >
-                                Cancel
+                                Do not disturb
                             </button>
                         </div> :
                         <div className="center">
                             <button className="btn lfg-btn" onClick={this.joinLobby}>
-                                Look for Game
+                                Ready for a game
                             </button>
                         </div>
                     }

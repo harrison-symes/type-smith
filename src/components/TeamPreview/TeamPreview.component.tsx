@@ -118,12 +118,11 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
         }
     }
     selectCharacter = (character) => {
-        let {selectedTeam, activeCharacter} = this.state
+        let {selectedTeam} = this.state
 
         if (selectedTeam.find(selected => selected.characterClass == character.characterClass)) {
-            if (activeCharacter.characterClass == character.characterClass) return
-
             selectedTeam = selectedTeam.filter(selected => selected.characterClass != character.characterClass)
+
         } else if (selectedTeam.length < teamSize) {
             selectedTeam.push(character)
         }
@@ -177,10 +176,28 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
         const {selectedTeam, activeCharacter} = this.state
 
         return (
-            <div className="center w-70">
+            <div>
                 <h1 className="page-title">Team Preview</h1>
                 
-                <div className="team-preview--container flex justify-center">
+                <div className="character-roster">
+                    {characters.map(character => (
+                        <div className={`character-roster--item ${
+                            !!selectedTeam.find(selected => selected.characterClass == character.characterClass) && "selected"
+                        }`}>
+                            <div className="portrait" onClick={() => this.selectCharacter(character)}>
+                                <div className="portrait--inner">
+
+                                </div>
+                            </div>
+                            <div className="name-bar" onClick={() => this.selectCharacter(character)}>
+                                <div className="name-bar--text">
+                                    {character.characterClass}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                {/* <div className="team-preview--container flex justify-center">
                     {characters.map(character => (
                         <div
                             className={`team-preview--character ${
@@ -219,7 +236,7 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                             </span>
                         </div>
                     ))}
-                </div>
+                </div> */}
                 {selectedTeam.length == teamSize ?
                     activeCharacter ?
                         <button onClick={this.submitTeam} className="btn btn--green w-50 hpx-100">
