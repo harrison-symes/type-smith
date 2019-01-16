@@ -76,17 +76,21 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                                     <Link to="/character" className="ra ra-id-card" />
                                 </span>
                                 {
-                                    leadCharacter 
+                                    leadCharacter
                                     ? leadCharacter.characterClass == character.characterClass
-                                        ? <span className="info-icon play" onClick={() => this.props.selectLeadCharacter(character)}>
+                                        ? <span className="info-icon remove" onClick={() => this.props.selectLeadCharacter(character)}>
                                             <span className="ra ra-crown" />
                                         </span>
                                         : <span className="info-icon crown disabled">
                                             <span className="ra ra-crown" />
                                         </span>
-                                        : <span className="info-icon remove" onClick={() => this.props.selectLeadCharacter(character)}>
+                                    : !!selectedTeam.find(selected => selected.characterClass == character.characterClass) 
+                                        ? <span className="info-icon play" onClick={() => this.props.selectLeadCharacter(character)}>
                                             <span className="ra ra-crown" />
                                         </span>
+                                        : <span className="info-icon crown disabled">
+                                                <span className="ra ra-crown" />
+                                            </span>
                                 }
                                 
 
