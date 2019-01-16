@@ -123,7 +123,7 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
             selectedTeam = selectedTeam.filter(selected => selected.characterClass != character.characterClass)
 
         } else if (selectedTeam.length < teamSize) {
-            selectedTeam.push(character)
+            selectedTeam = [...selectedTeam, character]
         }
         this.setState({ selectedTeam })
     }
