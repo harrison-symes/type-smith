@@ -143,6 +143,8 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
         )
     }
     render() {
+        const {selectedTeam} = this.state
+
         return (
             <Router>
                 <React.Fragment>
@@ -151,8 +153,9 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
                         <div className="lobby nav-helper">
                             <h2 className="page-title">Choose your team</h2>
                             <TeamPreview 
+                                characters={characters}
                                 selectCharacter={this.selectCharacter}
-                                selectedTeam={this.selectedTeam}
+                                selectedTeam={selectedTeam}
                             />
                         </div>
                     </React.Fragment>
