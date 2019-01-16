@@ -105,7 +105,7 @@ const classDescriptions = {
 
 interface PreGameState {
     selectedTeam: Partial<Character>[],
-    activeCharacter: Partial<Character>,
+    leadCharacter: Partial<Character> | null,
 }
 
 const teamSize = 4 || 5
@@ -116,25 +116,41 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
 
         this.state = {
             selectedTeam: [],
-            activeCharacter: null
+            leadCharacter: null
         }
     }
     selectCharacter = (character) => {
-        let { selectedTeam } = this.state
+        let { selectedTeam, leadCharacter } = this.state
 
         if (selectedTeam.find(selected => selected.characterClass == character.characterClass)) {
             selectedTeam = selectedTeam.filter(selected => selected.characterClass != character.characterClass)
+            if (character.characterClass == leadCharacter.characterClass){
+                this.setState({leadCharacter: null})
+            }
 
         } else if (selectedTeam.length < teamSize) {
             selectedTeam = [...selectedTeam, character]
         }
         this.setState({ selectedTeam })
     }
+    selectLeadCharacter = (character: Partial<Character>) => {
+        const {leadCharacter} = this.state
+
+        if (leadCharacter) {
+            this.setState({
+                leadCharacter: null
+            })
+        } else {
+            this.setState({
+                leadCharacter: character
+            })
+        }
+    }
     submitTeam = () => {
         const { socket, gameInfo } = this.props
-        const { selectedTeam, activeCharacter } = this.state
+        const { selectedTeam, leadCharacter } = this.state
 
-        const idx = selectedTeam.findIndex(c => c.characterClass == activeCharacter.characterClass)
+        const idx = selectedTeam.findIndex(c => c.characterClass == leadCharacter.characterClass)
 
         selectedTeam[idx].isActive = true
 
@@ -146,7 +162,7 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
         )
     }
     render() {
-        const {selectedTeam} = this.state
+        const {selectedTeam, leadCharacter} = this.state
 
         return (
             <Router>
@@ -160,6 +176,8 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
                                     characters={characters}
                                     selectCharacter={this.selectCharacter}
                                     selectedTeam={selectedTeam}
+                                    leadCharacter={leadCharacter}
+                                    selectLeadCharacter={this.selectLeadCharacter}
                                     {...props}
                                 />
                             </div>

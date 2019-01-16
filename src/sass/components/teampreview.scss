@@ -79,8 +79,20 @@
                 &.play{
                     background-color: $white;
                     border-color: $green-bright;
+                    transition: opacity 0.2s ease-in-out;
                     .ra {
                         color: $green-bright;
+                        transition: color 0.2s ease-in-out;
+                    }
+                    &.disabled {
+                        border-color: $grey-bright;
+                        color: $grey-bright;
+                        background-color: $white;
+                        opacity: 0.5;
+                    }
+                    &.remove {
+                        color: red;
+                        border-color: red;
                     }
                 }
             }

@@ -8,8 +8,10 @@ export interface TeamPreviewProps {
     socket: Socket,
     gameInfo: GameState,
     characters: Partial<Character>[],
+    leadCharacter: Partial<Character>,
     selectedTeam: Partial<Character>[],
     selectCharacter (character: Partial<Character>) : void;
+    selectLeadCharacter (character: Partial<Character>) : void;
 }
 
 interface TeamPreviewState {
@@ -48,7 +50,7 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
     //     </span>
     // }
     render() {
-        const {selectedTeam, characters, selectCharacter} = this.props
+        const {selectedTeam, characters, selectCharacter, leadCharacter} = this.props
         
         return (
                 <div className="character-roster">
@@ -73,9 +75,20 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                                 <span className="info-icon">
                                     <Link to="/character" className="ra ra-id-card" />
                                 </span>
-                                <span className="info-icon play">
-                                    <span className="ra ra-shaking-hands" />
-                                </span>
+                                {
+                                    leadCharacter 
+                                    ? leadCharacter.characterClass == character.characterClass
+                                        ? <span className="info-icon play" onClick={() => this.props.selectLeadCharacter(character)}>
+                                            <span className="ra ra-crown" />
+                                        </span>
+                                        : <span className="info-icon crown disabled">
+                                            <span className="ra ra-crown" />
+                                        </span>
+                                        : <span className="info-icon remove" onClick={() => this.props.selectLeadCharacter(character)}>
+                                            <span className="ra ra-crown" />
+                                        </span>
+                                }
+                                
 
                             </span>
                         </div>
