@@ -31,7 +31,7 @@ class MobileNav extends React.Component<MobileNavProps> {
                 {renderLink("/", "ra-tabletop-players")}
                 {renderLink("/profile", "ra-throne-king")}
 
-                <div className="mobile-nav--section" onClick={this.props.logout}>
+                <div className="mobile-nav--section" onClick={this.logout}>
                     <span className="ra ra-exit-door"></span>
                 </div>
             </div>
