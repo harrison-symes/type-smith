@@ -4,9 +4,9 @@ import {withRouter} from "react-router-dom"
 import { logout } from "../Auth/auth.actions";
 
 const mapStateToProps = ({
-
+    socket
 }) => ({
-
+    socket
 })
 
 const mapDispatchToProps = dispatch => ({

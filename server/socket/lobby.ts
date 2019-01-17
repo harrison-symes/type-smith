@@ -20,6 +20,10 @@ export const joinLobby = (socket : Socket, io) => {
                 const leaveRes = await lobbyDb.leaveLobby(socket.id, user_id)
                 io.emit(LFG_SOCKET_CHANNEL.USER_LEFT_LOBBY, user_id)
             })
+            socket.addListener("logout", async () => {
+                const leaveRes = await lobbyDb.leaveLobby(socket.id, user_id)
+                io.emit(LFG_SOCKET_CHANNEL.USER_LEFT_LOBBY, user_id)
+            })
 
         }
     )

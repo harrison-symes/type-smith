@@ -13,4 +13,6 @@ const NavBar : React.SFC<{}> = () => (
     </div>
 )
 
+
+
 export default NavBar

@@ -1,13 +1,19 @@
 import * as React from "react"
 import {withRouter, Link} from "react-router-dom"
 import { RouteComponentProps } from "react-router";
+import { Socket } from "socket.io";
 
 
 interface MobileNavProps extends RouteComponentProps<any> {
+    socket: Socket;
     logout() : void;
 }
 
 class MobileNav extends React.Component<MobileNavProps> {
+    logout = () => {
+        this.props.socket.emit("logout")
+        this.props.logout()
+    }
     render() {
         const renderLink = (path, icon) => (
             <Link to={path} className={`mobile-nav--section ${
