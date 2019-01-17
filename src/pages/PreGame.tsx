@@ -9,7 +9,7 @@ import NavBar from "../components/NavBar/NavBar.component";
 import { Character, CharacterClassList } from "../interfacing/characters";
 import { GAME_ATTACKS } from "../../shared/attacks";
 import { TEAM_PREVIEW_SOCKET_CHANNEL } from "../../shared/socketChannels";
-import PreGameMobileNav from "../components/MobileNav/PreGameMobileNav.component";
+import PreGameMobileNav from "../components/MobileNav/PreGameMobileNav.container";
 import CharacterPreview from "./CharacterPreview";
 import CharacterPreviewMobileNav from "../components/MobileNav/CharacterPreviewMobileNav.component";
 
@@ -103,6 +103,7 @@ const classDescriptions = {
 interface PreGameState {
     selectedTeam: Partial<Character>[],
     leadCharacter: Partial<Character> | null,
+    teamReady: boolean;
 }
 
 const teamSize = 4 || 5
@@ -113,11 +114,15 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
 
         this.state = {
             selectedTeam: [],
-            leadCharacter: null
+            leadCharacter: null,
+            teamReady: false
         }
     }
     selectCharacter = (character) => {
-        let { selectedTeam, leadCharacter } = this.state
+        let { selectedTeam, leadCharacter, teamReady} = this.state
+
+        if (teamReady) return
+
         if (selectedTeam.find(selected => selected.characterClass == character.characterClass)) {
             selectedTeam = selectedTeam.filter(selected => selected.characterClass != character.characterClass)
             if (leadCharacter && character.characterClass == leadCharacter.characterClass){
@@ -130,7 +135,9 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
         this.setState({ selectedTeam })
     }
     selectLeadCharacter = (character: Partial<Character>) => {
-        const {leadCharacter} = this.state
+        const {leadCharacter, teamReady} = this.state
+
+        if (teamReady) return
 
         if (leadCharacter) {
             this.setState({
@@ -146,6 +153,8 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
         const { socket, gameInfo } = this.props
         const { selectedTeam, leadCharacter } = this.state
 
+        if (selectedTeam.length != teamSize &&  !leadCharacter) return
+
         const idx = selectedTeam.findIndex(c => c.characterClass == leadCharacter.characterClass)
 
         selectedTeam[idx].isActive = true
@@ -156,6 +165,9 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
             gameInfo.user_id,
             selectedTeam
         )
+        this.setState({
+            teamReady: true
+        })
     }
     render() {
         const {selectedTeam, leadCharacter} = this.state
@@ -184,7 +196,11 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
                     {/* <Route exact path="/" component={Lobby} />
 
                     <Route path="/" component={MobileNav} /> */}
-                    <Route exact path="/" component={PreGameMobileNav} />
+                    <Route exact path="/" render={props => <PreGameMobileNav
+                        teamReady={this.state.teamReady}
+                        readyTeam={this.submitTeam}
+                        {...props}
+                    />} />
                     <Route path="/character" component={CharacterPreviewMobileNav} />
 
                 </React.Fragment>

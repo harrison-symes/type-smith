@@ -125,3 +125,29 @@
         }
     }
 }
+
+@keyframes rotatePeriodic {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(1800deg);
+    }
+    40% {
+        transform: rotate(360deg);
+    }
+    60% {
+        transform: rotate(360deg);
+    }
+    80% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.ra-sands-of-time {
+    animation: rotatePeriodic 3s linear infinite;
+    animation-play-state: running;
+}

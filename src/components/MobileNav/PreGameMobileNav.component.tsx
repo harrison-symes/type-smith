@@ -4,7 +4,8 @@ import { RouteComponentProps } from "react-router";
 
 
 interface PreGameMobileNavProps extends RouteComponentProps<any> {
-    logout() : void;
+    teamReady: boolean;
+    readyTeam () : void;
 }
 
 class PreGameMobileNav extends React.Component<PreGameMobileNavProps> {
@@ -25,9 +26,14 @@ class PreGameMobileNav extends React.Component<PreGameMobileNavProps> {
                 </Link>
                 {renderLink("/", "ra-minions")}
                 {renderLink("/", "ra-coronation")}
-                <Link to={"/"} className={`mobile-nav--section`}>
-                    <span className={`ra ra-play-button`}></span>
-                </Link>
+                {this.props.teamReady ?
+                    <span className={`mobile-nav--section`}>
+                        <span className={`ra ra-sands-of-time`}></span>
+                    </span> :
+                    <span className={`mobile-nav--section`} onClick={this.props.readyTeam}>
+                        <span className={`ra ra-play-button`}></span>
+                    </span>
+                }
             </div>
         )
 
