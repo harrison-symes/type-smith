@@ -34,6 +34,7 @@ export interface CharacterAbility {
 // }
 
 export interface Character {
+    icon?: string;
     id: number;
     owner_id: number;
     characterClass: CharacterClassList;

@@ -45,7 +45,12 @@
                 margin: 5%;
                 background-color: $white;
                 border-radius: 50%;
-
+                text-align: center;
+                padding-top: 5%;
+                .class-icon {
+                    // height: 90%;
+                    font-size: 5rem;
+                }
             }
         }
 
@@ -87,7 +92,7 @@
                 }
                 &.disabled {
                     border-color: $grey-dark;
-                    color: $grey-dark;;
+                    color: $grey-dark;
                     background-color: $white;
                     opacity: 0.8;
                 }

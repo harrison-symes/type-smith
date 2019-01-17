@@ -22,6 +22,7 @@ export interface PreGameProps {
 const characters = [
     {
         characterClass: CharacterClassList.WARRIOR,
+        icon: "ra-swords-power",
         abilities: [
             { name: GAME_ATTACKS.DEMOLISH },
             { name: GAME_ATTACKS.SLASH },
@@ -30,6 +31,7 @@ const characters = [
         ]
     },
     {
+        icon: "ra-wizard-face",
         characterClass: CharacterClassList.MAGE,
         abilities: [
             { name: GAME_ATTACKS.METEOR },
@@ -40,6 +42,7 @@ const characters = [
     },
     {
         characterClass: CharacterClassList.ASSASSIN,
+        icon: "ra-cowled",
         abilities: [
             { name: GAME_ATTACKS.ASSASSINATE },
             { name: GAME_ATTACKS.BACKSTAB },
@@ -49,6 +52,7 @@ const characters = [
     },
     {
         characterClass: CharacterClassList.PALADIN,
+        icon: "ra-elf-helmet",
         abilities: [
             { name: GAME_ATTACKS.SANCTUARY },
             { name: GAME_ATTACKS.BLESSED_HAMMER },
@@ -58,6 +62,7 @@ const characters = [
     },
     {
         characterClass: CharacterClassList.WITCH,
+        icon: "ra-cauldron",
         abilities: [
             { name: GAME_ATTACKS.WITCHING_HOUR },
             { name: GAME_ATTACKS.BLOOD_MOON },
@@ -67,6 +72,7 @@ const characters = [
     },
     {
         characterClass: CharacterClassList.SNIPER,
+        icon: "ra-eye-target",
         abilities: [
             { name: GAME_ATTACKS.RAPID_FIRE },
             { name: GAME_ATTACKS.PIERCING_SHOT },
@@ -75,15 +81,6 @@ const characters = [
         ]
     },
 ] as Partial<Character>[]
-
-const icons = {
-    [CharacterClassList.WARRIOR]: "ra-crossed-swords",
-    [CharacterClassList.MAGE]: "ra-wizard-face",
-    [CharacterClassList.ASSASSIN]: "ra-cowled",
-    [CharacterClassList.PALADIN]: "ra-elf-helmet",
-    [CharacterClassList.WITCH]: "ra-witch-face",
-    [CharacterClassList.SNIPER]: "ra-eye-target",
-}
 
 const passives = {
     [CharacterClassList.WARRIOR]: "The Warriors attacks have their power increased by 1% for each point of health the Warrior is missing",
@@ -121,10 +118,9 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
     }
     selectCharacter = (character) => {
         let { selectedTeam, leadCharacter } = this.state
-
         if (selectedTeam.find(selected => selected.characterClass == character.characterClass)) {
             selectedTeam = selectedTeam.filter(selected => selected.characterClass != character.characterClass)
-            if (character.characterClass == leadCharacter.characterClass){
+            if (leadCharacter && character.characterClass == leadCharacter.characterClass){
                 this.setState({leadCharacter: null})
             }
 

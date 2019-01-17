@@ -68,7 +68,7 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                             </div>
                             <div className="portrait" onClick={() => selectCharacter(character)}>
                                 <div className="portrait--inner">
-
+                                    <span className={`class-icon ra ${character.icon}`} />
                                 </div>
                             </div>
                             <span className="info-icons">
