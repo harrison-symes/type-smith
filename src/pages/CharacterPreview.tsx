@@ -7,6 +7,7 @@ import { AuthState } from "../components/Auth/auth.interface";
 import { HashRouter as Router, Route, RouteComponentProps } from "react-router-dom";
 import { Character, CharacterClassList } from "../interfacing/characters";
 import { characterPreviews } from "../../shared/characterPreview";
+import CharacterDescription from "../components/CharacterPreview/CharacterDescription"
 
 export interface CharacterPreviewProps extends RouteComponentProps {
     socket: Socket,
@@ -50,7 +51,7 @@ class CharacterPreview extends React.Component<CharacterPreviewProps, CharacterP
                 </div>
                 <Router>
                     <div className="character-preview--second">
-                        <Route exact path="/character/:class" /> 
+                        <Route exact path="/character/:class" render={props => <CharacterDescription character={character} />} /> 
                         <Route exact path="/character/:class/stats" /> 
                         <Route exact path="/character/:class/abilities" /> 
                     </div>

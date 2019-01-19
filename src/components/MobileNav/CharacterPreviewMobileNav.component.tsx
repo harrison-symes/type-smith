@@ -25,7 +25,7 @@ class CharacterPreviewMobileNav extends React.Component<CharacterPreviewMobileNa
                 </Link>
                 {renderLink(`/character/${characterClass}`, "ra-id-card")}
                 {renderLink(`/character/${characterClass}/stats`, "ra-abacus")}
-                {renderLink(`/character${characterClass}/abilities}`, "ra-retro-controller")}
+                {renderLink(`/character${characterClass}/abilities`, "ra-retro-controller")}
             </div>
         )
 

@@ -11,7 +11,11 @@ enum Roles {
 
 interface CharacterPreview extends Partial<Character> {
     passive: string;
-    description: string;
+    description: {
+        usage: string;
+        strengths: string;
+        weaknesses: string;
+    };
     usage: string;
     roles: Roles[];
 }
@@ -22,7 +26,11 @@ export const characterPreviews: CharacterPreview[] = [
         icon: "ra-swords-power",
         passive: "The Warrior's attacks have their power increased by 1% for each point of health the Warrior is missing",
         usage: "",
-        description: "",
+        description: {
+            usage: "A Brutal attacker. The Warrior can efficiently deal heavy amounts of damage to opponents.",
+            strengths: "",
+            weaknesses: ""
+        },
         roles: [],
         abilities: [
             { name: GAME_ATTACKS.DEMOLISH },
@@ -35,7 +43,11 @@ export const characterPreviews: CharacterPreview[] = [
         icon: "ra-wizard-face",
         passive: "The Mage gains +1 Power at the end of each turn while Active.",
         usage: "",
-        description: "",
+        description: {
+            usage: "Strong power but weak defenses. The Mage can boost their power to deal devastating attacks.",
+            strengths: "",
+            weaknesses: ""
+        },
         roles: [],
         characterClass: CharacterClassList.MAGE,
         abilities: [
@@ -49,7 +61,11 @@ export const characterPreviews: CharacterPreview[] = [
         characterClass: CharacterClassList.ASSASSIN,
         passive: "The Assassin has +6 Priority when switching",
         usage: "",
-        description: "",
+        description: {
+            usage: "Fast and fragile. The Assassin can get off some quick attacks to finish weakened enemies, or power up to run away with the game.",
+            strengths: "",
+            weaknesses: ""
+        },
         roles: [],
         icon: "ra-cowled",
         abilities: [
@@ -63,7 +79,11 @@ export const characterPreviews: CharacterPreview[] = [
         characterClass: CharacterClassList.PALADIN,
         passive: "The Paladin restores 1 Health to themselves at the end of each turn while Active.",
         usage: "",
-        description: "",
+        description: {
+            usage: "Slow and Sturdy. The Paladin can heal and buff their teamates, but deals little damage themselves.",
+            strengths: "",
+            weaknesses: ""
+        },
         roles: [],
         icon: "ra-elf-helmet",
         abilities: [
@@ -77,7 +97,11 @@ export const characterPreviews: CharacterPreview[] = [
         characterClass: CharacterClassList.WITCH,
         passive: "All of the Witch's attacks also lower the opponent's Defense by 1",
         usage: "",
-        description: "",
+        description: {
+            usage: "Nasty and tricky. The Witch can lower opponent's stats, prevent switching, and turn their enemies own power against them",
+            strengths: "",
+            weaknesses: ""
+        },
         roles: [],
         icon: "ra-cauldron",
         abilities: [
@@ -92,7 +116,11 @@ export const characterPreviews: CharacterPreview[] = [
         icon: "ra-eye-target",
         passive: "The Sniper gains +1 bonus Energy at the end of each turn, no matter where they are.",
         usage: "",
-        description: "",
+        description: {
+            usage: "The Sniper can shoot through opponent's defense, build up to their ultimate quickly, which is a devastating attack in itself. They can also spike trap opponents, causing them to take damage when switching out.",
+            strengths: "",
+            weaknesses: ""
+        },
         roles: [],
         abilities: [
             { name: GAME_ATTACKS.RAPID_FIRE },
@@ -104,8 +132,6 @@ export const characterPreviews: CharacterPreview[] = [
 ]
 
 export const classDescriptions = {
-    [CharacterClassList.WARRIOR]: "A Brutal attacker. The Warrior can efficiently deal heavy amounts of damage to opponents.",
-    [CharacterClassList.MAGE]: "Strong power but weak defenses. The Mage can boost their power to deal devastating attacks.",
     [CharacterClassList.ASSASSIN]: "Fast and fragile. The Assassin can get off some quick attacks to finish weakened enemies, or power up to run away with the game.",
     [CharacterClassList.PALADIN]: "Slow and Sturdy. The Paladin can heal and buff their teamates, but deals little damage themselves.",
     [CharacterClassList.WITCH]: "Nasty and tricky. The Witch can lower opponent's stats, prevent switching, and turn their enemies own power against them",

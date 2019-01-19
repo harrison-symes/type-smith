@@ -12,6 +12,7 @@
     bottom: 0;
     overflow-y: scroll;
     &--core {
+        // height: 100px;
         display:flex;
         justify-content: space-between;
         height: 7rem; 
@@ -77,6 +78,28 @@
                     }
                 }
             }
+        }
+    }
+    &--second {
+        position: relative;
+        margin-top: calc(50px + 2rem);
+    }
+    &--description {
+        margin-top: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: $blue-light;
+        border: 0.125rem solid $blue-bright;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        color: $grey-dark;
+
+        .title {
+            text-align: left;
+            clear: none;
+            font-weight: 600;
         }
     }
 }
