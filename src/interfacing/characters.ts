@@ -46,7 +46,7 @@ export interface Character {
     defense: number;
     power: number;
     speed: number;
-    abilities: CharacterAbility[],
+    abilities: Partial<CharacterAbility>[],
     isAlive: boolean;
     isTrapped?: boolean;
     ultimateCharge: number;

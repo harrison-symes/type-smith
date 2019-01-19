@@ -73,7 +73,7 @@ class TeamPreview extends React.Component<TeamPreviewProps, TeamPreviewState> {
                             </div>
                             <span className="info-icons">
                                 <span className="info-icon">
-                                    <Link to="/character" className="ra ra-id-card" />
+                                    <Link to={`/character/${character.characterClass}`} className="ra ra-id-card" />
                                 </span>
                                 {
                                     leadCharacter

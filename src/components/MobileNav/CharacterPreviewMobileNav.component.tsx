@@ -16,16 +16,16 @@ class CharacterPreviewMobileNav extends React.Component<CharacterPreviewMobileNa
                 <span className={`ra ${icon}`}></span>
             </Link>
         )
-        console.log(this.props)
-        
+        const characterClass = this.props.match["class"]
+
         return (
             <div className="mobile-nav">
                 <Link to={"/"} className={`mobile-nav--section`}>
                     <span className={`ra ra-return-arrow`}></span>
                 </Link>
-                {renderLink("/character/", "ra-id-card")}
-                {renderLink("/character/stats", "ra-abacus")}
-                {renderLink("/character/abilities", "ra-retro-controller")}
+                {renderLink(`/character/${characterClass}}`, "ra-id-card")}
+                {renderLink(`/character/${characterClass}}/stats`, "ra-abacus")}
+                {renderLink(`/character${characterClass}/abilities}`, "ra-retro-controller")}
             </div>
         )
 

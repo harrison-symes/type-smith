@@ -35,10 +35,25 @@
 }
 
 .nav-helper {
-    margin-top: 3rem;
+    margin-top: 4rem;
     margin-bottom: calc(10rem + 2.5rem);
     height: calc(100% - 12.5rem - 3rem);
     width: 100%;
+}
+
+.scroll-container {
+    height: calc(100% - 3rem);
+    width: 100%;
+    padding: {
+        left: 1rem;
+        right: 1rem;
+    }
+    // margin-top: 
+    
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
 }
 
 .lfg {
