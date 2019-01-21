@@ -8,6 +8,8 @@ import { HashRouter as Router, Route, RouteComponentProps } from "react-router-d
 import { Character, CharacterClassList } from "../interfacing/characters";
 import { characterPreviews } from "../../shared/characterPreview";
 import CharacterDescription from "../components/CharacterPreview/CharacterDescription"
+import CharacterStats from "../components/CharacterPreview/CharacterStats";
+import CharacterAbilities from "../components/CharacterPreview/CharacterAbilities";
 
 export interface CharacterPreviewProps extends RouteComponentProps {
     socket: Socket,
@@ -52,8 +54,8 @@ class CharacterPreview extends React.Component<CharacterPreviewProps, CharacterP
                 <Router>
                     <div className="character-preview--second">
                         <Route exact path="/character/:class" render={props => <CharacterDescription character={character} />} /> 
-                        <Route exact path="/character/:class/stats" /> 
-                        <Route exact path="/character/:class/abilities" /> 
+                        <Route exact path="/character/:class/stats" render={props => <CharacterStats character={character} />} /> 
+                        <Route exact path="/character/:class/abilities" render={props => <CharacterAbilities character={character} />} /> 
                     </div>
                 </Router>
            </div>

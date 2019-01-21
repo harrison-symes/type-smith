@@ -1,5 +1,5 @@
 .character-preview {
-    height: calc(100% - 3rem);
+    height: calc(100% - 8.5rem);
     width: 100%;
     padding: {
         left: 1rem;
@@ -21,8 +21,8 @@
         &-text {
             margin-top: auto;
             margin-left: 1rem;
-            min-height: 150px;
-            font-size: 1rem;
+            min-height: 125px;
+            font-size: 0.8rem;
             font-weight: 500;
             background-color: $blue-light;
             border: 0.125rem solid $blue-bright;
@@ -30,23 +30,29 @@
             padding: 0.5rem;
 
             .bold {
+                font-size: 0.8rem;
                 font-weight: 600;
             }
         }
         &-profile {
-            $width: 200px;
+            $width: 125px;
             width: $width;
             position: relative;
             .name-bar {
                 cursor: pointer;
-                width: 150px;
+                width: 125px;
                 margin-left: auto;
                 margin-right: auto;
                 text-align: center;
                 position: absolute;
                 border-radius: 0.5rem;
-                bottom: -0.5rem;
+                bottom: -1.25rem;
                 z-index: 1000;
+
+                background-color: $grey-bright;
+                border-radius: 0.5rem;
+                border: none;
+
                 &--text {
                     position: relative;
                     font-size: 1rem;
@@ -57,8 +63,8 @@
             }
             .portrait {
                 position: relative;
-                height: 150px;
-                width: 150px;
+                height: 125px;
+                width: 125px;
                 border-radius: 50%;
                 background-color: $grey-bright;
                 padding: 5%;
@@ -82,24 +88,31 @@
     }
     &--second {
         position: relative;
-        margin-top: calc(50px + 2rem);
+        margin-top: calc(4rem);
+        margin-bottom: 1rem;
     }
     &--description {
         margin-top: 1rem;
-        margin-left: 1rem;
-        margin-right: 1rem;
         font-size: 1rem;
         font-weight: 500;
         background-color: $blue-light;
         border: 0.125rem solid $blue-bright;
         border-radius: 0.5rem;
         padding: 0.5rem;
+        padding-top: 0.25rem;
         color: $grey-dark;
-
+        &.ultimate {
+            background-color: $orange-med;
+            color: $white;
+            // border-color: $orange-light;
+        }
         .title {
             text-align: left;
             clear: none;
             font-weight: 600;
+        }
+        .text {
+            padding-top: 0.25rem;
         }
     }
 }

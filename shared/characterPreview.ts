@@ -9,7 +9,7 @@ enum Roles {
     DISRUPTION = "Disruption"
 }
 
-interface CharacterPreview extends Partial<Character> {
+export interface CharacterPreview extends Partial<Character> {
     passive: string;
     description: {
         usage: string;
@@ -27,9 +27,9 @@ export const characterPreviews: CharacterPreview[] = [
         passive: "The Warrior's attacks have their power increased by 1% for each point of health the Warrior is missing",
         usage: "",
         description: {
-            usage: "A Brutal attacker. The Warrior can efficiently deal heavy amounts of damage to opponents.",
-            strengths: "",
-            weaknesses: ""
+            usage: "Deal some strong hits to weaken your opponent's team. You could 1v1 an opponent, but the best use is to get sizeable damage across several opponents, and having another character come through to finish off the job. It can be a good strategy to boost your Max Health, Power and Defense against more defensive teams, rather than going all in for not much benefit.",
+            strengths: "The Warrior is great at dealing large chunks of damage, and punishing opponents for letting the Warrior reach lower health pools without dying.",
+            weaknesses: "Sturdy opponents that can defend or heal through the Warriors attacks, as the warrior WILL die eventually."
         },
         roles: [],
         abilities: [
@@ -44,9 +44,9 @@ export const characterPreviews: CharacterPreview[] = [
         passive: "The Mage gains +1 Power at the end of each turn while Active.",
         usage: "",
         description: {
-            usage: "Strong power but weak defenses. The Mage can boost their power to deal devastating attacks.",
-            strengths: "",
-            weaknesses: ""
+            usage: "The Mage can boost their own attack quite efficiently, and will often land 2 kills in a game. It's best to only boost your stats against non-aggressive opponents, as the Mage is quite vulnerable. You may forfeit your own speed to gain defense, but defense isn't as useful when you have a low health pool to begin with.",
+            strengths: "Gaining high Power very quickly, allowing the Mage to run away with the game. The Mage can deal large damage to any opponent, and can often raise their Power higher than the opponent can heal / raise defense.",
+            weaknesses: "The Mage is weak to aggressive opponents, as the Mage's main source of damage will often attack last, and the Mage has very low Health and Defense."
         },
         roles: [],
         characterClass: CharacterClassList.MAGE,
@@ -62,9 +62,9 @@ export const characterPreviews: CharacterPreview[] = [
         passive: "The Assassin has +6 Priority when switching",
         usage: "",
         description: {
-            usage: "Fast and fragile. The Assassin can get off some quick attacks to finish weakened enemies, or power up to run away with the game.",
-            strengths: "",
-            weaknesses: ""
+            usage: "The Assassin is best kept in the back, only coming out to get quick kills on weakened opponents before they can heal / retreat. Boosting your Power and Speed will pay off well if you can pull it off safely, so be sure to only set up when against a non-aggressive opponent.",
+            strengths: "Can outrun most opponents with a high speed stat and priority on their main damaging attack. The Assassin can retreat before most attacks will hit them if played well.",
+            weaknesses: "Very fragile. The Assassin often can't hold their own"
         },
         roles: [],
         icon: "ra-cowled",

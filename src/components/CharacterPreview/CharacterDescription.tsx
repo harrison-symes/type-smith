@@ -15,13 +15,13 @@ const CharacterDescription : React.SFC<CharacterDescriptionProps> = (props) => (
         <div className="character-preview--description">
             <span className="title">Strenths:</span>
             <div className="text">
-                {props.character.description.usage}
+                {props.character.description.strengths}
             </div>
         </div>
         <div className="character-preview--description">
             <span className="title">Weaknesses:</span>
             <div className="text">
-                {props.character.description.usage}
+                {props.character.description.weaknesses}
             </div>
         </div>
     </React.Fragment>
