@@ -25,32 +25,19 @@ module.exports = {
         extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
     },
     output: {
-        path: path.join(__dirname, '/dist'),
-        filename: "bundle.js",
+        path: path.join(__dirname, '/dist/'),
+        filename: "bundle.min.js",
         // chunkFilename: "[name].js?x=[chunkhash]",
-        pathinfo: true,
+        // pathinfo: true,
         // publicPath: "/Scripts/dist/"
         // filename: 'bundle.min.js',
         // pathinfo: false
     },
     module: {
         rules: [
-            {
-                test: /\.svg/,
-                use: {
-                    loader: 'svg-url-loader',
-                    options: {}
-                }
-            },
-            // {
-            //     test: /\.(js|jsx)$/,
-            //     exclude: /node_modules/,
-            //     loader: 'babel-loader'
-            // },
             // {
             //     test: /\.tsx?$/,
-            //     loader: 'awesome-typescript-loader',
-            //     exclude: /node_modules/
+            //     loader: 'awesome-typescript-loader'
             // },
             {
                 test: /\.(ts|tsx)$/,
