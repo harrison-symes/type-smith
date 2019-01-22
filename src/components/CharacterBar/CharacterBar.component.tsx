@@ -11,6 +11,7 @@ export interface CharacterBarProps {
     gameInfo: GameState;
     character: Character;
     opponent: Character;
+    opponent23?: any;
 }
 
 class CharacterBar extends React.Component<CharacterBarProps> {
