@@ -1,21 +1,28 @@
 const path = require('path');
+const webpack = require("webpack")
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.tsx',
+    stats: "minimal",
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
     },
     output: {
         path: path.join(__dirname, '/dist'),
-        filename: 'bundle.min.js'
+        filename: 'bundle.min.js',
+        pathinfo: false
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader'
+                loader: 'ts-loader',
+                options: {
+                    transpileOnly: true,
+                    experimentalWatchApi: true,
+                },
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -32,6 +39,11 @@ module.exports = {
                 }]
             }
         ]
+    },
+    optimization: {
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
     },
     plugins: [
         new HtmlWebpackPlugin({
