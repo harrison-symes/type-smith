@@ -12,9 +12,11 @@ export default (state : GameRequestsState = initialState, action:GameRequestActi
     const newState = {...state}
     switch(action.type) {
         case type.ADD_INCOMING_GAME_REQUEST:
+            if (!action.request) return state
             newState.inbound = [...newState.inbound, action.request]
             return newState
         case type.ADD_OUTGOUNG_GAME_REQUEST:
+            if (!action.request) return state
             newState.outbound = [...newState.outbound, action.request]
             return newState
         case type.REMOVE_INCOMING_GAME_REQUEST:

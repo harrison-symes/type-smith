@@ -73,7 +73,7 @@ class PreGame extends React.Component<PreGameProps, PreGameState> {
         const { socket, gameInfo } = this.props
         const { selectedTeam, leadCharacter } = this.state
 
-        if (selectedTeam.length != teamSize &&  !leadCharacter) return
+        if (selectedTeam.length != teamSize || !leadCharacter) return
 
         const idx = selectedTeam.findIndex(c => c.characterClass == leadCharacter.characterClass)
 

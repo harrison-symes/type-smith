@@ -10,7 +10,7 @@ interface AuthNavProps {
 }
 
 const AuthNav : React.SFC<AuthNavProps> = (props) => (
-    props.auth.isAuthenticated ?
+    (props.auth.isAuthenticated && props.auth.user) ?
         <p className="">
             {props.auth.user.user_name}
         </p> : 

@@ -1,16 +1,16 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {},
-    "rules": {
-        "interface-name": [
-            true,
-            "never-prefix"
-        ],
-        "no-empty-interface": false,
-        "ordered-imports": false,
-    },
-    "rulesDirectory": []
+    // "defaultSeverity": "error",
+    // "extends": [
+    //     "tslint:recommended"
+    // ],
+    // "jsRules": {},
+    // "rules": {
+    //     "interface-name": [
+    //         true,
+    //         "never-prefix"
+    //     ],
+    //     "no-empty-interface": false,
+    //     "ordered-imports": false,
+    // },
+    // "rulesDirectory": []
 }

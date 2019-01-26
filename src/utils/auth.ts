@@ -34,7 +34,7 @@ export const isAuthenticated = () : boolean => {
         const payload : TokenInfo = decode(token);
         const {exp} = payload
 
-        if (exp < new Date().getTime() / 1000 ) {
+        if (!exp || exp < new Date().getTime() / 1000 ) {
             removeUser()
             return false
         }

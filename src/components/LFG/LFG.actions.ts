@@ -1,6 +1,6 @@
 import { LFG_TYPES } from "./interface";
 
-export const ownPlayerLeftLobby = (user_id) => ({
+export const ownPlayerLeftLobby = () => ({
     type: LFG_TYPES.OWN_PLAYER_LEFT_LOBBY
 })
 

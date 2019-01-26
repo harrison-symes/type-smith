@@ -38,7 +38,7 @@ export interface Character {
     id: number;
     owner_id: number;
     characterClass: CharacterClassList;
-    isActive?: boolean;
+    isActive: boolean;
     healthMax: number;
     health: number;
     energyMax: number;

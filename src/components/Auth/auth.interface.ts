@@ -1,4 +1,4 @@
-import { TokenInfo } from "src/utils/auth";
+import { TokenInfo } from "../../utils/auth";
 import { History } from "history";
 // LOGIN
 export interface LoginOwnProps {
@@ -51,7 +51,7 @@ export interface AuthUser {
 export interface AuthState {
     isFetching: boolean;
     isAuthenticated: boolean;
-    user: TokenInfo;
+    user: TokenInfo | null;
     errorMessage: string;
 }
 

@@ -1,11 +1,10 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import TeamPreview from "../components/TeamPreview/TeamPreview.container";
 import { Socket } from "socket.io";
 import { GameState } from "../components/GameScreen/game.interface";
 import { AuthState } from "../components/Auth/auth.interface";
 import { HashRouter as Router, Route, RouteComponentProps } from "react-router-dom";
-import { Character, CharacterClassList } from "../interfacing/characters";
+import { Character } from "../interfacing/characters";
 import { characterPreviews } from "../../shared/characterPreview";
 import CharacterDescription from "../components/CharacterPreview/CharacterDescription"
 import CharacterStats from "../components/CharacterPreview/CharacterStats";
@@ -26,8 +25,10 @@ class CharacterPreview extends React.Component<CharacterPreviewProps, CharacterP
     render() {
         const character = characterPreviews.find(c => c.characterClass == this.props.match.params["class"])
 
-        console.log({character, characterPreviews, match: this.props})
-        // if (!character) this.props.history.push("/")
+        if (!character) {
+            this.props.history.push("/")
+            return <div></div>
+        }
 
         return (
            <div className="nav-helper scroll-container character-preview">
@@ -53,9 +54,9 @@ class CharacterPreview extends React.Component<CharacterPreviewProps, CharacterP
                 </div>
                 <Router>
                     <div className="character-preview--second">
-                        <Route exact path="/character/:class" render={props => <CharacterDescription character={character} />} /> 
-                        <Route exact path="/character/:class/stats" render={props => <CharacterStats character={character} />} /> 
-                        <Route exact path="/character/:class/abilities" render={props => <CharacterAbilities character={character} />} /> 
+                        <Route exact path="/character/:class" render={props => <CharacterDescription character={character} {...props} />} /> 
+                        <Route exact path="/character/:class/stats" render={props => <CharacterStats character={character} {...props} />} /> 
+                        <Route exact path="/character/:class/abilities" render={props => <CharacterAbilities character={character} {...props} />} /> 
                     </div>
                 </Router>
            </div>

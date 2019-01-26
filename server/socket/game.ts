@@ -3,7 +3,7 @@ import { GameState, GAME_TYPES, TurnStage } from "../../src/components/GameScree
 import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils.ts/createCharacter";
 import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
-import { GameTurnAction, attackActionMapper, ATTACK_STACK_TYPES, GAME_ATTACKS } from "../../shared/attacks";
+import { GameTurnAction, attackActionMapper, ATTACK_STACK_TYPES, GAME_ATTACKS, ATTACK_STACK_TYPES_TYPE } from "../../shared/attacks";
 
 const games = {
 
@@ -15,6 +15,7 @@ export const game = (socket, io) => {
 }
 
 const initTurn = (turnNumber, player_ids) => ({
+    turnNumber,
     [player_ids[0]]: [],
     [player_ids[1]]: [],
     player_ids,
@@ -182,7 +183,7 @@ const roomListeners = (socket, io) => {
 
     socket.on(
         GAME_ACTION_SOCKET_CHANNEL.SUBMIT_TURN_ACTION,
-        (roomId, user_id, action:GameTurnAction) => {
+        (roomId, _user_id, action:GameTurnAction) => {
             const game = games[roomId]
             const turn = game.turns[game.turns.length -1]
 
@@ -248,7 +249,7 @@ const roomListeners = (socket, io) => {
             
     socket.on(
         GAME_ACTION_SOCKET_CHANNEL.SUBMIT_REQUIRED_SWITCH,
-        (roomId, user_id, action:GameTurnAction) => {
+        (roomId, _user_id, action:GameTurnAction) => {
             const game = games[roomId]
             const turn = game.turns[game.turns.length - 1]
 
@@ -312,7 +313,7 @@ const roomListeners = (socket, io) => {
             }
 
             turn.turnActions.pop()
-            let actionStack = []
+            let actionStack:ATTACK_STACK_TYPES_TYPE[] = []
 
             if (secondStack.character.isTrapped && secondStack.ability.name == GAME_ATTACKS.SWITCH) {
                 //nothing happens, switch fails

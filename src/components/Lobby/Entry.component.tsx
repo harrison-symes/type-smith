@@ -3,7 +3,7 @@ import { AuthState } from "../Auth/auth.interface";
 import { Socket } from "socket.io";
 import { LobbyEntry } from "./interface";
 import { GAME_REQUEST_SOCKET_CHANNEL } from "../../../shared/socketChannels";
-import { GameRequestsState } from "components/GameRequests/interface";
+import { GameRequestsState } from "../GameRequests/interface";
 
 interface EntryProps {
     entry: LobbyEntry;
@@ -25,6 +25,8 @@ class Entry extends React.Component<EntryProps> {
     }
     sendRequest = () => {
         const {socket, entry, auth} = this.props
+
+        if (!auth.user) return
         
         socket.emit(
             GAME_REQUEST_SOCKET_CHANNEL.SEND_GAME_REQUEST,
@@ -39,8 +41,9 @@ class Entry extends React.Component<EntryProps> {
     }
     render() {
         const {entry, auth, gameRequests} = this.props
-
-        const isRequestSent = gameRequests.outbound.find(request => request.target_id == entry.user_id)
+        if (!auth.user) return <div></div>
+        
+        const isRequestSent = !!gameRequests.outbound.find(request => request.target_id == entry.user_id)
         const isOwnListing = auth.user.id == entry.user_id
 
         return (

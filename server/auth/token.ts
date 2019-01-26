@@ -28,7 +28,7 @@ export const createToken = (user, secret) => (
     })
 )
 
-export const getSecret = (req, payload, done) => {
+export const getSecret = (_req, _payload, done) => {
     done(null, process.env.JWT_SECRET)
 }
 

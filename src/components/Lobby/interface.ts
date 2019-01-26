@@ -1,4 +1,4 @@
-import { AUTH_TYPES } from "components/Auth/auth.interface";
+import { AUTH_TYPES } from "../Auth/auth.interface";
 
 export enum LOBBY_TYPES {
     RECEIVE_LOBBY = "RECEIVE_LOBBY",

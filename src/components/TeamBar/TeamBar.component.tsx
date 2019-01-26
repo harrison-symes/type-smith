@@ -32,14 +32,6 @@ const icons = {
     [CharacterClassList.SNIPER]: "ra-eye-target",
 }
 
-const images = {
-    [CharacterClassList.WARRIOR]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSrnnC3vvN68thWmPatN6YJotE84yitAhCgoGMvIDBcxjaU-yJ",
-    [CharacterClassList.MAGE]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9jdkxWaz9A9qKZuUx9B30n9Av63UfCnWQW8QAUtJvBdFoH3DVVQ",
-    [CharacterClassList.ASSASSIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN2ZPdgsilSlMot1Ra_J1wW6k5qExY0CrJAn9YTrUXKGUFjpsJ",
-    [CharacterClassList.PALADIN]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO1QoI5qjFzrmcmcZ7E1ZzIzNsyDWoZlk6uOVPETzGyigXTvdR3g",
-    [CharacterClassList.WITCH]: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGR81UKtXdiUnJFdpO0T4aQ7DkitpeLvu9qCFmTgajafFTKt4",
-}
-
 class TeamBar extends React.Component<TeamBarProps> {
     
     switchCharacter = (character) => {
@@ -58,9 +50,9 @@ class TeamBar extends React.Component<TeamBarProps> {
                 ATTACK_STACK_TYPES.SWITCH,
             ]
         }
-
+        const activeCharacter = userTeam.find(c => c.isActive)
         //rogue passive
-        if (userTeam.find(c => c.isActive).characterClass == CharacterClassList.ASSASSIN) ability.priority = 6
+        if (activeCharacter && activeCharacter.characterClass == CharacterClassList.ASSASSIN) ability.priority = 6
 
         if (gameInfo.turnStage == TurnStage.NEED_TO_SWITCH) {
             socket.emit(
@@ -91,6 +83,7 @@ class TeamBar extends React.Component<TeamBarProps> {
         const {gameInfo, isPlayerSide, userTeam, opponentTeam} = this.props
         const team = isPlayerSide ? userTeam : opponentTeam
         const active = team.find(character => character.isActive)
+        if (!active) return
 
         const isWaiting = !(gameInfo.turnStage == TurnStage.CHOOSING 
             || gameInfo.turnStage == TurnStage.NEED_TO_SWITCH)
@@ -98,7 +91,7 @@ class TeamBar extends React.Component<TeamBarProps> {
         const canAttack = !!character.abilities.find(ability => 
             character[
                 ability.isUltimate ? "ultimateCharge" : "energy"
-            ] >= ability.cost
+            ] >= ability.cost!
         )
 
         const isDisabled = isWaiting 

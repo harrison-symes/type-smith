@@ -23,14 +23,14 @@ export default (state: AuthState = initialState, action: AuthAction) : AuthState
                 ...state,
                 isFetching: false,
                 isAuthenticated: true,
-                user: action.user
+                user: action.user || state.user
             }
         case AUTH_TYPES.LOGIN_FAILURE:
             return {
                 ...state,
                 isFetching: false,
                 isAuthenticated: false,
-                errorMessage: action.message
+                errorMessage: action.message || state.errorMessage
             }
         case AUTH_TYPES.LOGOUT_SUCCESS:
             clearUserToken()
@@ -53,7 +53,7 @@ export default (state: AuthState = initialState, action: AuthAction) : AuthState
                 ...state,
                 isFetching: false,
                 isAuthenticated: false,
-                errorMessage: action.message
+                errorMessage: action.message || state.errorMessage
             }
         default:
             return state

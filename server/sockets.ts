@@ -1,7 +1,7 @@
 import * as socket from "socket.io"
 import { connection, disconnection } from "./socket";
 
-export let io = null
+export let io
 
 export const createSocket = http => {
     io = socket(http)

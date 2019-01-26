@@ -7,7 +7,7 @@ interface CharacterStatsProps {
 }
 
 const CharacterStats: React.SFC<CharacterStatsProps> = props => {
-    const stats = statSheets[props.character.characterClass]
+    const stats = statSheets[props.character.characterClass!]
 
     console.log({stats})
     return (
