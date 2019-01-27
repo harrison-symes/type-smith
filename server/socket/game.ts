@@ -1,7 +1,7 @@
 import { Socket } from "socket.io";
 import { GameState, GAME_TYPES, TurnStage } from "../../src/components/GameScreen/game.interface";
 import { GameRequest } from "../../src/components/GameRequests/interface";
-import createCharacter from "../gameUtils.ts/createCharacter";
+import createCharacter from "../gameUtils/createCharacter";
 import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
 import { GameTurnAction, attackActionMapper, ATTACK_STACK_TYPES, GAME_ATTACKS, ATTACK_STACK_TYPES_TYPE } from "../../shared/attacks";
 

@@ -1,4 +1,4 @@
-import { StatSheet, statSheets } from "./statSheets";
+import { StatSheet, statSheets } from "../../shared/statSheets";
 import { CharacterClassList, Character } from "../../shared/characters";
 import mapAbilities from "../../shared/mapAbilities";
 

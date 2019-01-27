@@ -1,5 +1,5 @@
 import * as React from "react"
-import { statSheets } from "../../../server/gameUtils.ts/statSheets";
+import { statSheets } from "../../../shared/statSheets";
 import { CharacterPreview } from "../../../shared/characterPreview";
 
 interface CharacterStatsProps {
