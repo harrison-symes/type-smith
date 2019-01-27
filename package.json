@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "webpack",
-    "start": "node server",
+    "start": "ts-node server/index.ts",
     "dev": "nodemon --exec ts-node ./server/index.ts & webpack --watch",
     "build": "tsc",
     "dev:server": "ts-node ./server/index.ts",
