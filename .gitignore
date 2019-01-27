@@ -3,3 +3,8 @@ dist/
 dev.sqlite3
 .env
 .awcache
+
+dist/*
+server/*.js
+server/*/*.js
+shared/*.js

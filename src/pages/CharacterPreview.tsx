@@ -4,7 +4,7 @@ import { Socket } from "socket.io";
 import { GameState } from "../components/GameScreen/game.interface";
 import { AuthState } from "../components/Auth/auth.interface";
 import { HashRouter as Router, Route, RouteComponentProps } from "react-router-dom";
-import { Character } from "../interfacing/characters";
+import { Character } from "../../shared/characters";
 import { characterPreviews } from "../../shared/characterPreview";
 import CharacterDescription from "../components/CharacterPreview/CharacterDescription"
 import CharacterStats from "../components/CharacterPreview/CharacterStats";

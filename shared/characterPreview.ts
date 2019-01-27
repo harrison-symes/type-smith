@@ -1,4 +1,4 @@
-import { Character, CharacterClassList, CharacterAbility } from "../src/interfacing/characters";
+import { Character, CharacterClassList, CharacterAbility } from "./characters";
 import { GAME_ATTACKS } from "./attacks";
 
 enum Roles {

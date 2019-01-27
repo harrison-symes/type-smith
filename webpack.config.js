@@ -5,25 +5,15 @@ const CheckerPlugin = require("awesome-typescript-loader").CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: "./src/index.tsx",
-    stats: "minimal",
-    // devtool: "cheap-module-eval-source-map",
-    
+    entry: './src/index.tsx',
     resolve: {
-        extensions: ['.js', '.jsx', '.tsx', '.ts'],
+        extensions: ['.ts', '.tsx', '.js'],
+        // root: path.resolve('./src'),
+        // moduleDirectories: ['node_modules']
     },
     output: {
-        path: path.join(__dirname, './dist/'),
-        // filename: "bundle.min.js",
-        // path: __dirname,
-        filename: "bundle.js",
-        pathinfo: true,
-        // publicPath: "./dist/"
-        // chunkFilename: "[name].js?x=[chunkhash]",
-        // pathinfo: true,
-        // publicPath: "/Scripts/dist/"
-        // filename: 'bundle.min.js',
-        // pathinfo: false
+        path: path.join(__dirname, '/dist'),
+        filename: 'bundle.min.js'
     },
     module: {
         rules: [
@@ -33,7 +23,7 @@ module.exports = {
                 use: [
                     {
                         loader: "awesome-typescript-loader",
-                        options: {configFileName: "tsconfig.client.json"}
+                        options: { configFileName: "tsconfig.client.json" }
                     },
                     {
                         loader: "tslint-loader",
@@ -44,28 +34,6 @@ module.exports = {
                     }
                 ]
             },
-            // {
-            //     test: /\.tsx?$/,
-            //     loader: 'awesome-typescript-loader'
-            // },
-            // {
-            //     test: /\.(ts|tsx)$/,
-            //     use: [
-            //         {
-            //             loader: 'awesome-typescript-loader',
-            //             options: {
-            //                 silent: true,
-            //                 useBabel: true,
-            //                 babelOptions: {
-            //                     compact: process.env.NODE_ENV === 'production',
-            //                     highlightCode: true,
-            //                 },
-            //                 babelCore: '@babel/core',
-            //                 useCache: true,
-            //             },
-            //         },
-            //     ],
-            // },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000'
@@ -82,7 +50,6 @@ module.exports = {
             }
         ]
     },
-    
     optimization: {
         // minimizer: [new UglifyJsPlugin()],
         removeAvailableModules: false,
@@ -93,7 +60,6 @@ module.exports = {
             minChunks: 3
         },
     },
-    
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
@@ -102,8 +68,6 @@ module.exports = {
             React: "react",
             ReactDOM: "react-dom"
         }),
-        new webpack.ContextReplacementPlugin(/moment[\\\/]lang$/, /^\.\/(en)$/),
-        new CheckerPlugin(),
         new ForkTsCheckerWebpackPlugin()
     ],
     devtool: 'source-map'

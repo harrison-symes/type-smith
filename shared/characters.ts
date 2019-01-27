@@ -1,5 +1,5 @@
-import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "../../shared/attacks";
-import { ATTACK_TYPES } from "../../shared/types";
+import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "./attacks";
+import { ATTACK_TYPES } from "./types";
 import { HelpBlock } from "react-bootstrap";
 
 export enum CharacterClassList {

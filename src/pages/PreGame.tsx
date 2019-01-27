@@ -6,7 +6,7 @@ import { GameState } from "../components/GameScreen/game.interface";
 import { AuthState } from "../components/Auth/auth.interface";
 import {HashRouter as Router, Route} from "react-router-dom";
 import NavBar from "../components/NavBar/NavBar.component";
-import { Character, CharacterClassList } from "../interfacing/characters";
+import { Character, CharacterClassList } from "../../shared/characters";
 import { GAME_ATTACKS } from "../../shared/attacks";
 import { TEAM_PREVIEW_SOCKET_CHANNEL } from "../../shared/socketChannels";
 import PreGameMobileNav from "../components/MobileNav/PreGameMobileNav.container";

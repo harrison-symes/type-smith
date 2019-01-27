@@ -1,5 +1,5 @@
 import { GAME_TYPES } from "./game.interface";
-import { Character } from "../../interfacing/characters";
+import { Character } from "../../../shared/characters";
 import { ATTACK_STACK_TYPES } from "../../../shared/attacks";
 
 export interface TeamAction {

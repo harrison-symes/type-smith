@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Character, CharacterClassList } from "../../interfacing/characters";
+import { Character, CharacterClassList } from "../../../shared/characters";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 import { GameState, TurnStage } from "../GameScreen/game.interface";
 import { Socket } from "socket.io";

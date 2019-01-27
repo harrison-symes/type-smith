@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Socket } from "socket.io";
 import { GameState } from "../GameScreen/game.interface";
-import { CharacterClassList, Character } from "../../interfacing/characters";
+import { CharacterClassList, Character } from "../../../shared/characters";
 import { Link } from "react-router-dom";
 
 export interface TeamPreviewProps {

@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "postinstall": "webpack & yarn build:server",
-    "start": "ts-node ./server/index.ts",
+    "postinstall": "webpack",
+    "start": "ts-node ./server/index",
     "dev": "nodemon --exec ts-node ./server/index.ts & webpack --watch",
     "build": "tsc",
     "dev:server": "ts-node ./server/index.ts",

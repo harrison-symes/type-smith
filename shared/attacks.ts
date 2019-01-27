@@ -1,5 +1,5 @@
 import { calcDamage } from "./damageCalc";
-import { Character, CharacterAbility } from "../src/interfacing/characters";
+import { Character, CharacterAbility } from "./characters";
 import { GAME_TYPES } from "../src/components/GameScreen/game.interface";
 
 export enum GAME_ATTACKS {
