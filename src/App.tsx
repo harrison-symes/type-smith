@@ -50,5 +50,5 @@ const mapStateToProps = ({
     gameInfo
 })
 
-export default connect(mapStateToProps)(App)
-// export default connect(mapStateToProps)(PreGame)
+export default connect(mapStateToProps)(PreGame)
+// export default connect(mapStateToProps)(App)
