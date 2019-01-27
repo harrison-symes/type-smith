@@ -8,7 +8,7 @@ const Welcome : React.SFC<{}> = () => (
     <Router>
         <div className="welcome-page">
             <span className="mb4 center">
-                <h1 className="game-title">Atlas arena</h1>
+                <h1 className="game-title">ATLAS <span className="ra ra-lg ra-atlas" /> arena</h1>
             </span>
             <Route exact path="/register" component={Register} />
             <Route exact path="/" component={Login} />

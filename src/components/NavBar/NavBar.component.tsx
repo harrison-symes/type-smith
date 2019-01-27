@@ -6,7 +6,7 @@ const NavBar : React.SFC<{}> = () => (
     <div className="navbar">
         <div className="navbar--container">
             <Link to="/" className="game-title navbar__title">
-                Atlas arena
+                ATLAS <span className="ra ra-lg ra-atlas" /> arena
             </Link>
             {/* <AuthNav /> */}
         </div>
