@@ -1,11 +1,15 @@
 const path = require('path');
-
+const webpack = require("webpack")
+var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CheckerPlugin = require("awesome-typescript-loader").CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.tsx',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        // root: path.resolve('./src'),
+        // moduleDirectories: ['node_modules']
     },
     output: {
         path: path.join(__dirname, '/dist'),
@@ -15,7 +19,20 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader'
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "awesome-typescript-loader",
+                        options: { configFileName: "tsconfig.client.json" }
+                    },
+                    {
+                        loader: "tslint-loader",
+                        options: {
+                            emitErrors: true,
+                            failOnHint: true
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -33,10 +50,25 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        // minimizer: [new UglifyJsPlugin()],
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: {
+            chunks: "all",
+            name: "common",
+            minChunks: 3
+        },
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
-        })
+        }),
+        new webpack.ProvidePlugin({
+            React: "react",
+            ReactDOM: "react-dom"
+        }),
+        new ForkTsCheckerWebpackPlugin()
     ],
     devtool: 'source-map'
 }

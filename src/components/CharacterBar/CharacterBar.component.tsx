@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CharacterAbility, Character } from "../../interfacing/characters";
+import { CharacterAbility, Character } from "../../../shared/characters";
 import { Socket } from "socket.io";
 import { GameState, TurnStage } from "../GameScreen/game.interface";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../../shared/socketChannels";
@@ -11,6 +11,7 @@ export interface CharacterBarProps {
     gameInfo: GameState;
     character: Character;
     opponent: Character;
+    opponent23?: any;
 }
 
 class CharacterBar extends React.Component<CharacterBarProps> {

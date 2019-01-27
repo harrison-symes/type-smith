@@ -4,7 +4,7 @@ import { TurnState } from "./GameLog.reducer";
 class GameLog extends React.Component<{
     gameLog: TurnState[]
 }> {
-    messageList : HTMLElement
+    messageList : HTMLDivElement
 
     scrollToBottom = () => {
         const scrollHeight = this.messageList.scrollHeight;
@@ -25,7 +25,7 @@ class GameLog extends React.Component<{
         return (
             <div className="game-log--container">
                 <div className="game-log--screen"
-                    ref={(el) => { this.messageList = el; }}
+                    ref={(el:HTMLDivElement) => { this.messageList = el; }}
                 >
                    {gameLog.map(turn => turn.turnLog.map(logMessage => <div className={`game-log--message ${logMessage.type}`}>
                        {logMessage.message}

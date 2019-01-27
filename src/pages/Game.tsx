@@ -4,7 +4,7 @@ import CharacterBar from "../components/CharacterBar/CharacterBar.container";
 import GameLog from "../components/GameLog/GameLog.container";
 import GameScreen from "../components/GameScreen/GameScreen.container";
 import TeamBar from "../components/TeamBar/TeamBar.container";
-import { Character } from "../interfacing/characters";
+import { Character } from "../../shared/characters";
 import { GameState, TurnStage } from "../components/GameScreen/game.interface";
 import { Socket } from "socket.io";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";

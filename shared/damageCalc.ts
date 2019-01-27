@@ -1,4 +1,4 @@
-import { Character, CharacterAbility } from "src/interfacing/characters";
+import { Character, CharacterAbility } from "./characters";
 
 export const calcDamage = (character: Character, opponent: Character, ability: CharacterAbility) => {
     const power = Math.round(

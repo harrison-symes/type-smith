@@ -29,7 +29,7 @@ const App : React.SFC<AppProps> = (props) => (
                 !props.auth.isAuthenticated ? 
                 <Route path="/" component={Welcome} /> :
                 <React.Fragment>
-                    <Route path="/" render={routeProps => {
+                    <Route path="/" render={_routeProps => {
                         switch(props.gameInfo.gameStage) {
                             case GameStage.GAME_STARTED: return <Game />
                             case GameStage.PRE_GAME: return <PreGame />
@@ -51,3 +51,4 @@ const mapStateToProps = ({
 })
 
 export default connect(mapStateToProps)(App)
+// export default connect(mapStateToProps)(PreGame)

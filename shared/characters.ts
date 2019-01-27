@@ -1,5 +1,5 @@
-import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "../../shared/attacks";
-import { ATTACK_TYPES } from "../../shared/types";
+import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "./attacks";
+import { ATTACK_TYPES } from "./types";
 import { HelpBlock } from "react-bootstrap";
 
 export enum CharacterClassList {
@@ -34,10 +34,11 @@ export interface CharacterAbility {
 // }
 
 export interface Character {
+    icon?: string;
     id: number;
     owner_id: number;
     characterClass: CharacterClassList;
-    isActive?: boolean;
+    isActive: boolean;
     healthMax: number;
     health: number;
     energyMax: number;
@@ -45,7 +46,7 @@ export interface Character {
     defense: number;
     power: number;
     speed: number;
-    abilities: CharacterAbility[],
+    abilities: Partial<CharacterAbility>[],
     isAlive: boolean;
     isTrapped?: boolean;
     ultimateCharge: number;

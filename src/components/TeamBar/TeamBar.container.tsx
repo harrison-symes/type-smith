@@ -7,7 +7,7 @@ const mapStateToProps = ({
     userTeam,
     opponentTeam,
     socket
-}, {isPlayerSide}) => ({
+}) => ({
     gameInfo,
     userTeam,
     opponentTeam,

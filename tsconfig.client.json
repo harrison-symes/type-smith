@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.promise",
+      "es2015.iterable",
+      "es2015.collection",
+      "es2015.core"
+    ],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "alwaysStrict": true,
+    "noUnusedParameters": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "packages",
+    "typings",
+    "tests",
+    "bin",
+    "obj"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": true
+  }
+}

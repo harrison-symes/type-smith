@@ -1,5 +1,5 @@
 import { StatSheet, statSheets } from "./statSheets";
-import { CharacterClassList, Character } from "../../src/interfacing/characters";
+import { CharacterClassList, Character } from "../../shared/characters";
 import mapAbilities from "../../shared/mapAbilities";
 
 export const calcHealth = (healthStat : number) => 30 + (10 * healthStat)

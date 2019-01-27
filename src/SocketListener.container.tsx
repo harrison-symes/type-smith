@@ -5,7 +5,6 @@ import { ownPlayerJoinedLobby, ownPlayerLeftLobby } from "./components/LFG/LFG.a
 import { LobbyEntry } from "./components/Lobby/interface";
 import { addEntryToLobby, removeEntryFromLobby } from "./components/Lobby/lobby.actions";
 import { receiveGameInfo, receiveTeamInfo, waitForOpponent, turnValidated, switchCharacterRequest } from "./components/GameScreen/gameScreen.actions";
-import { promises } from "fs";
 
 const mapStateToProps = ({
     socket
@@ -21,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
     removeOutgoingGameRequest: request_id => dispatch(removeGameRequestOutbound(request_id)),
     //LFG
     ownPlayerJoinedLobby: () => dispatch(ownPlayerJoinedLobby()),
-    ownPlayerLeftLobby: (user_id: number) => dispatch(ownPlayerLeftLobby(user_id)),
+    ownPlayerLeftLobby: (_user_id: number) => dispatch(ownPlayerLeftLobby()),
     //list (lobby)
     addEntryToLobby: (entry: LobbyEntry) => dispatch(addEntryToLobby(entry)),
     removeEntryFromLobby: (user_id: number) => dispatch(removeEntryFromLobby(user_id)),

@@ -2,7 +2,7 @@ import * as express from "express"
 import * as lobbyDb from "../db/lobby"
 const router = express.Router()
 
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
     try {
         const Lobby = await lobbyDb.getLobbyList()
         res.json(Lobby)

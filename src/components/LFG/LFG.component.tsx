@@ -30,14 +30,16 @@ class LFG extends React.Component<LFGProps, LFGState> {
     toggleShow = () => this.setState({showSection: !this.state.showSection})
     joinLobby  = () => {
         const {socket, auth} = this.props
-
+        if (!auth.user) return
+        
         socket.emit(
             LFG_SOCKET_CHANNEL.USER_JOIN_LOBBY, 
             auth.user.id
-        )
-    }
+            )
+        }
     leaveLobby = () => {
         const {socket, auth} = this.props
+        if (!auth.user) return
         socket.emit(
             LFG_SOCKET_CHANNEL.USER_LEAVE_LOBBY, 
             auth.user.id

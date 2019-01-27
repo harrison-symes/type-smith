@@ -1,6 +1,6 @@
 import * as React from "react"
 import {ProgressBar} from "react-bootstrap"
-import { Character } from "src/interfacing/characters";
+import { Character } from "../../../shared/characters";
 
 export interface HealthBarProps {
     character: Character;

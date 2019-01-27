@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Character, CharacterClassList } from "../../../src/interfacing/characters";
+import { Character, CharacterClassList } from "../../../shared/characters";
 import HealthBar from "../statComponents/HealthBar";
 import EnergyBar from "../statComponents/EnergyBar";
 import UltimateBar from "../statComponents/UltimateBar";

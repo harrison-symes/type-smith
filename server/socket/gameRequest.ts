@@ -58,7 +58,7 @@ export const gameRequests = (socket, io) => {
 
             //remove both users from lobby
             leaveLobby(socket.id, request.sender_id)
-                .then(() => leaveLobby(request.target_socket_id, request.target_id))
+                .then(() => leaveLobby(request.target_socket_id!, request.target_id))
                 .then(() => {
                     io.emit(LOBBY_SOCKET_CHANNEL.ENTRY_REMOVED, request.sender_id)
                     io.emit(LOBBY_SOCKET_CHANNEL.ENTRY_REMOVED, request.target_id)

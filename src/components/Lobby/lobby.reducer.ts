@@ -9,8 +9,10 @@ const lobbyReducer = (state: LobbyState = initialState, action : LobbyAction): L
     const newState = [...state]
     switch (action.type) {
         case type.RECEIVE_LOBBY:
-            return action.lobby
+            if (!action.lobby) return state
+            return action.lobby!
         case type.ADD_ENTRY_TO_LOBBY:
+            if (!action.entry) return state
             return [...newState, action.entry]
         case type.REMOVE_ENTRY_FROM_LOBBY:
             return newState.filter(entry => entry.user_id != action.user_id)

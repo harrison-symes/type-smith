@@ -1,7 +1,7 @@
 import { GAME_ATTACKS, ATTACK_STACK_TYPES } from "./attacks";
 import * as React from "react"
 import { ATTACK_TYPES } from "./types";
-import { Character } from "../src/interfacing/characters";
+import { Character } from "./characters";
 
 export default {
     [GAME_ATTACKS.ULTIMATE]: () => ({

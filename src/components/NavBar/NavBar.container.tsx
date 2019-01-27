@@ -6,7 +6,7 @@ const mapStateToProps = () => ({
 
 })
 
-const mapDispatchToProps = (dispatch : React.Dispatch<any>) => ({
+const mapDispatchToProps = (_dispatch : React.Dispatch<any>) => ({
 
 })
 

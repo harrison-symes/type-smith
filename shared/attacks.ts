@@ -1,5 +1,5 @@
 import { calcDamage } from "./damageCalc";
-import { Character, CharacterAbility } from "src/interfacing/characters";
+import { Character, CharacterAbility } from "./characters";
 import { GAME_TYPES } from "../src/components/GameScreen/game.interface";
 
 export enum GAME_ATTACKS {
@@ -121,12 +121,12 @@ export interface AttackAction {
     isStrong: boolean;
 }
 
-export const spendEnergyAction = (character, opponent, ability) => ({
+export const spendEnergyAction = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.SPEND_ENERGY,
     energyLoss: ability.cost,
     target: character
 })
-export const spendUltimateCharge = (character, opponent, ability) => ({
+export const spendUltimateCharge = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
     ultimateChargeLoss: ability.cost,
     target: character
@@ -147,7 +147,7 @@ export const damageOpponentAction = (character, opponent, ability) => {
 }
 
 // DAMAGE_SELF = "DAMAGE_SELF",
-export const damageSelfAction = (character, opponent, ability) => {
+export const damageSelfAction = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_SELF,
         power: ability.isStatic
@@ -157,7 +157,7 @@ export const damageSelfAction = (character, opponent, ability) => {
     }
 }
 // HEAL_SELF = "HEAL_SELF",
-export const healSelfAction = (character, opponent, ability) => {
+export const healSelfAction = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.HEAL_SELF,
         power: ability.isStatic
@@ -177,7 +177,7 @@ export const healOpponentAction = (character, opponent, ability) => {
     }
 }
 // GAIN_POWER = "GAIN_POWER",
-export const gainPowerAction = (character, opponent, ability) => {
+export const gainPowerAction = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.GAIN_POWER,
         powerGain: ability.powerGain,
@@ -185,7 +185,7 @@ export const gainPowerAction = (character, opponent, ability) => {
     }
 }
 // GAIN_DEFENSE = "GAIN_DEFENSE",
-export const gainDefenseAction = (character, opponent, ability) => {
+export const gainDefenseAction = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.GAIN_DEFENSE,
         defenseGain: ability.defenseGain,
@@ -193,14 +193,14 @@ export const gainDefenseAction = (character, opponent, ability) => {
     }
 }
 // GAIN_ENERGY = "GAIN_ENERGY",
-export const gainEnergyAction = (character, opponent, ability) => {
+export const gainEnergyAction = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.GAIN_ENERGY,
         energyGain: ability.energyGain,
         target: character
     }
 }
-export const gainUltimateCharge = (character, opponent, ability) => {
+export const gainUltimateCharge = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.GAIN_ULTIMATE_CHARGE,
         ultimateGain: ability.ultimateGain,
@@ -208,7 +208,7 @@ export const gainUltimateCharge = (character, opponent, ability) => {
     }
 }
 // GAIN_SPEED = "GAIN_SPEED",
-export const gainSpeedAction = (character, opponent, ability) => {
+export const gainSpeedAction = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.GAIN_SPEED,
         speedGain: ability.speedGain,
@@ -216,7 +216,7 @@ export const gainSpeedAction = (character, opponent, ability) => {
     }
 }
 // INCREASE_MAX_HEALTH = "INCREASE_MAX_HEALTH",
-export const increaseMaxHealth = (character, opponent, ability) => {
+export const increaseMaxHealth = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.INCREASE_MAX_HEALTH,
         target: character,
@@ -224,7 +224,7 @@ export const increaseMaxHealth = (character, opponent, ability) => {
     }
 }
 // INCREASE_MAX_ENERGY = "INCREASE_MAX_ENERGY",
-export const increaseMaxEnergy = (character, opponent, ability) => {
+export const increaseMaxEnergy = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.INCREASE_MAX_ENERGY,
         target: character,
@@ -232,7 +232,7 @@ export const increaseMaxEnergy = (character, opponent, ability) => {
     }
 }
 
-export const switchCharacterAction = (character, opponent, ability) => {
+export const switchCharacterAction = (character, _opponent, ability) => {
     return {
         type: ATTACK_STACK_TYPES.SWITCH,
         character,
@@ -240,24 +240,24 @@ export const switchCharacterAction = (character, opponent, ability) => {
     }
 }
 
-export const changeStatsOpponent = (character, opponent, ability) => ({
+export const changeStatsOpponent = (_character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.CHANGE_ALL_STATS,
     target: opponent,
     statChange: ability.statChange
 })
 
-export const changeStatsSelf = (character, opponent, ability) => ({
+export const changeStatsSelf = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.CHANGE_ALL_STATS,
     target: character,
     statChange: ability.statChange
 })
 
-export const trapOpponent = (character, opponent, ability) => ({
+export const trapOpponent = (_character, opponent, _ability) => ({
     type: ATTACK_STACK_TYPES.TRAP_TARGET,
     target: opponent
 })
 
-export const damageOpponentBloodMoon = (character, opponent, ability) => ({
+export const damageOpponentBloodMoon = (_character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
     target: opponent,
     power: calcDamage(opponent, opponent, ability)
@@ -313,7 +313,7 @@ export const damageOpponentIgnoreArmour = (character, opponent, ability) => {
     }
 }
 
-export const healTeamSelf = (character, opponent, ability) => ({
+export const healTeamSelf = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.HEAL_TEAM,
     owner_id: character.owner_id,
     power: ability.isStatic 
@@ -345,64 +345,64 @@ export const damageTeamDemolish = (character, opponent, ability) => {
     }
 }
 
-export const changeTeamStatsPower = (character, opponent, ability) => ({
+export const changeTeamStatsPower = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.CHANGE_TEAM_STAT,
     stat: "power",
     statChange: ability.powerGain,
     owner_id: character.owner_id
 })
 
-export const changeTeamStatsDefense = (character, opponent, ability) => ({
+export const changeTeamStatsDefense = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.CHANGE_TEAM_STAT,
     stat: "defense",
     statChange: ability.defenseGain,
     owner_id: character.owner_id
 })
 
-export const changeTeamStatsAllOpponent = (character, opponent, ability) => ({
+export const changeTeamStatsAllOpponent = (_character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.CHANGE_TEAM_STATS_ALL,
     statChange: ability.statChange,
     owner_id: opponent.owner_id
 })
 
-export const lowerOpponentPower = (character, opponent, ability) => ({
+export const lowerOpponentPower = (_character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.GAIN_POWER,
     target: opponent,
     powerGain: ability.powerGain
 
 })
-export const lowerOpponentDefense = (character, opponent, ability) => ({
+export const lowerOpponentDefense = (_character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.GAIN_DEFENSE,
     target: opponent,
     defenseGain: ability.defenseGain
 })
 
-export const lowerOpponentEnergy = (character, opponent, ability) => ({
+export const lowerOpponentEnergy = (_character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.GAIN_ENERGY,
     target: opponent,
     energyGain: ability.energyGain
 })
 
-export const lowerOpponentSpeed = (character, opponent, ability) => ({
+export const lowerOpponentSpeed = (_character, opponent, ability) => ({
     type: ATTACK_STACK_TYPES.GAIN_SPEED,
     target: opponent,
     speedGain: ability.speedGain
 })
-export const applySpikeTrapOpponent = (character, opponent, ability) => ({
+export const applySpikeTrapOpponent = (_character, opponent, _ability) => ({
     type: ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP,
     target: opponent
 })
-export const activateSpikeTrap = (character, opponent, ability) => ({
+export const activateSpikeTrap = (character, _opponent, _ability) => ({
     type: ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP,
     target: character
 })
-export const witchPassive = (character, opponent, ability) => ({
+export const witchPassive = (_character, opponent, _ability) => ({
     type: ATTACK_STACK_TYPES.GAIN_DEFENSE,
     target: opponent,
     defenseGain: -1,
 })
 
-export const useAttack = (character, opponent, ability) => ({
+export const useAttack = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.USE_ATTACK,
     abilityName: ability.name,
     characterName: character.characterClass,
