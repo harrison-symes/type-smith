@@ -12,6 +12,7 @@ import EnemyCharacter from "../components/Game/EnemyCharacter.container";
 import MobileNav from "../components/Game/MobileNav.container";
 import GameCharacter from "../components/Game/GameCharacter.container";
 import CharacterBar from "../components/CharacterBar/CharacterBar.container"
+import TeamBar from "../components/TeamBar/TeamBar.container"
 
 interface GameProps {
     socket: Socket;
@@ -75,10 +76,9 @@ class Game extends React.Component<GameProps> {
                 <div className="game-container">
                     <EnemyTeamContainer />
                     <EnemyCharacter />
-                    {/* <GameScreen /> */}
-                    {/* <TeamBar isPlayerSide={true} /> */}
                     {/* <GameLog /> */}
                     <Route component={CharacterBar} />
+                    <Route component={TeamBar} />
                     <GameCharacter />
                     <Route component={MobileNav} />
                 </div>

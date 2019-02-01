@@ -14,22 +14,13 @@ import EnergyBar from "../statComponents/EnergyBar";
 import UltimateBar from "../statComponents/UltimateBar";
 
 import {Tooltip} from "react-tippy"
+import { RouteComponentProps } from "react-router";
 
-interface TeamBarProps {
-    isPlayerSide: boolean;
+interface TeamBarProps extends RouteComponentProps {
     gameInfo: GameState;
     userTeam: Character[];
     opponentTeam: Character[];
     socket: Socket;
-}
-
-const icons = {
-    [CharacterClassList.WARRIOR]: "ra-crossed-swords",
-    [CharacterClassList.MAGE]: "ra-wizard-face",
-    [CharacterClassList.ASSASSIN]: "ra-cowled",
-    [CharacterClassList.PALADIN]: "ra-elf-helmet",
-    [CharacterClassList.WITCH]: "ra-witch-face",
-    [CharacterClassList.SNIPER]: "ra-eye-target",
 }
 
 class TeamBar extends React.Component<TeamBarProps> {
@@ -80,8 +71,8 @@ class TeamBar extends React.Component<TeamBarProps> {
 
     }
     renderCharacter = (character:Character) => {
-        const {gameInfo, isPlayerSide, userTeam, opponentTeam} = this.props
-        const team = isPlayerSide ? userTeam : opponentTeam
+        const {gameInfo, userTeam, opponentTeam} = this.props
+        const team = userTeam
         const active = team.find(character => character.isActive)
         if (!active) return
 
@@ -109,58 +100,34 @@ class TeamBar extends React.Component<TeamBarProps> {
                 // followCursor
                 inertia
                 arrow="true"
-                html={<span>
-                    <div className="subtitle">
-                        <span className="ra ra-lg ra-strong" />
-                        {" "}
-                        {character.power}
-                    </div>
-                    <div className="subtitle">
-                        <span className="ra ra-lg ra-vibrating-shield" />
-                        {" "}
-                        {character.defense}
-                    </div>
-                    <div className="subtitle">
-                        <span className="ra ra-lg ra-electric" />
-                        {" "}
-                        {character.speed}
-                    </div>
+                html={<span className="character-info">
+                    {character.characterClass}
+                    <EnergyBar character={character} />
+                    <UltimateBar character={character} />
                 </span>}
                 style={{ cursor: 'context-menu' }}
             >
-                <React.Fragment>
-
-                    <p className="team-member--name">
-                        {character.characterClass}
-                        {" "}
-                        <span className={`team-member--image ra ${icons[character.characterClass]}`} />
-                    </p>
-                    <div>
-                        <HealthBar character={character} />
-                        <EnergyBar character={character} />
-                        <UltimateBar character={character} />
-                    </div>
-                    {(isPlayerSide && !character.isActive && character.isAlive) &&
-                        <button 
-                        className="team-member--btn btn" 
-                        disabled={isDisabled}
-                        onClick={() => this.switchCharacter(character)}>
-                            Switch
-                        </button>
-                    }
-                </React.Fragment>
+                <div className="team-member--icon-container">
+                    <span className={`team-member--icon ra ${character.icon}`} />
+                </div>
+                <div>
+                    <HealthBar character={character} />
+                </div>
             </Tooltip>
         )
     }
     render() {
-        const {userTeam, opponentTeam, isPlayerSide} = this.props
-        const team = isPlayerSide ? userTeam : opponentTeam
+        const {userTeam} = this.props
 
         return (
-            <div className="team-bar width-100">
-                {team
-                    .map(character => this.renderCharacter(character))
-                }
+            <div className={`user-team--container 
+                ${this.props.location.pathname == "/team" && "active"}
+            `}>
+                <div className="user-team">
+                    {userTeam
+                        .map(character => this.renderCharacter(character))
+                    }
+                </div>
             </div>
         )
     }
