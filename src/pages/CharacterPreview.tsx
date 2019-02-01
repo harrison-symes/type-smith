@@ -6,7 +6,6 @@ import { AuthState } from "../components/Auth/auth.interface";
 import { HashRouter as Router, Route, RouteComponentProps } from "react-router-dom";
 import { Character } from "../../shared/characters";
 import { characterPreviews } from "../../shared/characterPreview";
-import CharacterDescription from "../components/CharacterPreview/CharacterDescription"
 import CharacterStats from "../components/CharacterPreview/CharacterStats";
 import CharacterAbilities from "../components/CharacterPreview/CharacterAbilities";
 
@@ -54,9 +53,24 @@ class CharacterPreview extends React.Component<CharacterPreviewProps, CharacterP
                 </div>
                 <Router>
                     <div className="character-preview--second">
-                        <Route exact path="/character/:class" render={props => <CharacterDescription character={character} {...props} />} /> 
-                        <Route exact path="/character/:class/stats" render={props => <CharacterStats character={character} {...props} />} /> 
-                        <Route exact path="/character/:class/abilities" render={props => <CharacterAbilities character={character} {...props} />} /> 
+                        <Route exact path="/character/:class" render={props => {
+                            const CharacterDescription = React.lazy(() => import("../components/CharacterPreview/CharacterDescription"))
+                            return <React.Suspense fallback={"loading"}>
+                                <CharacterDescription character={character} {...props} />}
+                            </React.Suspense>
+                        }} /> 
+                        <Route exact path="/character/:class/stats" render={props => {
+                            const CharacterStats = React.lazy(() => import("../components/CharacterPreview/CharacterStats"))
+                            return <React.Suspense fallback={"loading"}>
+                                <CharacterStats character={character} {...props} />
+                            </React.Suspense>
+                        }} /> 
+                        <Route exact path="/character/:class/abilities" render={props => {
+                            const CharacterAbilities = React.lazy(() => import("../components/CharacterPreview/CharacterAbilities"))
+                            return <React.Suspense fallback={"loading"}>
+                                <CharacterAbilities character={character} {...props} />
+                            </React.Suspense>
+                        }} /> 
                     </div>
                 </Router>
            </div>

@@ -16,8 +16,19 @@ class Main extends React.Component<{}> {
                 <React.Fragment>
                     <NavBar />
                     
-                    <Route exact path="/" component={Lobby} />
-                    <Route path="/" component={MobileNav} />
+                    <Route exact path="/" render={() => {
+                        const Lobby = React.lazy(() => import('./Lobby'))
+                        return <React.Suspense fallback={"loading"}>
+                            <Lobby />
+                        </React.Suspense>
+                    }} />
+                    
+                    <Route path="/" render={() => {
+                        const MobileNav = React.lazy(() => import("../components/MobileNav/MobileNav.container"))
+                        return <React.Suspense fallback={"loading"}>
+                            <MobileNav />
+                        </React.Suspense>   
+                    }} />
         
                 </React.Fragment>
         

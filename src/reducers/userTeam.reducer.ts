@@ -1,8 +1,8 @@
-import { GAME_TYPES } from "./game.interface";
-import { Character, CharacterClassList } from "../../../shared/characters";
-import { ATTACK_STACK_TYPES, AttackAction } from "../../../shared/attacks";
-import createCharacter from "../../../server/gameUtils/createCharacter";
-import { characterPreviews } from "../../../shared/characterPreview";
+import { GAME_TYPES } from "../components/GameScreen/game.interface";
+import { Character, CharacterClassList } from "../../shared/characters";
+import { ATTACK_STACK_TYPES, AttackAction } from "../../shared/attacks";
+import createCharacter from "../../server/gameUtils/createCharacter";
+import { characterPreviews } from "../../shared/characterPreview";
 
 export interface TeamAction {
     type: GAME_TYPES;

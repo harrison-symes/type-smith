@@ -1,5 +1,5 @@
 import* as React from "react"
-import { AuthState, RegisterProps, RegisterState } from "./auth.interface";
+import { RegisterProps, RegisterState } from "./auth.interface";
 import { Link } from "react-router-dom";
 
 class Register extends React.Component<
@@ -15,7 +15,6 @@ class Register extends React.Component<
         }
     }
     componentDidMount = () => {
-        this.props.loginError('')
     }
     updateDetails = (e : React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ [e.target.name]: e.target.value } as any)

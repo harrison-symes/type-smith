@@ -6,7 +6,7 @@ import lobby from "../components/Lobby/lobby.reducer"
 import isLFG from "../components/LFG/LFG.reducer";
 import gameRequests from "../components/GameRequests/GameRequests.reducer"
 import gameInfo from "../components/GameScreen/game.reducer"
-import userTeam from "../components/GameScreen/userTeam.reducer"
+import userTeam from "./userTeam.reducer"
 import gameLog from "../components/GameLog/GameLog.reducer"
 
 const reducer = combineReducers({

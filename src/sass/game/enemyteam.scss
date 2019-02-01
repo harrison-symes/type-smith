@@ -13,11 +13,13 @@
     .team-member {
         margin: auto;
         // height: 75%;
-        width: 20vw;
+        width: 20vmin;
         // background-color: $blue-med;
         &--icon-container {
-            width: 17vw;
-            height: 17vw;
+            width: 17vmin;
+            height: 17vmin;
+            max-height: 200px;
+            max-width: 200px;
             background-color: $blue-bright;
             margin: auto;
             text-align: center;
@@ -27,11 +29,17 @@
             display: block;
             padding-top: 2vw;
             color: $black;
-            font-size: 15vw;
+            font-size: 15vmin;
             text-align: center;
         }
-        &--active {
-            
+        .progress {
+            height: 0.5rem;
+            width: 18vmin;
+            margin: {
+                left: auto;
+                right: auto;
+                top: 0.5rem;
+            }
         }
     }
 }
