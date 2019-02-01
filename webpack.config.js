@@ -85,7 +85,7 @@ module.exports = {
         //     React: "react",
         //     ReactDOM: "react-dom"
         // }),
-        new ForkTsCheckerWebpackPlugin()
+        // new ForkTsCheckerWebpackPlugin()
     ],
     devtool: 'source-map'
 }

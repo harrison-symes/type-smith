@@ -5,20 +5,17 @@ import EnergyBar from "../statComponents/EnergyBar";
 import UltimateBar from "../statComponents/UltimateBar";
 import { Tooltip } from "react-tippy";
 
-export interface EnemyCharacterProps {
+export interface GameCharacterProps {
     character: Character;
 }
 
-class EnemyCharacter extends React.Component<EnemyCharacterProps> {
+class GameCharacter extends React.Component<GameCharacterProps> {
     render() {
         const {character} = this.props
         if (!character) return <div className="mt2 mb2 game-character--container"></div>
         return (
-            <div className={`enemy-character`}>
-                <div className="active-healthbar">
-                    <HealthBar isFull={true} character={character} />
-                </div>
-                <div className="enemy-character-inner">
+            <div className={`user-character`}>
+                <div className="user-character-inner">
                     <div className="portrait-container">
                         <div className="name-bar">
                             <div className="name-bar--text">
@@ -32,7 +29,7 @@ class EnemyCharacter extends React.Component<EnemyCharacterProps> {
                         </div>
                     </div>
                     <div className="info-container">
-                        
+
                         <EnergyBar character={character} />
                         <UltimateBar character={character} />
 
@@ -54,18 +51,21 @@ class EnemyCharacter extends React.Component<EnemyCharacterProps> {
                             </div>
                         </div>
                         <div className="stats-container">
-                            {character.isSpiked && 
+                            {character.isSpiked &&
                                 <div className="">
                                     <span className="ra ra-caltrops" />
                                 </div>
                             }
                         </div>
                     </div>
-                
+
+                </div>
+                <div className="active-healthbar">
+                    <HealthBar isFull={true} character={character} />
                 </div>
             </div>
         )
     }
 }
 
-export default EnemyCharacter
+export default GameCharacter
