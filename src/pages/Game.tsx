@@ -9,6 +9,7 @@ import { GameState, TurnStage } from "../components/GameScreen/game.interface";
 import { Socket } from "socket.io";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
 import { Dispatch } from "redux";
+import EnemyTeamContainer from "../components/TeamBar/EnemyTeam.container";
 
 interface GameProps {
     socket: Socket;
@@ -67,16 +68,13 @@ class Game extends React.Component<GameProps> {
         }
     }
     render() {
-        const {userTeam, opponentTeam} = this.props
         return (
-            <div className="game--container">
-                <div className="game-screen--container">
-                    <TeamBar isPlayerSide={false} />
-                    <GameScreen />
-                    <CharacterBar />
-                    <TeamBar isPlayerSide={true} />
-                </div>
-                <GameLog />
+            <div className="game-container">
+                <EnemyTeamContainer />
+                {/* <GameScreen /> */}
+                {/* <CharacterBar /> */}
+                {/* <TeamBar isPlayerSide={true} /> */}
+                {/* <GameLog /> */}
             </div>
         )
     }

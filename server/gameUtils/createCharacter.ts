@@ -22,6 +22,8 @@ export const createClassFromStatSheet = (owner_id, character) : Character => {
         isActive,
         id: ++id,
         owner_id,
+        icon: character.icon,
+        passive: character.passive,
         health: calcHealth(statSheet.healthStat),
         healthMax: calcHealth(statSheet.healthStat),
         energy: calcEnergy(statSheet.energyStat),

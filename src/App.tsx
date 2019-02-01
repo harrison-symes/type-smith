@@ -7,7 +7,6 @@ import { AuthState } from "./components/Auth/auth.interface";
 import Welcome from "./pages/Welcome";
 import Lobby from "./pages/Lobby"
 
-
 import "./sass/main.scss"
 import { GameState, GameStage } from "./components/GameScreen/game.interface";
 import Game from "./pages/Game";
@@ -50,5 +49,5 @@ const mapStateToProps = ({
     gameInfo
 })
 
-export default connect(mapStateToProps)(PreGame)
+export default connect(mapStateToProps)(Game)
 // export default connect(mapStateToProps)(App)

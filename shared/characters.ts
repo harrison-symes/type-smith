@@ -52,4 +52,5 @@ export interface Character {
     ultimateCharge: number;
     ultimateChargeMax: number;
     isSpiked?: boolean;
+    passive: string;
 }
