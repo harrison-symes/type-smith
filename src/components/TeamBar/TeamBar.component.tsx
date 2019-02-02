@@ -36,7 +36,7 @@ class TeamBar extends React.Component<TeamBarProps> {
             isUltimate: false,
             type: ATTACK_TYPES.STATUS,
             targetCharacter: character,
-            priority: -1,
+            priority: 0,
             stack: [
                 ATTACK_STACK_TYPES.SWITCH,
             ]
