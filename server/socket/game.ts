@@ -82,7 +82,6 @@ const joinRoom = (socket:Socket, io) => {
 }
 
 const mapTeamToGameObjects = (owner_id, team) => {
-    console.log(team)
     return team.map(character => {
         const mapped = createCharacter(owner_id, character)
         return mapped
@@ -224,11 +223,13 @@ const roomListeners = (socket, io) => {
             const finalStack = [
                 ...actionStack
             ]
-
+                
             //submit stack to client side
             io.to(roomId).emit(
                 GAME_ACTION_SOCKET_CHANNEL.RECEIVE_FIRST_TURN_STACK,
-                finalStack
+                finalStack,
+                firstStack.character,
+                firstStack.ability
             )   
                 
         }
@@ -335,10 +336,12 @@ const roomListeners = (socket, io) => {
             const finalStack = [
                 ...actionStack
             ]
-
+                
             io.to(roomId).emit(
                 GAME_ACTION_SOCKET_CHANNEL.RECEIVE_SECOND_TURN_STACK,
-                finalStack
+                finalStack,
+                secondStack.character,
+                secondStack.ability
             )  
         }
     )

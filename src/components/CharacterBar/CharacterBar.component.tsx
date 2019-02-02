@@ -29,6 +29,9 @@ class CharacterBar extends React.Component<CharacterBarProps> {
                 ability
             }
         )
+        setTimeout(() => {
+            this.props.history.push("/")
+        }, 100)
     }
     renderTooltip = (ability) => {
         return (
@@ -68,7 +71,7 @@ class CharacterBar extends React.Component<CharacterBarProps> {
                     onClick={() => this.submitAction(ability)}
                     disabled={isDisabled}
                     >
-                    <span className={`ra ra-lg ${ability.icon}`} />
+                    <span className={`ra ${ability.icon}`} />
                     {" "}
                     {ability.name}
                 </button>

@@ -31,10 +31,7 @@ const App : React.SFC<AppProps> = (props) => (
                     <Route path="/" render={(_routeProps) => {
                         switch(props.gameInfo.gameStage) {
                             case GameStage.GAME_STARTED:
-                                const Game = React.lazy(() => import('./pages/Game'))
-                                return <React.Suspense fallback={"loading"}>
-                                    <Game /> 
-                                </React.Suspense>
+                                return <Game /> 
                             case GameStage.PRE_GAME:
                                 const PreGame = React.lazy(() => import('./pages/PreGame')) 
                                 return <React.Suspense fallback={"loading"}>

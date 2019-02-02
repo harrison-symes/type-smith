@@ -290,7 +290,6 @@ export const damageOpponentWarrior = (character, opponent, ability) => {
     const subAbility = {...ability}
 
     subAbility.power *= (1 + (missingHealth / 100))
-    console.log(subAbility.power, ability.power)
     const power = calcDamage(character, opponent, subAbility)
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
@@ -336,7 +335,6 @@ export const damageTeamDemolish = (character, opponent, ability) => {
     const subAbility = { ...ability }
 
     subAbility.power *= (1 + (missingHealth / 100))
-    console.log(subAbility.power, ability.power)
     const power = subAbility.power
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_TEAM,

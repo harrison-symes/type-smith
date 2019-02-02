@@ -59,7 +59,6 @@ const renderStat = (label:string, value: number) => (
 const CharacterStats: React.SFC<CharacterStatsProps> = props => {
     const stats = statSheets[props.character.characterClass!]
 
-    console.log({stats})
     return (
         <React.Fragment>
             {renderStat("Health", stats.healthStat)}

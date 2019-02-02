@@ -22,7 +22,6 @@ class MobileNav extends React.Component<MobileNavProps> {
                 <span className={`ra ${icon}`}></span>
             </Link>
         )
-        console.log(this.props)
         
         return (
             <div className="mobile-nav">

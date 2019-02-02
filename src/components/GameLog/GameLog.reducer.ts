@@ -52,7 +52,6 @@ export default (state:TurnState[] = initialState, action) => {
     let message;
     switch(action.type) {
         case GAME_TYPES.TURN_VALIDATED:
-            console.log({newState, length: newState.length, current: newState[newState.length -1]})
             currentTurn = newState[newState.length - 1]
             currentTurn.isComplete = true
             newState[newState.length - 1] = {...currentTurn}

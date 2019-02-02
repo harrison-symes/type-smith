@@ -2,10 +2,12 @@ import {connect} from "react-redux"
 import EnemyCharacter, { EnemyCharacterProps } from "./EnemyCharacter.component"
 
 const mapStateToProps = ({
-    opponentTeam
+    opponentTeam,
+    socket,
 }) => ({
     character: opponentTeam
-        .find(character => character.isActive)
+        .find(character => character.isActive),
+    socket
 })
 
 

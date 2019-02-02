@@ -68,6 +68,9 @@ class TeamBar extends React.Component<TeamBarProps> {
                 }
             )
         }
+        setTimeout(() => {
+            this.props.history.push("/")
+        }, 100)
 
     }
     renderCharacter = (character:Character) => {
@@ -85,35 +88,43 @@ class TeamBar extends React.Component<TeamBarProps> {
             ] >= ability.cost!
         )
 
-        const isDisabled = isWaiting 
+        const isDisabled = active == character 
+        || isWaiting 
         || (active.isTrapped && (
             canAttack
         )) 
         || (active.isTrapped && gameInfo.turnStage != TurnStage.NEED_TO_SWITCH)
 
         return (
-            <Tooltip
+            <div 
                 className={`team-member ${character.isActive && "team-member--active"}`}
-                position="top"
-                trigger="mouseenter"
-                animation="perspective"
-                // followCursor
-                inertia
-                arrow="true"
-                html={<span className="character-info">
-                    {character.characterClass}
-                    <EnergyBar character={character} />
-                    <UltimateBar character={character} />
-                </span>}
-                style={{ cursor: 'context-menu' }}
+
             >
-                <div className="team-member--icon-container">
+                <Tooltip
+                    className="team-member--icon-container"
+                    position="top"
+                    trigger="mouseenter"
+                    animation="perspective"
+                    // followCursor
+                    inertia
+                    arrow="true"
+                    html={<span className="character-info">
+                        {character.characterClass}
+                        <EnergyBar character={character} />
+                        <UltimateBar character={character} />
+                    </span>}
+                    style={{ cursor: 'context-menu' }}
+                >
                     <span className={`team-member--icon ra ${character.icon}`} />
-                </div>
+                </Tooltip>
                 <div>
                     <HealthBar character={character} />
                 </div>
-            </Tooltip>
+                <button className="switch-button" disabled={isDisabled} onClick={() => this.switchCharacter(character)}>
+                    <span className="ra ra-return-arrow" />
+                </button>
+            
+            </div>
         )
     }
     render() {

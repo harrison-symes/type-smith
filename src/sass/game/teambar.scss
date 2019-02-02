@@ -59,4 +59,20 @@
     .character-info {
         width: 90vw;
     }
+    .switch-button {
+        margin: auto;
+        margin-top: 0.5rem;
+        width: 100%;
+        &:disabled {
+            opacity: 0.3;
+        }
+        border-radius: 0.25rem;
+        height: 2rem;
+        font-size: 1rem;
+        text-align: center;
+        border: none;
+        outline: none;
+        background-color: $blue-med;
+        color: $white;
+    }
 }
