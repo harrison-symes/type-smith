@@ -225,9 +225,11 @@ const roomListeners = (socket, io) => {
             if (firstStack.ability.name == GAME_ATTACKS.CATCH && turn.turnActions[0].ability.name == GAME_ATTACKS.SWITCH) {
                 turn.turnActions.ability.stack = []
                 firstStack.ability.power *= 3
+                console.log("caught")
             } else if (turn.turnActions[0].ability.name == GAME_ATTACKS.CATCH && firstStack.ability.name == GAME_ATTACKS.SWITCH) {
                 firstStack.ability.stack = []
                 turn.turnActions[0].ability.power *= 3
+                console.log("caught")
             }
             //spikes
             if (firstStack.character.isSpiked && firstStack.ability.name == GAME_ATTACKS.SWITCH) {

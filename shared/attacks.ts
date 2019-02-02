@@ -150,7 +150,7 @@ export const spendUltimateCharge = (character, _opponent, ability) => ({
     ultimateChargeLoss: ability.cost,
     target: character
 })
-export const spendALLUltimateCharge = (character : Character, _opponent, ability) => ({
+export const spendALLUltimateCharge = (character : Character, _opponent, _ability) => ({
     type: ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
     ultimateChargeLoss: character.ultimateCharge,
     target: character

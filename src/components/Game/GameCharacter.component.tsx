@@ -55,7 +55,10 @@ class GameCharacter extends React.Component<GameCharacterProps, CharacterState> 
             GAME_ACTION_SOCKET_CHANNEL.TURN_VALIDATED,
             () => {
                 console.log("turn validated, hide tooltip")
-                this.setState({ showAbilityUsed: false })
+                setTimeout(() => {
+                    this.setState({ showAbilityUsed: false })
+
+                }, 500)
             }
         )
     }
@@ -74,7 +77,6 @@ class GameCharacter extends React.Component<GameCharacterProps, CharacterState> 
                                 {this.state.abilityUsed && this.state.abilityUsed.name}
                             </span>}
                         >
-
                             <div className="name-bar--text">
                                 {character.characterClass}
                             </div>
