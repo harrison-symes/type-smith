@@ -4,6 +4,8 @@ import { GameRequest } from "../../src/components/GameRequests/interface";
 import createCharacter from "../gameUtils/createCharacter";
 import { LOBBY_SOCKET_CHANNEL, GAME_SOCKET_CHANNEL, TEAM_PREVIEW_SOCKET_CHANNEL, GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
 import { GameTurnAction, attackActionMapper, ATTACK_STACK_TYPES, GAME_ATTACKS, ATTACK_STACK_TYPES_TYPE } from "../../shared/attacks";
+import { ATTACK_TYPES } from "../../shared/types";
+import { CharacterClassList } from "../../shared/characters";
 
 const games = {
 
@@ -119,12 +121,17 @@ const orderTurnActions = ([actionOne, actionTwo]) => {
         }
         else {
             const speedTie = Math.random() > 0.5
-            const winner = speedTie ? actionOne : actionTwo
-            const loser = speedTie ? actionTwo : actionOne
+            let winner = speedTie ? actionOne : actionTwo
+            let loser = speedTie ? actionTwo : actionOne
+            if (
+                loser.characterClass == CharacterClassList.BRAWLER
+            ) {
+                let hold = winner
+                winner = loser
+                loser = winner
+                console.log("brawler always wins a tie ;)")
+            }
             //speed tie action added
-            // winner.ability.stack.push({
-
-            // }) 
             console.log(winner.character.characterClass, "won speed tie")
             first = winner
             second = loser
@@ -204,15 +211,31 @@ const roomListeners = (socket, io) => {
                 console.log("waiting for player 2")
                 return
             }
-            
+
             turn.turnActions = orderTurnActions(turn.turnActions)
             //execute first stack
             const firstStack = turn.turnActions.pop()
+
+            
+            //throat punch
+            if (firstStack.ability.name == GAME_ATTACKS.THROAT_PUNCH && turn.turnActions[0].ability.name != GAME_ATTACKS.SWITCH) {
+                turn.turnActions.ability.stack = []
+            }
+            //catch
+            if (firstStack.ability.name == GAME_ATTACKS.CATCH && turn.turnActions[0].ability.name == GAME_ATTACKS.SWITCH) {
+                turn.turnActions.ability.stack = []
+                firstStack.ability.power *= 3
+            } else if (turn.turnActions[0].ability.name == GAME_ATTACKS.CATCH && firstStack.ability.name == GAME_ATTACKS.SWITCH) {
+                firstStack.ability.stack = []
+                turn.turnActions[0].ability.power *= 3
+            }
+            //spikes
             if (firstStack.character.isSpiked && firstStack.ability.name == GAME_ATTACKS.SWITCH) {
                 firstStack.ability.stack.push(
                     ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
                 )
             }
+            //plague
             if (firstStack.character.isPlagued && firstStack.ability.name != GAME_ATTACKS.SWITCH) {
                 firstStack.ability.stack.push(
                     ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE
@@ -324,12 +347,20 @@ const roomListeners = (socket, io) => {
             if (secondStack.character.isTrapped && secondStack.ability.name == GAME_ATTACKS.SWITCH) {
                 //nothing happens, switch fails
             }
+            else if (secondStack.ability.isUltimate && secondStack.character.ultimateCharge < secondStack.ability.cost) {
+                //nothing happens, cant cast ability
+            }
+            else if (!secondStack.ability.isUltimate && secondStack.character.energy < secondStack.ability.cost) {
+                //nothing happens, cant cast ability
+            }
             else if (secondStack.character.isAlive) {
+                //spikes
                 if (secondStack.character.isSpiked && secondStack.ability.name == GAME_ATTACKS.SWITCH) {
                     secondStack.ability.stack.push(
                         ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
                     )
                 }
+                //plague
                 if (secondStack.character.isPlagued && secondStack.ability.name != GAME_ATTACKS.SWITCH) {
                     secondStack.ability.stack.push(
                         ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE

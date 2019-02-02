@@ -39,7 +39,12 @@ export enum GAME_ATTACKS {
     DEAD_RISE = "Dead Rise",
     PLAGUE = "Plague",
     DEATH_TOUCH = "Death Touch",
-    BONE_SHIELD = "Bone Shield"
+    BONE_SHIELD = "Bone Shield",
+
+    COMBO_BREAKER = "Combo Breaker",
+    THROAT_PUNCH = "Throat Punch",
+    CATCH = "Catch",
+    SMACKDOWN = "Smackdown"
 }
 
 export enum REDUCER_ATTACK_TYPES {
@@ -80,6 +85,9 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_WARRIOR = "DAMAGE_OPPONENT_WARRIOR",
     DAMAGE_TEAM_DEMOLISH = "DAMAGE_TEAM_DEMOLISH",
     DAMAGE_OPPONENT_DEATH_TOUCH = "DAMAGE_OPPONENT_DEATH_TOUCH",
+    DAMAGE_OPPONENT_COMBO_BREAKER = "DAMAGE_OPPONENT_COMBO_BREAKER",
+
+    SPEND_ALL_ULTIMATE_CHARGE = "SPEND_ALL_ULTIMATE_CHARGE",
 
     APPLY_PLAGUE_OPPONENT = "APPLY_PLAGUE_OPPONENT",
     TAKE_PLAGUE_DAMAGE = "TAKE_PLAGUE_DAMAGE",
@@ -140,6 +148,11 @@ export const spendEnergyAction = (character, _opponent, ability) => ({
 export const spendUltimateCharge = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
     ultimateChargeLoss: ability.cost,
+    target: character
+})
+export const spendALLUltimateCharge = (character : Character, _opponent, ability) => ({
+    type: ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
+    ultimateChargeLoss: character.ultimateCharge,
     target: character
 })
 
@@ -276,6 +289,14 @@ export const damageOpponentBloodMoon = (_character, opponent, ability) => ({
 
 export const damageOpponentRapidFire = (character, opponent, ability) => {
     const power = (ability.power + (ability.altPower * character.energy)) * character.power
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power
+    }
+}
+export const damageOpponentComboBreaker = (character, opponent, ability) => {
+    const power = (ability.power + (ability.altPower * character.ultimateCharge)) * character.power
     return {
         type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
         target: opponent,
@@ -455,6 +476,7 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
     [ATTACK_STACK_TYPES.SPEND_ENERGY]: spendEnergyAction,
     [ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE]: spendUltimateCharge,
+    [ATTACK_STACK_TYPES.SPEND_ALL_ULTIMATE_CHARGE]: spendALLUltimateCharge,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT]: damageOpponentAction,
     [ATTACK_STACK_TYPES.DAMAGE_SELF]: damageSelfAction,
     [ATTACK_STACK_TYPES.HEAL_SELF]: healSelfAction,
@@ -474,6 +496,7 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_RAPID_FIRE]: damageOpponentRapidFire,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BACKSTAB]: damageOpponentBackstab,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_WARRIOR]: damageOpponentWarrior,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_COMBO_BREAKER]: damageOpponentComboBreaker,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_DEMOLISH]: damageTeamDemolish,
     [ATTACK_STACK_TYPES.HEAL_TEAM_SELF]: healTeamSelf,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT]: damageTeamOpponent,

@@ -147,22 +147,22 @@ export const characterPreviews: CharacterPreview[] = [
             { name: GAME_ATTACKS.BONE_SHIELD },
         ]
     },
-    // {
-    //     characterClass: CharacterClassList.BRAWLER,
-    //     icon: "ra-punch-blast",
-    //     passive: "The Brawler's attacks generate 1 Ultimate Charge",
-    //     usage: "",
-    //     description: {
-    //         usage: "",
-    //         strengths: "",
-    //         weaknesses: ""
-    //     },
-    //     roles: [],
-    //     abilities: [
-    //         { name: GAME_ATTACKS.RAPID_FIRE },
-    //         { name: GAME_ATTACKS.PIERCING_SHOT },
-    //         { name: GAME_ATTACKS.RELOAD },
-    //         { name: GAME_ATTACKS.SPIKE_TRAP },
-    //     ]
-    // },
+    {
+        characterClass: CharacterClassList.BRAWLER,
+        icon: "ra-punch-blast",
+        passive: "The Brawler's will always win a speed tie.",
+        usage: "",
+        description: {
+            usage: "",
+            strengths: "",
+            weaknesses: ""
+        },
+        roles: [],
+        abilities: [
+            { name: GAME_ATTACKS.COMBO_BREAKER },
+            { name: GAME_ATTACKS.THROAT_PUNCH },
+            { name: GAME_ATTACKS.CATCH },
+            { name: GAME_ATTACKS.SMACKDOWN },
+        ]
+    },
 ]

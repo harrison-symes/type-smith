@@ -472,7 +472,7 @@ export default {
     [GAME_ATTACKS.BONE_SHIELD]: () => ({
         name: [GAME_ATTACKS.BONE_SHIELD],
         icon: "ra-crossed-bones",
-        cost: 2,
+        cost: 5,
         power: 0,
         description: "The Necromancer is immune to any attack this turn. +20 Priority",
         isUltimate: false,
@@ -480,6 +480,67 @@ export default {
         type: ATTACK_TYPES.STATUS,
         stack: [
             ATTACK_STACK_TYPES.IMMUNE_FOR_TURN,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+
+    [GAME_ATTACKS.COMBO_BREAKER]: () => ({
+        name: [GAME_ATTACKS.COMBO_BREAKER],
+        icon: "ra-armor-punch",
+        cost: 1,
+        power: 1,
+        altPower: 0.5,
+        description: "Consume all of your Ultimate Charges.Attack the opponent for 100 % of Power, plus 50% for each Charge consumed.",
+        isUltimate: true,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_COMBO_BREAKER,
+            ATTACK_STACK_TYPES.SPEND_ALL_ULTIMATE_CHARGE
+        ]
+    }),
+    [GAME_ATTACKS.THROAT_PUNCH]: () => ({
+        name: [GAME_ATTACKS.THROAT_PUNCH],
+        icon: "ra-punch",
+        cost: 2,
+        power: 0.5,
+        description: "Attack the opponent for 50% of Power, if this attacks first, your opponent's attack is interrupted.",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+    [GAME_ATTACKS.CATCH]: () => ({
+        name: [GAME_ATTACKS.CATCH],
+        icon: "ra-grab",
+        cost: 1,
+        power: 0,
+        energyGain: 3,
+        ultimateGain: 1,
+        description: "Attack the opponent for 50% of Power. If your opponent was trying to switch out, prevent it and deal triple the initial damage.",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_DEATH_TOUCH,
+            ATTACK_STACK_TYPES.SPEND_ENERGY,
+        ]
+    }),
+    [GAME_ATTACKS.SMACKDOWN]: () => ({
+        name: [GAME_ATTACKS.SMACKDOWN],
+        icon: "ra-back-pain",
+        cost: 3,
+        power: 0,
+        description: "Attack the opponent for 50% of Power. The opponent loses 2 energy",
+        isUltimate: false,
+        energyGain: -2,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.LOWER_OPPONENT_ENERGY,
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
     }),
