@@ -32,6 +32,7 @@ export default (isUserTeam:boolean) =>
     const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:number, actionTarget:Character) => {
         target = newState.find(character => character.id == actionTarget.id)
         if (!target) return state
+        if (stat == "health" && target.isImmune) return state
         idx = newState.indexOf(target)
         
         isGain 
@@ -117,6 +118,38 @@ export default (isUserTeam:boolean) =>
             stateHolder = modifyStat(stateHolder, "defense", true, action.statChange, action.target)
             stateHolder = modifyStat(stateHolder, "speed", true, action.statChange, action.target)
             return stateHolder
+        
+        case ATTACK_STACK_TYPES.DEAD_RISE:
+            return newState.map(char => {
+                if (char.owner_id == action.owner_id && !char.isAlive) {
+                    char.isAlive = true
+                    char.health = 10
+                }
+                return char
+            })
+        
+        case ATTACK_STACK_TYPES.IMMUNE_FOR_TURN:
+            target = newState.find(character => character.id == action.target.id)
+            if (!target) return state
+
+            target.isImmune = true
+            idx = newState.indexOf(target)
+            newState[idx] = { ...target }
+            
+            return newState
+
+        case ATTACK_STACK_TYPES.APPLY_PLAGUE_OPPONENT:
+            target = newState.find(character => character.id == action.target.id)
+            if (!target) return state
+
+            target.isPlagued = true
+            idx = newState.indexOf(target)
+            newState[idx] = { ...target }
+            
+            return newState
+
+        case ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE:
+            return modifyStat(newState, "health", true, -5, action.target)
 
         case ATTACK_STACK_TYPES.TRAP_TARGET:
             target = newState.find(character => character.id == action.target.id)
@@ -139,6 +172,8 @@ export default (isUserTeam:boolean) =>
         
         case ATTACK_STACK_TYPES.DAMAGE_TEAM:
             return newState.map(character => {
+                if (character.isImmune) return character
+
                 if (character.owner_id == action.owner_id && character.isAlive) {
                     character.health -= action.power
                     if (character.health <= 0) {
@@ -167,10 +202,13 @@ export default (isUserTeam:boolean) =>
             
         case GAME_TYPES.TURN_VALIDATED:
             return newState.map(character => {
+
                 if (character.characterClass == CharacterClassList.SNIPER) character.energy += 1
+
                 if (character.isAlive && !character.isActive) {
                     character.energy += 1
                 }
+
                 if (character.energy > character.energyMax) character.energy = character.energyMax
                 if (character.isAlive && character.isActive) {
                     character.ultimateCharge+=1
@@ -181,9 +219,15 @@ export default (isUserTeam:boolean) =>
                     else if (character.characterClass == CharacterClassList.PALADIN) {
                         character.health += 1
                         if (character.health > character.healthMax) character.health = character.healthMax
+                    } else if (character.characterClass == CharacterClassList.NECROMANCER) {
+                        const deadTeamates = newState.filter(char => !char.isAlive).length
+                        character.power += deadTeamates
                     }
                 }
-                return {...character}
+                return {
+                    ...character,
+                    isImmune: false
+                }
             })
         case ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP:
             target = newState.find(character => character.id == action.target.id)

@@ -424,4 +424,63 @@ export default {
             ATTACK_STACK_TYPES.SPEND_ENERGY
         ]
     }),
+
+    [GAME_ATTACKS.DEAD_RISE]: () => ({
+        name: [GAME_ATTACKS.DEAD_RISE],
+        icon: "ra-raise-zombie",
+        cost: 5,
+        power: 1,
+        description: "Return all dead teamates to life with 10 health",
+        isUltimate: true,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DEAD_RISE,
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
+        ]
+    }),
+    [GAME_ATTACKS.PLAGUE]: () => ({
+        name: [GAME_ATTACKS.PLAGUE],
+        icon: "ra-vomiting",
+        cost: 2,
+        power: 1,
+        description: "Plague the opponent, causing them to take 5 Damage any time that they use an ability",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.APPLY_PLAGUE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+    [GAME_ATTACKS.DEATH_TOUCH]: () => ({
+        name: [GAME_ATTACKS.DEATH_TOUCH],
+        icon: "ra-skeletal-hand",
+        cost: 1,
+        power: 0,
+        energyGain: 3,
+        ultimateGain: 1,
+        description: "Attack the opponent for 100% of Power. Deal 5 more more damage if the target is afflicted with Plague.",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_DEATH_TOUCH,
+            ATTACK_STACK_TYPES.SPEND_ENERGY,
+        ]
+    }),
+    [GAME_ATTACKS.BONE_SHIELD]: () => ({
+        name: [GAME_ATTACKS.BONE_SHIELD],
+        icon: "ra-crossed-bones",
+        cost: 2,
+        power: 0,
+        description: "The Necromancer is immune to any attack this turn. +20 Priority",
+        isUltimate: false,
+        priority: 20,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.IMMUNE_FOR_TURN,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
 }

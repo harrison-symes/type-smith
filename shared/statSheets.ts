@@ -43,6 +43,12 @@ export const sniperStatSheet: StatSheet = {
     powerStat: 4,
     speedStat: 4
 }
+export const necromancerStatSheet: StatSheet = {
+    healthStat: 4,
+    defenseStat: 1,
+    powerStat: 3,
+    speedStat: 2
+}
 
 export const statSheets = {
     [CharacterClassList.WARRIOR]: warriorStatSheet,
@@ -51,5 +57,7 @@ export const statSheets = {
     [CharacterClassList.PALADIN]: paladinStatSheet,
     [CharacterClassList.SNIPER]: sniperStatSheet,
     [CharacterClassList.WITCH]: witchStatSheet,
+    [CharacterClassList.NECROMANCER]: necromancerStatSheet,
+    // [CharacterClassList.BRAWLER]: braw,
 }
 

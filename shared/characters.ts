@@ -9,6 +9,8 @@ export enum CharacterClassList {
     PALADIN = "Paladin",
     WITCH = "Witch",
     SNIPER = "Sniper",
+    NECROMANCER = "Necromancer",
+    BRAWLER = "Brawler",
 }
 
 export interface CharacterAbility {
@@ -47,10 +49,13 @@ export interface Character {
     power: number;
     speed: number;
     abilities: Partial<CharacterAbility>[],
-    isAlive: boolean;
-    isTrapped?: boolean;
     ultimateCharge: number;
     ultimateChargeMax: number;
-    isSpiked?: boolean;
     passive: string;
+    
+    isAlive: boolean;
+    isTrapped?: boolean;
+    isSpiked?: boolean;
+    isPlagued?: boolean
+    isImmune?: boolean;
 }

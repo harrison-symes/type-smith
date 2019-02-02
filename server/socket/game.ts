@@ -213,6 +213,11 @@ const roomListeners = (socket, io) => {
                     ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
                 )
             }
+            if (firstStack.character.isPlagued && firstStack.ability.name != GAME_ATTACKS.SWITCH) {
+                firstStack.ability.stack.push(
+                    ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE
+                )
+            }
             const actionStack = [
                 ATTACK_STACK_TYPES.USE_ATTACK,
                 ...firstStack.ability.stack
@@ -323,6 +328,11 @@ const roomListeners = (socket, io) => {
                 if (secondStack.character.isSpiked && secondStack.ability.name == GAME_ATTACKS.SWITCH) {
                     secondStack.ability.stack.push(
                         ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP
+                    )
+                }
+                if (secondStack.character.isPlagued && secondStack.ability.name != GAME_ATTACKS.SWITCH) {
+                    secondStack.ability.stack.push(
+                        ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE
                     )
                 }
                 actionStack = [

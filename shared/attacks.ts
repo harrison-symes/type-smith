@@ -34,7 +34,12 @@ export enum GAME_ATTACKS {
     RAPID_FIRE = "Rapid Fire",
     PIERCING_SHOT = "Peircing Shot",
     RELOAD = "Reload",
-    SPIKE_TRAP = "Spike Trap"
+    SPIKE_TRAP = "Spike Trap",
+
+    DEAD_RISE = "Dead Rise",
+    PLAGUE = "Plague",
+    DEATH_TOUCH = "Death Touch",
+    BONE_SHIELD = "Bone Shield"
 }
 
 export enum REDUCER_ATTACK_TYPES {
@@ -63,6 +68,8 @@ export enum REDUCER_ATTACK_TYPES {
     APPLY_SPIKE_TRAP = "APPLY_SPIKE_TRAP",
     ACTIVATE_SPIKE_TRAP = "ACTIVATE_SPIKE_TRAP",
     WITCH_PASSIVE = "WITCH_PASSIVE",
+    IMMUNE_FOR_TURN = "IMMUNE_FOR_TURN",
+    DEAD_RISE = "DEAD_RISE",
 }
 
 export enum ABILITY_ATTACK_STACK_TYPES {
@@ -72,6 +79,10 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_BACKSTAB = "DAMAGE_OPPONENT_BACKSTAB",
     DAMAGE_OPPONENT_WARRIOR = "DAMAGE_OPPONENT_WARRIOR",
     DAMAGE_TEAM_DEMOLISH = "DAMAGE_TEAM_DEMOLISH",
+    DAMAGE_OPPONENT_DEATH_TOUCH = "DAMAGE_OPPONENT_DEATH_TOUCH",
+
+    APPLY_PLAGUE_OPPONENT = "APPLY_PLAGUE_OPPONENT",
+    TAKE_PLAGUE_DAMAGE = "TAKE_PLAGUE_DAMAGE",
 
     TRAP_OPPONENT = "TRAP_OPPONENT",
     TRAP_SELF = "TRAP_SELF",
@@ -312,6 +323,18 @@ export const damageOpponentIgnoreArmour = (character, opponent, ability) => {
     }
 }
 
+export const deathTouch = (character, opponent, ability) => {
+    let power = calcDamage(character, opponent, ability)
+    if (opponent.isPlagued) {
+        power += 5
+    }
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power
+    }
+}
+
 export const healTeamSelf = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.HEAL_TEAM,
     owner_id: character.owner_id,
@@ -407,6 +430,26 @@ export const useAttack = (character, _opponent, ability) => ({
     ability
 })
 
+export const deadRise = (character, _opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.DEAD_RISE,
+    owner_id: character.owner_id,
+})
+
+export const plagueOpponent = (_character, opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.APPLY_PLAGUE_OPPONENT,
+    target: opponent
+})
+
+export const immuneTurn = (character, _opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.IMMUNE_FOR_TURN,
+    target: character,
+})
+export const takePlagueDamage = (character, _opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE,
+    target: character,
+})
+
+
 export const attackActionMapper = {
     [ATTACK_STACK_TYPES.USE_ATTACK]: useAttack,
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
@@ -444,4 +487,9 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP_OPPONENT]: applySpikeTrapOpponent,
     [ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP]: activateSpikeTrap,
     [ATTACK_STACK_TYPES.WITCH_PASSIVE]: witchPassive,
+    [ATTACK_STACK_TYPES.DEAD_RISE]: deadRise,
+    [ATTACK_STACK_TYPES.APPLY_PLAGUE_OPPONENT]: plagueOpponent,
+    [ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE]: takePlagueDamage,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_DEATH_TOUCH]: deathTouch,
+    [ATTACK_STACK_TYPES.IMMUNE_FOR_TURN]: immuneTurn,
 }

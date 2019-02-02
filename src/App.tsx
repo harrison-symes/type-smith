@@ -5,6 +5,7 @@ import { HashRouter as Router, Route } from "react-router-dom"
 import { AuthState } from "./components/Auth/auth.interface";
 
 import Game from "./pages/Game"
+import PreGame from "./pages/PreGame"
 
 import "./sass/main.scss"
 import { GameState, GameStage } from "./components/GameScreen/game.interface";
@@ -59,4 +60,5 @@ const mapStateToProps = ({
 })
 
 // export default connect(mapStateToProps)(Game)
+// export default connect(mapStateToProps)(PreGame)
 export default connect(mapStateToProps)(App)
