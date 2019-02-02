@@ -2,10 +2,10 @@ import { StatSheet, statSheets } from "../../shared/statSheets";
 import { CharacterClassList, Character } from "../../shared/characters";
 import mapAbilities from "../../shared/mapAbilities";
 
-export const calcHealth = (healthStat : number) => 30 + (10 * healthStat)
+export const calcHealth = (healthStat : number) => 50 + (10 * healthStat)
 export const calcEnergy = (energyStat : number) => 10 + (2*energyStat)
-export const calcDefense = (defenseStat : number) => defenseStat
-export const calcPower = (powerStat : number) => 10 + powerStat
+export const calcDefense = (defenseStat : number) => 3 * defenseStat
+export const calcPower = (powerStat : number) => 15 + (3 * powerStat)
 export const calcSpeed = (speedStat : number) => speedStat
 
 let id = 1

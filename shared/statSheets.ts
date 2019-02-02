@@ -15,33 +15,33 @@ export const warriorStatSheet: StatSheet = {
 }
 export const mageStatSheet: StatSheet = {
     healthStat: 2,
-    defenseStat: 1,
+    defenseStat: 0,
     powerStat: 5,
-    speedStat: 3
+    speedStat: 2
 }
 export const assassinStatSheet: StatSheet = {
-    healthStat: 1,
+    healthStat: 0,
     defenseStat: 2,
-    powerStat: 3,
+    powerStat: 4,
     speedStat: 5
 }
 export const paladinStatSheet: StatSheet = {
     healthStat: 5,
     defenseStat: 5,
     powerStat: 1,
-    speedStat: 1
+    speedStat: 0
 }
 export const witchStatSheet: StatSheet = {
-    healthStat: 4,
-    defenseStat: 4,
-    powerStat: 3,
+    healthStat: 5,
+    defenseStat: 3,
+    powerStat: 1,
     speedStat: 2
 }
 export const sniperStatSheet: StatSheet = {
-    healthStat: 4,
+    healthStat: 3,
     defenseStat: 1,
-    powerStat: 5,
-    speedStat: 2
+    powerStat: 4,
+    speedStat: 4
 }
 
 export const statSheets = {
