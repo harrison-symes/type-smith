@@ -50,7 +50,7 @@ export default {
     [GAME_ATTACKS.RECKLESS_SLAM]: () => ({
         name: [GAME_ATTACKS.RECKLESS_SLAM],
         icon: "ra-earth-crack",
-        cost: 2,
+        cost: 3,
         power: 1.5,
         selfDamage: 0.5,
         description: "Attack the opponent for 150% of Power. Damage yourself for 50% of Power",
@@ -66,7 +66,7 @@ export default {
     [GAME_ATTACKS.TANK_UP]: () => ({
         name: [GAME_ATTACKS.TANK_UP],
         icon: "ra-armor-upgrade",
-        cost: 3,
+        cost: 2,
         power: 0,
         description: "Gain 2 Defense and 10 Max Health",
         isUltimate: false,
@@ -116,7 +116,7 @@ export default {
     [GAME_ATTACKS.RECUPERATE]: () => ({
         name: [GAME_ATTACKS.RECUPERATE],
         icon: "ra-bottled-bolt",
-        cost: 0,
+        cost: 1,
         power: 0,
         description: "Heal for 10 and gain 3 Energy",
         isUltimate: false,
@@ -134,7 +134,7 @@ export default {
     [GAME_ATTACKS.BACKSTAB]: () => ({
         name: [GAME_ATTACKS.BACKSTAB],
         icon: "ra-bouncing-sword",
-        cost: 3,
+        cost: 2,
         power: 1,
         description: "Attack the opponent for 100% Power. Power is doubled for targets below 30% health. +2 Priority",
         isUltimate: false,
@@ -181,9 +181,9 @@ export default {
     [GAME_ATTACKS.MOLTEN_CORE]: () => ({
         name: [GAME_ATTACKS.MOLTEN_CORE],
         icon: "ra-burning-passion",
-        cost: 2,
+        cost: 3,
         power: 5,
-        description: "Deal 5 damage to the opponent, ignoring armor. Gain 3 Power",
+        description: "Deal 5 damage to the opponent, ignoring defense. Gain 3 Power",
         isUltimate: false,
         priority: 0,
         powerGain: 3,
@@ -236,7 +236,7 @@ export default {
     [GAME_ATTACKS.CURSE]: () => ({
         name: [GAME_ATTACKS.CURSE],
         icon: "ra-cursed-star",
-        cost: 3,
+        cost: 2,
         power: 0,
         description: "Lower your opponent's Power, Energy, Defense by 3 and Speed by 1. Lose 10 health.",
         isUltimate: false,
@@ -263,7 +263,7 @@ export default {
     [GAME_ATTACKS.ENTRAP]: () => ({
         name: [GAME_ATTACKS.ENTRAP],
         icon: "ra-quicksand",
-        cost: 4,
+        cost: 3,
         power: 0,
         description: "Trap your opponent, preventing them from switching until they have no other choice",
         isUltimate: false,
@@ -279,7 +279,7 @@ export default {
     [GAME_ATTACKS.BLOOD_MOON]: () => ({
         name: [GAME_ATTACKS.BLOOD_MOON],
         icon: "ra-evil-moon",
-        cost: 2,
+        cost: 1,
         power: 1,
         description: "Attack your opponent for 100% of OPPONENT's Power.",
         isStatic: true,
@@ -397,7 +397,7 @@ export default {
     [GAME_ATTACKS.RELOAD]: () => ({
         name: [GAME_ATTACKS.RELOAD],
         icon: "ra-ammo-box",
-        cost: 0,
+        cost: 1,
         power: 0,
         energyGain: 3,
         ultimateGain: 1,
