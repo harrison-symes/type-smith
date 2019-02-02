@@ -31,7 +31,7 @@ class GameCharacter extends React.Component<GameCharacterProps, CharacterState> 
             GAME_ACTION_SOCKET_CHANNEL.RECEIVE_FIRST_TURN_STACK,
             (_stack, character, ability) => {
                 console.log("character attacked", { character, ability })
-                if (character.id == this.props.character.id) {
+                if (character && this.props.character && character.id == this.props.character.id) {
                     this.setState({
                         showAbilityUsed: true,
                         abilityUsed: ability
@@ -43,7 +43,7 @@ class GameCharacter extends React.Component<GameCharacterProps, CharacterState> 
             GAME_ACTION_SOCKET_CHANNEL.RECEIVE_SECOND_TURN_STACK,
             (_stack, character, ability) => {
                 console.log("character attacked", { character, ability })
-                if (character.id == this.props.character.id) {
+                if (character && this.props.character && character.id == this.props.character.id) {
                     this.setState({
                         showAbilityUsed: true,
                         abilityUsed: ability
