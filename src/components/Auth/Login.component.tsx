@@ -59,7 +59,7 @@ class Login extends React.Component<LoginProps, LoginState> {
 					<input className="btn" type="submit" value="Login" /> 
 					
 					<span className="info-text">
-						New to Type Smith?
+						New to Atlas arena?
 						{"  "}
 						<Link to="/register">
 							Register

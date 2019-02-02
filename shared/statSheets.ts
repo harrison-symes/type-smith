@@ -1,4 +1,4 @@
-import { CharacterClassList } from "../../shared/characters";
+import { CharacterClassList } from "./characters";
 
 export interface StatSheet {
     healthStat: number;

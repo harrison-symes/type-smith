@@ -4,8 +4,22 @@ var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CheckerPlugin = require("awesome-typescript-loader").CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const entries = {
+    index: "./src/index.tsx",
+    
+    welcome: "./src/pages/Welcome.tsx",
+    
+    main: "./src/pages/Main.tsx",
+    
+    pregame: "./src/pages/PreGame.tsx",
+    
+    game: "./src/pages/Game.tsx"
+}
+
 module.exports = {
-    entry: './src/index.tsx',
+    entry: entries,
+    mode: "development",
+    stats: "minimal",
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
         // root: path.resolve('./src'),
@@ -13,7 +27,9 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, '/dist'),
-        filename: 'bundle.min.js'
+        filename: '[name].js',
+        sourceMapFilename: '[name].[hash:8].map',
+        chunkFilename: '[id].[hash:8].js'
     },
     module: {
         rules: [
@@ -59,16 +75,17 @@ module.exports = {
             name: "common",
             minChunks: 3
         },
+        concatenateModules: false
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new webpack.ProvidePlugin({
-            React: "react",
-            ReactDOM: "react-dom"
-        }),
-        new ForkTsCheckerWebpackPlugin()
+        // new webpack.ProvidePlugin({
+        //     React: "react",
+        //     ReactDOM: "react-dom"
+        // }),
+        // new ForkTsCheckerWebpackPlugin()
     ],
     devtool: 'source-map'
 }

@@ -14,22 +14,13 @@ import EnergyBar from "../statComponents/EnergyBar";
 import UltimateBar from "../statComponents/UltimateBar";
 
 import {Tooltip} from "react-tippy"
+import { RouteComponentProps } from "react-router";
 
-interface TeamBarProps {
-    isPlayerSide: boolean;
+interface TeamBarProps extends RouteComponentProps {
     gameInfo: GameState;
     userTeam: Character[];
     opponentTeam: Character[];
     socket: Socket;
-}
-
-const icons = {
-    [CharacterClassList.WARRIOR]: "ra-crossed-swords",
-    [CharacterClassList.MAGE]: "ra-wizard-face",
-    [CharacterClassList.ASSASSIN]: "ra-cowled",
-    [CharacterClassList.PALADIN]: "ra-elf-helmet",
-    [CharacterClassList.WITCH]: "ra-witch-face",
-    [CharacterClassList.SNIPER]: "ra-eye-target",
 }
 
 class TeamBar extends React.Component<TeamBarProps> {
@@ -77,11 +68,14 @@ class TeamBar extends React.Component<TeamBarProps> {
                 }
             )
         }
+        setTimeout(() => {
+            this.props.history.push("/")
+        }, 100)
 
     }
     renderCharacter = (character:Character) => {
-        const {gameInfo, isPlayerSide, userTeam, opponentTeam} = this.props
-        const team = isPlayerSide ? userTeam : opponentTeam
+        const {gameInfo, userTeam, opponentTeam} = this.props
+        const team = userTeam
         const active = team.find(character => character.isActive)
         if (!active) return
 
@@ -94,73 +88,57 @@ class TeamBar extends React.Component<TeamBarProps> {
             ] >= ability.cost!
         )
 
-        const isDisabled = isWaiting 
+        const isDisabled = active == character 
+        || isWaiting 
         || (active.isTrapped && (
             canAttack
         )) 
         || (active.isTrapped && gameInfo.turnStage != TurnStage.NEED_TO_SWITCH)
 
         return (
-            <Tooltip
+            <div 
                 className={`team-member ${character.isActive && "team-member--active"}`}
-                position="top"
-                trigger="mouseenter"
-                animation="perspective"
-                // followCursor
-                inertia
-                arrow="true"
-                html={<span>
-                    <div className="subtitle">
-                        <span className="ra ra-lg ra-strong" />
-                        {" "}
-                        {character.power}
-                    </div>
-                    <div className="subtitle">
-                        <span className="ra ra-lg ra-vibrating-shield" />
-                        {" "}
-                        {character.defense}
-                    </div>
-                    <div className="subtitle">
-                        <span className="ra ra-lg ra-electric" />
-                        {" "}
-                        {character.speed}
-                    </div>
-                </span>}
-                style={{ cursor: 'context-menu' }}
-            >
-                <React.Fragment>
 
-                    <p className="team-member--name">
+            >
+                <Tooltip
+                    className="team-member--icon-container"
+                    position="top"
+                    trigger="mouseenter"
+                    animation="perspective"
+                    // followCursor
+                    inertia
+                    arrow="true"
+                    html={<span className="character-info">
                         {character.characterClass}
-                        {" "}
-                        <span className={`team-member--image ra ${icons[character.characterClass]}`} />
-                    </p>
-                    <div>
-                        <HealthBar character={character} />
                         <EnergyBar character={character} />
                         <UltimateBar character={character} />
-                    </div>
-                    {(isPlayerSide && !character.isActive && character.isAlive) &&
-                        <button 
-                        className="team-member--btn btn" 
-                        disabled={isDisabled}
-                        onClick={() => this.switchCharacter(character)}>
-                            Switch
-                        </button>
-                    }
-                </React.Fragment>
-            </Tooltip>
+                    </span>}
+                    style={{ cursor: 'context-menu' }}
+                >
+                    <span className={`team-member--icon ra ${character.icon}`} />
+                </Tooltip>
+                <div>
+                    <HealthBar character={character} />
+                </div>
+                <button className="switch-button" disabled={isDisabled} onClick={() => this.switchCharacter(character)}>
+                    <span className="ra ra-return-arrow" />
+                </button>
+            
+            </div>
         )
     }
     render() {
-        const {userTeam, opponentTeam, isPlayerSide} = this.props
-        const team = isPlayerSide ? userTeam : opponentTeam
+        const {userTeam} = this.props
 
         return (
-            <div className="team-bar width-100">
-                {team
-                    .map(character => this.renderCharacter(character))
-                }
+            <div className={`user-team--container 
+                ${this.props.location.pathname == "/team" && "active"}
+            `}>
+                <div className="user-team">
+                    {userTeam
+                        .map(character => this.renderCharacter(character))
+                    }
+                </div>
             </div>
         )
     }

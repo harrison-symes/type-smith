@@ -1,14 +1,18 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import CharacterBar from "../components/CharacterBar/CharacterBar.container";
-import GameLog from "../components/GameLog/GameLog.container";
-import GameScreen from "../components/GameScreen/GameScreen.container";
-import TeamBar from "../components/TeamBar/TeamBar.container";
+import {HashRouter as Router, Route} from "react-router-dom";
+
 import { Character } from "../../shared/characters";
 import { GameState, TurnStage } from "../components/GameScreen/game.interface";
 import { Socket } from "socket.io";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../shared/socketChannels";
 import { Dispatch } from "redux";
+import EnemyTeamContainer from "../components/TeamBar/EnemyTeam.container";
+import EnemyCharacter from "../components/Game/EnemyCharacter.container";
+import MobileNav from "../components/Game/MobileNav.container";
+import GameCharacter from "../components/Game/GameCharacter.container";
+import CharacterBar from "../components/CharacterBar/CharacterBar.container"
+import TeamBar from "../components/TeamBar/TeamBar.container"
 
 interface GameProps {
     socket: Socket;
@@ -67,17 +71,18 @@ class Game extends React.Component<GameProps> {
         }
     }
     render() {
-        const {userTeam, opponentTeam} = this.props
         return (
-            <div className="game--container">
-                <div className="game-screen--container">
-                    <TeamBar isPlayerSide={false} />
-                    <GameScreen />
-                    <CharacterBar />
-                    <TeamBar isPlayerSide={true} />
+            <Router>
+                <div className="game-container">
+                    <EnemyTeamContainer />
+                    <EnemyCharacter />
+                    {/* <GameLog /> */}
+                    <Route component={CharacterBar} />
+                    <Route component={TeamBar} />
+                    <GameCharacter />
+                    <Route component={MobileNav} />
                 </div>
-                <GameLog />
-            </div>
+            </Router>
         )
     }
 }

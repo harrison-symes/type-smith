@@ -5,8 +5,9 @@ import { GameState, TurnStage } from "../GameScreen/game.interface";
 import { GAME_ACTION_SOCKET_CHANNEL } from "../../../shared/socketChannels";
 
 import {Tooltip} from "react-tippy"
+import { RouterProps, RouteComponentProps } from "react-router";
 
-export interface CharacterBarProps {
+export interface CharacterBarProps extends RouteComponentProps {
     socket: Socket;
     gameInfo: GameState;
     character: Character;
@@ -28,8 +29,33 @@ class CharacterBar extends React.Component<CharacterBarProps> {
                 ability
             }
         )
+        setTimeout(() => {
+            this.props.history.push("/")
+        }, 100)
     }
-    renderAbility = (ability: CharacterAbility) => {
+    renderTooltip = (ability) => {
+        return (
+
+            <Tooltip
+                className="info-icon"
+                position="top"
+                trigger="mouseenter"
+                animation="perspective"
+                // followCursor
+                inertia
+                arrow="true"
+                html={<span className="ability-description">
+                    <div>{ability.name}</div>
+                    <div>Cost: {ability.cost} {ability.isUltimate ? "Charges" : "Energy"}</div>
+                    <text>{ability.description}</text>
+                </span>}
+                style={{ cursor: 'context-menu'}}
+            >
+                <span className="ra ra-info" />
+            </Tooltip>
+        )
+    }
+    renderAbility = (ability: CharacterAbility, i:number) => {
         const {gameInfo, character} = this.props
         const isWaiting = gameInfo.turnStage != TurnStage.CHOOSING
         const hasEnergy = ability.isUltimate
@@ -38,42 +64,29 @@ class CharacterBar extends React.Component<CharacterBarProps> {
 
         const isDisabled = !hasEnergy || isWaiting 
         return (
-            <Tooltip
-                className="btn--container w-25"
-                position="top"
-                trigger="mouseenter"
-                animation="perspective"
-                // followCursor
-                inertia
-                arrow="true"
-                html={<span>
-                    <text>Cost: {ability.cost} {ability.isUltimate ? "Charges" : "Energy"}</text>
-                    <br />
-                    <text>Type: {ability.type}</text>
-                    <br />
-                    <text>{ability.description}</text>
-                </span>}
-                style={{ cursor: 'context-menu'}}
-            >
+            <div className="ability-container">
+                {i % 2 == 0 && this.renderTooltip(ability)}
                 <button 
-                    className="btn" 
+                    className="ability-button" 
                     onClick={() => this.submitAction(ability)}
                     disabled={isDisabled}
-                >
-                    <span className={`ra ra-lg ${ability.icon}`} />
+                    >
+                    <span className={`ra ${ability.icon}`} />
                     {" "}
                     {ability.name}
                 </button>
-            </Tooltip>
-
+                {i % 2 == 1 && this.renderTooltip(ability)}
+            </div>
         )
     }
     render() {
         const {character} = this.props
 
         return (
-            <div className="character-bar">
-                {character.abilities.map(this.renderAbility)}
+            <div className={`ability-bar ${this.props.location.pathname == "/abilities" && "active" }`}>
+                <div className="ability-bar--inner">
+                    {character.abilities.map(this.renderAbility)}
+                </div>
             </div>
         )
     }

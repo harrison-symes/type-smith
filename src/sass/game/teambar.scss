@@ -1,0 +1,78 @@
+@import "./gameVariables.scss";
+
+.user-team--container {
+    position: fixed;
+    // height: 12rem;
+    width: 100%;
+    z-index: 100;
+    bottom: -12rem;
+    &.active {
+        bottom: 4.5rem
+    }
+    background-color: $white;
+    box-shadow: 0 0rem 5rem 1rem fade-out($black, 0.5);
+    
+    transition: bottom 0.3s ease-in-out;
+
+    .user-team {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        background-color: fade-out($blue-light, 0.5);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    
+        .team-member {
+            margin: auto;
+            // height: 75%;
+            width: 20vmin;
+            // background-color: $blue-med;
+            &--icon-container {
+                width: 17vmin;
+                height: 17vmin;
+                max-height: 200px;
+                max-width: 200px;
+                background-color: $blue-bright;
+                margin: auto;
+                text-align: center;
+                border-radius: 100%;
+            }
+            &--icon {
+                display: block;
+                padding-top: 2vw;
+                color: $black;
+                font-size: 15vmin;
+                text-align: center;
+            }
+            .progress {
+                height: 0.5rem;
+                width: 18vmin;
+                margin: {
+                    left: auto;
+                    right: auto;
+                    top: 0.5rem;
+                }
+            }
+        }
+    }
+    .character-info {
+        width: 90vw;
+    }
+    .switch-button {
+        margin: auto;
+        margin-top: 0.5rem;
+        width: 100%;
+        &:disabled {
+            opacity: 0.3;
+        }
+        border-radius: 0.25rem;
+        height: 2rem;
+        font-size: 1rem;
+        text-align: center;
+        border: none;
+        outline: none;
+        background-color: $blue-med;
+        color: $white;
+    }
+}

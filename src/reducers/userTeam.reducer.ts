@@ -1,6 +1,8 @@
-import { GAME_TYPES } from "./game.interface";
-import { Character, CharacterClassList } from "../../../shared/characters";
-import { ATTACK_STACK_TYPES, AttackAction } from "../../../shared/attacks";
+import { GAME_TYPES } from "../components/GameScreen/game.interface";
+import { Character, CharacterClassList } from "../../shared/characters";
+import { ATTACK_STACK_TYPES, AttackAction } from "../../shared/attacks";
+import createCharacter from "../../server/gameUtils/createCharacter";
+import { characterPreviews } from "../../shared/characterPreview";
 
 export interface TeamAction {
     type: GAME_TYPES;
@@ -14,14 +16,20 @@ export type TeamState = Character[]
 
 const initialState = []
 
+const buildState = (isUserTeam:boolean) => {
+    const chars = [...characterPreviews].slice(0, 4)
+    chars[0].isActive = true
+    return chars.map(char => createCharacter(isUserTeam?1:2, char))
+}
+
 export default (isUserTeam:boolean) => 
-(state : any[] = initialState, action ):TeamState => {
+(state : any[] = buildState(isUserTeam), action ):TeamState => {
 
     const newState = [...state]
     let target;
     let idx;
 
-const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:number, actionTarget:Character) => {
+    const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:number, actionTarget:Character) => {
         target = newState.find(character => character.id == actionTarget.id)
         if (!target) return state
         idx = newState.indexOf(target)
@@ -130,7 +138,6 @@ const modifyStat = (newState:TeamState, stat:string, isGain: boolean, value:numb
             })
         
         case ATTACK_STACK_TYPES.DAMAGE_TEAM:
-            console.log({action})
             return newState.map(character => {
                 if (character.owner_id == action.owner_id && character.isAlive) {
                     character.health -= action.power

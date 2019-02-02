@@ -17,7 +17,6 @@ class PreGameMobileNav extends React.Component<PreGameMobileNavProps> {
                 <span className={`ra ${icon}`}></span>
             </Link>
         )
-        console.log(this.props)
         
         return (
             <div className="mobile-nav">

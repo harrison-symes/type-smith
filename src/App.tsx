@@ -4,17 +4,11 @@ import { HashRouter as Router, Route } from "react-router-dom"
 
 import { AuthState } from "./components/Auth/auth.interface";
 
-import Welcome from "./pages/Welcome";
-import Lobby from "./pages/Lobby"
-
+import Game from "./pages/Game"
 
 import "./sass/main.scss"
 import { GameState, GameStage } from "./components/GameScreen/game.interface";
-import Game from "./pages/Game";
-import PreGame from "./pages/PreGame";
-import Main from "./pages/Main";
 import SocketListener from "./SocketListener.container";
-import MobileNav from "./components/MobileNav/MobileNav.container";
 
 interface AppProps {
     auth: AuthState,
@@ -27,13 +21,27 @@ const App : React.SFC<AppProps> = (props) => (
             <SocketListener />
             {
                 !props.auth.isAuthenticated ? 
-                <Route path="/" component={Welcome} /> :
+                <Route path="/" render={() => {
+                    const Welcome = React.lazy(()=>import("./pages/Welcome"))
+                    return <React.Suspense fallback={"loading"}>
+                        <Welcome />
+                    </React.Suspense>
+                }} /> :
                 <React.Fragment>
-                    <Route path="/" render={_routeProps => {
+                    <Route path="/" render={(_routeProps) => {
                         switch(props.gameInfo.gameStage) {
-                            case GameStage.GAME_STARTED: return <Game />
-                            case GameStage.PRE_GAME: return <PreGame />
-                            default: return <Main />
+                            case GameStage.GAME_STARTED:
+                                return <Game /> 
+                            case GameStage.PRE_GAME:
+                                const PreGame = React.lazy(() => import('./pages/PreGame')) 
+                                return <React.Suspense fallback={"loading"}>
+                                    <PreGame />
+                                </React.Suspense>    
+                            default: 
+                                const Main = React.lazy(() => import('./pages/Main')) 
+                                return <React.Suspense fallback={"loading"}>
+                                    <Main />
+                                </React.Suspense>
                         }
                     }} />
                 </React.Fragment>
@@ -50,5 +58,5 @@ const mapStateToProps = ({
     gameInfo
 })
 
+// export default connect(mapStateToProps)(Game)
 export default connect(mapStateToProps)(App)
-// export default connect(mapStateToProps)(PreGame)

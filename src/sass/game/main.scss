@@ -1,0 +1,10 @@
+@import "./enemyteam.scss";
+@import "./enemycharacter.scss";
+@import "./usercharacter.scss";
+@import "./abilitybar.scss";
+@import "./teambar.scss";
+
+.game-container {
+    height: 100%;
+    width: 100%;
+}

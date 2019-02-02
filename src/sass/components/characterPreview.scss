@@ -116,3 +116,40 @@
         }
     }
 }
+
+.stat-container {
+    margin-bottom: 1rem;
+    background-color: $blue-light;
+    border: 0.125rem solid $blue-bright;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    height: 3rem;
+    padding: {
+        left: 0.25rem;
+        right: 0.25rem;
+    }
+
+    .stat-icon, .stat-value {
+        font-size: 2rem;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 3rem;
+        text-align:center;
+    }
+    .progress {
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 12rem;
+        @include progress-bar-variant($blue-bright);
+
+        // (239,115,7)
+        .progress-bar-striped {
+            // background-image: -webkit-linear-gradient(45deg, rgba(239,115,7, 0.15) 25%, transparent 25%, transparent 50%, rgba(239,115,7, 0.15) 50%, rgba(239,115,7, 0.15) 75%, transparent 75%, transparent);
+            // background-image: -o-linear-gradient(45deg, rgba(239,115,7, 0.15) 25%, transparent 25%, transparent 50%, rgba(239,115,7, 0.15) 50%, rgba(239,115,7, 0.15) 75%, transparent 75%, transparent);
+            background-image: linear-gradient(45deg, rgba(239,115,7, 1) 25%, transparent 25%, transparent 50%, rgba(239,115,7, 1) 50%, rgba(239,115,7, 1) 75%, transparent 75%, transparent);
+        }
+
+        // background-image: -o-linear-gradient(45deg, $orange-light 25%, transparent 25%, transparent 50%, $orange-light 50%, $orange-light 75%, transparent 75%, transparent) !important;
+    }
+}
