@@ -61,5 +61,5 @@ const mapStateToProps = ({
     gameInfo
 })
 
-export default connect(mapStateToProps)(Game)
-// export default connect(mapStateToProps)(App)
+// export default connect(mapStateToProps)(Game)
+export default connect(mapStateToProps)(App)
