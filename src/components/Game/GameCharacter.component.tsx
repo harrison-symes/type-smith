@@ -1,15 +1,64 @@
 import * as React from "react"
-import { Character, CharacterClassList } from "../../../shared/characters";
+import { Character, CharacterClassList, CharacterAbility } from "../../../shared/characters";
 import HealthBar from "../statComponents/HealthBar";
 import EnergyBar from "../statComponents/EnergyBar";
 import UltimateBar from "../statComponents/UltimateBar";
 import { Tooltip } from "react-tippy";
+import { GAME_ACTION_SOCKET_CHANNEL } from "../../../shared/socketChannels";
+import { Socket } from "net";
 
 export interface GameCharacterProps {
     character: Character;
+    socket: Socket;
 }
 
-class GameCharacter extends React.Component<GameCharacterProps> {
+interface CharacterState {
+    abilityUsed: CharacterAbility | null;
+    showAbilityUsed: boolean;
+}
+
+class GameCharacter extends React.Component<GameCharacterProps, CharacterState> {
+    constructor(props) {
+        super(props)
+        this.state = {
+            abilityUsed: null,
+            showAbilityUsed: false
+        }
+    }
+    componentDidMount() {
+        console.log("mounted")
+        this.props.socket.on(
+            GAME_ACTION_SOCKET_CHANNEL.RECEIVE_FIRST_TURN_STACK,
+            (_stack, character, ability) => {
+                console.log("character attacked", { character, ability })
+                if (character.id == this.props.character.id) {
+                    this.setState({
+                        showAbilityUsed: true,
+                        abilityUsed: ability
+                    })
+                }
+            }
+        )
+        this.props.socket.on(
+            GAME_ACTION_SOCKET_CHANNEL.RECEIVE_SECOND_TURN_STACK,
+            (_stack, character, ability) => {
+                console.log("character attacked", { character, ability })
+                if (character.id == this.props.character.id) {
+                    this.setState({
+                        showAbilityUsed: true,
+                        abilityUsed: ability
+                    })
+                }
+            }
+        )
+        this.props.socket.on(
+            GAME_ACTION_SOCKET_CHANNEL.TURN_VALIDATED,
+            () => {
+                console.log("turn validated, hide tooltip")
+                this.setState({ showAbilityUsed: false })
+            }
+        )
+    }
     render() {
         const {character} = this.props
         if (!character) return <div className="mt2 mb2 game-character--container"></div>
@@ -17,11 +66,19 @@ class GameCharacter extends React.Component<GameCharacterProps> {
             <div className={`user-character`}>
                 <div className="user-character-inner">
                     <div className="portrait-container">
-                        <div className="name-bar">
+                        <Tooltip
+                            className="name-bar"
+                            position="top"
+                            open={this.state.showAbilityUsed}
+                            html={<span>
+                                {this.state.abilityUsed && this.state.abilityUsed.name}
+                            </span>}
+                        >
+
                             <div className="name-bar--text">
                                 {character.characterClass}
                             </div>
-                        </div>
+                        </Tooltip>
                         <div className="portrait">
                             <div className="portrait--inner">
                                 <span className={`class-icon ra ${character.icon}`} />
