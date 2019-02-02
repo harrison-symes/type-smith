@@ -26,7 +26,7 @@ const calcStat = (label, stat) => {
         case "Power": return calcPower(stat)
         case "Defense": return calcDefense(stat)
         case "Speed": return calcSpeed(stat) 
-        case "Energy": return calcEnergy(stat)
+        case "Energy": return 20
         default: return 0
     }
 }
@@ -65,7 +65,7 @@ const CharacterStats: React.SFC<CharacterStatsProps> = props => {
             {renderStat("Defense", stats.defenseStat)}
             {renderStat("Power", stats.powerStat)}
             {renderStat("Speed", stats.speedStat)}
-            {renderStat("Energy", stats.energyStat)}
+            {renderStat("Energy", 5)}
         </React.Fragment>
     )
 }
