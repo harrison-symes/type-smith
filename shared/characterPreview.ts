@@ -129,11 +129,40 @@ export const characterPreviews: CharacterPreview[] = [
             { name: GAME_ATTACKS.SPIKE_TRAP },
         ]
     },
+    {
+        characterClass: CharacterClassList.NECROMANCER,
+        icon: "ra-fomorian",
+        passive: "Gain +1 Power at the end of turn for each dead teamate",
+        usage: "",
+        description: {
+            usage: "",
+            strengths: "",
+            weaknesses: ""
+        },
+        roles: [],
+        abilities: [
+            { name: GAME_ATTACKS.DEAD_RISE },
+            { name: GAME_ATTACKS.PLAGUE },
+            { name: GAME_ATTACKS.DEATH_TOUCH },
+            { name: GAME_ATTACKS.BONE_SHIELD },
+        ]
+    },
+    {
+        characterClass: CharacterClassList.BRAWLER,
+        icon: "ra-punch-blast",
+        passive: "The Brawler's will always win a speed tie.",
+        usage: "",
+        description: {
+            usage: "",
+            strengths: "",
+            weaknesses: ""
+        },
+        roles: [],
+        abilities: [
+            { name: GAME_ATTACKS.COMBO_BREAKER },
+            { name: GAME_ATTACKS.THROAT_PUNCH },
+            { name: GAME_ATTACKS.CATCH },
+            { name: GAME_ATTACKS.SMACKDOWN },
+        ]
+    },
 ]
-
-export const classDescriptions = {
-    [CharacterClassList.ASSASSIN]: "Fast and fragile. The Assassin can get off some quick attacks to finish weakened enemies, or power up to run away with the game.",
-    [CharacterClassList.PALADIN]: "Slow and Sturdy. The Paladin can heal and buff their teamates, but deals little damage themselves.",
-    [CharacterClassList.WITCH]: "Nasty and tricky. The Witch can lower opponent's stats, prevent switching, and turn their enemies own power against them",
-    [CharacterClassList.SNIPER]: "The Sniper can shoot through opponent's defense, build up to their ultimate quickly, which is a devastating attack in itself. They can also spike trap opponents, causing them to take damage when switching out."
-}

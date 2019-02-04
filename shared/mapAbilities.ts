@@ -50,10 +50,10 @@ export default {
     [GAME_ATTACKS.RECKLESS_SLAM]: () => ({
         name: [GAME_ATTACKS.RECKLESS_SLAM],
         icon: "ra-earth-crack",
-        cost: 2,
-        power: 2,
-        selfDamage: 1,
-        description: "Attack the opponent for 200% of Power. Damage yourself for 100% of Power",
+        cost: 3,
+        power: 1.5,
+        selfDamage: 0.5,
+        description: "Attack the opponent for 150% of Power. Damage yourself for 50% of Power",
         isUltimate: false,
         type: ATTACK_TYPES.SWORDS,
         priority: 0,
@@ -66,7 +66,7 @@ export default {
     [GAME_ATTACKS.TANK_UP]: () => ({
         name: [GAME_ATTACKS.TANK_UP],
         icon: "ra-armor-upgrade",
-        cost: 3,
+        cost: 2,
         power: 0,
         description: "Gain 2 Defense and 10 Max Health",
         isUltimate: false,
@@ -86,8 +86,8 @@ export default {
         name: [GAME_ATTACKS.ASSASSINATE],
         icon: "ra-split-body",
         cost: 5,
-        power: 5,
-        description: "Damage the opponent for 500% Character Power.",
+        power: 4,
+        description: "Attack the opponent for 400% of Character Power.",
         isUltimate: true,
         type: ATTACK_TYPES.DAGGERS,
         priority: 0,
@@ -101,7 +101,7 @@ export default {
         icon: "ra-running-ninja",
         cost: 3,
         power: 0,
-        description: "Gain 1 Speed and 5 Power",
+        description: "Gain 1 Speed and 3 Power",
         isUltimate: false,
         speedGain: 1,
         powerGain: 3,
@@ -116,12 +116,12 @@ export default {
     [GAME_ATTACKS.RECUPERATE]: () => ({
         name: [GAME_ATTACKS.RECUPERATE],
         icon: "ra-bottled-bolt",
-        cost: 0,
+        cost: 1,
         power: 0,
-        description: "Heal for 15 and gain 3 Energy",
+        description: "Heal for 10 and gain 3 Energy",
         isUltimate: false,
         isStatic: true,
-        healAmount: 15,
+        healAmount: 10,
         energyGain: 3,
         type: ATTACK_TYPES.STATUS,
         priority: 0,
@@ -134,9 +134,9 @@ export default {
     [GAME_ATTACKS.BACKSTAB]: () => ({
         name: [GAME_ATTACKS.BACKSTAB],
         icon: "ra-bouncing-sword",
-        cost: 3,
-        power: 1.2,
-        description: "Attack the opponent for 120% Power. Power is doubled for targets below 50% health. +2 Priority",
+        cost: 2,
+        power: 1,
+        description: "Attack the opponent for 100% Power. Power is doubled for targets below 30% health. +2 Priority",
         isUltimate: false,
         priority: 2,
         type: ATTACK_TYPES.DAGGERS,
@@ -181,9 +181,9 @@ export default {
     [GAME_ATTACKS.MOLTEN_CORE]: () => ({
         name: [GAME_ATTACKS.MOLTEN_CORE],
         icon: "ra-burning-passion",
-        cost: 2,
+        cost: 3,
         power: 5,
-        description: "Damage opponent for 5, Gain 3 Power",
+        description: "Deal 5 damage to the opponent, ignoring defense. Gain 3 Power",
         isUltimate: false,
         priority: 0,
         powerGain: 3,
@@ -236,9 +236,9 @@ export default {
     [GAME_ATTACKS.CURSE]: () => ({
         name: [GAME_ATTACKS.CURSE],
         icon: "ra-cursed-star",
-        cost: 3,
+        cost: 2,
         power: 0,
-        description: "Lower your opponent's Power, Energy, Defense by 3 and Speed by 1. Lose 15 health.",
+        description: "Lower your opponent's Power, Energy, Defense by 3 and Speed by 1. Lose 10 health.",
         isUltimate: false,
         priority: 0,
         powerGain: -3,
@@ -246,7 +246,7 @@ export default {
         energyGain: -3,
         speedGain: -1,
         isStatic: true,
-        damageAmount: 15,
+        damageAmount: 10,
         type: ATTACK_TYPES.STATUS,
         stack: [
             ATTACK_STACK_TYPES.DAMAGE_SELF,
@@ -263,7 +263,7 @@ export default {
     [GAME_ATTACKS.ENTRAP]: () => ({
         name: [GAME_ATTACKS.ENTRAP],
         icon: "ra-quicksand",
-        cost: 4,
+        cost: 3,
         power: 0,
         description: "Trap your opponent, preventing them from switching until they have no other choice",
         isUltimate: false,
@@ -279,7 +279,7 @@ export default {
     [GAME_ATTACKS.BLOOD_MOON]: () => ({
         name: [GAME_ATTACKS.BLOOD_MOON],
         icon: "ra-evil-moon",
-        cost: 2,
+        cost: 1,
         power: 1,
         description: "Attack your opponent for 100% of OPPONENT's Power.",
         isStatic: true,
@@ -297,10 +297,10 @@ export default {
         icon: "ra-guarded-tower",
         cost: 5,
         power: 0,
-        description: "Heal your team for 100% of Power, gain 10 Defense. +6 Priority",
+        description: "Heal your team for 100% of Power, gain 5 Defense. +6 Priority",
         isUltimate: true,
         priority: 6,
-        defenseGain: 10,
+        defenseGain: 5,
         type: ATTACK_TYPES.STATUS,
         stack: [
             ATTACK_STACK_TYPES.HEAL_TEAM_SELF,
@@ -315,7 +315,7 @@ export default {
         cost: 2,
         power: 0,
         healAmount: 5,
-        description: "Restore 5 Health to your entire team",
+        description: "Restore 5 Health to your each member of your team",
         isStatic: true,
         isUltimate: false,
         priority: 0,
@@ -331,7 +331,7 @@ export default {
         icon: "ra-thor-hammer",
         cost: 1,
         power: 1,
-        description: "Damage opponent for 100% of Power, then heal yourself for 5",
+        description: "Attack the opponent for 100% of Power, then heal yourself for 5",
         healAmount: 5,
         isUltimate: false,
         priority: 0,
@@ -370,7 +370,7 @@ export default {
         defenseGain: 1,
         powerGain: 1,
         energyGain: -100,
-        description: "Attack for 100 of Power. Consume all remaining energy and deal 30% more damage for each point of energy consumed",
+        description: "Attack for 100% of Power. Consume all remaining energy and deal 30% more damage for each point of energy consumed",
         isUltimate: true,
         priority: 0,
         type: ATTACK_TYPES.STATUS,
@@ -385,7 +385,7 @@ export default {
         icon: "ra-supersonic-bullet",
         cost: 2,
         power: 1,
-        description: "Attack for 100% of power, ignoring armour",
+        description: "Attack for 100% of power, ignoring defense",
         isUltimate: false,
         priority: 0,
         type: ATTACK_TYPES.STATUS,
@@ -397,7 +397,7 @@ export default {
     [GAME_ATTACKS.RELOAD]: () => ({
         name: [GAME_ATTACKS.RELOAD],
         icon: "ra-ammo-box",
-        cost: 0,
+        cost: 1,
         power: 0,
         energyGain: 3,
         ultimateGain: 1,
@@ -425,5 +425,123 @@ export default {
         ]
     }),
 
+    [GAME_ATTACKS.DEAD_RISE]: () => ({
+        name: [GAME_ATTACKS.DEAD_RISE],
+        icon: "ra-raise-zombie",
+        cost: 5,
+        power: 1,
+        description: "Return all dead teamates to life with 10 health",
+        isUltimate: true,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DEAD_RISE,
+            ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE
+        ]
+    }),
+    [GAME_ATTACKS.PLAGUE]: () => ({
+        name: [GAME_ATTACKS.PLAGUE],
+        icon: "ra-vomiting",
+        cost: 2,
+        power: 1,
+        description: "Plague the opponent, causing them to take 5 Damage any time that they use an ability",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.APPLY_PLAGUE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+    [GAME_ATTACKS.DEATH_TOUCH]: () => ({
+        name: [GAME_ATTACKS.DEATH_TOUCH],
+        icon: "ra-skeletal-hand",
+        cost: 1,
+        power: 0,
+        energyGain: 3,
+        ultimateGain: 1,
+        description: "Attack the opponent for 100% of Power. Deal 5 more more damage if the target is afflicted with Plague.",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_DEATH_TOUCH,
+            ATTACK_STACK_TYPES.SPEND_ENERGY,
+        ]
+    }),
+    [GAME_ATTACKS.BONE_SHIELD]: () => ({
+        name: [GAME_ATTACKS.BONE_SHIELD],
+        icon: "ra-crossed-bones",
+        cost: 5,
+        power: 0,
+        description: "The Necromancer is immune to any attack this turn. +20 Priority",
+        isUltimate: false,
+        priority: 20,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.IMMUNE_FOR_TURN,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
 
+    [GAME_ATTACKS.COMBO_BREAKER]: () => ({
+        name: [GAME_ATTACKS.COMBO_BREAKER],
+        icon: "ra-armor-punch",
+        cost: 1,
+        power: 0.5,
+        altPower: 0.5,
+        description: "Consume all of your Ultimate Charges. Attack the opponent for 50% of Power, plus 50% for each Charge consumed.",
+        isUltimate: true,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_COMBO_BREAKER,
+            ATTACK_STACK_TYPES.SPEND_ALL_ULTIMATE_CHARGE
+        ]
+    }),
+    [GAME_ATTACKS.THROAT_PUNCH]: () => ({
+        name: [GAME_ATTACKS.THROAT_PUNCH],
+        icon: "ra-punch",
+        cost: 2,
+        power: 0.5,
+        description: "Attack the opponent for 50% of Power, if this attacks first, your opponent's attack is interrupted.",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
+    [GAME_ATTACKS.CATCH]: () => ({
+        name: [GAME_ATTACKS.CATCH],
+        icon: "ra-grab",
+        cost: 1,
+        power: 0.5,
+        energyGain: 3,
+        ultimateGain: 1,
+        description: "Attack the opponent for 50% of Power. If your opponent was trying to switch out, prevent it and deal triple the initial damage.",
+        isUltimate: false,
+        priority: 0,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT_DEATH_TOUCH,
+            ATTACK_STACK_TYPES.SPEND_ENERGY,
+        ]
+    }),
+    [GAME_ATTACKS.SMACKDOWN]: () => ({
+        name: [GAME_ATTACKS.SMACKDOWN],
+        icon: "ra-back-pain",
+        cost: 3,
+        power: 0.5,
+        description: "Attack the opponent for 50% of Power. The opponent loses 2 energy",
+        isUltimate: false,
+        energyGain: -2,
+        type: ATTACK_TYPES.STATUS,
+        stack: [
+            ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+            ATTACK_STACK_TYPES.LOWER_OPPONENT_ENERGY,
+            ATTACK_STACK_TYPES.SPEND_ENERGY
+        ]
+    }),
 }

@@ -34,7 +34,17 @@ export enum GAME_ATTACKS {
     RAPID_FIRE = "Rapid Fire",
     PIERCING_SHOT = "Peircing Shot",
     RELOAD = "Reload",
-    SPIKE_TRAP = "Spike Trap"
+    SPIKE_TRAP = "Spike Trap",
+
+    DEAD_RISE = "Dead Rise",
+    PLAGUE = "Plague",
+    DEATH_TOUCH = "Death Touch",
+    BONE_SHIELD = "Bone Shield",
+
+    COMBO_BREAKER = "Combo Breaker",
+    THROAT_PUNCH = "Throat Punch",
+    CATCH = "Catch",
+    SMACKDOWN = "Smackdown"
 }
 
 export enum REDUCER_ATTACK_TYPES {
@@ -63,6 +73,8 @@ export enum REDUCER_ATTACK_TYPES {
     APPLY_SPIKE_TRAP = "APPLY_SPIKE_TRAP",
     ACTIVATE_SPIKE_TRAP = "ACTIVATE_SPIKE_TRAP",
     WITCH_PASSIVE = "WITCH_PASSIVE",
+    IMMUNE_FOR_TURN = "IMMUNE_FOR_TURN",
+    DEAD_RISE = "DEAD_RISE",
 }
 
 export enum ABILITY_ATTACK_STACK_TYPES {
@@ -72,6 +84,13 @@ export enum ABILITY_ATTACK_STACK_TYPES {
     DAMAGE_OPPONENT_BACKSTAB = "DAMAGE_OPPONENT_BACKSTAB",
     DAMAGE_OPPONENT_WARRIOR = "DAMAGE_OPPONENT_WARRIOR",
     DAMAGE_TEAM_DEMOLISH = "DAMAGE_TEAM_DEMOLISH",
+    DAMAGE_OPPONENT_DEATH_TOUCH = "DAMAGE_OPPONENT_DEATH_TOUCH",
+    DAMAGE_OPPONENT_COMBO_BREAKER = "DAMAGE_OPPONENT_COMBO_BREAKER",
+
+    SPEND_ALL_ULTIMATE_CHARGE = "SPEND_ALL_ULTIMATE_CHARGE",
+
+    APPLY_PLAGUE_OPPONENT = "APPLY_PLAGUE_OPPONENT",
+    TAKE_PLAGUE_DAMAGE = "TAKE_PLAGUE_DAMAGE",
 
     TRAP_OPPONENT = "TRAP_OPPONENT",
     TRAP_SELF = "TRAP_SELF",
@@ -129,6 +148,11 @@ export const spendEnergyAction = (character, _opponent, ability) => ({
 export const spendUltimateCharge = (character, _opponent, ability) => ({
     type: ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
     ultimateChargeLoss: ability.cost,
+    target: character
+})
+export const spendALLUltimateCharge = (character : Character, _opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE,
+    ultimateChargeLoss: character.ultimateCharge,
     target: character
 })
 
@@ -271,10 +295,18 @@ export const damageOpponentRapidFire = (character, opponent, ability) => {
         power
     }
 }
+export const damageOpponentComboBreaker = (character, opponent, ability) => {
+    const power = (ability.power + (ability.altPower * character.ultimateCharge)) * character.power
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power
+    }
+}
 
 export const damageOpponentBackstab = (character, opponent, ability) => {
     const subCharacter = {...character}
-    if (opponent.health / opponent.healthMax <= 0.5) {
+    if (opponent.health / opponent.healthMax <= 0.3) {
         subCharacter.power = subCharacter.power * 2
     }
     const power = calcDamage(subCharacter, opponent, ability)
@@ -309,6 +341,18 @@ export const damageOpponentIgnoreArmour = (character, opponent, ability) => {
         target: opponent,
         power: calcDamage(character, subOpponent, ability)
 
+    }
+}
+
+export const deathTouch = (character, opponent, ability) => {
+    let power = calcDamage(character, opponent, ability)
+    if (opponent.isPlagued) {
+        power += 5
+    }
+    return {
+        type: ATTACK_STACK_TYPES.DAMAGE_OPPONENT,
+        target: opponent,
+        power
     }
 }
 
@@ -407,11 +451,32 @@ export const useAttack = (character, _opponent, ability) => ({
     ability
 })
 
+export const deadRise = (character, _opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.DEAD_RISE,
+    owner_id: character.owner_id,
+})
+
+export const plagueOpponent = (_character, opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.APPLY_PLAGUE_OPPONENT,
+    target: opponent
+})
+
+export const immuneTurn = (character, _opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.IMMUNE_FOR_TURN,
+    target: character,
+})
+export const takePlagueDamage = (character, _opponent, _ability) => ({
+    type: ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE,
+    target: character,
+})
+
+
 export const attackActionMapper = {
     [ATTACK_STACK_TYPES.USE_ATTACK]: useAttack,
     [ATTACK_STACK_TYPES.SWITCH]: switchCharacterAction,
     [ATTACK_STACK_TYPES.SPEND_ENERGY]: spendEnergyAction,
     [ATTACK_STACK_TYPES.SPEND_ULTIMATE_CHARGE]: spendUltimateCharge,
+    [ATTACK_STACK_TYPES.SPEND_ALL_ULTIMATE_CHARGE]: spendALLUltimateCharge,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT]: damageOpponentAction,
     [ATTACK_STACK_TYPES.DAMAGE_SELF]: damageSelfAction,
     [ATTACK_STACK_TYPES.HEAL_SELF]: healSelfAction,
@@ -431,6 +496,7 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_RAPID_FIRE]: damageOpponentRapidFire,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_BACKSTAB]: damageOpponentBackstab,
     [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_WARRIOR]: damageOpponentWarrior,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_COMBO_BREAKER]: damageOpponentComboBreaker,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_DEMOLISH]: damageTeamDemolish,
     [ATTACK_STACK_TYPES.HEAL_TEAM_SELF]: healTeamSelf,
     [ATTACK_STACK_TYPES.DAMAGE_TEAM_OPPONENT]: damageTeamOpponent,
@@ -444,4 +510,9 @@ export const attackActionMapper = {
     [ATTACK_STACK_TYPES.APPLY_SPIKE_TRAP_OPPONENT]: applySpikeTrapOpponent,
     [ATTACK_STACK_TYPES.ACTIVATE_SPIKE_TRAP]: activateSpikeTrap,
     [ATTACK_STACK_TYPES.WITCH_PASSIVE]: witchPassive,
+    [ATTACK_STACK_TYPES.DEAD_RISE]: deadRise,
+    [ATTACK_STACK_TYPES.APPLY_PLAGUE_OPPONENT]: plagueOpponent,
+    [ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE]: takePlagueDamage,
+    [ATTACK_STACK_TYPES.DAMAGE_OPPONENT_DEATH_TOUCH]: deathTouch,
+    [ATTACK_STACK_TYPES.IMMUNE_FOR_TURN]: immuneTurn,
 }

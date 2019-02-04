@@ -31,7 +31,7 @@ class EnemyCharacter extends React.Component<EnemyCharacterProps, CharacterState
             GAME_ACTION_SOCKET_CHANNEL.RECEIVE_FIRST_TURN_STACK,
             (_stack, character, ability) => {
                 console.log("character attacked", {character, ability})
-                if (character.id == this.props.character.id) {
+                if (character && this.props.character && character.id == this.props.character.id) {
                     this.setState({
                         showAbilityUsed: true,
                         abilityUsed: ability
@@ -43,7 +43,7 @@ class EnemyCharacter extends React.Component<EnemyCharacterProps, CharacterState
             GAME_ACTION_SOCKET_CHANNEL.RECEIVE_SECOND_TURN_STACK,
             (_stack, character, ability) => {
                 console.log("character attacked", {character, ability})
-                if (character.id == this.props.character.id) {
+                if (character && this.props.character && character.id == this.props.character.id) {
                     this.setState({
                         showAbilityUsed: true,
                         abilityUsed: ability
@@ -112,10 +112,25 @@ class EnemyCharacter extends React.Component<EnemyCharacterProps, CharacterState
                             </div>
                         </div>
                         <div className="stats-container">
-                            {character.isSpiked && 
-                                <div className="">
-                                    <span className="ra ra-caltrops" />
-                                </div>
+                            {character.isTrapped &&
+                                <Tooltip text="Trapped (cannot switch out)">
+                                    <span className="ra ra-lg ra-prisoner" />
+                                </Tooltip>
+                            }
+                            {character.isSpiked &&
+                                <Tooltip text="Spiked (takes 10 damage upon switching out)">
+                                    <span className="ra ra-lg ra-caltrops" />
+                                </Tooltip>
+                            }
+                            {character.isPlagued &&
+                                <Tooltip text="Plagued (Takes 5 damage after using any ability)">
+                                    <span className="ra ra-lg ra-vomiting" />
+                                </Tooltip>
+                            }
+                            {character.isImmune &&
+                                <Tooltip text="Immune (cannot take damage this turn)">
+                                    <span className="ra ra-lg ra-stone-wall" />
+                                </Tooltip>
                             }
                         </div>
                     </div>

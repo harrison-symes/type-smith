@@ -1,0 +1,56 @@
+.game-log {
+    &--container {
+        position: fixed;
+        width: 100%;
+        height: calc(50vh);
+        z-index: 10000;
+        bottom: -200%;
+        &.active {
+            bottom: 4.5rem
+        }
+        background-color: fade-out($blue-bright, 0.5);
+        box-shadow: 0 0rem 5rem 1rem fade-out($black, 0.5);
+        
+        transition: bottom 0.3s ease-in-out;
+        background-color: $blue-med;
+    }
+    &--screen {
+        position: relative;
+        width: calc(100% - 1rem);
+        height: calc(100% - 2.5rem);
+        margin: 0.5rem;
+        padding-bottom: 1rem;
+        background-color: $white;
+        overflow-y: scroll;
+    }
+    &--message {
+        margin-top: 0.125rem;
+        font-size: 0.8rem;
+        padding: 0.5rem;
+        word-wrap: normal;
+    }
+}
+
+.extra-bold {
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    background-color: $blue-bright;
+    border-top: 1px solid $blue-light;
+    border-bottom: 1px solid $blue-light;
+}
+.bold {
+    margin-top: 0.25rem;
+    padding-left: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.game-screen--container {
+    width: 100%;
+}
+
+.game--container {
+    display: flex;
+}

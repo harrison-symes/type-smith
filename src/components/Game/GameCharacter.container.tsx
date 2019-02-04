@@ -1,8 +1,9 @@
 import {connect} from "react-redux"
 import GameCharacter, { GameCharacterProps } from "./GameCharacter.component"
 
-const mapStateToProps = ({userTeam}) => ({
-    character: userTeam.find(character => character.isActive)
+const mapStateToProps = ({userTeam, socket}) => ({
+    character: userTeam.find(character => character.isActive),
+    socket
 })
 
 

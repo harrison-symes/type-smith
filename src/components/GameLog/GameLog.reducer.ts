@@ -171,6 +171,13 @@ export default (state:TurnState[] = initialState, action) => {
             }
             return addMessage(newState, message)
         
+        case ATTACK_STACK_TYPES.TAKE_PLAGUE_DAMAGE:
+            message = {
+                type: MESSAGE_TYPES.NORMAL,
+                message: `${action.target.name} takes 5 damage from Plague`
+            }
+            return addMessage(newState, message)
+        
         default: return state
     }
 }
