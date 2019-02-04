@@ -1,9 +1,13 @@
 import * as React from "react"
 import { TurnState } from "./GameLog.reducer";
+import {RouteComponentProps} from "react-router-dom"
 
-class GameLog extends React.Component<{
-    gameLog: TurnState[]
-}> {
+
+interface GameLogProps extends RouteComponentProps {
+    gameLog: TurnState[],
+}
+
+class GameLog extends React.Component<GameLogProps> {
     messageList : HTMLDivElement
 
     scrollToBottom = () => {
@@ -23,13 +27,17 @@ class GameLog extends React.Component<{
     render() {
         const {gameLog} = this.props
         return (
-            <div className="game-log--container">
+            <div className={`game-log--container ${this.props.location.pathname == "/log" && "active"}`}>
                 <div className="game-log--screen"
                     ref={(el:HTMLDivElement) => { this.messageList = el; }}
                 >
-                   {gameLog.map(turn => turn.turnLog.map(logMessage => <div className={`game-log--message ${logMessage.type}`}>
-                       {logMessage.message}
-                   </div>))}
+                    {gameLog.map(turn => 
+                        turn.turnLog.map(logMessage => 
+                            <div className={`game-log--message ${logMessage.type}`}>
+                                {logMessage.message}
+                            </div>
+                        )
+                    )}
                 </div>
             </div>
         )
